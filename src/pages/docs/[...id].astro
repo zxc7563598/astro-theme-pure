@@ -1,0 +1,27 @@
+---
+import { render, type CollectionEntry } from 'astro:content'
+
+import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
+import DocsLayout from '@/layouts/DocsLayout.astro'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const posts = sortMDByDate(await getBlogCollection('docs'))
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post }
+  }))
+}
+
+type Props = {
+  post: CollectionEntry<'docs'>
+}
+
+const { post } = Astro.props
+const { Content, headings } = await render(post)
+---
+
+<DocsLayout {post} {headings}>
+  <Content />
+</DocsLayout>

@@ -1,38 +1,58 @@
 ---
-import type { MarkdownHeading, MarkdownLayoutProps } from 'astro'
+import type { MarkdownHeading } from 'astro'
+import type { CollectionEntry } from 'astro:content'
 
 import { MediumZoom } from 'astro-pure/advanced'
-import { CardList } from 'astro-pure/user'
-import IndividualPage from '@/layouts/IndividualPage.astro'
+import { TOC } from 'astro-pure/components/pages'
+import { Button, CardList } from 'astro-pure/user'
+import { cn } from 'astro-pure/utils'
+import PageLayout from '@/layouts/BaseLayout.astro'
 import { docs } from '@/utils/docsContents'
+import { integ } from '@/site-config'
 
 export const partial = true
 
-type Props = MarkdownLayoutProps<{
-  title: string
-  description: string
-  heroImage?: { src: string }
-  language?: string
-  back?: string
-}> & {
+interface Props {
+  post: CollectionEntry<'docs'>
   headings: MarkdownHeading[]
 }
 
-const { frontmatter, headings, file, url, rawContent, compiledContent } = Astro.props
-frontmatter.file = file
-frontmatter.back = '/docs/list'
+const {
+  post: { data },
+  headings
+} = Astro.props
+
+const { description, title } = data
+
+const socialImage = '/images/social-card.png'
 ---
 
-<IndividualPage
-  frontmatter={frontmatter}
-  {headings}
-  file={file}
-  url={url}
-  rawContent={rawContent}
-  compiledContent={compiledContent}
->
-  <CardList {...docs} collapse />
-  <slot />
-  <CardList {...docs} title='See more docs' class='mt-5' />
-  <MediumZoom />
-</IndividualPage>
+<PageLayout meta={{ description, ogImage: socialImage, title }}>
+  <Button title='Back' href='/docs' style='back' />
+
+  <main class='mt-6 items-start gap-x-10 md:flex'>
+    {
+      !!headings.length && (
+        <TOC
+          class='animate top-24 min-w-48 basis-60 max-md:hidden md:sticky md:order-2 lg:shrink-0'
+          {headings}
+        />
+      )
+    }
+
+    <article class='min-w-0 grow' data-pagefind-body>
+      <div id='content-header' class='animate'>
+        <CardList {...docs} collapse />
+      </div>
+
+      <div
+        id='content'
+        class={cn('max-w-none animate mt-8 md:min-w-[45ch]', integ.typography.class)}
+      >
+        <slot />
+      </div>
+      <CardList {...docs} title='See more docs' class='mt-5' />
+    </article>
+    <MediumZoom />
+  </main>
+</PageLayout>
