@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process'
-import { dirname, relative } from 'node:path'
+import path, { dirname, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 // Astro
 import type { AstroIntegration, RehypePlugins, RemarkPlugins } from 'astro'
@@ -84,6 +84,28 @@ export default function AstroPureIntegration(opts: UserInputConfig): AstroIntegr
           // If not already configured, default to prefetching all links on hover.
           prefetch: config.prefetch ?? { prefetchAll: true }
         })
+      },
+
+      'astro:build:start': () => {
+        const env = import.meta.env.BUN_LINK_PKG
+        console.log('===> Your pkg link build method is at: ', env)
+        if (env === 'true') {
+          console.log('===> Linking packages...')
+          const cwd = dirname(fileURLToPath(import.meta.url))
+          return new Promise<void>((resolve) => {
+            spawn('bun', ['link'], {
+              stdio: 'inherit',
+              shell: true,
+              cwd: path.join(cwd, 'packages/pure')
+            }).on('close', () => {
+              spawn('bun', ['link', 'astro-pure'], {
+                stdio: 'inherit',
+                shell: true,
+                cwd
+              }).on('close', () => resolve())
+            })
+          })
+        }
       },
 
       'astro:build:done': ({ dir }) => {
