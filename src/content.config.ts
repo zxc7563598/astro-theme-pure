@@ -24,6 +24,10 @@ const blog = defineCollection({
         .object({
           src: image(),
           alt: z.string().optional(),
+          inferSize: z.boolean().optional(),
+          width: z.number().optional(),
+          height: z.number().optional(),
+
           color: z.string().optional()
         })
         .optional(),
