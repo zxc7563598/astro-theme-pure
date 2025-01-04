@@ -86,28 +86,6 @@ export default function AstroPureIntegration(opts: UserInputConfig): AstroIntegr
         })
       },
 
-      'astro:build:start': () => {
-        const env = import.meta.env.BUN_LINK_PKG
-        console.log('===> Your pkg link build method is at: ', env)
-        if (env === 'true') {
-          console.log('===> Linking packages...')
-          const cwd = dirname(fileURLToPath(import.meta.url))
-          return new Promise<void>((resolve) => {
-            spawn('bun', ['link'], {
-              stdio: 'inherit',
-              shell: true,
-              cwd: path.join(cwd, 'packages/pure')
-            }).on('close', () => {
-              spawn('bun', ['link', 'astro-pure'], {
-                stdio: 'inherit',
-                shell: true,
-                cwd
-              }).on('close', () => resolve())
-            })
-          })
-        }
-      },
-
       'astro:build:done': ({ dir }) => {
         if (!opts.integ.pagefind) return
         const targetDir = fileURLToPath(dir)

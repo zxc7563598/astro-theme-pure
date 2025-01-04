@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:check": "astro check --watch & astro dev",
-    "build": "astro check && astro build",
+    "build": "astro-pure check && astro check && astro build",
     "preview": "astro preview",
     "sync": "astro sync",
     "check": "astro check",
@@ -17,9 +17,6 @@
     "yijiansilian": "bun lint && bun sync && bun check && bun format",
     "clean": "rm -rf .astro .vercel dist"
   },
-  "engines": {
-    "node": "20.x"
-  },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/rss": "^4.0.11",
@@ -29,7 +26,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@waline/client": "^3.4.2",
     "astro": "^5.1.2",
-    "astro-pure": "1.2.3",
+    "astro-pure": "1.2.4",
     "katex": "^0.16.19",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
