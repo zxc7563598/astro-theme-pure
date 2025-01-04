@@ -1,12 +1,12 @@
 ---
 import { Image } from 'astro:assets'
-import { type CollectionKey, type InferEntrySchema } from 'astro:content'
+import type { InferEntrySchema } from 'astro:content'
 
 import { PageInfo } from '.'
 import { FormattedDate, Icon } from '../user'
 
 interface Props {
-  data: InferEntrySchema<CollectionKey>
+  data: InferEntrySchema<'blog'>
   remarkPluginFrontmatter: Record<string, unknown>
 }
 

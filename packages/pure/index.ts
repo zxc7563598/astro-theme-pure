@@ -25,7 +25,7 @@ export default function AstroPureIntegration(opts: UserInputConfig): AstroIntegr
         let userConfig = parseWithFriendlyErrors(
           UserConfigSchema,
           opts,
-          'Invalid config passed to starlight integration'
+          'Invalid config passed to astro-pure integration'
         )
 
         // Add built-in integrations only if they are not already added by the user through the
