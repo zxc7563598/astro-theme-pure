@@ -1,8 +1,12 @@
 ---
 import { render, type CollectionEntry } from 'astro:content'
 
+import { MediumZoom } from 'astro-pure/advanced'
+import { TOC } from 'astro-pure/components/pages'
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
-import DocsLayout from '@/layouts/DocsLayout.astro'
+import { CardList } from 'astro-pure/user'
+import PageLayout from '@/layouts/ContentLayout.astro'
+import { docs } from '@/pages/docs/docsContents'
 
 export const prerender = true
 
@@ -20,8 +24,34 @@ type Props = {
 
 const { post } = Astro.props
 const { Content, headings } = await render(post)
+const { description, title } = post.data
 ---
 
-<DocsLayout {post} {headings}>
+<PageLayout meta={{ description, title }} back='/docs'>
+  <Fragment slot='sidebar'>
+    {!!headings.length && <TOC {headings} />}
+    <CardList {...docs} title='DOCS' class='mt-5 border-0' style='padding:0' />
+  </Fragment>
+
+  <Fragment slot='header'>
+    <h1 class='text-2xl font-medium sm:mb-2 sm:text-3xl'>
+      {title}
+    </h1>
+    <div class='mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs leading-6 text-muted-foreground'>
+      {
+        // Description
+        description && (
+          <blockquote class='text-sm italic text-muted-foreground'>
+            <q>{description}</q>
+          </blockquote>
+        )
+      }
+    </div>
+    <CardList {...docs} collapse class='md:hidden' />
+  </Fragment>
+
   <Content />
-</DocsLayout>
+
+  <CardList {...docs} title='See more docs' class='mt-5' slot='bottom' />
+</PageLayout>
+<MediumZoom />
