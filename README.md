@@ -50,7 +50,7 @@ Theme includes a lot of components, which can not only be used in the theme, but
 
 ## Documentation
 
-[Docs](https://astro-pure.js.org/docs/list) | [Showcase](https://github.com/cworld1/astro-theme-pure/issues/10)
+[Docs](https://astro-pure.js.org/docs) | [Showcase](https://github.com/cworld1/astro-theme-pure/issues/10)
 
 ## Package
 

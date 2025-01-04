@@ -50,7 +50,7 @@
 
 ## 文档
 
-[文档](https://astro-pure.js.org/docs/list) | [展示台](https://github.com/cworld1/astro-theme-pure/issues/10)
+[文档](https://astro-pure.js.org/docs) | [展示台](https://github.com/cworld1/astro-theme-pure/issues/10)
 
 ## NPM 包
 
