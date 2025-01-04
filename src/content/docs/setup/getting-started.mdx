@@ -156,7 +156,19 @@ The theme file structure is as follows:
    }
    ```
 
-   - Remove `src/utils/docsContents.ts` file
+   - Remove the Content Collection for docs in `src/content.config.ts`:
+
+   ```ts title="src/content.config.ts"
+   const docs = defineCollection({ // [!code --]
+   loader: glob({ base: './src/content/docs', pattern: '**/*.{md,mdx}' }), // [!code --]
+   schema: ({ image }) => // [!code --]
+      z.object({ // [!code --]
+         ... // [!code --]
+      }) // [!code --]
+   }) // [!code --]
+   export const collections = { blog, docs } // [!code --]
+   export const content = { blog } // [!code ++]
+   ```
 
 2. Remove `packages` directory (this will be imported by our NPM package)
 
