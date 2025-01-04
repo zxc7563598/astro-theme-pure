@@ -65,7 +65,7 @@ export const theme: ThemeUserConfig = {
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */
     credits: true,
     /** Optional details about the social media accounts for this site. */
-    social: { github: 'https://astro.build/chat' }
+    social: { github: 'https://github.com/cworld1/astro-theme-pure' }
   },
 
   content: {
@@ -80,6 +80,7 @@ export const theme: ThemeUserConfig = {
 
 export const integ: IntegrationUserConfig = {
   links: {
+    // Friend logbook
     logbook: [
       { date: '2024-07-01', content: 'Lorem ipsum dolor sit amet.' },
       { date: '2024-07-01', content: 'vidit suscipit at mei.' },
