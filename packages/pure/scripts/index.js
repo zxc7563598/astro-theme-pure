@@ -31,6 +31,7 @@ switch (args._[0]) {
     break
   case 'help':
     console.log('Usage:')
+    console.log('  check - Check envirionment and run corresponding adaption code')
     console.log('  new [args] - Create new post on blog collection')
     console.log('  info - Show this info message')
     console.log('  help - Show this help message')

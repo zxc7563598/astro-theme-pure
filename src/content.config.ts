@@ -39,6 +39,7 @@ const blog = defineCollection({
     })
 })
 
+// Define docs collection
 const docs = defineCollection({
   loader: glob({ base: './src/content/docs', pattern: '**/*.{md,mdx}' }),
   schema: () =>
