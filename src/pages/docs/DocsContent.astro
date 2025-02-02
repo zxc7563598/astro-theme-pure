@@ -1,0 +1,46 @@
+---
+import { type CollectionEntry } from 'astro:content'
+
+import { getBlogCollection } from 'astro-pure/server'
+import { cn } from 'astro-pure/utils'
+
+export const prerender = true
+export const partial = true
+
+const docsCollection = (await getBlogCollection('docs')) as CollectionEntry<'docs'>[]
+// group docs by id first part (setup, integrations, advanced, etc.)
+const docsByCate = docsCollection.reduce((acc: { [key: string]: typeof docsCollection }, doc) => {
+  const id = doc.id.split('/')[0]
+  if (!acc[id]) acc[id] = [] as typeof docsCollection
+  acc[id].push(doc)
+  return acc
+}, {})
+
+const docCategories = {
+  setup: 'Setup',
+  integrations: 'Integrations',
+  advanced: 'Advanced'
+}
+
+const { class: className, ...props } = Astro.props
+---
+
+<docs-toc class={cn('not-prose', className)} {...props}>
+  <h2 class='text-foreground font-semibold'>DOCS</h2>
+  <ul class='mt-4 flex flex-col gap-y-5'>
+    {
+      Object.entries(docCategories).map(([id, title]: [string, string]) => (
+        <li>
+          <h3 class='text-muted-foreground text-xs tracking-widest uppercase'>{title}</h3>
+          <ul class='mt-2'>
+            {docsByCate[id].map((doc) => (
+              <li class='text-foreground border-l-2 pl-4'>
+                <a href={`/docs/${doc.id}`}>{doc.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+</docs-toc>

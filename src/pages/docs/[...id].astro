@@ -30,7 +30,7 @@ const { description, title } = post.data
 <PageLayout meta={{ description, title }} back='/docs'>
   <Fragment slot='sidebar'>
     {!!headings.length && <TOC {headings} />}
-    <CardList {...docs} title='DOCS' class='mt-5 border-0' style='padding:0' />
+    <CardList {...docs} title='DOCS' class='docs-toc mt-5 border-0' style='padding:0' />
   </Fragment>
 
   <Fragment slot='header'>
@@ -55,3 +55,20 @@ const { description, title } = post.data
   <CardList {...docs} title='See more docs' class='mt-5' slot='bottom' />
 </PageLayout>
 <MediumZoom />
+
+<style>
+  @media (min-width: 1300px) {
+    :global(
+      main { transform: translateX(7.9rem); }
+      #sidebar { overflow: inherit; }
+      toc-heading { height: 100%; display: flex; flex-direction: column; }
+      toc-heading > ul { overflow-y: scroll; }
+    )
+    .docs-toc {
+      position: fixed;
+      top: 0;
+      left: -64rem;
+      margin-top: 0;
+    }
+  }
+</style>
