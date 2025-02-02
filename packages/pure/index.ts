@@ -6,7 +6,6 @@ import type { AstroIntegration, RehypePlugins, RemarkPlugins } from 'astro'
 // Integrations
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
 import rehypeExternalLinks from 'rehype-external-links'
 
 import { remarkAddZoomable, remarkReadingTime } from './plugins/remark-plugins'
@@ -36,9 +35,6 @@ export default function AstroPureIntegration(opts: UserInputConfig): AstroIntegr
         }
         if (!allIntegrations.find(({ name }) => name === '@astrojs/mdx')) {
           integrations.push(mdx({ optimize: true }))
-        }
-        if (!allIntegrations.find(({ name }) => name === '@astrojs/tailwind')) {
-          integrations.push(tailwind({ applyBaseStyles: false }))
         }
 
         // Add supported remark plugins based on user config.

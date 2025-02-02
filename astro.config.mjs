@@ -1,14 +1,12 @@
 // @ts-check
 
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
-// Adapter
 import vercel from '@astrojs/vercel'
-// Integrations
 import AstroPureIntegration from 'astro-pure'
 import { defineConfig } from 'astro/config'
-// Rehype & remark packages
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
+import UnoCSS from 'unocss/astro'
 
 // Others
 // import { visualizer } from 'rollup-plugin-visualizer'
@@ -36,6 +34,7 @@ export default defineConfig({
   trailingSlash: 'never',
 
   // Adapter
+  // https://docs.astro.build/en/guides/deploy/
   // 1. Vercel (serverless)
   adapter: vercel(),
   output: 'server',
@@ -43,6 +42,7 @@ export default defineConfig({
   // adapter: vercelStatic(),
   // 3. Local (standalone)
   // adapter: node({ mode: 'standalone' }),
+  // output: 'server',
   // ---
 
   image: {
@@ -55,7 +55,7 @@ export default defineConfig({
     // astro-pure will automatically add sitemap, mdx & tailwind
     // sitemap(),
     // mdx(),
-    // tailwind({ applyBaseStyles: false }),
+    UnoCSS({ injectReset: true }),
     AstroPureIntegration(config),
     // (await import('@playform/compress')).default({
     //   SVG: false,
@@ -108,14 +108,15 @@ export default defineConfig({
     }
   },
   experimental: {
-    svg: true
+    svg: true,
+    contentIntellisense: true
   },
   vite: {
-    // plugins: [
-    //   visualizer({
-    //     emitFile: true,
-    //     filename: 'stats.html'
-    //   })
-    // ]
+    plugins: [
+      //   visualizer({
+      //     emitFile: true,
+      //     filename: 'stats.html'
+      //   })
+    ]
   }
 })
