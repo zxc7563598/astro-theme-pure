@@ -45,10 +45,10 @@ const { html } = processSteps(content)
     font-size: 0.8125rem;
     font-weight: 600;
     text-align: center;
-    color: hsl(var(--foreground) / var(--tw-text-opacity, 1));
-    background-color: hsl(var(--primary-foreground) / var(--tw-bg-opacity, 1));
+    color: hsl(var(--foreground) / var(--un-text-opacity, 1));
+    background-color: hsl(var(--primary-foreground) / var(--un-bg-opacity, 1));
     border-radius: 99rem;
-    box-shadow: inset 0 0 0 1px hsl(var(--border) / var(--tw-border-opacity, 1));
+    box-shadow: inset 0 0 0 1px hsl(var(--border) / var(--un-border-opacity, 1));
   }
 
   /* Vertical guideline linking list numbers. */
@@ -60,7 +60,7 @@ const { html } = processSteps(content)
     bottom: var(--bullet-margin);
     inset-inline-start: calc((var(--bullet-size) - var(--guide-width)) / 2);
     width: var(--guide-width);
-    background-color: hsl(var(--border) / var(--tw-border-opacity, 1));
+    background-color: hsl(var(--border) / var(--un-border-opacity, 1));
   }
 
   /* Adjust first item inside a step so that it aligns vertically with the number
@@ -76,7 +76,7 @@ const { html } = processSteps(content)
     margin-top: 0;
     transform: translateY(var(--shift-y));
     margin-bottom: var(--shift-y);
-    color: hsl(var(--foreground) / var(--tw-text-opacity, 1));
+    color: hsl(var(--foreground) / var(--un-text-opacity, 1));
   }
   .sl-steps > li > :first-child:where(h1, h2, h3, h4, h5, h6) {
     --lh: calc(1.2em);
