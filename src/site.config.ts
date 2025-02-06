@@ -112,7 +112,7 @@ export const integ: IntegrationUserConfig = {
   // See: https://astro-pure.js.org/docs/integrations/others#tailwindcsstypography
   typography: {
     // https://github.com/tailwindlabs/tailwindcss-typography
-    class: 'text-base prose prose-truegray xl:text-xl'
+    class: 'prose text-base text-muted-foreground'
   },
   // A lightbox library that can add zoom effect
   // See: https://astro-pure.js.org/docs/integrations/others#medium-zoom
