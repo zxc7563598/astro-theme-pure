@@ -42,7 +42,6 @@
     "hast-util-select": "^6.0.3",
     "node-html-parser": "^7.0.1",
     "pagefind": "^1.2.0",
-    "rehype-external-links": "^3.0.0",
-    "tailwind-merge": "^2.5.5"
+    "rehype-external-links": "^3.0.0"
   }
 }
