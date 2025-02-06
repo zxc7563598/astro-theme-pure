@@ -8,6 +8,8 @@ import { CardList } from 'astro-pure/user'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import { docs } from '@/pages/docs/docsContents'
 
+import DocsContent from './DocsContent.astro'
+
 export const prerender = true
 
 export async function getStaticPaths() {
@@ -30,7 +32,7 @@ const { description, title } = post.data
 <PageLayout meta={{ description, title }} back='/docs'>
   <Fragment slot='sidebar'>
     {!!headings.length && <TOC {headings} />}
-    <CardList {...docs} title='DOCS' class='docs-toc mt-5 border-0' style='padding:0' />
+    <DocsContent class='docs-toc block mt-3' />
   </Fragment>
 
   <Fragment slot='header'>

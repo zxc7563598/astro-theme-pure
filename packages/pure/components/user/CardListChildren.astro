@@ -6,7 +6,7 @@ type Props = { main?: boolean; children: CardList }
 const { main = false, children } = Astro.props
 ---
 
-<ul class={cn('flex flex-col gap-y-1', !main && 'list-disc ms-5')}>
+<ul class={cn('flex flex-col gap-y-1', !main && 'subitem list-disc ms-5')}>
   {
     children.map((child) => {
       const Tag = child.link ? 'a' : 'p'

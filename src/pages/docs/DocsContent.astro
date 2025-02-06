@@ -22,19 +22,24 @@ const docCategories = {
   advanced: 'Advanced'
 }
 
-const { class: className, ...props } = Astro.props
+type Props = {
+  title?: boolean
+  class?: string
+}
+
+const { title = true, class: className, ...props } = Astro.props
 ---
 
 <docs-toc class={cn('not-prose', className)} {...props}>
-  <h2 class='text-foreground font-semibold'>DOCS</h2>
+  {title && <h2 class='text-foreground font-semibold'>DOCS</h2>}
   <ul class='mt-4 flex flex-col gap-y-5'>
     {
       Object.entries(docCategories).map(([id, title]: [string, string]) => (
         <li>
           <h3 class='text-muted-foreground text-xs tracking-widest uppercase'>{title}</h3>
-          <ul class='mt-2'>
+          <ul class='mt-2 flex flex-col gap-y-1 border-l-3 ml-1 pl-3'>
             {docsByCate[id].map((doc) => (
-              <li class='text-foreground border-l-2 pl-4'>
+              <li class='text-foreground'>
                 <a href={`/docs/${doc.id}`}>{doc.data.title}</a>
               </li>
             ))}
