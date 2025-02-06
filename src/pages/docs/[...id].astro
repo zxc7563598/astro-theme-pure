@@ -59,7 +59,7 @@ const { description, title } = post.data
 <style>
   @media (min-width: 1300px) {
     :global(
-      main { transform: translateX(7.9rem); }
+      main, .bottom { transform: translateX(7.9rem); }
       #sidebar { overflow: inherit; }
       toc-heading { height: 100%; display: flex; flex-direction: column; }
       toc-heading > ul { overflow-y: scroll; }
@@ -69,6 +69,9 @@ const { description, title } = post.data
       top: 0;
       left: -64rem;
       margin-top: 0;
+      max-height: calc(100vh - 7rem);
+      overflow-y: scroll;
+      padding-right: 1rem !important;
     }
   }
 </style>
