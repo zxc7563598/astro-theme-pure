@@ -3,7 +3,6 @@ import { dirname, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 // Astro
 import type { AstroIntegration, RehypePlugins, RemarkPlugins } from 'astro'
-import type { z } from 'astro:content'
 // Integrations
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
@@ -23,9 +22,8 @@ export default function AstroPureIntegration(opts: UserInputConfig): AstroIntegr
     hooks: {
       'astro:config:setup': async ({ config, updateConfig }) => {
         let userConfig = parseWithFriendlyErrors(
-          // UserConfigSchema,
-          // TODO: A temp solution, waiting for fixing
-          UserConfigSchema as unknown as z.ZodType<any, z.ZodTypeDef, any>,
+          // @ts-ignore
+          UserConfigSchema,
           opts,
           'Invalid config passed to astro-pure integration'
         )
