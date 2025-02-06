@@ -1,17 +1,21 @@
+/* Font */
 @font-face {
   font-family: 'Satoshi';
   src: url('/fonts/Satoshi-Variable.ttf');
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Satoshi';
   src: url('/fonts/Satoshi-VariableItalic.ttf');
   font-style: italic;
   font-display: swap;
 }
+html {
+  font-family: 'Satoshi', sans-serif;
+}
 
+/* Theme */
 :root {
   --background: 210 33% 99%;
   --foreground: 240 10% 3.9%;
@@ -34,7 +38,6 @@
   --ring: 240 5.9% 10%;
   --radius: 0.5rem;
 }
-
 .dark {
   --background: 240 20.54% 5.2%;
   --foreground: 0 0% 98%;
@@ -56,13 +59,17 @@
   --input: 240 3.7% 15.9%;
   --ring: 240 4.9% 83.9%;
 }
-
 :root {
   --un-default-border-color: hsl(var(--border) / 1);
 }
-/* body {
-  @apply bg-background text-foreground;
+html.dark {
+  color-scheme: dark;
 }
+
+/* Global */
 a {
-  @apply hover:text-primary transition-colors;
-} */
+  transition: color 0.2s ease;
+  &:hover {
+    color: hsl(var(--primary) / var(--un-text-opacity, 1));
+  }
+}

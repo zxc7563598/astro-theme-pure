@@ -1,11 +1,3 @@
-html {
-  font-family: 'Satoshi', sans-serif;
-}
-
-html.dark {
-  color-scheme: dark;
-}
-
 /* Animation */
 @keyframes fade-in-up {
   0% {
