@@ -26,7 +26,8 @@ Then you can configure the Waline comment system in the `integrationConfig.serve
 export const integ: IntegrationUserConfig = {
   // ...
   waline: {
-    // Comment system service link (no link to disable)
+    enable: true,
+    // Server service link
     server: 'https://astro-theme-pure-waline.arthals.ink/', // [!code highlight]
     // Refer https://waline.js.org/en/guide/features/emoji.html
     emoji: ['bmoji', 'weibo'],

@@ -68,18 +68,16 @@ import { MediumZoom } from 'astro-pure/advanced'
 
 Checkout [playform/compress](https://github.com/PlayForm/Compress) for more.
 
-## `@tailwindcss/typography`
+## `@unocss/preset-typography`
 
-Configure typography; configs are in `tailwind.config.mjs`.
+Configure typography; configs are in `uno.config.ts`.
 
-```js title="tailwind.config.mjs"
-const typographyConfig = ({ theme }) => ({
-  pure: {
-    css: { // [!code highlight:3]
-      // ...
-    }
+```js title="uno.config.ts"
+const typographyConfig = {
+  cssExtend: { // [!code highlight:3]
+    // ...
   }
-})
+}
 ```
 
 And it will be applied to class list configuration:
@@ -88,12 +86,12 @@ And it will be applied to class list configuration:
 export const integ: IntegrationUserConfig = {
   // ...
   typography: {
-    class: 'prose prose-pure dark:prose-invert dark:prose-pure prose-headings:font-medium' // [!code highlight]
+    class: 'prose text-base text-muted-foreground' // [!code highlight]
   }
 }
 ```
 
-Checkout [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography) for more.
+Checkout [Typography preset](https://unocss.dev/presets/typography) for more.
 
 ## Friend-Circle-Lite
 
