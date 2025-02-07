@@ -39,7 +39,7 @@
 
 主题包含了许多组件，不仅可以在主题中使用，还可以在其他 Astro 项目中使用。
 
-> 对于其他 Astro 项目，需要 Tailwind CSS。
+> 对于其他 Astro 项目，需要 UnoCSS。
 
 - 基础组件：`Aside`、`Tabs`、`Timeline`、`Steps`、`Spoiler`...
 - 高级组件：`GithubCard`、`LinkPreview`、`Quote`、`QRCode`...
