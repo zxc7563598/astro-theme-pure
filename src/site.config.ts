@@ -108,10 +108,9 @@ export const integ: IntegrationUserConfig = {
     server: 'https://api.quotable.io/quotes/random?maxLength=60',
     target: `(data) => data[0].content || 'Error'`
   },
-  // Tailwindcss typography
-  // See: https://astro-pure.js.org/docs/integrations/others#tailwindcsstypography
+  // UnoCSS typography
+  // See: https://unocss.dev/presets/typography
   typography: {
-    // https://github.com/tailwindlabs/tailwindcss-typography
     class: 'prose text-base text-muted-foreground'
   },
   // A lightbox library that can add zoom effect
