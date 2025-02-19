@@ -13,6 +13,29 @@ import { Aside } from 'astro-pure/user'
 
 ## Breaking Changes
 
+### v4.0.3
+
+- Change footer registration config to `links`. This will give you more flexibility to add more links or other information:
+
+  ```ts title="src/site.config.ts"
+  export const theme: ThemeUserConfig = {
+    footer: {
+      links: [ // [!code highlight:12]
+        {
+          title: 'Moe ICP APTX4869',
+          link: 'https://icp.gov.moe/?keyword=APTX4869',
+          style: 'text-sm' // Uno/TW CSS class
+        },
+        {
+          title: 'Site Policy',
+          link: '/terms/list',
+          pos: 2 // position set to 2 will be appended to copyright line
+        }
+      ]
+    }
+  }
+  ``` 
+
 ### v4.0.2-beta
 
 - Considering move tools icons to new path like `src/assets/tools/`, this may help user know which ones are relevant to tools.
