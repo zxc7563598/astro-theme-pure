@@ -110,6 +110,9 @@ const typographyConfig = {
     a: {
       'font-weight': '500',
       color: fg
+    },
+    'code:not(pre code)': {
+      'white-space': 'pre-wrap!important'
     }
   }
 }
