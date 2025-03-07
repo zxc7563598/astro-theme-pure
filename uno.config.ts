@@ -112,7 +112,8 @@ const typographyConfig = {
       color: fg
     },
     'code:not(pre code)': {
-      'white-space': 'pre-wrap!important'
+      'white-space': 'pre-wrap!important',
+      'word-break': 'break-all!important'
     }
   }
 }
