@@ -1,4 +1,8 @@
-import { defineConfig, presetTypography, presetUno } from 'unocss'
+import { defineConfig, presetTypography, presetUno } from 'unocss';
+
+
+
+
 
 const fg = 'hsl(var(--foreground) / var(--un-text-opacity, 1))'
 const fgMuted = 'hsl(var(--muted-foreground) / var(--un-text-opacity, 1))'
@@ -114,6 +118,19 @@ const typographyConfig = {
     'code:not(pre code)': {
       'white-space': 'pre-wrap!important',
       'word-break': 'break-all!important'
+    },
+    '.katex-html': {
+      overflow: 'auto hidden',
+      padding: '3px'
+    },
+    '.katex-html .base': {
+      'margin-block': '0',
+      'margin-inline': 'auto'
+    },
+    '.katex-html .tag': {
+      position: 'relative !important',
+      display: 'inline-block',
+      'padding-inline-start': '0.5rem'
     }
   }
 }
