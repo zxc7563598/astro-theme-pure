@@ -51,7 +51,7 @@ const typographyConfig = {
     },
     // Table
     table: {
-      display: 'inline-table',
+      display: 'block',
       width: '100%',
       'overflow-x': 'scroll',
       'font-size': '.875em'
