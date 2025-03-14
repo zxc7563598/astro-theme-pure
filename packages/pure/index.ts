@@ -9,6 +9,7 @@ import sitemap from '@astrojs/sitemap'
 import rehypeExternalLinks from 'rehype-external-links'
 import UnoCSS from 'unocss/astro'
 
+import rehypeWrapContentTables from './plugins/rehype-table'
 import { remarkAddZoomable, remarkReadingTime } from './plugins/remark-plugins'
 import { vitePluginUserConfig } from './plugins/virtual-user-config'
 import { UserConfigSchema, type UserInputConfig } from './types/user-config'
@@ -48,14 +49,17 @@ export default function AstroPureIntegration(opts: UserInputConfig): AstroIntegr
         remarkPlugins.push(remarkReadingTime)
 
         // Add supported rehype plugins based on user config.
-        rehypePlugins.push([
-          rehypeExternalLinks,
-          {
-            content: { type: 'text', value: userConfig.content.externalLinksContent },
-            target: '_blank',
-            rel: ['nofollow', 'noopener', 'noreferrer']
-          }
-        ])
+        rehypePlugins.push(
+          [
+            rehypeExternalLinks,
+            {
+              content: { type: 'text', value: userConfig.content.externalLinksContent },
+              target: '_blank',
+              rel: ['nofollow', 'noopener', 'noreferrer']
+            }
+          ],
+          rehypeWrapContentTables
+        )
         // Add Starlight directives restoration integration at the end of the list so that remark
         // plugins injected by Starlight plugins through Astro integrations can handle text and
         // leaf directives before they are transformed back to their original form.
