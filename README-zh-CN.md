@@ -13,7 +13,7 @@
 ![image](./.github/assets/body.webp)
 
 > [!WARNING]
-> 主题模板 v4.0.2^ 尝试将 CSS 引擎换到 UnoCSS。更稳定的版本是 [v4.0.1-beta](https://github.com/cworld1/astro-theme-pure/tree/v4.0.1-beta)。已知问题：
+> 主题模板 v4.0.2^ CSS 引擎被换到 UnoCSS。更稳定版本为 [v4.0.1-beta](https://github.com/cworld1/astro-theme-pure/tree/v4.0.1-beta)。已知问题：
 >
 > 1. Head 标签和自定义选项仍在开发中（已经暴露模板直接改）
 

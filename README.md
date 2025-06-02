@@ -13,7 +13,7 @@ A simple, fast and powerful blog theme built by Astro.
 ![image](./.github/assets/body.webp)
 
 > [!WARNING]
-> Theme template v4.0.2^ is changing CSS engine to UnoCSS. Stabler experience is currently on [v4.0.1-beta](https://github.com/cworld1/astro-theme-pure/tree/v4.0.1-beta). Known issues:
+> Theme template v4.0.2^ CSS engine changed to UnoCSS. Stabler version is [v4.0.1-beta](https://github.com/cworld1/astro-theme-pure/tree/v4.0.1-beta). Known issues:
 >
 > 1. Header & customize options is still under development (template exposed still)
 

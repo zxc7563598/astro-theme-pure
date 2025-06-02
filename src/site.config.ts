@@ -33,7 +33,7 @@ export const theme: ThemeUserConfig = {
   prerender: true,
   npmCDN: 'https://cdn.jsdelivr.net/npm',
 
-  // still in test
+  // Still in test
   head: [
     /* Telegram channel */
     // {
