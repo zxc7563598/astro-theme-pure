@@ -5,12 +5,8 @@ import { Icon } from '../user'
 ---
 
 <header-component
-  class='group sticky top-4 z-30 mb-12 flex items-center justify-between rounded-xl border border-transparent max-sm:py-1 sm:rounded-2xl [&.not-top]:border-border [&.not-top]:bg-background [&.not-top]:px-1.5 dark:[&.not-top]:bg-muted'
+  class='group sticky top-4 z-30 mb-12 flex items-center justify-between rounded-xl border border-transparent max-sm:py-1 sm:rounded-2xl'
 >
-  <!-- <div
-      class='absolute -left-4 -top-8 -z-10 box-content hidden h-20 w-[calc(100%+2rem)] !duration-0 max-sm:group-[.expanded]:block max-sm:group-[.expanded.not-top]:hidden max-sm:group-[.expanded]:bg-white dark:max-sm:group-[.expanded]:bg-muted'
-    >
-    </div> -->
   <a
     class='z-30 text-xl font-semibold group-[.not-top]:ms-2 sm:group-[.not-top]:ms-3'
     style='transition:margin-inline 0.3s'
@@ -45,7 +41,7 @@ import { Icon } from '../user'
       </div>
     </div>
 
-    <!-- buttons -->
+    {/* buttons */}
     <div class='z-30 flex gap-x-4 group-[.not-top]:gap-x-2' style='transition:gap 0.3s'>
       <button
         id='toggleDarkMode'
@@ -125,6 +121,12 @@ import { Icon } from '../user'
       background-color 0.15s;
 
     &.not-top {
+      --un-border-opacity: 1;
+      border-color: hsl(var(--border) / var(--un-border-opacity));
+      --un-bg-opacity: 1;
+      background-color: hsl(var(--background) / var(--un-bg-opacity));
+      padding-left: 0.375rem;
+      padding-right: 0.375rem;
       box-shadow:
         rgb(255, 255, 255) 0px 0px 0px 0px,
         rgba(24, 24, 27, 0.08) 0px 0px 0px 1px,
@@ -139,6 +141,9 @@ import { Icon } from '../user'
     header-component.not-top {
       margin-inline: 8%;
     }
+  }
+  :global(.dark) header-component.not-top {
+    background-color: hsl(var(--muted) / var(--un-bg-opacity));
   }
 
   /* header menu */
