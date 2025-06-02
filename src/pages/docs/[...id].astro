@@ -48,9 +48,13 @@ const { description, title } = post.data
         )
       }
     </div>
-    <Collapse class='md:hidden' title='See more docs'>
-      <DocsContents title={false} />
-    </Collapse>
+    {
+
+        /* Show more docs collapse on small screen */
+        // <Collapse class='md:hidden' title='See more docs'>
+        //   <DocsContents title={false} />
+        // </Collapse>
+    }
   </Fragment>
 
   <Content />
