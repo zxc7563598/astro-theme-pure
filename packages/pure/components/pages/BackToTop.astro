@@ -4,25 +4,28 @@ import { Icon } from '../user'
 const { header: headerName, content: contentName, needPercent = true } = Astro.props
 ---
 
-<button
-  aria-label='Back to Top'
-  class='z-90 group fixed bottom-8 end-4 flex h-10 w-10 translate-y-28 items-center justify-center rounded-full border-2 border-transparent bg-muted text-muted-foreground opacity-0 transition-all duration-300 hover:border-border/75 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12'
-  data-show='false'
-  id='to-top-btn'
+<div
+  class='z-90 group fixed bottom-8 end-4 transition-all flex flex-col gap-y-4 sm:end-8'
+  id='action-buttons'
 >
-  <div
-    class='absolute bottom-0 end-0 start-0 top-0 flex items-center justify-center transition-opacity group-hover:opacity-0 group-[.ended]:opacity-0'
+  <slot name='other-icons' />
+  <button
+    aria-label='Back to Top'
+    class='relative h-10 w-10 flex items-center justify-center rounded-full border-2 border-transparent bg-muted text-muted-foreground duration-300 hover:border-border/75 sm:size-12 opacity-0'
+    id='to-top-btn'
   >
-    <span class='text'>10</span>
-    <span class='text-xs'>%</span>
-  </div>
-  <Icon
-    name='up'
-    class='opacity-0 transition-opacity group-hover:opacity-100 group-[.ended]:opacity-100'
-  />
-</button>
+    <div
+      class='top-text absolute bottom-0 end-0 start-0 top-0 flex items-center justify-center group-[.ended]:opacity-0'
+    >
+      <span class='text'>10</span>
+      <span class='text-xs'>%</span>
+    </div>
+    <Icon name='up' class='top-icon group-[.ended]:opacity-100' />
+  </button>
+</div>
 
 <script is:inline define:vars={{ headerName, contentName, needPercent }}>
+  const actionBtns = document.getElementById('action-buttons')
   const scrollBtn = document.getElementById('to-top-btn')
   const scrollPercentEl = scrollBtn.children[0].children[0]
   const targetHeader = document.getElementById(headerName)
@@ -31,8 +34,8 @@ const { header: headerName, content: contentName, needPercent = true } = Astro.p
   // scroll to top
   function callback(entries) {
     entries.forEach((entry) => {
-      // only show the scroll to top button when the heading is out of view
-      scrollBtn.dataset.show = (!entry.isIntersecting).toString()
+      // only show the action buttons when the heading is out of view
+      actionBtns.classList.toggle('show', !entry.isIntersecting)
     })
   }
   scrollBtn.addEventListener('click', () => {
@@ -63,9 +66,46 @@ const { header: headerName, content: contentName, needPercent = true } = Astro.p
       scrollPercentEl.innerText = scrollPercent.toString()
 
       // If percent is 100, percent won't need to show
-      scrollBtn.classList.toggle('ended', scrollPercent > 100)
+      actionBtns.classList.toggle('ended', scrollPercent > 100)
     })
   } else {
-    scrollBtn.classList.add('ended')
+    actionBtns.classList.add('ended')
   }
 </script>
+
+<style>
+  #action-buttons {
+    transform: translateY(4rem);
+    &.show {
+      transform: translateY(0);
+      & #to-top-btn {
+        opacity: 1;
+      }
+    }
+
+    /* To top button status change */
+    & #to-top-btn {
+      & .top-text,
+      & .top-icon {
+        transition-property: opacity;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+      }
+      & .top-text {
+        opacity: 1;
+      }
+      & .top-icon {
+        opacity: 0;
+      }
+    }
+    &.ended #to-top-btn,
+    & #to-top-btn:hover {
+      & .top-text {
+        opacity: 0;
+      }
+      & .top-icon {
+        opacity: 1;
+      }
+    }
+  }
+</style>
