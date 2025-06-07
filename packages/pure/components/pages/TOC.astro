@@ -126,3 +126,9 @@ const toc = generateToc(headings)
 
   customElements.define('toc-heading', TOC)
 </script>
+
+<style>
+  toc-heading :global(.toc-item) {
+    display: flow-root;
+  }
+</style>

@@ -160,12 +160,12 @@ const headings = [
         { name: 'WeChat', icon: 'wechat-pay', image: wechat },
         { name: 'Alipay', icon: 'alipay', image: alipay }
       ].map((item) => (
-        <div class='group relative justify-center overflow-hidden rounded-xl border bg-white'>
-          <div class='absolute bottom-0 end-0 start-0 top-0 flex items-center justify-center transition-opacity group-hover:opacity-0'>
+        <div class='sponsorship-card relative justify-center overflow-hidden rounded-xl border bg-white'>
+          <div class='sponsorship-card-icon absolute bottom-0 end-0 start-0 top-0 flex items-center justify-center transition-opacity'>
             <Icon class='size-20' name={item.icon as iconsType} />
           </div>
           <Image
-            class='mx-auto my-0 max-w-60 opacity-30 blur-sm transition-opacity group-hover:opacity-100 group-hover:blur-none'
+            class='sponsorship-card-img mx-auto my-0 max-w-60 blur-sm transition-opacity'
             src={item.image}
             alt={item.name}
             loading='lazy'
@@ -201,3 +201,23 @@ const headings = [
 
   await loadPageviewCount()
 </script>
+
+<style>
+  .sponsorship-card {
+    & .sponsorship-card-img {
+      opacity: 0.3;
+      --un-blur: blur(4px);
+      filter: var(--un-blur);
+    }
+
+    &:hover {
+      & .sponsorship-card-icon {
+        opacity: 0;
+      }
+      & .sponsorship-card-img {
+        opacity: 1;
+        --un-blur: blur(0);
+      }
+    }
+  }
+</style>
