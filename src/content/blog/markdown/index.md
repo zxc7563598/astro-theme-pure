@@ -1,6 +1,6 @@
 ---
 title: Markdown Syntax Support
-publishDate: 2024-07-26 08:00:00
+publishDate: 2023-07-26 08:00:00
 description: 'Markdown is a lightweight markup language.'
 tags:
   - Markdown
