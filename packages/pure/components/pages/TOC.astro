@@ -90,7 +90,7 @@ const toc = generateToc(headings)
               (i == this.tocLinks.length - 1 ||
                 !this.headingProgress[this.tocLinks[i + 1]?.slug].inView)
           )
-          bar.classList.toggle('readed', !inView && progress == 1)
+          bar.classList.toggle('is-read', !inView && progress == 1)
           bar.classList.toggle('highlight-bg', inView)
           bar.style.setProperty('height', `${progress * 90}%`)
         }

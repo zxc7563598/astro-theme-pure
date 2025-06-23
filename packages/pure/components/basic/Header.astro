@@ -17,7 +17,7 @@ import { Icon } from '../user'
   <div class='flex items-center gap-x-2'>
     {/* Menu links */}
     <div
-      id='headerExpandConetent'
+      id='headerExpandContent'
       class='end-0 start-0 top-12 grid border border-transparent group-[.not-top]:rounded-xl group-[.expanded]:opacity-100 dark:group-[.expanded.not-top]:bg-muted max-sm:absolute max-sm:opacity-0 max-sm:group-[.not-top]:border-border max-sm:group-[.expanded.not-top]:bg-background max-sm:group-[.not-top]:px-4 max-sm:group-[.not-top]:py-2 sm:grid-rows-1'
     >
       <div class='flex flex-col items-center justify-center overflow-hidden sm:flex-row'>
@@ -148,7 +148,7 @@ import { Icon } from '../user'
 
   /* header menu */
   @media (max-width: 640px) {
-    #headerExpandConetent {
+    #headerExpandContent {
       grid-template-rows: 0fr;
       transition:
         opacity 0.3s,
@@ -156,10 +156,10 @@ import { Icon } from '../user'
         border-color 0.15s,
         grid-template-rows 0.3s;
     }
-    .expanded #headerExpandConetent {
+    .expanded #headerExpandContent {
       grid-template-rows: 1fr;
     }
-    .expanded.not-top #headerExpandConetent {
+    .expanded.not-top #headerExpandContent {
       box-shadow:
         rgb(255, 255, 255) 0px 0px 0px 0px,
         rgba(24, 24, 27, 0.08) 0px 0px 0px 1px,
@@ -168,7 +168,7 @@ import { Icon } from '../user'
     }
 
     /* header component after */
-    header-component #headerExpandConetent::after {
+    header-component #headerExpandContent::after {
       box-sizing: content-box;
       content: '';
       position: absolute;
@@ -181,7 +181,7 @@ import { Icon } from '../user'
       opacity: 0;
       border-bottom: 1px solid transparent;
     }
-    header-component:not(.not-top) #headerExpandConetent::after {
+    header-component:not(.not-top) #headerExpandContent::after {
       visibility: visible;
       bottom: -1rem;
       opacity: 1;

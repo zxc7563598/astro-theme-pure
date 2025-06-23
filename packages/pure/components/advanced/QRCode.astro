@@ -10,12 +10,12 @@ const { content, class: className, ...props } = Astro.props
 <script is:inline define:vars={{ content }}>
   const renderContent = content ?? window.location.href
   // Load qrcode
-  function loadqrcode(qrcodeContainer) {
+  function loadQRcode(qrcodeContainer) {
     if (!qrcodeContainer) throw new Error('qrcode container not found')
     if (qrcodeContainer.innerHTML !== '') return
     new QRCode(qrcodeContainer, renderContent)
   }
   const qrcodeContainer = document.getElementById('qrcode-container')
   if (!qrcodeContainer) throw new Error('qrcode container not found')
-  loadqrcode(qrcodeContainer)
+  loadQRcode(qrcodeContainer)
 </script>
