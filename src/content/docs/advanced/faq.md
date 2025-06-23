@@ -1,7 +1,7 @@
 ---
 title: 'FAQs'
 description: 'Frequently asked questions'
-order: 3
+order: 4
 ---
 
 ## Routes
