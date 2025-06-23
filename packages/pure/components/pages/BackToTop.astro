@@ -5,13 +5,13 @@ const { header: headerName, content: contentName, needPercent = true } = Astro.p
 ---
 
 <div
-  class='z-90 group fixed bottom-8 end-4 transition-all flex flex-col gap-y-4 sm:end-8'
+  class='z-10 group fixed bottom-8 end-4 transition-all flex flex-col gap-y-4 sm:end-8'
   id='action-buttons'
 >
   <slot name='other-icons' />
   <button
     aria-label='Back to Top'
-    class='relative h-10 w-10 flex items-center justify-center rounded-full border-2 border-transparent bg-muted text-muted-foreground duration-300 hover:border-border/75 sm:size-12 opacity-0'
+    class='relative size-10 flex items-center justify-center rounded-full border-2 border-transparent bg-muted text-muted-foreground duration-300 hover:border-border/75 sm:size-12 opacity-0'
     id='to-top-btn'
   >
     <div
@@ -47,7 +47,6 @@ const { header: headerName, content: contentName, needPercent = true } = Astro.p
   } else {
     console.error(`Element with ID ${headerName} not found.`)
   }
-
   if (needPercent) {
     // scroll percentage
     const scrollHeight = articleElement.scrollHeight // total height
