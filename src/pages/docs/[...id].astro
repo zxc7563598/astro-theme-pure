@@ -4,7 +4,6 @@ import { render, type CollectionEntry } from 'astro:content'
 import { MediumZoom } from 'astro-pure/advanced'
 import { TOC } from 'astro-pure/components/pages'
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
-import { Collapse } from 'astro-pure/user'
 import PageLayout from '@/layouts/ContentLayout.astro'
 
 import DocsContents from './DocsContents.astro'
@@ -48,9 +47,13 @@ const { description, title } = post.data
         )
       }
     </div>
-    <Collapse class='md:hidden' title='See more docs'>
-      <DocsContents title={false} />
-    </Collapse>
+    {
+
+        /* Show more docs collapse on small screen */
+        // <Collapse class='md:hidden' title='See more docs'>
+        //   <DocsContents title={false} />
+        // </Collapse>
+    }
   </Fragment>
 
   <Content />

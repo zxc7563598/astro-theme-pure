@@ -8,7 +8,7 @@ export const prerender = true
 export const partial = true
 
 const docsCollection = (await getBlogCollection('docs')) as CollectionEntry<'docs'>[]
-// group docs by id first part (setup, integrations, advanced, etc.)
+// Group docs by id first part (setup, integrations, advanced, etc.)
 const docsByCate = docsCollection.reduce((acc: { [key: string]: typeof docsCollection }, doc) => {
   const id = doc.id.split('/')[0]
   if (!acc[id]) acc[id] = [] as typeof docsCollection
@@ -41,8 +41,10 @@ const { title = true, class: className, ...props } = Astro.props
             {docsByCate[id]
               .sort((a, b) => a.data.order - b.data.order)
               .map((doc) => (
-                <li class='docs-item relative ms-2 px-3 py-1 text-foreground/75 transition-all rounded-2xl'>
-                  <a href={`/docs/${doc.id}`}>{doc.data.title}</a>
+                <li class='docs-item flex relative ms-2 px-3 py-1 text-foreground/75 transition-all rounded-2xl'>
+                  <a class='flex-1 hover:text-foreground' href={`/docs/${doc.id}`}>
+                    {doc.data.title}
+                  </a>
                 </li>
               ))}
           </ul>
@@ -67,7 +69,9 @@ const { title = true, class: className, ...props } = Astro.props
   docs-toc :global(.docs-item.docs-hl) {
     background-color: hsl(var(--muted) / var(--un-bg-opacity));
     font-weight: 500;
-    color: hsl(var(--primary) / var(--un-text-opacity));
+    & a {
+      color: hsl(var(--primary) / var(--un-text-opacity));
+    }
 
     &::before {
       background-color: hsl(var(--primary) / var(--un-bg-opacity));

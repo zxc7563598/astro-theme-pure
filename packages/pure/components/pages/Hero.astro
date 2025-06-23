@@ -45,7 +45,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
         fetchpriority='high'
         loading='eager'
         id='blurImage'
-        class='absolute end-0 top-4 z-0 mt-0 h-full max-w-[65ch] rounded-3xl opacity-60 blur-xl transition-opacity duration-300'
+        class='absolute end-0 top-4 z-0 mt-0 h-full max-w-[65ch] rounded-3xl opacity-60 transition-opacity duration-300'
         {...heroImage}
       />
     </div>
@@ -148,3 +148,10 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
     })
   }
 </script>
+
+<style>
+  #blurImage {
+    --un-blur: blur(24px);
+    filter: var(--un-blur);
+  }
+</style>
