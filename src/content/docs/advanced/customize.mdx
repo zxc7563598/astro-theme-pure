@@ -4,7 +4,7 @@ description: 'Custom theme by yourself'
 order: 2
 ---
 
-import { Aside, Spoiler } from 'astro-pure/user'
+import { Aside, Spoiler, Steps } from 'astro-pure/user'
 
 ## You Should Know
 
@@ -26,6 +26,60 @@ This theme chose an elegant method called 'Swizzling', which is inspired by the 
 1. Use an IDE to quickly view the source code corresponding to a certain component (In VSCode, it is to click the component with <kbd>Ctrl</kbd>).
 2. Copy to `src/components/<your prefer directory>`.
 3. After modification, change the corresponding reference to your own file path.
+
+Let's make an example to customize the `Footer` component:
+
+<Steps>
+1. Search the `Footer` in your project code:
+
+   ```astro title="src/layout/BaseLayout.astro"
+   ---
+   import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic'
+   import type { SiteMeta } from 'astro-pure/types'
+   // ...
+   ---
+   ```
+
+2. Find it in theme source code:
+
+   ```ts title="node_modules/astro-theme-pure/components/basic/index.ts"
+   export { default as Footer } from './Footer.astro'
+   export { default as Header } from './Header.astro'
+   export { default as ThemeProvider } from './ThemeProvider.astro'
+   ```
+
+   Then you get the `Footer` component source code at `node_modules/astro-theme-pure/components/basic/Footer.astro`.
+
+3. Copy the `Footer.astro` file to your project:
+
+   ```bash
+   cp node_modules/astro-theme-pure/components/basic/Footer.astro src/components/custom/Footer.astro
+   ```
+
+4. Solve the sub-dependencies problem:
+
+   ```astro title="src/components/custom/Footer.astro"
+   ---
+   import config from 'virtual:config'
+
+   import { Icon } from '../user' // [!code --]
+   import { Icon } from 'astro-pure/user' // [!code ++]
+   // ...
+   ---
+   ```
+
+5. Change the reference in `BaseLayout.astro`:
+
+   ```astro title="src/layout/BaseLayout.astro"
+    ---
+    import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic' // [!code --]
+    import { Header, ThemeProvider } from 'astro-pure/components/basic' // [!code ++]
+    import { Footer } from '@/components/custom/Footer.astro' // [!code ++]
+    // ...
+    ---
+    ```
+
+</Steps>
 
 Then you've done a "localization" of the component.
 
