@@ -1,6 +1,6 @@
 # Astro Theme Pure (Integration Package)
 
-A simple, fast and powerful blog theme built by Astro.
+A simple, fast and powerful blog & document theme built by Astro.
 
 [![GitHub deployments](https://img.shields.io/github/deployments/cworld1/astro-theme-pure/production?style=flat&logo=vercel&label=vercel)](https://astro-pure.js.org/)
 [![NPM Version](https://img.shields.io/npm/v/astro-pure?style=flat)](https://www.npmjs.com/package/astro-pure)
