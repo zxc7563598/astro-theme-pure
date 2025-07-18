@@ -94,6 +94,8 @@ To spend more time coding and less time fiddling with whitespace, this project u
 - [Astro Resume](https://github.com/srleom/astro-theme-resume)
 - [Starlight](https://github.com/withastro/starlight)
 
+Other third party references are on [Docs#Contributions](https://astro-pure.js.org/docs/advanced/thanks). Appreciate for all open source libraries.
+
 ## License
 
 This project is licensed under the Apache 2.0 License.
