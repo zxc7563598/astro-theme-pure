@@ -94,6 +94,8 @@ bun new-post
 - [Astro Resume](https://github.com/srleom/astro-theme-resume)
 - [Starlight](https://github.com/withastro/starlight)
 
+其他第三方参考资料在 [Docs#Contributions](https://astro-pure.js.org/docs/advanced/thanks) 上。感谢所有开源库。
+
 ## 许可证
 
 本项目基于 Apache 2.0 许可证。
