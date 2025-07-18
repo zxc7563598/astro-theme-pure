@@ -2,7 +2,6 @@
 import links from 'public/links.json'
 import config from 'virtual:config'
 
-import { Comment } from 'astro-pure/advanced'
 import { Collapse, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import FriendList from '@/components/links/FriendList.astro'
@@ -15,11 +14,10 @@ const headings = [
 
 const { friends } = links
 const linksConf = config.integ.links
-
 const linkEditPage = 'https://github.com/cworld1/astro-theme-pure/blob/main/public/links.json'
 ---
 
-<PageLayout title='Links' {headings} info='/links'>
+<PageLayout title='Links' {headings} comment>
   <p>怎么可能有顺序呢，当然是随机的~ It's random</p>
   <h2 id='common-links'>Common Links</h2>
   <FriendList list={friends[0]} />
@@ -62,5 +60,4 @@ const linkEditPage = 'https://github.com/cworld1/astro-theme-pure/blob/main/publ
     <li>请确保你的站点活着. Make sure your site is alive.</li>
     <li>博客内容不违反国家法律. Content does not violate common laws.</li>
   </ul>
-  <Comment slot='bottom' />
 </PageLayout>
