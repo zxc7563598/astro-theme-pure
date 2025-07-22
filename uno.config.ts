@@ -190,6 +190,12 @@ const rules: Rule<object>[] = [
     {
       'object-fit': 'cover'
     }
+  ],
+  [
+    'bg-cover',
+    {
+      'background-size': 'cover'
+    }
   ]
 ]
 
