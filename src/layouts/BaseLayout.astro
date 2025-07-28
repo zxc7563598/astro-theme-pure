@@ -36,9 +36,11 @@ const {
         />
       )
     }
-    <div class='w-full max-w-[70rem] px-4 sm:px-7 lg:px-10'>
+    <div class='w-full max-w-[70rem] px-4 sm:px-7 lg:px-10 min-h-[100svh] flex flex-col justify-between items-center'>
       <Header />
-      <slot />
+      <div class='flex-1 w-full'>
+        <slot />
+      </div>
       <Footer />
     </div>
 
