@@ -77,6 +77,16 @@ const [owner, repoName] = repo.split('/')
   .loading .gh-text:nth-child(2) {
     animation-delay: 1s;
   }
+
+  #gh-avatar {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  github-card:not(.loading) #gh-avatar {
+    background-color: transparent !important;
+  }
 </style>
 
 <script>
@@ -140,6 +150,7 @@ const [owner, repoName] = repo.split('/')
         if (avatarEl) {
           avatarEl.style.backgroundImage = `url(${data.owner.avatar_url})`
           avatarEl.style.backgroundColor = 'transparent'
+          avatarEl.classList.remove('gh-text')
         }
 
         this.classList.remove('loading')
