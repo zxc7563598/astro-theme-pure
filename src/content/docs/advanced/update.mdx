@@ -13,6 +13,38 @@ import { Aside } from 'astro-pure/user'
 
 ## Breaking Changes
 
+### v4.0.7
+
+- Changed the `Button` component to use `variant` prop instead of `style` prop. This can help you add custom styles without conflicts. You should change your code like this:
+
+  ```jsx
+  <Button title='My Button' style='primary' /> // [!code --]
+  <Button title='My Button' variant='primary' /> // [!code ++]
+  ```
+
+- Changed the `ExternalLinks` configuration in `src/site.config.ts`. You should change your config like this:
+
+  ```ts title="src/site.config.ts"
+  export const theme: ThemeUserConfig = {
+    content: {
+      externalLinksContent: ' ↗', // [!code --]
+      /** External links configuration */ // [!code ++]
+      externalLinks: { // [!code ++]
+        content: ' ↗', // [!code ++]
+        /** Properties for the external links element */ // [!code ++]
+        properties: { // [!code ++]
+          style: 'user-select:none' // [!code ++]
+        } // [!code ++]
+      }, // [!code ++]
+      /** Blog page size for pagination (optional) */
+      blogPageSize: 8,
+      externalLinkArrow: true, // show external link arrow // [!code --]
+    }
+  }
+  ```
+
+  - Changed the Waline files out of package! Checkout [Commit 5119694](https://github.com/cworld1/astro-theme-pure/commit/5119694ab3e32b600887dca30650bcbc63da3f7b) to see how to change your existing pages & layouts. Don't forget to copy files at `src/components/waline` to your project.
+
 ### v4.0.6
 
 - Changed the project card var name to `projects` instead of `project`.
