@@ -150,7 +150,12 @@ const [owner, repoName] = repo.split('/')
           licenseEl.textContent = data.license.spdx_id
         } else {
           licenseEl.textContent = 'N/A'
+        const licenseText = data.license?.spdx_id || 'N/A'
+        licenseEl.textContent = licenseText
+        if (licenseText === 'N/A') {
           licenseEl.classList.add('no-license')
+        } else {
+          licenseEl.classList.remove('no-license')
         }
 
         const avatarEl = this.querySelector('#gh-avatar') as HTMLElement
