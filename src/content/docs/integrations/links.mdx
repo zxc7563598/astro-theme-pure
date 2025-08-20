@@ -6,6 +6,29 @@ order: 4
 
 import { Steps } from 'astro-pure/user'
 
+## Remove Links Page
+
+Links page is a page for showing your friend blog links, which is enabled by default.
+
+If you want to remove the links page for any reason, follow the steps in this section. Otherwise, you can skip ahead to the next chapter.
+
+Set `links.enable` to `false` in `src/site.config.ts`:
+
+```ts title="src/site.config.ts"
+export const integ: IntegrationUserConfig = {
+  // ...
+  links: {
+    enable: false // [!code highlight]
+  }
+}
+```
+
+And also, remember to delete the following folders & files:
+
+- `src/components/links/`
+- `src/pages/links/`
+- `public/links.json`
+
 ## Basic Configurations
 
 A basic configuration for friend links is in `src/site.config.ts`. You can add your friend's logbook or your own link info.
