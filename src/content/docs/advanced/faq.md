@@ -33,3 +33,9 @@ To allow this host, add "xxx" to `preview.allowedHosts` in vite.config.js.
 ```
 
 See [option server.allowedHosts doesn't take into account "true"](https://github.com/vitejs/vite/issues/19242)
+
+## Packages
+
+### Problem with `BUN_LINK_PKG`
+
+See [BUN_LINK_PKG 环境变量无法设置成功](https://github.com/cworld1/astro-theme-pure/issues/51)
