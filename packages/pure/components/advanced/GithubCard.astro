@@ -21,7 +21,7 @@ const [owner, repoName] = repo.split('/')
       >
         <div
           id='gh-avatar'
-          class='gh-text me-2 size-7 flex-shrink-0 bg-cover sm:size-8'
+          class='load-block me-2 size-7 flex-shrink-0 bg-cover sm:size-8'
           style='border-radius:999px'
         >
         </div>
@@ -39,9 +39,9 @@ const [owner, repoName] = repo.split('/')
         <Icon name='github' />
       </div>
     </div>
-    <p id='gh-description' class='gh-text text-sm sm:text-base'>Waiting for api.github.com...</p>
+    <p id='gh-description' class='load-block text-sm sm:text-base'>Waiting for api.github.com...</p>
     <div class='flex items-center justify-between gap-x-2'>
-      <div class='gh-text flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-5'>
+      <div class='load-block flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-x-5'>
         <div class='flex items-center gap-x-1.5 sm:gap-x-2'>
           {/* mingcute:star-line */}
           <!-- prettier-ignore -->
@@ -63,8 +63,7 @@ const [owner, repoName] = repo.split('/')
           <span id='gh-license' class='text-sm leading-tight sm:text-base'>???</span>
         </div>
       </div>
-
-      <span id='gh-language' class='gh-text text-sm leading-tight sm:text-base'>?????</span>
+      <span id='gh-language' class='load-block text-sm leading-tight sm:text-base'>?????</span>
     </div>
   </a>
 </github-card>
@@ -81,14 +80,14 @@ const [owner, repoName] = repo.split('/')
       opacity: 1;
     }
   }
-  .loading .gh-text {
+  .loading .load-block {
     color: transparent;
     border-radius: calc(var(--radius) - 3px);
     background-color: hsl(var(--primary-foreground) / var(--un-text-opacity));
     animation: pulsate 2s infinite linear;
     user-select: none;
   }
-  .loading .gh-text:nth-child(2) {
+  .loading .load-block:nth-child(2) {
     animation-delay: 1s;
   }
   .no-license {
