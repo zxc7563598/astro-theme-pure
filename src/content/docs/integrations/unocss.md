@@ -45,6 +45,7 @@ Typography config can be modified in `uno.config.ts`:
 
 ```js title="uno.config.ts"
 const typographyConfig = {
+  // prettier-ignore
   cssExtend: { // [!code highlight:3]
     // ...
   }
