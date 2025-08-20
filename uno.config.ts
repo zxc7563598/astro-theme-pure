@@ -123,6 +123,9 @@ const typographyConfig = {
       color: fg
     },
     a: {
+      'word-wrap': 'break-word',
+      'word-break': 'break-word',
+      'overflow-wrap': 'anywhere',
       'font-weight': '500',
       color: fg
     },
