@@ -24,13 +24,13 @@ Remove it by the following steps:
 1. set `enable` to `false` in `src/site.config.ts`.
 
    ```ts title="src/site.config.ts"
-    export const integ: IntegrationUserConfig = {
-      // ...
-      waline: {
-        enable: false // [!code highlight]
-      }
-    }
-    ```
+   export const integ: IntegrationUserConfig = {
+     // ...
+     waline: {
+       enable: false // [!code highlight]
+     }
+   }
+   ```
 
 2. Remove dependency `@waline/client`:
 
@@ -38,15 +38,13 @@ Remove it by the following steps:
    bun remove @waline/client
    ```
 
-2. Remove folder `src/components/waline`.
+3. Remove folder `src/components/waline`.
 
-3. Remove relative code in these layouts:
-
+4. Remove relative code in these layouts:
    - `src/layouts/CommonPage.astro`
    - `src/layouts/BlogPost.astro`
 
-4. Remove relative config like `comment` or `view` configuring for the earlier edited layouts in these files:
-
+5. Remove relative config like `comment` or `view` configuring for the earlier edited layouts in these files:
    - `src/pages/about/index.astro`
    - `src/pages/links/index.astro`
    - `src/pages/projects/index.astro`
@@ -86,6 +84,7 @@ You can call it manually in `.astro` or `.mdx` files.
 ```jsx
 import { Comment } from '@/components/waline'
 
+// prettier-ignore
 <Comment />
 ```
 
