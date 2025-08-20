@@ -133,31 +133,22 @@ const [owner, repoName] = repo.split('/')
       try {
         const data = await this.fetchGithub(this.dataset.repo)
         if (!data) return
-        ;(this.querySelector('#gh-stars') as HTMLElement).textContent = this.numberFormat(
-          data.stargazers_count
-        )
-        ;(this.querySelector('#gh-forks') as HTMLElement).textContent = this.numberFormat(
-          data.forks
-        )
-        ;(this.querySelector('#gh-language') as HTMLElement).textContent = data.language || 'N/A'
-        ;(this.querySelector('#gh-description') as HTMLElement).textContent =
+        // Update stats
+        this.updateElement('#gh-stars', this.numberFormat(data.stargazers_count))
+        this.updateElement('#gh-forks', this.numberFormat(data.forks))
+        this.updateElement('#gh-language', data.language || 'N/A')
+        // Update description
+        const description =
           typeof data.description === 'string'
             ? data.description.replace(/:[a-zA-Z0-9_]+:/g, '')
             : 'Description not set'
-
-        const licenseEl = this.querySelector('#gh-license') as HTMLElement
-        if (data.license?.spdx_id) {
-          licenseEl.textContent = data.license.spdx_id
-        } else {
-          licenseEl.textContent = 'N/A'
+        this.updateElement('#gh-description', description)
+        // Update license
         const licenseText = data.license?.spdx_id || 'N/A'
+        const licenseEl = this.querySelector('#gh-license') as HTMLElement
         licenseEl.textContent = licenseText
-        if (licenseText === 'N/A') {
-          licenseEl.classList.add('no-license')
-        } else {
-          licenseEl.classList.remove('no-license')
-        }
-
+        licenseEl.classList.toggle('no-license', licenseText === 'N/A')
+        // Update avatar
         const avatarEl = this.querySelector('#gh-avatar') as HTMLElement
         if (avatarEl) {
           avatarEl.style.backgroundImage = `url(${data.owner.avatar_url})`
@@ -167,7 +158,14 @@ const [owner, repoName] = repo.split('/')
         this.classList.remove('loading')
       } catch (e) {
         console.error('Error setting Github data:', e)
-        ;(this.querySelector('#gh-description') as HTMLElement).textContent = 'Failed to fetch data'
+        this.updateElement('#gh-description', 'Failed to fetch data')
+      }
+    }
+
+    private updateElement(selector: string, text: string) {
+      const element = this.querySelector(selector) as HTMLElement
+      if (element) {
+        element.textContent = text
       }
     }
   }
