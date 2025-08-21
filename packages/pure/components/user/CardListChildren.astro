@@ -1,14 +1,19 @@
 ---
+import type { HTMLTag, Polymorphic } from 'astro/types'
+
 import type { CardList } from '../../types'
 import { cn } from '../../utils'
 
-type Props = { main?: boolean; children: CardList }
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+  main?: boolean
+  children: CardList
+}
 const { main = false, children } = Astro.props
 ---
 
 <ul class={cn('flex flex-col gap-y-1', !main && 'subitem list-disc ms-5')}>
   {
-    children.map((child) => {
+    children.map((child: CardList[number]) => {
       const Tag = child.link ? 'a' : 'p'
       return (
         <li>
