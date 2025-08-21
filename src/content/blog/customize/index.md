@@ -53,7 +53,6 @@ If you want to add new social media, you need to modify the following files:
 - `public/icons/social.svg`: Follow the existing format and add a new icon as a symbol
 
   It is recommended to find social media icons on the following websites to maintain consistency:
-
   - [remixicon](https://remixicon.com/)
   - [mingcute](https://www.mingcute.com/)
 

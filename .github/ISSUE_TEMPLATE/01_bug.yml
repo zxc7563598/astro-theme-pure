@@ -11,6 +11,11 @@ body:
         ✅ I am using the **latest version of `astro-theme-pure`** and all plugins.
         ✅ I am using a version of Node that Astro supports (`v18.17.1` or `v20.3.0` or higher.)
   - type: textarea
+    id: environment-auto-check
+    attributes:
+      label: Run command like `bun astro-pure info`, `bun astro info`
+      description: Paste your auto check command information.
+  - type: textarea
     id: bug-description
     attributes:
       label: Describe the Bug

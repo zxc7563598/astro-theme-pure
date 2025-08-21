@@ -1,9 +1,33 @@
 ---
 title: 'Friend Links'
 description: 'Configurations for friend links'
+order: 4
 ---
 
 import { Steps } from 'astro-pure/user'
+
+## Remove Links Page
+
+Links page is a page for showing your friend blog links, which is enabled by default.
+
+If you want to remove the links page for any reason, follow the steps in this section. Otherwise, you can skip ahead to the next chapter.
+
+Set `links.enable` to `false` in `src/site.config.ts`:
+
+```ts title="src/site.config.ts"
+export const integ: IntegrationUserConfig = {
+  // ...
+  links: {
+    enable: false // [!code highlight]
+  }
+}
+```
+
+And also, remember to delete the following folders & files:
+
+- `src/components/links/`
+- `src/pages/links/`
+- `public/links.json`
 
 ## Basic Configurations
 
@@ -14,8 +38,11 @@ export const integ: IntegrationUserConfig = {
   links: {
     // Friend logbook
     logbook: [
-      { date: '2024-07-01', content: 'Lorem ipsum dolor sit amet.' },
-      { date: '2024-07-01', content: 'vidit suscipit at mei.' },
+      { date: '2025-03-16', content: 'Is there a leakage?' },
+      { date: '2025-03-16', content: 'A leakage of what?' },
+      { date: '2025-03-16', content: 'I have a full seat of water, like, full of water!' },
+      { date: '2025-03-16', content: 'Must be the water.' },
+      { date: '2025-03-16', content: 'Let\'s add that to the words of wisdom.' },
     ],
     // Yourself link info
     applyTip: {
@@ -64,7 +91,7 @@ The friend links configurations are at `public/links.json`.
 
 ## Integrated with `Friend-Circle-Lite`
 
-[Friend-Circle-Lite](https://github.com/willow-god/Friend-Circle-Lite) is a stripped-down friendlink app with no backend and running only using github action.
+[Friend-Circle-Lite](https://github.com/willow-god/Friend-Circle-Lite) is a stripped-down friend-link app with no backend and running only using github action.
 
 It requires:
 
