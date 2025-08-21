@@ -70,22 +70,15 @@ const [owner, repoName] = repo.split('/')
   .loading .gh-text {
     color: transparent;
     border-radius: calc(var(--radius) - 3px);
-    background-color: hsl(var(--primary-foreground) / var(--un-text-opacity));
+    background-color: hsl(var(--primary-foreground) / var(--un-bg-opacity, 1));
     animation: pulsate 2s infinite linear;
     user-select: none;
   }
   .loading .gh-text:nth-child(2) {
     animation-delay: 1s;
   }
-
-  #gh-avatar {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  github-card:not(.loading) #gh-avatar {
-    background-color: transparent !important;
+  :not(.loading) #gh-avatar {
+    background-color: hsl(var(--primary-foreground) / var(--un-bg-opacity));
   }
 </style>
 
@@ -149,8 +142,6 @@ const [owner, repoName] = repo.split('/')
         const avatarEl = this.querySelector('#gh-avatar') as HTMLElement
         if (avatarEl) {
           avatarEl.style.backgroundImage = `url(${data.owner.avatar_url})`
-          avatarEl.style.backgroundColor = 'transparent'
-          avatarEl.classList.remove('gh-text')
         }
 
         this.classList.remove('loading')
