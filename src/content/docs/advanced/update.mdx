@@ -7,11 +7,15 @@ order: 1
 import { Aside } from 'astro-pure/user'
 
 <Aside type='caution'>
-  This theme is updated frequently, and updating the theme may be a little bit complex. Please read the
-  following breaking changes carefully.
+  This theme is updated frequently, and updating the theme may be a little bit complex. Please read
+  the following breaking changes carefully.
 </Aside>
 
 ## Breaking Changes
+
+### v4.0.8
+
+No breaking changes.
 
 ### v4.0.7
 
@@ -38,7 +42,7 @@ import { Aside } from 'astro-pure/user'
       }, // [!code ++]
       /** Blog page size for pagination (optional) */
       blogPageSize: 8,
-      externalLinkArrow: true, // show external link arrow // [!code --]
+      externalLinkArrow: true // show external link arrow // [!code --]
     }
   }
   ```
@@ -74,7 +78,7 @@ import { Aside } from 'astro-pure/user'
       ]
     }
   }
-  ``` 
+  ```
 
 ### v4.0.2-beta
 
@@ -118,6 +122,7 @@ import { Aside } from 'astro-pure/user'
       }
     ]},
   />
+  ```
 
 - This changes import a new component `Svg`. See [User Components #Svg Loader](/docs/integrations/components#svg-loader) for usage.
 
@@ -131,13 +136,13 @@ import { Aside } from 'astro-pure/user'
   ```
 
 - New format config file `src/site.config.ts`. There will be zod schema to validate the config file, and use of config will be changed to:
-  
-    ```ts
-    import { siteConfig } from '@/site-config' // [!code --]
-    import config from '@/site-config' // [!code ++]
-    // Or if you want to use the config that is after processed or transformed
-    import config from 'virtual:config' // [!code ++]
-    ```
+
+  ```ts
+  import { siteConfig } from '@/site-config' // [!code --]
+  import config from '@/site-config' // [!code ++]
+  // Or if you want to use the config that is after processed or transformed
+  import config from 'virtual:config' // [!code ++]
+  ```
 
 - Built-in astro config supported. package `astro-pure` will automatically config some integrations like `unocss/astro`, `@astrojs/mdx`, `@astrojs/sitemap`, also with some rehypePlugins and remarkPlugins.
 - Changed search engine to [pagefind](https://pagefind.app/), mainly because Astro v5 will not allow getting collection data directly from client (that is core working mode of Fuse.js search engine).
