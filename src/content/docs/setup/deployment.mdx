@@ -4,7 +4,7 @@ description: 'Deploy your site to various platforms'
 order: 3
 ---
 
-import { Steps } from 'astro-pure/user'
+import { Asides, Steps } from 'astro-pure/user'
 
 ## Package Mode
 
@@ -20,7 +20,9 @@ This method can also work on Deployment for other platforms like 'Vercel'. All y
 import { Aside } from 'astro-pure/user'
 
 <Aside type='tip'>
+
 Astro had a very fantastic support for deployment. Check [Deploy your Astro Site](https://docs.astro.build/en/guides/deploy/) for more.
+
 </Aside>
 
 ### Vercel
@@ -60,8 +62,8 @@ bun add '@astrojs/node'
 Then follow the comments in `astro.config.ts` and modify like:
 
 ```ts title="astro.config.ts"
-import vercelServerless from '@astrojs/vercel/serverless' // [!code --]
 import node from '@astrojs/node' // [!code ++]
+import vercelServerless from '@astrojs/vercel/serverless' // [!code --]
 
 export default defineConfig({
   //   ...
@@ -69,6 +71,7 @@ export default defineConfig({
   adapter: node({ mode: 'standalone' }), // [!code ++]
 
   integrations: [
+    // prettier-ignore
     outputCopier({ // [!code --]
       integ: ['sitemap', 'pagefind'] // [!code --]
     }) // [!code --]
@@ -92,10 +95,43 @@ import vercelServerless from '@astrojs/vercel/serverless' // [!code --]
 export default defineConfig({
   //   ...
   adapter: vercelServerless(), // [!code --]
-  output: 'server', // [!code --]
+  output: 'server' // [!code --]
 })
 ```
 
 ### GitHub Pages
 
 See [Astro: Configure Astro for GitHub Pages](https://docs.astro.build/en/guides/deploy/github/).
+
+For ones deploying on GitHub Pages with a base path, like `username.github.io/repo-name`, please read [Deployment#Platform with Base Path](/docs/setup/deployment#platform-with-base-path).
+carefully.
+
+## Platform with Base Path
+
+<Asides type='warning'>
+
+1. Astro provides basic support for a base path — see the "base" option in the configuration reference [Astro: base](https://docs.astro.build/en/reference/configuration-reference/#base) for more.
+2. This theme will not support the base path, as it seriously break down the experience of remote developments. In general, deploying the template with a base path is not recommended because the homepage integrates lists, resume elements, and other features that rely on the template’s source structure.
+3. If you follow the guide and modify the code, you can deploy with a base path, but you cannot use the same project copy to deploy both with and without a base path simultaneously. Proceed at your own risk; do not open issues about this unless you plan to contribute improvements to the docs.
+
+</Asides>
+
+1. Set the `base` option in `astro.config.ts` to your base path, for example:
+
+   ```ts title="astro.config.ts"
+   export default defineConfig({
+     //   ...
+     base: '/repo-name/' // Replace with your repository name
+   })
+   ```
+
+2. Update all internal links in Dynamic script files:
+   - `src/components/BaseHead.astro`
+   - `src/pages/docs/DocsContent.astro`
+   - `src/pages/rss.xml.ts`
+   - `packages/pure/components/pages/PostPreview.astro` ([Customize Theme](/docs/advanced/customize) is required to make the change)
+
+3. Update all static resource paths:
+   - Add base paths in `src/site.config.ts`. Especially the menu configs.
+   - Add base paths in `src/plugins/shiki-transformers.ts` for all `/icons/code.svg`.
+   - Add base paths in `src/assets/styles/app.css` for all url in `@font-face` property.
