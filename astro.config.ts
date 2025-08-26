@@ -26,7 +26,8 @@ import config from './src/site.config.ts'
 export default defineConfig({
   // Top-Level Options
   site: 'https://astro-pure.js.org',
-  // base: '/docs',
+  // Deploy to a sub path; See https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
+  // base: '/astro-pure/',
   trailingSlash: 'never',
 
   // Adapter
@@ -42,6 +43,7 @@ export default defineConfig({
   // ---
 
   image: {
+    responsiveStyles: true,
     service: {
       entrypoint: 'astro/assets/services/sharp'
     }

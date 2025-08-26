@@ -1,11 +1,14 @@
 ---
+import type { HTMLTag, Polymorphic } from 'astro/types'
+
 import { cn } from '../../utils'
 
-interface Props {
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
   as?: string
   title?: string
   href?: string
   variant?: 'button' | 'pill' | 'back' | 'ahead'
+  target?: string
   class?: string
 }
 

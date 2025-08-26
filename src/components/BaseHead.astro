@@ -1,6 +1,4 @@
 ---
-// import { ClientRouter } from 'astro:transitions'
-
 import { prod } from 'astro-pure/server'
 import type { SiteMeta } from 'astro-pure/types'
 import config from '@/site-config'
@@ -87,19 +85,6 @@ const socialImageURL = new URL(ogImage ? ogImage : '/images/social-card.png', As
 
 {/* Styles */}
 <link rel='stylesheet' href='/styles/global.css' />
-
-{/* View transitions */}
-<!-- <ClientRouter /> -->
-<!-- <script is:inline>
-  const style = document.createElement('style')
-  style.textContent = `* { transition: none !important; }`
-  document.addEventListener('astro:after-swap', () => {
-    document.head.appendChild(style)
-    setTimeout(() => {
-      style.remove()
-    }, 100)
-  })
-</script> -->
 
 {
   /* User script*/
