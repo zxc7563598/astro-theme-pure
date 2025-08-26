@@ -4,7 +4,7 @@ description: 'Deploy your site to various platforms'
 order: 3
 ---
 
-import { Asides, Steps } from 'astro-pure/user'
+import { Aside, Steps } from 'astro-pure/user'
 
 ## Package Mode
 
@@ -16,8 +16,6 @@ This theme which >= v4.0.0 has integrated NPM package mode. Recommended way is r
 This method can also work on Deployment for other platforms like 'Vercel'. All you need is to add the environment variable to build options on your platform control settings. The build command `astro-pure check && astro check && astro build` will automatically link the package.
 
 ## Deployment Mode
-
-import { Aside } from 'astro-pure/user'
 
 <Aside type='tip'>
 
@@ -108,13 +106,13 @@ carefully.
 
 ## Platform with Base Path
 
-<Asides type='warning'>
+<Aside type='danger'>
 
 1. Astro provides basic support for a base path — see the "base" option in the configuration reference [Astro: base](https://docs.astro.build/en/reference/configuration-reference/#base) for more.
 2. This theme will not support the base path, as it seriously break down the experience of remote developments. In general, deploying the template with a base path is not recommended because the homepage integrates lists, resume elements, and other features that rely on the template’s source structure.
 3. If you follow the guide and modify the code, you can deploy with a base path, but you cannot use the same project copy to deploy both with and without a base path simultaneously. Proceed at your own risk; do not open issues about this unless you plan to contribute improvements to the docs.
 
-</Asides>
+</Aside>
 
 1. Set the `base` option in `astro.config.ts` to your base path, for example:
 
