@@ -1,67 +1,51 @@
 ---
-interface StatsItem {
-  platform: string
-  color?: string
-  link?: string
-  text: string
-  count?: number
-}
-
-const stats: StatsItem[] = []
-
-async function fetchCount(url: string) {
-  stats.push({
-    platform: '访问人数',
-    text: '近日访问人数',
-    count: 123
-  })
-  stats.push({
-    platform: '访问人数',
-    text: url,
-    count: 123
-  })
-}
-
-await fetchCount('url')
+import { laWidget } from '@/site-config'
 ---
 
-<div class='grid grid-cols-1 gap-3 rounded-xl border p-2 sm:grid-cols-2 sm:p-3'>
-  {
-    stats.map(({ link, platform, count, text }) => (
-      <a
-        class='group text-muted-foreground no-underline'
-        href={link}
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        <div class='flex items-center gap-3 rounded-lg border border-transparent px-3 py-2 transition-all hover:border-border hover:bg-muted'>
-          <div class='flex-1 text-foreground transition-colors group-hover:text-primary'>
-            {platform}
-          </div>
-          {count ? (
-            <div class='flex items-center gap-1.5'>
-              <samp>{count}</samp>
-              <span class='text-sm font-normal'>{text}</span>
-            </div>
-          ) : (
-            'null'
-          )}
-        </div>
-      </a>
-    ))
-  }
+<div
+  class='grid grid-cols-1 gap-3 rounded-xl border p-2 sm:grid-cols-2 sm:p-3'
+  id='statistic'
+  data-url={laWidget.url}
+>
+  加载中...
 </div>
 
-<div id='51la-demo'></div>
-
 <script is:inline>
-  ;(function () {
-    const _la = document.createElement('script')
-    _la.src =
-      'https://v6-widget.51.la/v6/3K0Dk6gsiH5Cx3N3/quote.js?theme=0&f=12&display=0,0,1,1,1,1,1,1'
-    _la.id = '51la-demo'
-    _la.crossorigin = 'anonymous'
-    _la.charset = 'UTF-8'
-    document.body.appendChild(_la)
-  })()
+  const el = document.getElementById('statistic')
+  const laWidgetConfig = el.dataset.url
+  fetch(laWidgetConfig)
+    .then((res) => res.text())
+    .then((data) => {
+      let num = data.match(/(<\/span><span>).*?(\/span><\/p>)/g)
+      if (!num) {
+        console.warn('51.la 数据匹配失败')
+        return
+      }
+      num = num.map((el) => el.replace(/(<\/span><span>|<\/span><\/p>)/g, ''))
+      const titles = [
+        '最近活跃',
+        '今日人数',
+        '今日访问',
+        '昨日人数',
+        '昨日访问',
+        '本月访问',
+        '总访问量'
+      ]
+      const container = document.getElementById('statistic')
+      let html = ''
+      for (let i = 0; i < num.length; i++) {
+        if (i === 0) continue
+        html += `<div class='group text-muted-foreground no-underline cursor-pointer'>`
+        html += `<div class='flex items-center gap-3 rounded-lg border border-transparent px-3 py-2 transition-all hover:border-border hover:bg-muted'>`
+        html += `<div class='flex-1 text-foreground transition-colors group-hover:text-primary'>${titles[i]}</div>`
+        html += `<div class='flex items-center gap-1.5'><samp>${num[i]}</samp></div>`
+        html += `</div>`
+        html += `</div>`
+      }
+      container.innerHTML = html
+    })
+    .catch((err) => {
+      console.error('51.la 数据获取失败:', err)
+      document.getElementById('statistic').innerHTML = '加载失败'
+    })
 </script>

@@ -1,5 +1,9 @@
 import type { CardListData, Config, IntegrationUserConfig, ThemeUserConfig } from 'astro-pure/types'
 
+interface AccessStatistics {
+  url: string
+}
+
 export const theme: ThemeUserConfig = {
   // === Basic configuration ===
   /** Title for your website. Will be used in metadata and as browser tab title. */
@@ -104,7 +108,7 @@ export const integ: IntegrationUserConfig = {
     // server: 'https://v1.hitokoto.cn/?c=i',
     // target: (data) => (data as { hitokoto: string }).hitokoto || 'Error'
     // https://github.com/lukePeavey/quotable
-    server: 'https://v1.hitokoto.cn/?c=i', 
+    server: 'https://v1.hitokoto.cn/?c=i',
     target: `(data) => data.hitokoto || 'Error'`
   },
   // UnoCSS typography
@@ -166,6 +170,10 @@ export const terms: CardListData = {
       link: '/terms/disclaimer'
     }
   ]
+}
+
+export const laWidget: AccessStatistics = {
+  url: 'https://v6-widget.51.la/v6/3K0Dk6gsiH5Cx3N3/quote.js'
 }
 
 const config = { ...theme, integ } as Config
