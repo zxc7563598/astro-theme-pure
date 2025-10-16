@@ -1,0 +1,67 @@
+---
+interface StatsItem {
+  platform: string
+  color?: string
+  link?: string
+  text: string
+  count?: number
+}
+
+const stats: StatsItem[] = []
+
+async function fetchCount(url: string) {
+  stats.push({
+    platform: '访问人数',
+    text: '近日访问人数',
+    count: 123
+  })
+  stats.push({
+    platform: '访问人数',
+    text: url,
+    count: 123
+  })
+}
+
+await fetchCount('url')
+---
+
+<div class='grid grid-cols-1 gap-3 rounded-xl border p-2 sm:grid-cols-2 sm:p-3'>
+  {
+    stats.map(({ link, platform, count, text }) => (
+      <a
+        class='group text-muted-foreground no-underline'
+        href={link}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <div class='flex items-center gap-3 rounded-lg border border-transparent px-3 py-2 transition-all hover:border-border hover:bg-muted'>
+          <div class='flex-1 text-foreground transition-colors group-hover:text-primary'>
+            {platform}
+          </div>
+          {count ? (
+            <div class='flex items-center gap-1.5'>
+              <samp>{count}</samp>
+              <span class='text-sm font-normal'>{text}</span>
+            </div>
+          ) : (
+            'null'
+          )}
+        </div>
+      </a>
+    ))
+  }
+</div>
+
+<div id='51la-demo'></div>
+
+<script is:inline>
+  ;(function () {
+    const _la = document.createElement('script')
+    _la.src =
+      'https://v6-widget.51.la/v6/3K0Dk6gsiH5Cx3N3/quote.js?theme=0&f=12&display=0,0,1,1,1,1,1,1'
+    _la.id = '51la-demo'
+    _la.crossorigin = 'anonymous'
+    _la.charset = 'UTF-8'
+    document.body.appendChild(_la)
+  })()
+</script>

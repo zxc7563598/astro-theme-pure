@@ -3,23 +3,23 @@ import type { CardListData, Config, IntegrationUserConfig, ThemeUserConfig } fro
 export const theme: ThemeUserConfig = {
   // === Basic configuration ===
   /** Title for your website. Will be used in metadata and as browser tab title. */
-  title: 'Astro Theme Pure',
+  title: '星河避难所',
   /** Will be used in index page & copyright declaration */
-  author: 'Pure Lab',
+  author: '何俊杰',
   /** Description metadata for your website. Can be used in page metadata. */
-  description: 'Stay hungry, stay foolish',
+  description: '写代码，也写自己',
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
   favicon: '/favicon/favicon.ico',
   /** Specify the default language for this site. */
   locale: {
-    lang: 'en-US',
-    attrs: 'en_US',
+    lang: 'zh-CN',
+    attrs: 'zh_CN',
     // Date locale
-    dateLocale: 'en-US',
+    dateLocale: 'zh-CN',
     dateOptions: {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
     }
   },
   /** Set a logo image to show in the homepage. */
@@ -47,11 +47,9 @@ export const theme: ThemeUserConfig = {
   /** Configure the header of your site. */
   header: {
     menu: [
-      { title: 'Blog', link: '/blog' },
-      { title: 'Docs', link: '/docs' },
-      { title: 'Projects', link: '/projects' },
-      { title: 'Links', link: '/links' },
-      { title: 'About', link: '/about' }
+      { title: '文章', link: '/blog' },
+      { title: '项目', link: '/projects' },
+      { title: '关于我', link: '/about' }
     ]
   },
 
@@ -63,26 +61,21 @@ export const theme: ThemeUserConfig = {
     links: [
       // Registration link
       {
-        title: 'Moe ICP 114514',
-        link: 'https://icp.gov.moe/?keyword=114514',
+        title: '鲁ICP备2025143078号-1',
+        link: 'https://beian.mps.gov.cn/#/query/webSearch',
         style: 'text-sm' // Uno/TW CSS class
-      },
-      {
-        title: 'Travelling',
-        link: 'https://www.travellings.cn/go.html',
-        style: 'text-sm'
       },
       // Privacy Policy link
       {
-        title: 'Site Policy',
+        title: '隐私政策',
         link: '/terms/list',
         pos: 2 // position set to 2 will be appended to copyright line
       }
     ],
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */
-    credits: true,
+    credits: false,
     /** Optional details about the social media accounts for this site. */
-    social: { github: 'https://github.com/cworld1/astro-theme-pure' }
+    social: { github: 'https://github.com/zxc7563598' }
   },
 
   content: {
@@ -102,25 +95,6 @@ export const theme: ThemeUserConfig = {
 }
 
 export const integ: IntegrationUserConfig = {
-  // Links management
-  // See: https://astro-pure.js.org/docs/integrations/links
-  links: {
-    // Friend logbook
-    logbook: [
-      { date: '2025-03-16', content: 'Is there a leakage?' },
-      { date: '2025-03-16', content: 'A leakage of what?' },
-      { date: '2025-03-16', content: 'I have a full seat of water, like, full of water!' },
-      { date: '2025-03-16', content: 'Must be the water.' },
-      { date: '2025-03-16', content: "Let's add that to the words of wisdom." }
-    ],
-    // Yourself link info
-    applyTip: [
-      { name: 'Name', val: theme.title },
-      { name: 'Desc', val: theme.description || 'Null' },
-      { name: 'Link', val: 'https://astro-pure.js.org/' },
-      { name: 'Avatar', val: 'https://astro-pure.js.org/favicon/favicon.ico' }
-    ]
-  },
   // Enable page search function
   pagefind: true,
   // Add a random quote to the footer (default on homepage footer)
@@ -130,8 +104,8 @@ export const integ: IntegrationUserConfig = {
     // server: 'https://v1.hitokoto.cn/?c=i',
     // target: (data) => (data as { hitokoto: string }).hitokoto || 'Error'
     // https://github.com/lukePeavey/quotable
-    server: 'https://api.quotable.io/quotes/random?maxLength=60',
-    target: `(data) => data[0].content || 'Error'`
+    server: 'https://v1.hitokoto.cn/?c=i', 
+    target: `(data) => data.hitokoto || 'Error'`
   },
   // UnoCSS typography
   // See: https://unocss.dev/presets/typography
@@ -155,7 +129,7 @@ export const integ: IntegrationUserConfig = {
   waline: {
     enable: true,
     // Server service link
-    server: 'https://astro-theme-pure-waline.arthals.ink/',
+    server: 'https://waline.hejunjie.life/',
     // Refer https://waline.js.org/en/guide/features/emoji.html
     emoji: ['bmoji', 'weibo'],
     // Refer https://waline.js.org/en/reference/client/props.html
@@ -164,8 +138,8 @@ export const integ: IntegrationUserConfig = {
       pageview: true,
       comment: true,
       locale: {
-        reaction0: 'Like',
-        placeholder: 'Welcome to comment. (Email to receive replies. Login is unnecessary)'
+        reaction0: '喜欢',
+        placeholder: '欢迎发表评论。（通过电子邮件接收回复。无需登录）'
       },
       imageUploader: false
     }
@@ -173,22 +147,22 @@ export const integ: IntegrationUserConfig = {
 }
 
 export const terms: CardListData = {
-  title: 'Terms content',
+  title: '条款内容',
   list: [
     {
-      title: 'Privacy Policy',
+      title: '隐私政策',
       link: '/terms/privacy-policy'
     },
     {
-      title: 'Terms and Conditions',
+      title: '条款与条件',
       link: '/terms/terms-and-conditions'
     },
     {
-      title: 'Copyright',
+      title: '版权',
       link: '/terms/copyright'
     },
     {
-      title: 'Disclaimer',
+      title: '免责声明',
       link: '/terms/disclaimer'
     }
   ]

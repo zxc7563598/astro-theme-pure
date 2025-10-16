@@ -1,147 +1,257 @@
 ---
 import { Image } from 'astro:assets'
 
-import { Button, Collapse, Icon } from 'astro-pure/user'
+import { Button, Icon } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import ProjectSection from '@/components/projects/ProjectSection.astro'
 import Sponsors from '@/components/projects/Sponsors.astro'
 import Sponsorship from '@/components/projects/Sponsorship.astro'
-import alipay from '@/assets/alipay-qrcode.jpg'
+import alipay from '@/assets/alipay-qrcode.png'
 import KeyIcon from '@/assets/icons/key.svg'
-import wechat from '@/assets/wechat-qrcode.jpg'
+import wechat from '@/assets/wechat-qrcode.png'
 
 const headings = [
-  { depth: 2, slug: 'theme', text: 'Theme' },
-  { depth: 2, slug: 'programs', text: 'Programs' },
-  { depth: 2, slug: 'learnings', text: 'Learnings' },
-  { depth: 2, slug: 'others', text: 'Others' },
-  { depth: 2, slug: 'gpg-signature', text: 'GPG Signature' },
-  { depth: 2, slug: 'sponsorship', text: 'Sponsorship' }
+  { depth: 2, slug: 'open-source', text: '开源项目' },
+  { depth: 2, slug: 'composer', text: 'Composer 仓库' },
+  { depth: 2, slug: 'direct-contact', text: '取得联系' },
+  { depth: 2, slug: 'sponsorship', text: '赞助' }
 ]
 ---
 
-<PageLayout title='Projects' {headings} view>
-  <p>Github Activities:</p>
+<PageLayout title='项目' {headings} view>
+  <p>我的 GitHub 动态:</p>
   <p>
     <Image
-      src='https://ghchart.rshah.org/659eb9/cworld1'
+      src='https://hejunjie.life/659eb9/zxc7563598'
       alt='github activities'
       inferSize
       loading='lazy'
     />
   </p>
-  <p>
-    If you think it would be useful or interesting to collaborate on a project, you can donate to
-    support my work or contact me to discuss a project.
-  </p>
-  <Button title='Checkout sponsorship' class='w-fit' href='#sponsorship'>
+  <p>如果你觉得有趣或者有合作机会，欢迎赞助支持我的工作，或者直接联系我聊聊项目</p>
+  <Button title='请我喝杯咖啡 ☕' class='w-fit' href='#sponsorship'>
     <Icon class='size-5' name='receive-money' slot='before' />
   </Button>
 
-  <h2 id='theme'>Theme</h2>
+  <h2 id='open-source'>开源项目</h2>
   <ProjectSection
     projects={[
       {
-        name: '🍭 Astro-theme-pure',
-        description: 'A simple, clean but powerful blog theme build by astro.',
+        name: 'FinBoard',
+        description: '基于 Go 实现的个人财务应用，支持账单记录、分类统计与数据分析',
         links: [
-          { type: 'github', href: 'https://github.com/cworld1/astro-theme-pure' },
-          { type: 'site', href: 'https://github.com/cworld1/astro-theme-pure' },
+          { type: 'github', href: 'https://github.com/zxc7563598/fintrack-backend' },
+          { type: 'release', href: 'https://github.com/zxc7563598/fintrack-backend/releases' },
           {
             type: 'doc',
-            href: 'https://github.com/cworld1/astro-theme-pure/blob/main/src/content/blog/customize/index.md'
+            href: 'https://hejunjie.life/posts/d7285de6.html'
+          }
+        ]
+      },
+      {
+        name: 'B站弹幕机器人&积分商城',
+        description: '基于 PHP 实现的 B 站弹幕机器人 + 积分商城，支持 Docker 一键部署',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-bilibili-danmu' },
+          {
+            type: 'doc',
+            href: 'https://hejunjie.life/posts/b80f6d1a.html'
+          }
+        ]
+      },
+      {
+        name: 'Oh Shit Logger',
+        description: '一个用 Go 编写的轻量级错误日志收集与分析网站，用来集中管理多个项目的异常',
+        links: [
+          { type: 'github', href: ' https://github.com/zxc7563598/oh-shit-logger' },
+          { type: 'release', href: ' https://github.com/zxc7563598/oh-shit-logger/releases' },
+          {
+            type: 'doc',
+            href: 'https://hejunjie.life/posts/23cf1f6b.html'
+          }
+        ]
+      },
+      {
+        name: 'Data Query Tool',
+        description: '内网快速 SQL 查询工具，零依赖、免学习成本，非技术同事也能轻松自助查数据',
+        links: [
+          { type: 'github', href: ' https://github.com/zxc7563598/data-query-tool' },
+          {
+            type: 'doc',
+            href: 'https://hejunjie.life/posts/44994b49.html'
           }
         ]
       }
     ]}
   />
 
-  <h2 id='programs'>Programs</h2>
+  <h2 id='composer'>Composer 仓库</h2>
   <ProjectSection
     projects={[
       {
-        name: '📒 Notie',
+        name: 'hejunjie/trade-splitter',
         description:
-          'Android note App complies with Material You specifications, developed using Java',
+          '一个灵活、可扩展的交易/利润分账组件，提供百分比、固定金额、阶梯与递归分账等内置策略，并支持注册自定义策略',
         links: [
-          { type: 'github', href: 'https://github.com/cworld1/notie' },
-          {
-            type: 'release',
-            href: 'https://github.com/cworld1/notie/releases'
-          }
+          { type: 'github', href: 'https://github.com/zxc7563598/php-trade-splitter' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/trade-splitter' }
         ]
       },
       {
-        name: '💄 PKU Art',
-        description: 'A script to beautify pku course website',
+        name: 'hejunjie/milvus',
+        description:
+          '一个轻量级的 PHP 库，用来通过 RESTful API 调用 Milvus 向量数据库，可以用它来管理集合、插入数据，以及进行向量搜索',
         links: [
-          { type: 'github', href: 'https://github.com/zhuozhiyongde/pku-art' },
-          { type: 'site', href: 'https://github.com/zhuozhiyongde/pku-art' },
-          { type: 'doc', href: 'https://docs.arthals.ink/docs/pku-art' }
+          { type: 'github', href: 'https://github.com/zxc7563598/php-milvus' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/milvus' }
+        ]
+      },
+      {
+        name: 'hejunjie/alipay-bill-parser',
+        description:
+          '一个高性能、自动化的支付宝账单解析器，支持压缩包密码自动破解与账单数据智能提取，适用于账单分析、账单自动化入账、个人理财工具开发等场景',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-alipay-bill-parser' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/alipay-bill-parser' }
+        ]
+      },
+      {
+        name: 'hejunjie/wechat-bill-parser',
+        description:
+          '一个高性能、自动化的微信账单解析器，支持压缩包密码自动破解与账单数据智能提取，适用于账单分析、账单自动化入账、个人理财工具开发等场景',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-wechat-bill-parser' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/wechat-bill-parser' }
+        ]
+      },
+      {
+        name: 'hejunjie/encrypted-request',
+        description: 'PHP 请求加密工具包，支持 AES 解密、签名与时间戳验证，快速实现前后端安全通信',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-encrypted-request' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/encrypted-request' }
+        ]
+      },
+      {
+        name: 'hejunjie/id-generator',
+        description: '轻量级 PHP ID 生成器，多策略高性能，可用于订单号、资源标识等场景',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-id-generator' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/id-generator' }
+        ]
+      },
+      {
+        name: 'hejunjie/schema-validator',
+        description:
+          '一个简单且可扩展的 PHP 参数验证库，支持规则式定义与自定义扩展，适用于任何结构化数据校验场景',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-schema-validator' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/schema-validator' }
+        ]
+      },
+      {
+        name: 'hejunjie/promotion-engine',
+        description:
+          '一个 灵活可扩展 的 PHP 促销策略引擎，让购物车的各种复杂促销逻辑（满减、打折、阶梯优惠、会员折扣…）实现更优雅、可维护',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-promotion-engine' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/promotion-engine' }
+        ]
+      },
+      {
+        name: 'hejunjie/address-parser',
+        description:
+          '收货地址智能解析工具，支持从非结构化文本中提取姓名、手机号、身份证号、省市区、详细地址等字段，适用于电商、物流、CRM 等系统',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-address-parser' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/address-parser' }
+        ]
+      },
+      {
+        name: 'hejunjie/cache',
+        description:
+          '基于装饰器模式实现的多层缓存系统，支持内存、文件、本地与远程缓存组合，提升缓存命中率，简化缓存管理逻辑',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-cache' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/cache' }
+        ]
+      },
+      {
+        name: 'hejunjie/china-division',
+        description:
+          '全国最新省市区划分数据，身份证号码解析地址，支持 Composer 安装与版本控制，适用于表单选项、数据校验、地址解析等场景',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-china-division' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/china-division' }
+        ]
+      },
+      {
+        name: 'hejunjie/fortune-analyzer',
+        description:
+          '一款简洁易用的 PHP 八字排盘工具库，提供阳历与农历的相互转换、精准的节气时间计算、四柱排盘（八字）分析及五行推演等功能',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-fortune-analyzer' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/fortune-analyzer' }
+        ]
+      },
+      {
+        name: 'hejunjie/google-authenticator',
+        description:
+          '一个用于生成和验证时间基础一次性密码（TOTP）的 PHP 包，支持 Google Authenticator 及类似应用',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-google-authenticator' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/google-authenticator' }
+        ]
+      },
+      {
+        name: 'hejunjie/ip138',
+        description:
+          'PHP 封装的 IP138 API SDK, 简化 IP、手机号归属地、天气查询信息接口以及二维码生成接口调用',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-ip138' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/ip138' }
+        ]
+      },
+      {
+        name: 'hejunjie/mobile-locator',
+        description:
+          '基于国内号段规则的手机号码归属地查询库，支持运营商识别与地区定位，适用于注册验证、用户画像、数据归档等场景',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-mobile-locator' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/mobile-locator' }
+        ]
+      },
+      {
+        name: 'hejunjie/simple-rule-engine',
+        description:
+          '一个轻量、易用的 PHP 规则引擎，支持多条件组合、动态规则执行，适合业务规则判断、数据校验等场景',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-simple-rule-engine' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/simple-rule-engine' }
+        ]
+      },
+      {
+        name: 'hejunjie/url-signer',
+        description: '用于生成带签名和加密保护的URL链接的PHP工具包，适用于需要保护资源访问的场景',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-url-signer' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/url-signer' }
+        ]
+      },
+      {
+        name: 'hejunjie/utils',
+        description:
+          '一个零碎但实用的 PHP 工具函数集合库。包含文件、字符串、数组、网络请求等常用函数的工具类集合，提升开发效率，适用于日常 PHP 项目辅助功能',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-utils' },
+          { type: 'release', href: 'https://packagist.org/packages/hejunjie/utils' }
         ]
       }
     ]}
   />
-  <Collapse title='Some old projects'>
-    <ProjectSection
-      projects={[
-        {
-          name: 'Search Switcher',
-          description: 'Add links to each other in search engines',
-          links: [{ type: 'github', href: 'https://github.com/cworld1/search-switcher' }]
-        },
-        {
-          name: 'Pure Baidu',
-          description: 'Baidu search page beautification module',
-          links: [
-            { type: 'doc', href: 'https://cworld0.com/blog/pure-baidu' },
-            { type: 'site', href: 'https://userstyles.org/styles/173673/pure' }
-          ]
-        }
-      ]}
-    />
-  </Collapse>
 
-  <h2 id='learnings'>Learnings</h2>
-  <ProjectSection
-    class='my-2'
-    projects={[
-      {
-        name: 'Rust Learning',
-        description: 'Some notes and code about CWorld learning Rust',
-        links: [{ type: 'github', href: 'https://github.com/cworld1/rust-learning' }]
-      },
-      {
-        name: 'CS 213 Learning',
-        description: 'Notes, code and experiences for Introduction to Computer Systems course',
-        links: [
-          {
-            type: 'github',
-            href: 'https://github.com/zhuozhiyongde/Introduction-To-Computer-System-2023Fall-PKU'
-          }
-        ]
-      }
-    ]}
-  />
-
-  <h2 id='others'>Others</h2>
-  <ProjectSection
-    projects={[
-      {
-        name: 'CWorld',
-        description: "CWorld's Github",
-        links: [{ type: 'github', href: 'https://github.com/cworld1' }]
-      },
-      {
-        name: 'Arthals',
-        description: 'Arthals Github',
-        links: [{ type: 'github', href: 'https://github.com/zhuozhiyongde' }]
-      }
-    ]}
-  />
-
-  <!-- gpg signature -->
-  <h2 id='gpg-signature'>GPG Signature</h2>
+  <!-- direct contact -->
+  <h2 id='direct-contact'>取得联系</h2>
   <p>
     You can verify the authenticity of the files I signed by checking the GPG signature. My GPG key
     is <code>114514</code>, and you can find it on the opengpg key servers or download from it.
@@ -151,21 +261,20 @@ const headings = [
   </Button>
 
   <!-- sponsorship -->
-  <h2 id='sponsorship'>Sponsorship</h2>
-  <p>Please leave a message or contact me proactively after sponsorship.</p>
+  <h2 id='sponsorship'>赞助</h2>
+  <p>感谢你的支持！赞助后可以留言或者联系我</p>
   <Sponsorship
     methods={[
       { name: 'WeChat', icon: 'wechat-pay', image: wechat },
       { name: 'Alipay', icon: 'alipay', image: alipay }
     ]}
   />
-  <p>Thanks to the following sponsors:</p>
+  <p>感谢这些支持我的朋友:</p>
   <Sponsors
     sponsors={[
-      { name: 'C*a（酷安@暴走の蜗牛）', amount: '2.00', date: '2019-07-02' },
-      { name: '华雄(QQ：1300****71)', amount: '5.00', date: '2019-12-30' },
-      { name: '◌(QQ：1934****45)', amount: '3.00', date: '2019-12-30' },
-      { name: 'Anonymous', amount: '20.00', date: '2022-04-06' }
+      { name: '陆九', amount: '188.00', platform: '微信', date: '2025-08-17 20:26:07' },
+      { name: '为野犬干杯', amount: '30.00', platform: '微信', date: '2025-08-17 19:46:26' },
+      { name: '.*.', amount: '10.00', platform: '微信', date: '2025-08-05 23:46:58' }
     ]}
   />
 </PageLayout>
