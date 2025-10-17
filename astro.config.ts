@@ -5,6 +5,7 @@ import { defineConfig } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 import vue from '@astrojs/vue'
+import sitemap from '@astrojs/sitemap';
 
 // Others
 // import { visualizer } from 'rollup-plugin-visualizer'
@@ -26,7 +27,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // Top-Level Options
-  site: 'https://astro-pure.js.org',
+  site: 'https://hejunjie.life',
   // Deploy to a sub path; See https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
   // base: '/astro-pure/',
   trailingSlash: 'never',
@@ -63,7 +64,8 @@ export default defineConfig({
 
     // Temporary fix vercel adapter
     // static build method is not needed
-    vue()
+    vue(),
+    sitemap()
   ],
   // root: './my-project-directory',
 
