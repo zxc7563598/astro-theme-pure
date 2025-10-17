@@ -1,0 +1,17 @@
+---
+import { Button, CardList } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { terms } from '@/site-config'
+
+const meta = {
+  title: 'Site policy',
+  description: 'Site policy documentation'
+}
+---
+
+<PageLayout {meta}>
+  <Button title='返回' href='/' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <CardList {...terms} />
+  </main>
+</PageLayout>

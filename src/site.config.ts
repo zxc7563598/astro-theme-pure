@@ -71,8 +71,8 @@ export const theme: ThemeUserConfig = {
       },
       // Privacy Policy link
       {
-        title: '隐私政策',
-        link: '/terms/list',
+        title: '更多便捷工具',
+        link: '/projects/list',
         pos: 2 // position set to 2 will be appended to copyright line
       }
     ],
@@ -151,23 +151,11 @@ export const integ: IntegrationUserConfig = {
 }
 
 export const terms: CardListData = {
-  title: '条款内容',
+  title: '更多便捷工具',
   list: [
     {
-      title: '隐私政策',
-      link: '/terms/privacy-policy'
-    },
-    {
-      title: '条款与条件',
-      link: '/terms/terms-and-conditions'
-    },
-    {
-      title: '版权',
-      link: '/terms/copyright'
-    },
-    {
-      title: '免责声明',
-      link: '/terms/disclaimer'
+      title: '身份证信息查询',
+      link: '/composer/china-division'
     }
   ]
 }

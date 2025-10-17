@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets'
 
-import { Button, Icon } from 'astro-pure/user'
+import { Button, Icon, Spoiler } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import ProjectSection from '@/components/projects/ProjectSection.astro'
 import Sponsors from '@/components/projects/Sponsors.astro'
 import Sponsorship from '@/components/projects/Sponsorship.astro'
 import alipay from '@/assets/alipay-qrcode.png'
-import KeyIcon from '@/assets/icons/key.svg'
+import WechatIcon from '@/assets/icons/wechat.svg'
 import wechat from '@/assets/wechat-qrcode.png'
 
 const headings = [
@@ -201,12 +201,12 @@ const headings = [
 
   <!-- direct contact -->
   <h2 id='direct-contact'>取得联系</h2>
-  <p>
-    You can verify the authenticity of the files I signed by checking the GPG signature. My GPG key
-    is <code>114514</code>, and you can find it on the opengpg key servers or download from it.
-  </p>
-  <Button href='https://keys.openpgp.org/search?q=114514' title='Checkout my key' target='_blank'>
-    <KeyIcon class='size-5' slot='before' />
+  <p>有任何疑问？想聊项目、技术，或者只是打个招呼？</p>
+  <p>可以扫码加我微信，直接聊起来。</p>
+  <p>社恐也没关系，可以给我发送邮件，我会尽快回复 :)</p>
+  <p>邮箱地址：<Spoiler>junjie.he.925@gmail.com</Spoiler></p>
+  <Button href='/images/wechat.jpg' title='添加微信' target='_blank'>
+    <WechatIcon class='size-5' slot='before' />
   </Button>
 
   <!-- sponsorship -->
