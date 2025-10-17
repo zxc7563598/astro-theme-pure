@@ -1,0 +1,47 @@
+---
+import { Button } from 'astro-pure/user'
+import PageLayout from '@/layouts/ProjectsPage.astro'
+import BatchIdChecker from '@/components/BatchIdChecker.vue'
+import IdChecker from '@/components/IdChecker.vue'
+
+const headings = [
+  { depth: 2, slug: 'singular-demo', text: '单条数据查询' },
+  { depth: 2, slug: 'plurality-demo', text: '批量数据查询' },
+  { depth: 2, slug: 'motivation', text: '制作初衷' }
+]
+---
+
+<PageLayout title='hejunjie/china-division' {headings} comment>
+  <p>
+    定期更新，全国最新省市区划分数据，身份证号码解析地址，支持 Composer
+    安装与版本控制，适用于表单选项、数据校验、地址解析等场景
+  </p>
+  <Button
+    title='通过 Zread 了解本项目'
+    class='w-fit'
+    href='https://zread.ai/zxc7563598/php-china-division'
+    variant='ahead'
+  />
+  <Button
+    title='前往 GitHub 查看文档'
+    class='w-fit'
+    href='https://github.com/zxc7563598/php-china-division'
+    variant='ahead'
+  />
+
+  {/* singular-demo */}
+  <h2 id='singular-demo'>单条数据查询</h2>
+  <IdChecker client:load />
+
+  {/* plurality-demo */}
+  <h2 id='plurality-demo'>批量数据查询</h2>
+  <BatchIdChecker client:load />
+
+  {/* motivation */}
+  <h2 id='motivation'>制作初衷</h2>
+  <p>
+    自己维护的一个全国省市区划分数据仓库，包含了最新的行政区划数据，也保留了历史记录和地址变更情况。
+  </p>
+  <p>主要是为了方便项目里需要用到这些数据的时候不用每次都去手动找、整理。</p>
+  <p>数据每隔一段时间会同步更新，支持通过 Composer 安装，也可以直接引用 JSON 文件做处理</p>
+</PageLayout>
