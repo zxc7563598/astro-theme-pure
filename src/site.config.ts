@@ -156,6 +156,10 @@ export const terms: CardListData = {
     {
       title: '身份证信息查询',
       link: '/composer/china-division'
+    },
+    {
+      title: '手机号信息查询',
+      link: '/composer/mobile-locator'
     }
   ]
 }
