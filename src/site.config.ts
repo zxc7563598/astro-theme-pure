@@ -160,6 +160,10 @@ export const terms: CardListData = {
     {
       title: '手机号信息查询',
       link: '/composer/mobile-locator'
+    },
+    {
+      title: '地址解析工具',
+      link: '/composer/address-parser'
     }
   ]
 }
