@@ -6,7 +6,7 @@ tags:
   - PHP
   - NodeJs
 language: '中文'
-# heroImage: { src: './cover/php.png', color: '#573ba2' }
+heroImage: { src: './cover/php.png', color: '#573ba2' }
 draft: false
 slug: 'f04d98cd'
 ---

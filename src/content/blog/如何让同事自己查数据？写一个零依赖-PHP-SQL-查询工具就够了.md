@@ -6,7 +6,7 @@ tags:
   - PHP
   - MySQL
 language: '中文'
-# heroImage: { src: './cover/php.png', color: '#573ba2' }
+heroImage: { src: './cover/php.png', color: '#573ba2' }
 draft: false
 slug: '44994b49'
 ---

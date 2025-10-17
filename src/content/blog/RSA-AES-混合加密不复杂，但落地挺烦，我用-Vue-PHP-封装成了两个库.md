@@ -7,7 +7,7 @@ tags:
   - NodeJs
   - Composer
 language: '中文'
-# heroImage: { src: './cover/php.png', color: '#573ba2' }
+heroImage: { src: './cover/php.png', color: '#573ba2' }
 draft: false
 slug: '9634b05b'
 ---

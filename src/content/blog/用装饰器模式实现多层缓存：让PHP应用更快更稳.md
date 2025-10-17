@@ -5,7 +5,7 @@ description: '通过装饰器模式实现PHP多层缓存架构，详解如何利
 tags:
   - PHP
 language: '中文'
-# heroImage: { src: './cover/php.png', color: '#573ba2' }
+heroImage: { src: './cover/php.png', color: '#573ba2' }
 draft: false
 slug: '78d10aa8'
 ---

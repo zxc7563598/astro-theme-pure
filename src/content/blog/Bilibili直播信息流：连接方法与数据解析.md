@@ -6,7 +6,7 @@ tags:
   - PHP
   - Bilibili
 language: '中文'
-# heroImage: { src: './cover/php.png', color: '#573ba2' }
+heroImage: { src: './cover/bilibili.jpg', color: '#8cbde5' }
 draft: false
 slug: 'e1ccd148'
 ---

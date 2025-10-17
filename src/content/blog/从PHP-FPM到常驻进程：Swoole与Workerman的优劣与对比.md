@@ -5,7 +5,7 @@ description: '了解 Swoole 和 Workerman 常驻进程 PHP 框架的特点及优
 tags:
   - PHP
 language: '中文'
-# heroImage: { src: './cover/php.png', color: '#573ba2' }
+heroImage: { src: './cover/php.png', color: '#573ba2' }
 draft: false
 slug: 'ddb3efc5'
 ---

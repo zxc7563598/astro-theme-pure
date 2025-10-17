@@ -6,7 +6,7 @@ tags:
   - PHP
   - Docker
 language: '中文'
-# heroImage: { src: './cover/php.png', color: '#573ba2' }
+heroImage: { src: './cover/docker.png', color: '#51a4cb' }
 draft: false
 slug: '26ee1ee8'
 ---

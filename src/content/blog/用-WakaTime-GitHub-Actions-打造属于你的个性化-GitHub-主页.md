@@ -5,7 +5,7 @@ description: '手把手教你用 WakaTime 和 GitHub Actions 打造一个自动�
 tags:
   - GitHub
 language: '中文'
-# heroImage: { src: './cover/php.png', color: '#573ba2' }
+heroImage: { src: './cover/github.jpg', color: '#000000' }
 draft: false
 slug: '357ee777'
 ---
