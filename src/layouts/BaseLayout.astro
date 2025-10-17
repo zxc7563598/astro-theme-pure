@@ -24,6 +24,10 @@ const {
   <head>
     <BaseHead {articleDate} {description} {ogImage} {title} />
     <ThemeProvider />
+    <script id='LA_COLLECT' src='//sdk.51.la/js-sdk-pro.min.js'></script>
+    <script is:inline>
+      LA.init({ id: '3K0Dk6gsiH5Cx3N3', ck: '3K0Dk6gsiH5Cx3N3' })
+    </script>
   </head>
 
   <body class='flex justify-center bg-background text-foreground' {...props}>
@@ -36,7 +40,9 @@ const {
         />
       )
     }
-    <div class='w-full max-w-[70rem] px-4 sm:px-7 lg:px-10 min-h-[100dvh] flex flex-col justify-between'>
+    <div
+      class='w-full max-w-[70rem] px-4 sm:px-7 lg:px-10 min-h-[100dvh] flex flex-col justify-between'
+    >
       <Header />
       <div class='flex-1 w-full'>
         <slot />
