@@ -8,6 +8,7 @@ import { Button, Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
+import ProductDelivery from '@/components/projects/ProductDelivery.astro'
 import avatar from '@/assets/avatar.jpg'
 import config from '@/site-config'
 
@@ -44,8 +45,8 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
 
       {/* Get template */}
       <a
-        href='mailto:junjie.he.925@gmail.com'
-        rel="external nofollow noreferrer"
+        href='/projects#direct-contact'
+        rel='external nofollow noreferrer'
         class='flex flex-row items-center gap-x-3 rounded-full border bg-background px-4 py-2 text-sm shadow-sm transition-shadow hover:shadow-md'
       >
         <span class='relative flex items-center justify-center'>
@@ -62,10 +63,9 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
       <Section title='关于我'>
         <p class='text-muted-foreground'>PHP 工程师 / 全栈开发</p>
         <p class='text-muted-foreground'>
-          一名独立开发者，主要使用 Go 与 PHP 构建后端服务，也会用 Vue 写一点前端。<br />
+          <br />一名独立开发者，主要使用 Go 与 PHP 构建后端服务，也会用 Vue 写一点前端。<br /><br />
           我喜欢把想法变成可以跑起来的代码，也喜欢研究系统背后的逻辑与工程细节。<br />
-          这个博客记录的是我在开发过程中的经验、坑点和一些思考。 希望这些内容能帮到你，也欢迎交流。<br
-          /><br />
+          这个博客记录的是我在开发过程中的经验、坑点和一些思考。 希望这些内容能帮到你，也欢迎交流。<br /><br />
           如果你正在寻找一位技术合作者、远程开发者，或者只是想聊聊项目和代码，都可以随时联系我，交流总比独自摸索要有趣得多。
         </p>
         <Button title='更多关于我' class='w-fit self-end' href='/about' variant='ahead' />
@@ -84,6 +84,36 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
           </Section>
         )
       }
+
+      <Section title='小工具'>
+        <ProductDelivery
+          title='这是我一些小 demo 的集合，涵盖不同语言和项目类型；主要用于展示功能、验证想法或记录技术实现过程，仅供查看效果参考'
+          list={{
+            id_name: '',
+            desc: '',
+            link_list: [
+              {
+                name: '身份证信息查询',
+                intro: '校验身份证并提取位置、性别等信息',
+                link: '/composer/china-division',
+                avatar: '/icons/china-division.png'
+              },
+              {
+                name: '手机号信息查询',
+                intro: '提取手机号运营商/归属地',
+                link: '/composer/mobile-locator',
+                avatar: '/icons/mobile-locator.png'
+              },
+              {
+                name: '地址解析工具',
+                intro: '从非结构化的地址文本中提取结构化信息',
+                link: '/composer/address-parser',
+                avatar: '/icons/address-parser.png'
+              }
+            ]
+          }}
+        />
+      </Section>
 
       <Section title='技能'>
         <SkillLayout title='语言' skills={languages} />
