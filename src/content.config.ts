@@ -40,4 +40,20 @@ const blog = defineCollection({
     })
 })
 
-export const collections = { blog }
+// Define docs collection
+const kitchen = defineCollection({
+  loader: glob({ base: './src/content/kitchen', pattern: '**/*.{md,mdx}' }),
+  schema: () =>
+    z.object({
+      title: z.string().max(60),
+      description: z.string().max(160),
+      publishDate: z.coerce.date().optional(),
+      updatedDate: z.coerce.date().optional(),
+      tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+      draft: z.boolean().default(false),
+      // Special fields
+      order: z.number().default(999)
+    })
+})
+
+export const collections = { blog, kitchen }
