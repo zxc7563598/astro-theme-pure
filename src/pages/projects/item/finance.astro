@@ -1,0 +1,63 @@
+---
+import { Button, Timeline } from 'astro-pure/user'
+import PageLayout from '@/layouts/ProjectsPage.astro'
+
+const headings = [
+  { depth: 2, slug: 'introduction', text: '项目介绍' },
+  { depth: 2, slug: 'achievements', text: '项目成果' },
+  { depth: 2, slug: 'development', text: '项目发展' }
+]
+---
+
+<PageLayout title='跨境金融系统' {headings} comment>
+  <p>
+    一个综合性的金融科技平台，基于高性能的 Webman 框架构建，为现代金融应用提供强大的借贷服务、风险管理和支付处理能力
+  </p>
+
+  {/* introduction */}
+  <h2 id='introduction'>项目介绍</h2>
+  <p>本项目为一套支持多地区用户服务的跨境业务平台系统。</p>
+  <p>最初于 2019 年接手开发，系统初期基于 ThinkPHP 5.1 构建。</p>
+  <p>由于历史代码维护成本高、缺乏规范，2020 年对整体架构进行重构。</p>
+  <p>全面迁移至 Laravel 8 框架，提升开发效率与代码质量。</p>
+  <p>随着 2022 年平台运营方向调整，为应对高并发访问、实时通信、在线客服等功能需求。</p>
+  <p>系统再次升级至高性能的 Webman 框架，优化整体响应能力与可扩展性。</p>
+
+  {/* achievements */}
+  <h2 id='achievements'>项目成果</h2>
+  <p>由于历史数据不可考，自 2024 年 1 月 1 日起开始统计，截至项目结束：</p>
+  <ul>
+    <li>服务用户：<b>22,592</b>人</li>
+    <li>累计成交金额：<b>54,741,245</b>人民币</li>
+    <li>累计回收金额：<b>58,729,980</b>人民币</li>
+    <li>总流水：<b>113,471,225</b>人民币</li>
+  </ul>
+
+  {/* development */}
+  <h2 id='development'>项目发展</h2>
+  <Timeline
+    events={[
+      {
+        date: '2019年',
+        content:
+          '入职上海豪达，接收公司祖传代码，基于 thinkPHP 5.1 开发的外包项目， 应用于 越南 / 尼日利亚 市场'
+      },
+      {
+        date: '2020年',
+        content:
+          '与原公司团队独立，因历史代码问题及规范化需求, 项目整体重构为 Laravel 8 并重新设计规范项目结构，应用于 越南 / 尼日利亚 市场'
+      },
+      {
+        date: '2022年',
+        content:
+          '为应对高并发下的性能问题、在线聊天、异步处理等需求, 迁移至高性能的 Webman 框架, 应用于国内市场'
+      }
+    ]}
+  />
+  <Button
+    title='联系我，了解更多'
+    class='w-fit self-end'
+    href='/projects#direct-contact'
+    variant='ahead'
+  />
+</PageLayout>

@@ -13,6 +13,7 @@ import wechat from '@/assets/wechat-qrcode.png'
 const headings = [
   { depth: 2, slug: 'open-source', text: '开源项目' },
   { depth: 2, slug: 'composer', text: 'Composer 仓库' },
+  { depth: 2, slug: 'non-open-source', text: '非开源项目' },
   { depth: 2, slug: 'direct-contact', text: '取得联系' },
   { depth: 2, slug: 'sponsorship', text: '赞助' }
 ]
@@ -44,7 +45,7 @@ const headings = [
           { type: 'release', href: 'https://github.com/zxc7563598/fintrack-backend/releases' },
           {
             type: 'doc',
-            href: 'https://hejunjie.life/posts/d7285de6.html'
+            href: '/posts/d7285de6'
           }
         ]
       },
@@ -55,7 +56,7 @@ const headings = [
           { type: 'github', href: 'https://github.com/zxc7563598/php-bilibili-danmu' },
           {
             type: 'doc',
-            href: 'https://hejunjie.life/posts/b80f6d1a.html'
+            href: '/posts/b80f6d1a'
           }
         ]
       },
@@ -67,7 +68,7 @@ const headings = [
           { type: 'release', href: ' https://github.com/zxc7563598/oh-shit-logger/releases' },
           {
             type: 'doc',
-            href: 'https://hejunjie.life/posts/23cf1f6b.html'
+            href: '/posts/23cf1f6b'
           }
         ]
       },
@@ -78,7 +79,7 @@ const headings = [
           { type: 'github', href: ' https://github.com/zxc7563598/data-query-tool' },
           {
             type: 'doc',
-            href: 'https://hejunjie.life/posts/44994b49.html'
+            href: '/posts/44994b49'
           }
         ]
       }
@@ -201,6 +202,22 @@ const headings = [
         description:
           '一个零碎但实用的 PHP 工具函数集合库。包含文件、字符串、数组、网络请求等常用函数的工具类集合，提升开发效率，适用于日常 PHP 项目辅助功能',
         links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-utils' }]
+      }
+    ]}
+  />
+
+  <h2 id='non-open-source'>非开源项目</h2>
+  <ProjectSection
+    projects={[
+      {
+        name: '跨境金融系统',
+        description: '基于 Go 实现的个人财务应用，支持账单记录、分类统计与数据分析',
+        links: [
+          {
+            type: 'doc',
+            href: '/projects/item/finance'
+          }
+        ]
       }
     ]}
   />
