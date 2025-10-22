@@ -1,9 +1,5 @@
 import type { CardListData, Config, IntegrationUserConfig, ThemeUserConfig } from 'astro-pure/types'
 
-interface AccessStatistics {
-  url: string
-}
-
 export const theme: ThemeUserConfig = {
   // === Basic configuration ===
   /** Title for your website. Will be used in metadata and as browser tab title. */
@@ -150,6 +146,19 @@ export const integ: IntegrationUserConfig = {
   }
 }
 
+export const metrics: { enable: boolean; id: string; ck: string; widget: string } = {
+  // 51.la 统计
+  enable: true,
+  // 统计网站的 id 与 ck
+  // 在统计网站的后台获取
+  // See: https://v6.51.la/report/setup/params/statistics
+  id: '3K0Dk6gsiH5Cx3N3',
+  ck: '3K0Dk6gsiH5Cx3N3',
+  // 数据挂件 javascript 地址，类似：https://v6-widget.51.la/v6/3K0Dk6gsiH5Cx3N3/quote.js
+  // See: https://v6.51.la/report/setup/params/widget
+  widget: 'https://v6-widget.51.la/v6/3K0Dk6gsiH5Cx3N3/quote.js'
+}
+
 export const terms: CardListData = {
   title: '更多便捷工具',
   list: [
@@ -166,10 +175,6 @@ export const terms: CardListData = {
       link: '/composer/address-parser'
     }
   ]
-}
-
-export const laWidget: AccessStatistics = {
-  url: 'https://v6-widget.51.la/v6/3K0Dk6gsiH5Cx3N3/quote.js'
 }
 
 const config = { ...theme, integ } as Config
