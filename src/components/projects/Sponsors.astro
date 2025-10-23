@@ -1,6 +1,4 @@
 ---
-import { cn } from 'astro-pure/utils'
-
 interface Props {
   class?: string
   sponsors: {
@@ -10,30 +8,28 @@ interface Props {
     platform: string
   }[]
 }
-const { class: className, sponsors, ...props } = Astro.props
+const { sponsors, ...props } = Astro.props
 ---
 
-<div class={cn('border px-3 sm:px-4 py-2 rounded-xl', className)} {...props}>
-  <table class='my-0'>
-    <thead>
-      <tr>
-        <th>昵称</th>
-        <th>金额</th>
-        <th>平台</th>
-        <th>日期</th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        sponsors.map((sponsor) => (
-          <tr>
-            <td>{sponsor.name}</td>
-            <td>{sponsor.amount}</td>
-            <td>{sponsor.platform}</td>
-            <td>{sponsor.date}</td>
-          </tr>
-        ))
-      }
-    </tbody>
-  </table>
+<div class='grid gap-3.5 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3' {...props}>
+  {
+    sponsors.map((sponsor) => (
+      <div class='group relative h-full rounded-xl border border-neutral-200 bg-white/70 px-4 py-3 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm dark:border-neutral-800 dark:bg-neutral-900/50'>
+        <div class='flex flex-col gap-2'>
+          <div class='text-base font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300'>
+            {sponsor.name}
+          </div>
+          <div class='flex items-center justify-between text-xs text-neutral-500'>
+            <span class='rounded-md border border-neutral-200 px-1.5 py-0.5 dark:border-neutral-700 dark:text-neutral-400'>
+              {sponsor.platform}
+            </span>
+            <span class='font-medium text-neutral-700 dark:text-neutral-300'>
+              ¥{sponsor.amount}
+            </span>
+          </div>
+          <div class='text-[11px] text-neutral-400 dark:text-neutral-500'>{sponsor.date}</div>
+        </div>
+      </div>
+    ))
+  }
 </div>
