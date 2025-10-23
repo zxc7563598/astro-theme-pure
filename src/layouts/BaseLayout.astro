@@ -27,8 +27,9 @@ const {
     {
       metrics.enable && (
         <script is:inline src='https://sdk.51.la/js-sdk-pro.min.js'></script>
-        <script is:inline>
-          LA.init({ id: metrics.id, ck: metrics.ck })
+        <script is:inline data-id={metrics.id} data-ck={metrics.ck} id="la-script">
+          const s = document.getElementById('la-script');
+          LA.init({ id: s.dataset.id, ck: s.dataset.ck });
         </script>
       )
     }
