@@ -24,15 +24,12 @@ const {
   <head>
     <BaseHead {articleDate} {description} {ogImage} {title} />
     <ThemeProvider />
-    {
-      metrics.enable && (
-        <script is:inline src='https://sdk.51.la/js-sdk-pro.min.js'></script>
-        <script is:inline data-id={metrics.id} data-ck={metrics.ck} id="la-script">
-          const s = document.getElementById('la-script');
-          LA.init({ id: s.dataset.id, ck: s.dataset.ck });
-        </script>
-      )
-    }
+    {metrics.enable && <script is:inline src='https://sdk.51.la/js-sdk-pro.min.js' />}
+    <script is:inline type='module' data-astro-rerun define:vars={{ metrics: metrics }}>
+      if (metrics.enable) {
+        LA.init({ id: metrics.id, ck: metrics.ck })
+      }
+    </script>
   </head>
 
   <body class='flex justify-center bg-background text-foreground' {...props}>
