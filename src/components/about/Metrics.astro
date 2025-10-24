@@ -5,18 +5,13 @@ import { metrics } from '@/site-config'
 <div
   class='grid grid-cols-1 gap-3 rounded-xl border p-2 sm:grid-cols-2 sm:p-3'
   id='widget'
-  data-enable={metrics.enable}
-  data-widget={metrics.widget}
 >
   加载中...
 </div>
 
-<script is:inline>
-  const el = document.getElementById('widget')
-  const enable = el.dataset.enable
-  const widget = el.dataset.widget
-  if (enable && widget) {
-    fetch(widget)
+<script is:inline type='module' data-astro-rerun define:vars={{ metrics: metrics }}>
+  if (metrics.enable && metrics.widget) {
+    fetch(metrics.widget)
       .then((res) => res.text())
       .then((data) => {
         let num = data.match(/(<\/span><span>).*?(\/span><\/p>)/g)

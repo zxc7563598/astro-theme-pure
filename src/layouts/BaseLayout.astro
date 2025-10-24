@@ -24,7 +24,7 @@ const {
   <head>
     <BaseHead {articleDate} {description} {ogImage} {title} />
     <ThemeProvider />
-    {metrics.enable && <script is:inline src='https://sdk.51.la/js-sdk-pro.min.js' />}
+    {metrics.enable && <script is:inline src={metrics.sdk} />}
     <script is:inline type='module' data-astro-rerun define:vars={{ metrics: metrics }}>
       if (metrics.enable) {
         LA.init({ id: metrics.id, ck: metrics.ck })
