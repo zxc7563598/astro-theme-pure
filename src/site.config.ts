@@ -174,6 +174,10 @@ export const terms: CardListData = {
     {
       title: '地址解析工具',
       link: '/composer/address-parser'
+    },
+    {
+      title: '随机头像生成',
+      link: '/projects/item/avatar-service'
     }
   ]
 }
