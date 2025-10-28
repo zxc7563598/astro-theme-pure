@@ -248,7 +248,7 @@ Phinx 在 MySQL 下支持的字段类型如下：
 | ​`values`​         | array/string | 枚举或集合可选值，英文逗号隔开的字符串或数组                    |
 | ​`identity`​       | bool         | 是否自增（需搭配 null:false）                                   |
 
-### 示例代码
+### 示例代码（看这里，各种实用操作使用）
 
 > 如果对表格形式不感兴趣，可以直接通过以下完整迁移脚本理解字段定义方式。
 
@@ -375,8 +375,6 @@ final class CreateTable extends AbstractMigration
     }
 }
 ```
-
-‍
 
 ## 填充脚本（Seeder）示例
 
