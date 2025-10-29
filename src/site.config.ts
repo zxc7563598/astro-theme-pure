@@ -152,7 +152,7 @@ export const metrics: { enable: boolean; sdk: string; id: string; ck: string; wi
   // 统计网站的配置信息
   // 在统计网站的后台获取
   // See: https://v6.51.la/report/setup/params/statistics
-  sdk: 'https://sdk.51.la/js-sdk-pro.min.js',
+  sdk: '/scripts/js-sdk-pro.min.js',
   id: '3K0Dk6gsiH5Cx3N3',
   ck: '3K0Dk6gsiH5Cx3N3',
   // 数据挂件 javascript 地址，类似：https://v6-widget.51.la/v6/3K0Dk6gsiH5Cx3N3/quote.js
