@@ -38,6 +38,17 @@ const headings = [
   <ProjectSection
     projects={[
       {
+        name: 'B站弹幕机器人&积分商城',
+        description: '基于 PHP 实现的 B 站弹幕机器人 + 积分商城，支持 Docker 一键部署',
+        links: [
+          { type: 'github', href: 'https://github.com/zxc7563598/php-bilibili-danmu' },
+          {
+            type: 'doc',
+            href: '/posts/b80f6d1a'
+          }
+        ]
+      },
+      {
         name: 'FinBoard',
         description: '基于 Go 实现的个人财务应用，支持账单记录、分类统计与数据分析',
         links: [
@@ -46,17 +57,6 @@ const headings = [
           {
             type: 'doc',
             href: '/posts/d7285de6'
-          }
-        ]
-      },
-      {
-        name: 'B站弹幕机器人&积分商城',
-        description: '基于 PHP 实现的 B 站弹幕机器人 + 积分商城，支持 Docker 一键部署',
-        links: [
-          { type: 'github', href: 'https://github.com/zxc7563598/php-bilibili-danmu' },
-          {
-            type: 'doc',
-            href: '/posts/b80f6d1a'
           }
         ]
       },
@@ -81,6 +81,16 @@ const headings = [
             type: 'doc',
             href: '/posts/44994b49'
           }
+        ]
+      },
+      {
+        name: 'Avatar Service',
+        description: '一个用 Go 写的随机头像生成服务，支持多种风格的头像生成(Identicon/Pixel)',
+        links: [
+          { type: 'github', href: ' https://github.com/zxc7563598/avatar-service' },
+          { type: 'release', href: ' https://github.com/zxc7563598/avatar-service/releases' },
+          { type: 'doc', href: '/posts/d94u5hht' },
+          { type: 'site', href: '/projects/item/avatar-service' }
         ]
       }
     ]}
@@ -117,6 +127,36 @@ const headings = [
         ]
       },
       {
+        name: 'hejunjie/promotion-engine',
+        description:
+          '一个 灵活可扩展 的 PHP 促销策略引擎，让购物车的各种复杂促销逻辑（满减、打折、阶梯优惠、会员折扣…）实现更优雅、可维护',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-promotion-engine' }]
+      },
+      {
+        name: 'hejunjie/fortune-analyzer',
+        description:
+          '一款简洁易用的 PHP 八字排盘工具库，提供阳历与农历的相互转换、精准的节气时间计算、四柱排盘（八字）分析及五行推演等功能',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-fortune-analyzer' }]
+      },
+      {
+        name: 'hejunjie/bililive',
+        description:
+          'B站直播 WebSocket 连接的核心组件库，提供简洁的接口实现，包括登录、直播间信息流加密/解密、以及相关的关键方法',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-bilibili-danmu-core' }]
+      },
+      {
+        name: 'hejunjie/wechat-bill-parser',
+        description:
+          '一个高性能、自动化的微信账单解析器，支持压缩包密码自动破解与账单数据智能提取，适用于账单分析、账单自动化入账、个人理财工具开发等场景',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-wechat-bill-parser' }]
+      },
+      {
+        name: 'hejunjie/simple-rule-engine',
+        description:
+          '一个轻量、易用的 PHP 规则引擎，支持多条件组合、动态规则执行，适合业务规则判断、数据校验等场景',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-simple-rule-engine' }]
+      },
+      {
         name: 'hejunjie/trade-splitter',
         description:
           '一个灵活、可扩展的交易/利润分账组件，提供百分比、固定金额、阶梯与递归分账等内置策略，并支持注册自定义策略',
@@ -129,50 +169,10 @@ const headings = [
         links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-milvus' }]
       },
       {
-        name: 'hejunjie/alipay-bill-parser',
-        description:
-          '一个高性能、自动化的支付宝账单解析器，支持压缩包密码自动破解与账单数据智能提取，适用于账单分析、账单自动化入账、个人理财工具开发等场景',
-        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-alipay-bill-parser' }]
-      },
-      {
-        name: 'hejunjie/wechat-bill-parser',
-        description:
-          '一个高性能、自动化的微信账单解析器，支持压缩包密码自动破解与账单数据智能提取，适用于账单分析、账单自动化入账、个人理财工具开发等场景',
-        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-wechat-bill-parser' }]
-      },
-      {
-        name: 'hejunjie/encrypted-request',
-        description: 'PHP 请求加密工具包，支持 AES 解密、签名与时间戳验证，快速实现前后端安全通信',
-        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-encrypted-request' }]
-      },
-      {
-        name: 'hejunjie/id-generator',
-        description: '轻量级 PHP ID 生成器，多策略高性能，可用于订单号、资源标识等场景',
-        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-id-generator' }]
-      },
-      {
         name: 'hejunjie/schema-validator',
         description:
           '一个简单且可扩展的 PHP 参数验证库，支持规则式定义与自定义扩展，适用于任何结构化数据校验场景',
         links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-schema-validator' }]
-      },
-      {
-        name: 'hejunjie/promotion-engine',
-        description:
-          '一个 灵活可扩展 的 PHP 促销策略引擎，让购物车的各种复杂促销逻辑（满减、打折、阶梯优惠、会员折扣…）实现更优雅、可维护',
-        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-promotion-engine' }]
-      },
-      {
-        name: 'hejunjie/cache',
-        description:
-          '基于装饰器模式实现的多层缓存系统，支持内存、文件、本地与远程缓存组合，提升缓存命中率，简化缓存管理逻辑',
-        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-cache' }]
-      },
-      {
-        name: 'hejunjie/fortune-analyzer',
-        description:
-          '一款简洁易用的 PHP 八字排盘工具库，提供阳历与农历的相互转换、精准的节气时间计算、四柱排盘（八字）分析及五行推演等功能',
-        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-fortune-analyzer' }]
       },
       {
         name: 'hejunjie/google-authenticator',
@@ -181,16 +181,10 @@ const headings = [
         links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-google-authenticator' }]
       },
       {
-        name: 'hejunjie/ip138',
+        name: 'hejunjie/alipay-bill-parser',
         description:
-          'PHP 封装的 IP138 API SDK, 简化 IP、手机号归属地、天气查询信息接口以及二维码生成接口调用',
-        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-ip138' }]
-      },
-      {
-        name: 'hejunjie/simple-rule-engine',
-        description:
-          '一个轻量、易用的 PHP 规则引擎，支持多条件组合、动态规则执行，适合业务规则判断、数据校验等场景',
-        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-simple-rule-engine' }]
+          '一个高性能、自动化的支付宝账单解析器，支持压缩包密码自动破解与账单数据智能提取，适用于账单分析、账单自动化入账、个人理财工具开发等场景',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-alipay-bill-parser' }]
       },
       {
         name: 'hejunjie/url-signer',
@@ -202,6 +196,28 @@ const headings = [
         description:
           '一个零碎但实用的 PHP 工具函数集合库。包含文件、字符串、数组、网络请求等常用函数的工具类集合，提升开发效率，适用于日常 PHP 项目辅助功能',
         links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-utils' }]
+      },
+      {
+        name: 'hejunjie/cache',
+        description:
+          '基于装饰器模式实现的多层缓存系统，支持内存、文件、本地与远程缓存组合，提升缓存命中率，简化缓存管理逻辑',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-cache' }]
+      },
+      {
+        name: 'hejunjie/id-generator',
+        description: '轻量级 PHP ID 生成器，多策略高性能，可用于订单号、资源标识等场景',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-id-generator' }]
+      },
+      {
+        name: 'hejunjie/encrypted-request',
+        description: 'PHP 请求加密工具包，支持 AES 解密、签名与时间戳验证，快速实现前后端安全通信',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-encrypted-request' }]
+      },
+      {
+        name: 'hejunjie/ip138',
+        description:
+          'PHP 封装的 IP138 API SDK, 简化 IP、手机号归属地、天气查询信息接口以及二维码生成接口调用',
+        links: [{ type: 'github', href: 'https://github.com/zxc7563598/php-ip138' }]
       }
     ]}
   />
