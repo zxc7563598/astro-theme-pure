@@ -126,8 +126,11 @@
                     </div>
                 </div>
             </div>
-            <div class="border-t opacity-10 mt-2 mb-2"></div>
-            <div class="grid grid-cols-1 gap-3">
+            <div class="border-t opacity-10 mt-2 mb-2"
+                v-if="(detect_wu_xing_ju.extra.sanhui.length > 0) || (detect_wu_xing_ju.extra.sanhe.length > 0) || (detect_wu_xing_ju.extra.liuhe.length > 0) || (detect_wu_xing_ju.extra.wuju.length > 0)">
+            </div>
+            <div class="grid grid-cols-1 gap-3"
+                v-if="(detect_wu_xing_ju.extra.sanhui.length > 0) || (detect_wu_xing_ju.extra.sanhe.length > 0) || (detect_wu_xing_ju.extra.liuhe.length > 0) || (detect_wu_xing_ju.extra.wuju.length > 0)">
                 <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm bg-card">
                     <div class="text-sm font-medium opacity-90">五行局分析</div>
                     <div>
@@ -137,7 +140,8 @@
                                 class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
                                 <span class="font-semibold">{{ content }}</span>
                             </div>
-                            <div v-if="detect_wu_xing_ju.extra.sanhui.length == 0" class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                            <div v-if="detect_wu_xing_ju.extra.sanhui.length == 0"
+                                class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
                                 <span class="text-xs">无匹配三会局</span>
                             </div>
                         </div>
@@ -150,7 +154,8 @@
                                 class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
                                 <span class="font-semibold">{{ content }}</span>
                             </div>
-                            <div v-if="detect_wu_xing_ju.extra.sanhe.length == 0" class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                            <div v-if="detect_wu_xing_ju.extra.sanhe.length == 0"
+                                class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
                                 <span class="text-xs">无匹配三合局</span>
                             </div>
                         </div>
@@ -163,7 +168,8 @@
                                 class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
                                 <span class="font-semibold">{{ content }}</span>
                             </div>
-                            <div v-if="detect_wu_xing_ju.extra.liuhe.length == 0" class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                            <div v-if="detect_wu_xing_ju.extra.liuhe.length == 0"
+                                class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
                                 <span class="text-xs">无匹配六合局</span>
                             </div>
                         </div>
@@ -176,7 +182,8 @@
                                 class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
                                 <span class="font-semibold">{{ content }}</span>
                             </div>
-                            <div v-if="detect_wu_xing_ju.extra.wuju.length == 0" class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                            <div v-if="detect_wu_xing_ju.extra.wuju.length == 0"
+                                class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
                                 <span class="text-xs">无匹配五局</span>
                             </div>
                         </div>
@@ -185,7 +192,8 @@
                     <div>
                         <div class="text-xs text-muted-foreground mb-2">分析</div>
                         <ul class="list-disc list-inside space-y-1 text-sm">
-                            <li v-for="(content, index) in detect_wu_xing_ju.extra.sanhui" :key="index" class="text-primary">
+                            <li v-for="(content, index) in detect_wu_xing_ju.extra.sanhui" :key="index"
+                                class="text-primary">
                                 {{ content }}: {{ getWuXingJuDirection(content) }}
                             </li>
                             <li v-for="(content, index) in detect_wu_xing_ju.extra.sanhe" :key="index">
