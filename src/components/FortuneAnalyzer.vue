@@ -128,13 +128,90 @@
             </div>
             <div class="border-t opacity-10 mt-2 mb-2"></div>
             <div class="grid grid-cols-1 gap-3">
+                <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm bg-card">
+                    <div class="text-sm font-medium opacity-90">五行局分析</div>
+                    <div>
+                        <div class="text-xs text-muted-foreground mb-2">三会局</div>
+                        <div class="flex flex-wrap gap-2">
+                            <div v-for="(content, index) in detect_wu_xing_ju.extra.sanhui" :key="index"
+                                class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                                <span class="font-semibold">{{ content }}</span>
+                            </div>
+                            <div v-if="detect_wu_xing_ju.extra.sanhui.length == 0" class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                                <span class="text-xs">无匹配三会局</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t opacity-10"></div>
+                    <div>
+                        <div class="text-xs text-muted-foreground mb-2">三合局</div>
+                        <div class="flex flex-wrap gap-2">
+                            <div v-for="(content, index) in detect_wu_xing_ju.extra.sanhe" :key="index"
+                                class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                                <span class="font-semibold">{{ content }}</span>
+                            </div>
+                            <div v-if="detect_wu_xing_ju.extra.sanhe.length == 0" class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                                <span class="text-xs">无匹配三合局</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t opacity-10"></div>
+                    <div>
+                        <div class="text-xs text-muted-foreground mb-2">六合局</div>
+                        <div class="flex flex-wrap gap-2">
+                            <div v-for="(content, index) in detect_wu_xing_ju.extra.liuhe" :key="index"
+                                class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                                <span class="font-semibold">{{ content }}</span>
+                            </div>
+                            <div v-if="detect_wu_xing_ju.extra.liuhe.length == 0" class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                                <span class="text-xs">无匹配六合局</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t opacity-10"></div>
+                    <div>
+                        <div class="text-xs text-muted-foreground mb-2">五局</div>
+                        <div class="flex flex-wrap gap-2">
+                            <div v-for="(content, index) in detect_wu_xing_ju.extra.wuju" :key="index"
+                                class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                                <span class="font-semibold">{{ content }}</span>
+                            </div>
+                            <div v-if="detect_wu_xing_ju.extra.wuju.length == 0" class="flex items-center gap-1 px-2 py-0.5 rounded bg-muted/10 text-sm">
+                                <span class="text-xs">无匹配五局</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t opacity-10"></div>
+                    <div>
+                        <div class="text-xs text-muted-foreground mb-2">分析</div>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li v-for="(content, index) in detect_wu_xing_ju.extra.sanhui" :key="index" class="text-primary">
+                                {{ content }}: {{ getWuXingJuDirection(content) }}
+                            </li>
+                            <li v-for="(content, index) in detect_wu_xing_ju.extra.sanhe" :key="index">
+                                {{ content }}: {{ getWuXingJuDirection(content) }}
+                            </li>
+                            <li v-for="(content, index) in detect_wu_xing_ju.extra.liuhe" :key="index">
+                                {{ content }}: {{ getWuXingJuDirection(content) }}
+                            </li>
+                            <li v-for="(content, index) in detect_wu_xing_ju.extra.wuju" :key="index">
+                                {{ content }}: {{ getWuXingJuDirection(content) }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t opacity-10 mt-2 mb-2"></div>
+            <div class="grid grid-cols-1 gap-3">
                 <div class="rounded-xl border p-4 flex flex-col gap-2 transition duration-150 hover:shadow-sm bg-card">
                     <div class="text-sm font-medium opacity-90">大运排盘</div>
-                    <div>此人会在 <b>{{calculate_start_age.date}}</b> 迎来第一次大运，此时的年龄为 <b>{{calculate_start_age.age}}</b></div>
+                    <div>此人会在 <b>{{ calculate_start_age.date }}</b> 迎来第一次大运，此时的年龄为 <b>{{ calculate_start_age.age }}</b>
+                    </div>
                     <ul class="ps-0 mt-0 sm:ps-2">
                         <li v-for="(item, index) in luck_cycles" :key="item.step"
                             class="group relative flex list-none gap-x-3 rounded-full ps-0 sm:gap-x-2">
-                            <span class="z-10 my-2 ms-2 h-3 w-3 min-w-3 rounded-full border-2 border-muted-foreground transition-transform group-hover:scale-125" />
+                            <span
+                                class="z-10 my-2 ms-2 h-3 w-3 min-w-3 rounded-full border-2 border-muted-foreground transition-transform group-hover:scale-125" />
                             <span class="absolute start-[12px] top-[20px] w-1 bg-border"
                                 :style="{ height: 'calc(100% - 4px)' }" />
                             <div class="flex flex-col gap-2 max-sm:flex-col cursor-pointer">
@@ -262,8 +339,19 @@ interface LuckCycleItem {
 type LuckCycles = LuckCycleItem[]
 
 interface CalculateStartAge {
-    age:number
-    date:string
+    age: number
+    date: string
+}
+
+interface DetectWuXingJu {
+    main_ju: string
+    description: string
+    extra: {
+        sanhui: string[]
+        wuju: string[]
+        sanhe: string[]
+        liuhe: string[]
+    };
 }
 
 const birthday_time = ref('')
@@ -294,10 +382,20 @@ const interpret_shi_shen = reactive<InterpretShiShen>({
     analysis: []
 })
 const calculate_start_age = reactive<CalculateStartAge>({
-    age:0,
-    date:''
+    age: 0,
+    date: ''
 })
 const luck_cycles = reactive<LuckCycles>([])
+const detect_wu_xing_ju = reactive<DetectWuXingJu>({
+    main_ju: '',
+    description: '',
+    extra: {
+        sanhui: [],
+        wuju: [],
+        sanhe: [],
+        liuhe: []
+    }
+})
 
 async function handleQuery() {
     if (!birthday_time.value.trim()) {
@@ -319,6 +417,7 @@ async function handleQuery() {
             Object.assign(interpret_shi_shen, data.data.interpret_shi_shen)
             Object.assign(calculate_start_age, data.data.calculate_start_age)
             Object.assign(luck_cycles, data.data.luck_cycles)
+            Object.assign(detect_wu_xing_ju, data.data.detect_wu_xing_ju)
         } else {
             showToast({ message: data.message })
         }
@@ -344,38 +443,69 @@ const getWuXingClass = (xing: string) => {
     }
 }
 
-const getInterpretationDirection = (shishen: string) => {
-    switch (shishen) {
+const getInterpretationDirection = (shi_shen: string) => {
+    switch (shi_shen) {
         case '正官':
             return '规矩、责任、约束、社会地位';
-            break;
         case '七杀':
             return '权力、挑战、压力、决断力';
-            break;
         case '正印':
             return '学识、贵人、帮助、保护';
-            break;
         case '偏印':
             return '灵活、变化、机缘、依赖';
-            break;
         case '比肩':
             return '竞争、独立、兄弟姐妹、固执';
-            break;
         case '劫财':
             return '竞争、独立、争夺';
-            break;
         case '正财':
             return '财富、收入、理财能力';
-            break;
         case '偏财':
             return '偶然财、投资、偏门收入';
-            break;
         case '食神':
             return '才华、创造力、表达能力';
-            break;
         case '伤官':
             return '才华张扬、突破、叛逆';
-            break;
+    }
+}
+
+const getWuXingJuDirection = (wu_xing_ju: string) => {
+    switch (wu_xing_ju) {
+        case '金四局':
+            return '命盘中出现申、酉等金旺之地支，金气成象，主刚毅果决、重信重义。';
+        case '木三局':
+            return '命盘中出现寅、卯等木旺之地支，木气成象，主仁慈聪慧、有生发之机。';
+        case '水二局':
+            return '命盘中出现亥、子等水旺之地支，水气成象，主智慧灵活、应变强。';
+        case '火六局':
+            return '命盘中出现巳、午等火旺之地支，火气成象，主热情主动、光明磊落。';
+        case '土五局':
+            return '命盘中出现辰、戌、丑、未等地支，土气成象，主稳重厚道、有守成之力。';
+        case '木三会':
+            return '命盘中寅、卯、辰齐全，东方木旺成象，主仁德聪颖、善于开创。';
+        case '火三会':
+            return '巳、午、未三支齐聚，南方火旺成象，主热情积极、有领导力。';
+        case '金三会':
+            return '申、酉、戌汇聚，西方金旺成象，主果断果敢、讲信守义。';
+        case '水三会':
+            return '亥、子、丑相聚，北方水旺成象，主聪慧机敏、擅长谋略。';
+        case '水三合':
+            return '命盘中有申、子、辰三支，水气流通旺盛，主智慧过人、通权达变。';
+        case '火三合':
+            return '寅、午、戌三支成合，火气旺盛，主热情勇敢、具领袖气质。';
+        case '木三合':
+            return '亥、卯、未三支成合，木气旺盛，主仁厚有礼、善于发展。';
+        case '金三合':
+            return '巳、酉、丑三支成合，金气充足，主果决干练、意志坚定。';
+        case '土六合':
+            return '丑与未相合，土气厚重，主忠实稳重、踏实守信。';
+        case '金六合':
+            return '申与酉相合，金气精纯，主聪明有谋、精于判断。';
+        case '木六合':
+            return '寅与亥相合，木气生发，主仁义聪慧、富有远见。';
+        case '水六合':
+            return '子与丑相合，水气通达，主灵动多谋、性格柔和。';
+        case '火六合':
+            return '巳与午相合，火气明盛，主热情活泼、富有激情。';
     }
 }
 </script>
