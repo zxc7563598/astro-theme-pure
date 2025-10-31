@@ -176,6 +176,10 @@ export const terms: CardListData = {
       link: '/composer/address-parser'
     },
     {
+      title: '八字排盘',
+      link: '/composer/fortune-analyzer'
+    },
+    {
       title: '随机头像生成',
       link: '/projects/item/avatar-service'
     }
