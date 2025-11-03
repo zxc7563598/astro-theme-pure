@@ -139,7 +139,7 @@ export const integ: IntegrationUserConfig = {
       comment: true,
       locale: {
         reaction0: '喜欢',
-        placeholder: '欢迎发表评论。（通过电子邮件接收回复。无需登录）'
+        placeholder: '欢迎发表评论。（通过电子邮件接收回复。无需登录，但起码你要在上面写上电子邮箱才会收到邮件）'
       },
       imageUploader: false
     }
