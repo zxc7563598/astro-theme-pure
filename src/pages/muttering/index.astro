@@ -1,0 +1,28 @@
+---
+import PageLayout from '@/layouts/BaseLayout.astro'
+import PaginationList from '@/components/vue/muttering/PaginationList.vue'
+import { Comment, PageInfo } from '@/components/waline'
+
+const meta = {
+  description: '记录生活日常琐碎，这里保留灵感碎片、即时想法，是博客长文以外的流速频道。',
+  title: '碎碎念'
+}
+const { view } = Astro.props
+---
+
+<PageLayout {meta}>
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate mb-2'>
+      <h1 class='mb-6 text-3xl font-medium'>碎碎念</h1>
+      <p>记录生活日常琐碎，这里保留灵感碎片、即时想法，是博客长文以外的流速频道</p>
+    </div>
+    <Fragment slot='header'>
+      <PageInfo {view} comment={true} class='italic' />
+    </Fragment>
+    <PaginationList client:load />
+    <slot />
+    <slot name='bottom' slot='bottom'>
+      <Comment class='mt-3 sm:mt-6' />
+    </slot>
+  </main>
+</PageLayout>

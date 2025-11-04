@@ -49,6 +49,7 @@ export const theme: ThemeUserConfig = {
     menu: [
       { title: '文章', link: '/blog' },
       { title: '项目', link: '/projects' },
+      { title: '碎碎念', link: '/muttering' },
       { title: '关于我', link: '/about' }
     ]
   },
@@ -139,7 +140,8 @@ export const integ: IntegrationUserConfig = {
       comment: true,
       locale: {
         reaction0: '喜欢',
-        placeholder: '欢迎发表评论。（通过电子邮件接收回复。无需登录，但起码你要写上邮箱地址才会收到邮件）'
+        placeholder:
+          '欢迎发表评论。（通过电子邮件接收回复。无需登录，但起码你要写上邮箱地址才会收到邮件）'
       },
       imageUploader: false
     }
