@@ -5,9 +5,6 @@ import { defineConfig } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 
-// Others
-// import { visualizer } from 'rollup-plugin-visualizer'
-
 // Local integrations
 // Local rehype & remark plugins
 import rehypeAutolinkHeadings from './src/plugins/rehype-auto-link-headings.ts'
@@ -54,10 +51,8 @@ export default defineConfig({
     // sitemap(),
     // mdx(),
     AstroPureIntegration(config)
-    // (await import('@playform/compress')).default({
-    //   SVG: false,
-    //   Exclude: ['index.*.js']
-    // }),
+    // @playform/compress have potential build issue with this template
+    // (await import('@playform/compress')).default({ SVG: false, Exclude: ['index.*.js'] })
 
     // Temporary fix vercel adapter
     // static build method is not needed
