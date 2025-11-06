@@ -1,7 +1,7 @@
 {
   "name": "astro-theme-pure",
   "type": "module",
-  "version": "4.0.8",
+  "version": "4.0.9",
   "scripts": {
     "dev": "astro dev",
     "dev:check": "astro check --watch & astro dev",
@@ -18,35 +18,35 @@
     "clean": "rm -rf .astro .vercel dist"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/preact": "^4.1.1",
-    "@astrojs/rss": "^4.0.12",
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/preact": "^4.1.2",
+    "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/vercel": "^8.2.2",
-    "@astrojs/vue": "^5.1.1",
+    "@astrojs/vercel": "^9.0.0",
+    "@astrojs/vue": "^5.1.2",
     "@playform/compress": "^0.2.0",
     "@tailwindcss/line-clamp": "^0.4.4",
-    "@waline/client": "^3.6.0",
-    "astro": "^5.12.0",
-    "astro-pure": "1.3.4",
-    "axios": "^1.12.2",
+    "@waline/client": "^3.7.1",
+    "astro": "^5.15.3",
+    "astro-pure": "1.3.6",
+    "axios": "^1.13.2",
     "hejunjie-encrypted-request": "^2.0.0",
-    "katex": "^0.16.22",
+    "katex": "^0.16.25",
     "preact": "^10.27.2",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "sharp": "^0.34.3",
-    "typescript": "^5.8.3",
-    "vue": "^3.5.22"
+    "sharp": "^0.34.4",
+    "typescript": "^5.9.3",
+    "vue": "^3.5.23"
   },
   "devDependencies": {
-    "@eslint/js": "^9.31.0",
-    "@ianvs/prettier-plugin-sort-imports": "^4.5.1",
-    "eslint": "^9.31.0",
-    "eslint-plugin-astro": "^1.3.1",
+    "@eslint/js": "^9.39.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-astro": "^1.5.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
-    "rollup-plugin-visualizer": "^6.0.3",
-    "typescript-eslint": "^8.37.0"
+    "rollup-plugin-visualizer": "^6.0.5",
+    "typescript-eslint": "^8.46.3"
   }
 }
