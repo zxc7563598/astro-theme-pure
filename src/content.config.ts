@@ -28,7 +28,6 @@ const blog = defineCollection({
           inferSize: z.boolean().optional(),
           width: z.number().optional(),
           height: z.number().optional(),
-
           color: z.string().optional()
         })
         .optional(),
@@ -36,7 +35,15 @@ const blog = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       // Special fields
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      password: z
+        .array(
+          z.object({
+            question: z.string().min(1, '问题不能为空'),
+            answer: z.string().min(1, '答案不能为空')
+          })
+        )
+        .default([])
     })
 })
 
