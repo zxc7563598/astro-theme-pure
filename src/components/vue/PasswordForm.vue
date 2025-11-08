@@ -53,7 +53,8 @@ async function verifyAnswer() {
     const res = await fetch(`/api/verify?slug=${props.slug}`, {
         method: 'POST',
         body: formData,
-    })
+        credentials: 'same-origin',
+    });
     const data = await res.json()
     if (res.ok && data.success) {
         window.location.reload()
