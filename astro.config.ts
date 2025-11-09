@@ -31,7 +31,7 @@ export default defineConfig({
   site: 'https://hejunjie.life',
   // Deploy to a sub path; See https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
   // base: '/astro-pure/',
-  trailingSlash: 'ignore',
+  trailingSlash: 'never',
 
   // Adapter
   // https://docs.astro.build/en/guides/deploy/
