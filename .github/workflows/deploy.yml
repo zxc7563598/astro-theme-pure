@@ -42,7 +42,7 @@ jobs:
       # 6️⃣ Deploy dist + package.json + bun.lockb to Repository B
       - name: Deploy dist to Repository B
         env:
-          REPO_B: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/zxc7563598/astro-theme-pure-dist.git
+          REPO_B: https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@github.com/zxc7563598/astro-theme-pure-dist.git
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # 配置 git
