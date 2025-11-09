@@ -1,0 +1,71 @@
+name: Build and Deploy Astro to Repo B
+
+on:
+  push:
+    branches:
+      - main # 仓库 A 的 main 分支有更新时触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout 仓库 A
+      - name: Checkout Repository A
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Bun
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      # 3️⃣ Cache Bun dependencies
+      - name: Cache Bun dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.bun
+            ./node_modules
+          key: bun-deps-${{ hashFiles('bun.lockb') }}
+          restore-keys: |
+            bun-deps-
+
+      # 4️⃣ Install dependencies
+      - name: Install dependencies
+        run: bun install
+
+      # 5️⃣ Build Astro
+      - name: Build Astro
+        run: bun run build
+
+      # 6️⃣ Deploy dist + package.json + bun.lockb to Repository B
+      - name: Deploy dist to Repository B
+        env:
+          REPO_B: git@github.com:zxc7563598/astro-theme-pure-dist.git
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 配置 git
+          git config --global user.name "github-actions"
+          git config --global user.email "junjie.he.925@gmail.com"
+
+          # 克隆仓库 B
+          git clone --depth 1 $REPO_B temp-repo
+          cd temp-repo
+
+          # 删除旧的 dist 内容，但保留 package.json 和 bun.lockb
+          rm -rf dist/*
+
+          # 如果 dist 目录不存在，先创建
+          mkdir -p dist
+
+          # 复制新的 dist 文件
+          cp -R ../dist/* dist/
+
+          # 复制 package.json 和 bun.lockb
+          cp ../package.json ../bun.lockb ./
+
+          # 提交并推送更新
+          git add .
+          git commit -m "Update dist, package.json and bun.lockb from main branch of A" || echo "No changes to commit"
+          git push origin main
