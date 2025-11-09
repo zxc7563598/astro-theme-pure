@@ -25,12 +25,6 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get upgrade -y
-          sudo apt-get install -y libvips-dev
-
       # 3️⃣ Cache Bun dependencies
       - name: Cache Bun dependencies
         uses: actions/cache@v3
