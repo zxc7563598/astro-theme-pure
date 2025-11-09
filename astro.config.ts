@@ -49,7 +49,7 @@ export default defineConfig({
   image: {
     responsiveStyles: true,
     service: {
-      entrypoint: 'astro/assets/services/noop'
+      entrypoint: 'astro/assets/services/sharp'
     }
   },
 
