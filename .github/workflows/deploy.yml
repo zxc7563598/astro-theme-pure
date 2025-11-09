@@ -27,7 +27,7 @@ jobs:
           path: |
             ~/.bun
             ./node_modules
-          key: bun-deps-${{ hashFiles('bun.lockb') }}
+          key: bun-deps-${{ hashFiles('bun.lock') }}
           restore-keys: |
             bun-deps-
 
@@ -39,7 +39,7 @@ jobs:
       - name: Build Astro
         run: bun run build
 
-      # 6️⃣ Deploy dist + package.json + bun.lockb to Repository B
+      # 6️⃣ Deploy dist + package.json + bun.lock to Repository B
       - name: Deploy dist to Repository B
         env:
           REPO_B: https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@github.com/zxc7563598/astro-theme-pure-dist.git
@@ -53,7 +53,7 @@ jobs:
           git clone --depth 1 $REPO_B temp-repo
           cd temp-repo
 
-          # 删除旧的 dist 内容，但保留 package.json 和 bun.lockb
+          # 删除旧的 dist 内容，但保留 package.json 和 bun.lock
           rm -rf dist/*
 
           # 如果 dist 目录不存在，先创建
@@ -62,10 +62,10 @@ jobs:
           # 复制新的 dist 文件
           cp -R ../dist/* dist/
 
-          # 复制 package.json 和 bun.lockb
-          cp ../package.json ../bun.lockb ./
+          # 复制 package.json 和 bun.lock
+          cp ../package.json ../bun.lock ./
 
           # 提交并推送更新
           git add .
-          git commit -m "Update dist, package.json and bun.lockb from main branch of A" || echo "No changes to commit"
+          git commit -m "Update dist, package.json and bun.lock from main branch of A" || echo "No changes to commit"
           git push origin main
