@@ -1,0 +1,54 @@
+{
+  "friends": [
+    {
+      "id_name": "cf-links",
+      "desc": "散落在各地的灯火",
+      "link_list": [
+        {
+          "name": "Arthals' ink",
+          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
+          "link": "https://arthals.ink/",
+          "avatar": "https://cdn.arthals.ink/Arthals.png",
+          "avatar_cache": "/avatars/Arthals.png"
+        },
+        {
+          "name": "张洪Heo",
+          "intro": "分享设计与科技生活",
+          "link": "https://blog.zhheo.com",
+          "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp",
+          "avatar_cache": "/avatars/张洪Heo.png"
+        },
+        {
+          "name": "CWorld Site",
+          "intro": "求知若愚，虚怀若谷",
+          "link": "https://cworld0.com/",
+          "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200",
+          "avatar_cache": "/avatars/CWorld.png"
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": []
+    },
+    {
+      "id_name": "special-links",
+      "desc": "旅途的意外转弯",
+      "link_list": [
+        {
+          "name": "虫洞",
+          "intro": "随机前往十年之约的成员博客",
+          "link": "https://www.foreverblog.cn/go.html",
+          "avatar": "/images/wormhole.png"
+        },
+        {
+          "name": "开往",
+          "intro": "随机前往开往的成员博客",
+          "link": "https://www.travellings.cn/go.html",
+          "avatar": "https://www.travellings.cn/assets/travelling.png"
+        }
+      ]
+    }
+  ]
+}

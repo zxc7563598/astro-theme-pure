@@ -50,6 +50,7 @@ export const theme: ThemeUserConfig = {
       { title: '文章', link: '/blog' },
       { title: '项目', link: '/projects' },
       { title: '碎碎念', link: '/muttering' },
+      { title: '友情链接', link: '/links' },
       { title: '关于我', link: '/about' }
     ]
   },
@@ -96,6 +97,31 @@ export const theme: ThemeUserConfig = {
 }
 
 export const integ: IntegrationUserConfig = {
+  // Links management
+  // See: https://astro-pure.js.org/docs/integrations/links
+  links: {
+    // Friend logbook
+    logbook: [
+      { date: '2023-10-15', content: '首篇文章书写完成' },
+      { date: '2024-10-04', content: '首次建立博客，基于 Hexo 使用了 everfu 老师的 hexo-theme-solitude 主题' },
+      { date: '2025-01-27', content: '管局审核通过，网站正式稳定' },
+      { date: '2025-10-17', content: '由 Hexo 更换到 Astro 使用了 cworld1 老师的 astro-theme-pure 主题' },
+      { date: '2025-10-24', content: "完善主题流量统计模块" },
+      { date: '2025-11-04', content: "新增碎碎念模块" },
+      { date: '2025-11-09', content: "新增文章加密模块，由静态部署变更为 SSR 部署" },
+      { date: '...', content: "持续进步中..." },
+    ],
+    // Yourself link info
+    applyTip: [
+      { name: '名称', val: theme.title },
+      { name: '描述', val: theme.description || 'Null' },
+      { name: '地址', val: 'https://hejunjie.life' },
+      { name: '头像', val: 'https://hejunjie.life/avatar.jpg' },
+      { name: '友链页面', val: 'https://hejunjie.life/links' }
+    ],
+    // Cache avatars in `public/avatars/` to improve user experience.
+    cacheAvatar: true
+  },
   // Enable page search function
   pagefind: true,
   // Add a random quote to the footer (default on homepage footer)
