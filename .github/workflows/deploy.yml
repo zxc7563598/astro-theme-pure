@@ -14,6 +14,11 @@ jobs:
       - name: Checkout Repository A
         uses: actions/checkout@v3
 
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.20.0
+
       # 2️⃣ Setup Bun
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
