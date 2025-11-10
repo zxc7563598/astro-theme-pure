@@ -67,6 +67,11 @@ export const theme: ThemeUserConfig = {
         link: 'https://beian.mps.gov.cn/#/query/webSearch',
         style: 'text-sm' // Uno/TW CSS class
       },
+      {
+        title: 'Travelling',
+        link: 'https://www.travellings.cn/go.html',
+        style: 'text-sm'
+      },
       // Privacy Policy link
       {
         title: '更多便捷工具',
