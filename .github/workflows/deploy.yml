@@ -3,74 +3,66 @@ name: Build and Deploy Astro to Repo B
 on:
   push:
     branches:
-      - main # 仓库 A 的 main 分支有更新时触发
+      - main
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-      # 1️⃣ Checkout 仓库 A
       - name: Checkout Repository A
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.20.0
 
-      # 2️⃣ Setup Bun
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: 1.3.1
 
-      # 3️⃣ Cache Bun dependencies
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libvips-dev=8.15.1-1.1build4 || sudo apt-get install -y libvips-dev
+
       - name: Cache Bun dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.bun
             ./node_modules
-          key: bun-deps-${{ hashFiles('bun.lock') }}
+          key: bun-deps-${{ hashFiles('bun.lockb') }}
           restore-keys: |
             bun-deps-
 
-      # 4️⃣ Install dependencies
       - name: Install dependencies
         run: bun install
 
-      # 5️⃣ Build Astro
+      - name: Verify Sharp version
+        run: bun pm ls sharp
+
       - name: Build Astro
         run: bun run build
 
-      # 6️⃣ Deploy dist + package.json + bun.lock to Repository B
       - name: Deploy dist to Repository B
         env:
           REPO_B: https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@github.com/zxc7563598/astro-theme-pure-dist.git
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # 配置 git
           git config --global user.name "github-actions"
           git config --global user.email "junjie.he.925@gmail.com"
 
-          # 克隆仓库 B
           git clone --depth 1 $REPO_B temp-repo
           cd temp-repo
 
-          # 删除旧的 dist 内容，但保留 package.json 和 bun.lock
           rm -rf dist/*
-
-          # 如果 dist 目录不存在，先创建
           mkdir -p dist
 
-          # 复制新的 dist 文件
           cp -R ../dist/* dist/
-
-          # 复制 package.json 和 bun.lock
           cp ../package.json ../bun.lock ./
 
-          # 提交并推送更新
           git add .
           git commit -m "Update dist, package.json and bun.lock from main branch of A" || echo "No changes to commit"
           git push origin main
