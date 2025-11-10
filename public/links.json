@@ -24,6 +24,13 @@
           "link": "https://cworld0.com/",
           "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200",
           "avatar_cache": "/avatars/CWorld.webp"
+        },
+        {
+          "name": "Xingluo’s Blog",
+          "intro": "何处秋风悲画扇",
+          "link": "https://blog.en.icu",
+          "avatar": "https://pic.en.icu/Xingluo.webp",
+          "avatar_cache": "/avatars/Xingluo.webp"
         }
       ]
     },
