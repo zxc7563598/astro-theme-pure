@@ -365,9 +365,6 @@ export const POST: APIRoute = async ({ request, url }) => {
     'Set-Cookie',
     `verified-${slug}=${cookieVal}; Path=${path}; HttpOnly; Secure; SameSite=Lax; Max-Age=86400`
   )
-  console.log('slug', slug)
-  console.log('cookieVal', cookieVal)
-  console.log('path', path)
   return new Response(JSON.stringify({ success: true }), {
     status: 200,
     headers: {
