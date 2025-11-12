@@ -2,12 +2,14 @@ import { exec as execCb } from 'child_process'
 import fs from 'fs/promises'
 import { promisify } from 'util'
 import fetch from 'node-fetch'
+import pLimit from 'p-limit'
 import links from 'public/links.json'
 
 const exec = promisify(execCb)
 const { friends } = links
 
 const MY_SITE = 'https://hejunjie.life'
+const CONCURRENCY = 50
 
 interface FriendItem {
   name: string
@@ -50,7 +52,10 @@ async function main() {
   friends[0].link_list.forEach((f) => (f.check ? friendsToCheck.push(f) : friendsToKeep0.push(f)))
   friends[1].link_list.forEach((f) => (f.check ? friendsToCheck.push(f) : friendsToKeep1.push(f)))
 
-  const results = await Promise.all(friendsToCheck.map(checkFriendPage))
+  const limit = pLimit(CONCURRENCY)
+  const results = await Promise.all(
+    friendsToCheck.map((friend) => limit(() => checkFriendPage(friend)))
+  )
 
   friends[0].link_list = [...friendsToKeep0]
   friends[1].link_list = [...friendsToKeep1]
