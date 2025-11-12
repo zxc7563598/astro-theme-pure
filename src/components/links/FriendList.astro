@@ -31,7 +31,7 @@ const { title, list: friendList, ...props } = Astro.props
 
 const getAvatarSrc = (friend: friend) =>
   (config.integ?.links?.cacheAvatar ?? false)
-    ? (friend.avatar_cache ?? friend.avatar)
+    ? (friend.avatar_cache ? friend.avatar_cache : friend.avatar)
     : friend.avatar
 ---
 
