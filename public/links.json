@@ -9,28 +9,36 @@
           "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
           "link": "https://arthals.ink/",
           "avatar": "https://cdn.arthals.ink/Arthals.png",
-          "avatar_cache": "/avatars/Arthals.png"
+          "avatar_cache": "/avatars/Arthals.png",
+          "friend_link": "https://arthals.ink/links",
+          "check": true
         },
         {
           "name": "张洪Heo",
           "intro": "分享设计与科技生活",
           "link": "https://blog.zhheo.com",
           "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp",
-          "avatar_cache": "/avatars/张洪Heo.png"
+          "avatar_cache": "/avatars/张洪Heo.png",
+          "friend_link": "https://blog.zhheo.com/link/",
+          "check": true
         },
         {
           "name": "CWorld Site",
           "intro": "求知若愚，虚怀若谷",
           "link": "https://cworld0.com/",
           "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200",
-          "avatar_cache": "/avatars/CWorld.webp"
+          "avatar_cache": "/avatars/CWorld.webp",
+          "friend_link": "https://cworld0.com/links",
+          "check": false
         },
         {
           "name": "Xingluo’s Blog",
           "intro": "何处秋风悲画扇",
           "link": "https://blog.en.icu",
           "avatar": "https://pic.en.icu/Xingluo.webp",
-          "avatar_cache": "/avatars/Xingluo.webp"
+          "avatar_cache": "/avatars/Xingluo.webp",
+          "friend_link": "https://blog.en.icu/links",
+          "check": true
         }
       ]
     },
@@ -47,19 +55,29 @@
           "name": "虫洞",
           "intro": "随机前往十年之约的成员博客",
           "link": "https://www.foreverblog.cn/go.html",
-          "avatar": "/images/wormhole.png"
+          "avatar": "/images/wormhole.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false
+
         },
         {
           "name": "开往",
           "intro": "随机前往开往的成员博客",
           "link": "https://www.travellings.cn/go.html",
-          "avatar": "https://www.travellings.cn/assets/travelling.png"
+          "avatar": "https://www.travellings.cn/assets/travelling.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false
         },
         {
           "name": "BlogFinder",
           "intro": "聚合优秀的个人博客，发掘优质的个人博客文章和内容",
           "link": "https://bf.zzxworld.com/s",
-          "avatar": "https://bf.zzxworld.com/images/favicon.png"
+          "avatar": "https://bf.zzxworld.com/images/favicon.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false
         }
       ]
     }
