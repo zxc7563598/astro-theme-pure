@@ -83,7 +83,7 @@ async function validateImageUrl(url: string): Promise<void> {
       throw new Error(`无法访问头像链接: ${res.status} ${res.statusText}`)
     }
     const contentType = res.headers.get('content-type') || ''
-    if (!contentType.startsWith('image/')) {
+    if (!contentType.includes('image')) {
       throw new Error('头像链接不是图片类型')
     }
   } catch (err: unknown) {
