@@ -12,33 +12,6 @@
           "avatar_cache": "/avatars/CWorld.webp",
           "friend_link": "https://cworld0.com/links",
           "check": false
-        },
-        {
-          "name": "Arthals' ink",
-          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
-          "link": "https://arthals.ink/",
-          "avatar": "https://cdn.arthals.ink/Arthals.png",
-          "avatar_cache": "/avatars/Arthals.png",
-          "friend_link": "https://arthals.ink/links",
-          "check": true
-        },
-        {
-          "name": "张洪Heo",
-          "intro": "分享设计与科技生活",
-          "link": "https://blog.zhheo.com",
-          "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp",
-          "avatar_cache": "/avatars/张洪Heo.png",
-          "friend_link": "https://blog.zhheo.com/link/",
-          "check": true
-        },
-        {
-          "name": "Xingluo’s Blog",
-          "intro": "何处秋风悲画扇",
-          "link": "https://blog.en.icu",
-          "avatar": "https://pic.en.icu/Xingluo.webp",
-          "avatar_cache": "/avatars/Xingluo.webp",
-          "friend_link": "https://blog.en.icu/links",
-          "check": true
         }
       ]
     },
