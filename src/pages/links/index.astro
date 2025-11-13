@@ -5,21 +5,21 @@ import config from 'virtual:config'
 import { Collapse, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import FriendList from '@/components/links/FriendList.astro'
+import ApplyLinks from '@/components/vue/ApplyLinks.vue'
 
 const headings = [
   { depth: 2, slug: 'common-links', text: '散落在各地的灯火' },
   { depth: 2, slug: 'special-links', text: '旅途的意外转弯' },
   { depth: 2, slug: 'im-here', text: '我在这里' },
+  { depth: 2, slug: 'site-info', text: '本站信息' },
   { depth: 2, slug: 'friendlink-info', text: '友链申请说明' },
   { depth: 2, slug: 'friendlink-requirements', text: '友链申请条件' },
-  { depth: 2, slug: 'apply-method', text: '申请方式' },
-  { depth: 2, slug: 'site-info', text: '本站信息' },
+  { depth: 2, slug: 'apply-method', text: '申请友链' },
   { depth: 2, slug: 'note', text: '最后的话' }
 ]
 
 const { friends } = links
 const linksConf = config.integ.links
-const linkEditPage = 'https://github.com/zxc7563598/astro-theme-pure/blob/main/public/links.json'
 ---
 
 <PageLayout title='友情链接' {headings} comment>
@@ -42,6 +42,25 @@ const linkEditPage = 'https://github.com/zxc7563598/astro-theme-pure/blob/main/p
   <p>如果你也有在认真更新自己的博客，欢迎交换友链，让彼此的页面多一点连结。</p>
   <p>在申请前，请先简单看一下以下说明～</p>
 
+  <h2 id='site-info'>本站信息</h2>
+  <blockquote class='not-prose grid grid-cols-[auto_1fr] gap-x-2 break-words border-s-4 ps-4'>
+    {
+      linksConf.applyTip.map(({ name, val }) => {
+        const script = `navigator.clipboard.writeText('${val}');document.dispatchEvent(new CustomEvent('toast',{detail:{message:'已将 "${val}" 复制到剪切板!'}}))`
+        return (
+          <>
+            <span class='text-end'>
+              <b>{name}</b>:
+            </span>
+            <samp class='cursor-pointer' onclick={script}>
+              {val}
+            </samp>
+          </>
+        )
+      })
+    }
+  </blockquote>
+
   <h2 id='friendlink-info'>友链申请说明</h2>
   <p>为了让整个友链页面在展示上更整齐，也方便后续维护，这里有一些小约定：</p>
   <ul>
@@ -63,37 +82,10 @@ const linkEditPage = 'https://github.com/zxc7563598/astro-theme-pure/blob/main/p
     <li>请先在贵站添加本站链接，再在本页留言申请。</li>
   </ol>
 
-  <h2 id='apply-method'>申请方式</h2>
-  <p>在评论中留下以下信息即可（建议格式如下）：</p>
-  <ul>
-    <li>名称：你的站点名</li>
-    <li>描述：一句话简介</li>
-    <li>地址：https://example.com</li>
-    <li>头像：https://example.com/avatar.png</li>
-    <li>友链页面：https://example.com/links</li>
-  </ul>
-  <p>或者也可以前往GitHub <a href={linkEditPage} target='_blank'>提交 PR</a> 申请友链。</p>
-  <p>我会在确认链接有效后，将你的站点加入到友链页中。</p>
+  <h2 id='apply-method'>申请友链</h2>
+  <p>请确定您的友链中已经加入了本站，系统会自动检测，并将你的站点加入到友链页中。</p>
   <p>如信息有误或头像需更新，也可直接在评论区留言说明。</p>
-
-  <h2 id='site-info'>本站信息</h2>
-  <blockquote class='not-prose grid grid-cols-[auto_1fr] gap-x-2 break-words border-s-4 ps-4'>
-    {
-      linksConf.applyTip.map(({ name, val }) => {
-        const script = `navigator.clipboard.writeText('${val}');document.dispatchEvent(new CustomEvent('toast',{detail:{message:'已将 "${val}" 复制到剪切板!'}}))`
-        return (
-          <>
-            <span class='text-end'>
-              <b>{name}</b>:
-            </span>
-            <samp class='cursor-pointer' onclick={script}>
-              {val}
-            </samp>
-          </>
-        )
-      })
-    }
-  </blockquote>
+  <ApplyLinks client:load />
 
   <h2 id='note'>最后的话</h2>
   <p>每一座认真写字的博客，都是互联网里闪烁的灯火。</p>
