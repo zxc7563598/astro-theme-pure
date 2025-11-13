@@ -74,6 +74,35 @@ async function uploadImageFromUrl(imageUrl: string, fileName: string): Promise<s
   }
 }
 
+// 检查头像有效性
+async function validateImageUrl(url: string): Promise<void> {
+  if (!url) throw new Error('头像地址不能为空')
+  try {
+    const res = await fetch(url.trim(), { method: 'GET' })
+    if (!res.ok) {
+      throw new Error(`无法访问头像链接: ${res.status} ${res.statusText}`)
+    }
+    const contentType = res.headers.get('content-type') || ''
+    if (!contentType.startsWith('image/')) {
+      throw new Error('头像链接不是图片类型')
+    }
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err)
+    throw new Error(`头像链接无法访问或请求出错: ${message}`)
+  }
+}
+
+// 检查域名
+function isSameDomain(url1: string, url2: string): boolean {
+  try {
+    const u1 = new URL(url1)
+    const u2 = new URL(url2)
+    return u1.hostname === u2.hostname
+  } catch {
+    return false // URL 解析失败视为不同域名
+  }
+}
+
 let writeQueue: Promise<unknown> = Promise.resolve()
 async function queueWrite<T>(task: () => Promise<T>): Promise<T> {
   writeQueue = writeQueue.then(() => task())
@@ -112,6 +141,20 @@ export const POST: APIRoute = async ({ request }) => {
         headers: { 'Content-Type': 'application/json' }
       })
     }
+    try {
+      await validateImageUrl(avatar.toString().trim())
+    } catch (err) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          message: err instanceof Error ? err.message : String(err)
+        }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+    }
     const friend_link = formData.get('friend_link')
     if (!friend_link) {
       return new Response(JSON.stringify({ success: false, message: `友情链接页面地址不能为空` }), {
@@ -127,6 +170,15 @@ export const POST: APIRoute = async ({ request }) => {
       friend_link: friend_link.toString().trim(),
       avatar_cache: '',
       check: true
+    }
+    if (!isSameDomain(friend.link, friend.friend_link)) {
+      return new Response(
+        JSON.stringify({ success: false, message: `友情链接页面与主站并非同一域名` }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
     }
     // 读取 links.json 并检查重复网站
     const content = await fs.readFile(LINK_JSON_PATH, 'utf-8')
