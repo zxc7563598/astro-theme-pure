@@ -9,36 +9,9 @@
           "intro": "求知若愚，虚怀若谷",
           "link": "https://cworld0.com/",
           "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200",
-          "avatar_cache": "/avatars/CWorld.webp",
           "friend_link": "https://cworld0.com/links",
+          "avatar_cache": "/avatars/CWorld.webp",
           "check": false
-        },
-        {
-          "name": "Arthals' ink",
-          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
-          "link": "https://arthals.ink/",
-          "avatar": "https://cdn.arthals.ink/Arthals.png",
-          "friend_link": "https://arthals.ink/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763020841795.png",
-          "check": true
-        },
-        {
-          "name": "张洪Heo",
-          "intro": "分享设计与科技生活",
-          "link": "https://blog.zhheo.com",
-          "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp",
-          "friend_link": "https://blog.zhheo.com/link/",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/张洪Heo-1763021004759.webp",
-          "check": true
-        },
-        {
-          "name": "Xingluo’s Blog",
-          "intro": "何处秋风悲画扇",
-          "link": "https://blog.en.icu",
-          "avatar": "https://pic.en.icu/Xingluo.webp",
-          "friend_link": "https://blog.en.icu/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763021050550.webp",
-          "check": true
         }
       ]
     },
