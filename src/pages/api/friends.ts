@@ -77,6 +77,25 @@ async function uploadImageFromUrl(imageUrl: string, fileName: string): Promise<s
 // 检查头像有效性
 async function validateImageUrl(url: string): Promise<void> {
   if (!url) throw new Error('头像地址不能为空')
+  const imageExtensions = [
+    '.png',
+    '.jpg',
+    '.jpeg',
+    '.gif',
+    '.webp',
+    '.bmp',
+    '.ico',
+    '.svg',
+    '.avif',
+    '.tiff'
+  ]
+  const urlLower = url.trim().toLowerCase()
+  const hasValidExt = imageExtensions.some((ext) => urlLower.endsWith(ext))
+  if (hasValidExt) {
+    // URL 后缀命中，直接认为是图片
+    return
+  }
+  // URL 后缀不命中，则检查 Content-Type
   try {
     const res = await fetch(url.trim(), { method: 'GET' })
     if (!res.ok) {
