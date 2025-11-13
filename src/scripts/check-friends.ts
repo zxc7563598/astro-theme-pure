@@ -80,10 +80,15 @@ async function main() {
 
   // ---- 这里开始执行 git 提交和 push ----
   try {
-    await exec('git add public/links.json')
-    await exec('git commit -m "chore(links): 自动检测链接活跃情况并进行分类"')
-    await exec('git push')
-    console.log('🚀 已成功推送到远程仓库')
+    const { stdout } = await exec('git status --porcelain')
+    if (stdout.trim().length === 0) {
+      console.log('📭 没有文件变动，无需提交')
+    } else {
+      await exec('git add public/links.json')
+      await exec('git commit -m "chore(links): 自动检测链接活跃情况并进行分类"')
+      await exec('git push')
+      console.log('🚀 已成功推送到远程仓库')
+    }
   } catch (err) {
     console.error('❌ Git 操作失败:', err)
   }
