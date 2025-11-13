@@ -77,7 +77,7 @@ async function submitForm() {
     })
     const data = await res.json()
     if (data.success) {
-      showToast({ message: '提交成功，站点已加入友链' })
+      showToast({ message: '提交成功，站点已加入友链，刷新页面即可查看' })
       form.value = { name: '', intro: '', link: '', avatar: '', friend_link: '' }
     } else {
       showToast({ message: `提交失败：${data.message || '未知错误'}` })
