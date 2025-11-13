@@ -1,5 +1,6 @@
 ---
-import links from 'public/links.json'
+import fs from 'fs/promises'
+import path from 'path'
 import config from 'virtual:config'
 
 import { Collapse, Timeline } from 'astro-pure/user'
@@ -18,7 +19,10 @@ const headings = [
   { depth: 2, slug: 'note', text: '最后的话' }
 ]
 
-const { friends } = links
+const linksPath = path.resolve('public/links.json')
+const content = await fs.readFile(linksPath, 'utf-8')
+const linksData = JSON.parse(content)
+const { friends } = linksData
 const linksConf = config.integ.links
 ---
 
@@ -79,7 +83,7 @@ const linksConf = config.integ.links
   <ol>
     <li>站点内容需合法、积极，不得含有违反中国大陆法律法规的内容。</li>
     <li>网站可在中国大陆正常访问。</li>
-    <li>请先在贵站添加本站链接，再在本页留言申请。</li>
+    <li>请先在贵站添加本站链接，再由本页提交申请。</li>
   </ol>
 
   <h2 id='apply-method'>申请友链</h2>
