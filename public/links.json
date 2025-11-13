@@ -12,6 +12,15 @@
           "friend_link": "https://cworld0.com/links",
           "avatar_cache": "/avatars/CWorld.webp",
           "check": false
+        },
+        {
+          "name": "Arthals' ink",
+          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
+          "link": "https://arthals.ink/",
+          "avatar": "https://cdn.arthals.ink/Arthals.png",
+          "friend_link": "https://arthals.ink/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763021912342.png",
+          "check": true
         }
       ]
     },
