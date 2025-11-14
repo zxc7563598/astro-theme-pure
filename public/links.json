@@ -5,6 +5,15 @@
       "desc": "散落在各地的灯火",
       "link_list": [
         {
+          "name": "唯知笔记",
+          "intro": "探索知识的无限可能",
+          "link": "https://note.weizwz.com",
+          "avatar": "https://p.weizwz.com/logo_a4353391cbf0889b.webp",
+          "friend_link": "https://note.weizwz.com/pages/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/weizwz-1763123387382.webp",
+          "check": false
+        },
+        {
           "name": "CWorld Site",
           "intro": "求知若愚，虚怀若谷",
           "link": "https://cworld0.com/",
