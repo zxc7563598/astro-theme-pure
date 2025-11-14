@@ -114,6 +114,8 @@ export const integ: IntegrationUserConfig = {
       { date: '2025-10-24', content: "完善主题流量统计模块" },
       { date: '2025-11-04', content: "新增碎碎念模块" },
       { date: '2025-11-09', content: "新增文章加密模块，由静态部署变更为 SSR 部署" },
+      { date: '2025-11-10', content: "开放友情链接页面，开始交换友链" },
+      { date: '2025-11-13', content: "增加友链自动申请功能，实现自动添加/检测" },
       { date: '...', content: "持续进步中..." },
     ],
     // Yourself link info
