@@ -123,7 +123,7 @@ export const integ: IntegrationUserConfig = {
       { name: '名称', val: theme.title },
       { name: '描述', val: theme.description || 'Null' },
       { name: '地址', val: 'https://hejunjie.life' },
-      { name: '头像', val: 'https://hejunjie.life/avatar.jpg' },
+      { name: '头像', val: 'https://cdn.hejunjie.life/avatar.jpg' },
       { name: '友链页面', val: 'https://hejunjie.life/links' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
