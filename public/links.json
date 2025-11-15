@@ -66,6 +66,15 @@
           "friend_link": "https://maplezz.com/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/猫普的精神世界-1763192767763.webp",
           "check": false
+        },
+        {
+          "name": "安知鱼",
+          "intro": "生活明朗，万物可爱",
+          "link": "https://blog.anheyu.com",
+          "avatar": "https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg",
+          "friend_link": "https://blog.anheyu.com/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/安知鱼-1763194109160.jpg",
+          "check": false
         }
       ]
     },
