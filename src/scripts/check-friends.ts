@@ -28,7 +28,7 @@ friends.forEach((group) => {
 
 async function checkFriendPage(
   friend: FriendItem
-): Promise<{ friend: FriendItem; status: 'ok' | 'missing' | 'error' }> {
+): Promise<{ friend: FriendItem; status: 'ok' | 'missing' | 'error' | 'not_check' }> {
   try {
     const res = await fetch(friend.friend_link, {
       timeout: 10000,
@@ -36,7 +36,11 @@ async function checkFriendPage(
     })
     if (!res.ok) return { friend, status: 'error' }
     const html = await res.text()
-    return html.includes(MY_SITE) ? { friend, status: 'ok' } : { friend, status: 'missing' }
+    if (friend.check) {
+      return html.includes(MY_SITE) ? { friend, status: 'ok' } : { friend, status: 'missing' }
+    } else {
+      return { friend, status: 'not_check' }
+    }
   } catch {
     return { friend, status: 'error' }
   }
@@ -44,31 +48,24 @@ async function checkFriendPage(
 
 async function main() {
   console.log('🔍 开始检测友链页面...\n')
-
   const friendsToCheck: FriendItem[] = []
-  const friendsToKeep0: FriendItem[] = []
-  const friendsToKeep1: FriendItem[] = []
-
-  friends[0].link_list.forEach((f) => (f.check ? friendsToCheck.push(f) : friendsToKeep0.push(f)))
-  friends[1].link_list.forEach((f) => (f.check ? friendsToCheck.push(f) : friendsToKeep1.push(f)))
-
+  friends[0].link_list.forEach((f) => friendsToCheck.push(f))
+  friends[1].link_list.forEach((f) => friendsToCheck.push(f))
   const limit = pLimit(CONCURRENCY)
   const results = await Promise.all(
     friendsToCheck.map((friend) => limit(() => checkFriendPage(friend)))
   )
-
-  friends[0].link_list = [...friendsToKeep0]
-  friends[1].link_list = [...friendsToKeep1]
-
+  // 先清空原来的 link_list
+  friends[0].link_list = []
+  friends[1].link_list = []
+  // 根据检测结果重新分配
   results.forEach((r) => {
-    const updatedFriend = { ...r.friend, check: r.status === 'ok' }
-    if (r.status === 'ok') {
-      friends[0].link_list.push(updatedFriend)
+    if (r.status === 'ok' || r.status === 'not_check') {
+      friends[0].link_list.push(r.friend)
     } else {
-      friends[1].link_list.push(updatedFriend)
+      friends[1].link_list.push(r.friend)
     }
   })
-
   console.log('\n📋 检测结果:')
   results.forEach((r) => {
     console.log(`${r.friend.link.padEnd(40)} => ${r.status}`)
@@ -85,7 +82,7 @@ async function main() {
       console.log('📭 没有文件变动，无需提交')
     } else {
       await exec('git add public/links.json')
-      await exec('git commit -m "chore(links): 自动检测链接活跃情况并进行分类"')
+      await exec('git commit -am "chore(links): 自动检测链接活跃情况并进行分类"')
       await exec('git push')
       console.log('🚀 已成功推送到远程仓库')
     }
