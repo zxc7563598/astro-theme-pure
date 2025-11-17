@@ -13,7 +13,7 @@ const { sponsors, ...props } = Astro.props
 
 <div class='grid gap-3.5 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3' {...props}>
   {
-    sponsors.map((sponsor) => (
+    sponsors.slice().reverse().map((sponsor) => (
       <div class='group relative h-full rounded-xl border border-neutral-200 bg-white/70 px-4 py-3 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm dark:border-neutral-800 dark:bg-neutral-900/50'>
         <div class='flex flex-col gap-2'>
           <div class='text-base font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-neutral-700 dark:group-hover:text-neutral-300'>

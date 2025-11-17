@@ -1,4 +1,6 @@
 ---
+import fs from 'fs/promises'
+import path from 'path'
 import { Image } from 'astro:assets'
 
 import { Button, Icon, Spoiler } from 'astro-pure/user'
@@ -17,6 +19,11 @@ const headings = [
   { depth: 2, slug: 'direct-contact', text: '取得联系' },
   { depth: 2, slug: 'sponsorship', text: '赞助' }
 ]
+
+const sponsorshipPath = path.resolve('public/sponsorship.json')
+const content = await fs.readFile(sponsorshipPath, 'utf-8')
+const sponsorshipData = JSON.parse(content)
+const { sponsorship } = sponsorshipData
 ---
 
 <PageLayout title='项目' {headings} comment>
@@ -292,15 +299,7 @@ const headings = [
     ]}
   />
   <p>感谢这些支持我的朋友:</p>
-  <Sponsors
-    sponsors={[
-      { name: '小宾', amount: '15.00', platform: '微信', date: '2025-11-16 08:53:15' },
-      { name: '小宾', amount: '20.00', platform: '微信', date: '2025-11-11 13:20:24' },
-      { name: '陆九', amount: '188.00', platform: '微信', date: '2025-08-17 20:26:07' },
-      { name: '为野犬干杯', amount: '30.00', platform: '微信', date: '2025-08-17 19:46:26' },
-      { name: '.*.', amount: '10.00', platform: '微信', date: '2025-08-05 23:46:58' }
-    ]}
-  />
+  <Sponsors sponsors={sponsorship} />
 </PageLayout>
 
 <style>
