@@ -27,7 +27,7 @@ async function checkFriendPage(friend: FriendItem): Promise<{ success: boolean; 
   try {
     const res = await fetch(friend.friend_link, {
       timeout: 10000,
-      headers: { 'User-Agent': `FriendLinkChecker/1.0 (+${MY_SITE})` }
+      headers: { 'User-Agent': `Mozilla/5.0 FriendLinkChecker/1.0 (+${MY_SITE})` }
     })
     if (!res.ok) {
       return { success: false, message: `网站访问失败: ${res.status} ${res.statusText}` }
@@ -54,7 +54,7 @@ async function uploadImageFromUrl(imageUrl: string, fileName: string): Promise<s
   try {
     // 下载图片
     const res = await fetch(imageUrl, {
-      headers: { 'User-Agent': `AvatarFetcher/1.0 (+${MY_SITE})` }
+      headers: { 'User-Agent': `Mozilla/5.0 AvatarFetcher/1.0 (+${MY_SITE})` }
     })
     if (!res.ok) throw new Error(`下载失败: ${res.status} ${res.statusText}`)
     const buffer = await res.arrayBuffer()
