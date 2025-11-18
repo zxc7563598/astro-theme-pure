@@ -26,14 +26,29 @@ friends.forEach((group) => {
   group.link_list.forEach((item) => allFriends.push(item))
 })
 
+const fetchWithBrowserUA = async (url: string, mySite: string) => {
+  const browserUA =
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +
+    'AppleWebKit/537.36 (KHTML, like Gecko) ' +
+    'Chrome/141.0.0.0 Safari/537.36'
+  const customUA = `${browserUA} FriendLinkChecker/1.0 (+${mySite})`
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'User-Agent': customUA,
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+      'Accept-Encoding': 'gzip, deflate, br'
+    },
+    signal: AbortSignal.timeout(12_000)
+  })
+}
+
 async function checkFriendPage(
   friend: FriendItem
 ): Promise<{ friend: FriendItem; status: 'ok' | 'missing' | 'error' | 'not_check' }> {
   try {
-    const res = await fetch(friend.friend_link, {
-      timeout: 10000,
-      headers: { 'User-Agent': 'FriendLinkChecker/1.0 (+https://hejunjie.life)' }
-    })
+    const res = await fetchWithBrowserUA(friend.friend_link, MY_SITE);
     if (!res.ok) return { friend, status: 'error' }
     const html = await res.text()
     if (friend.check) {
