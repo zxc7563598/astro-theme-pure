@@ -84,6 +84,15 @@
           "friend_link": "https://maplezz.com/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/猫普的精神世界-1763192767763.webp",
           "check": false
+        },
+        {
+          "name": "GnixAij",
+          "intro": "Life tracking & Tech Sharing",
+          "link": "https://vluv.space",
+          "avatar": "https://assets.vluv.space/avatar.webp",
+          "friend_link": "https://vluv.space/links",
+          "avatar_cache": "",
+          "check": true
         }
       ]
     },
