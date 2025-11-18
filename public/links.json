@@ -75,13 +75,7 @@
           "friend_link": "https://blog.en.icu/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "猫普的精神世界",
           "intro": "一个独立开发者的精神自留地",
@@ -89,9 +83,14 @@
           "avatar": "https://maplezz.com/favicon/avatar.webp",
           "friend_link": "https://maplezz.com/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/猫普的精神世界-1763192767763.webp",
-          "check": true
+          "check": false
         }
       ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": []
     },
     {
       "id_name": "special-links",
