@@ -22,17 +22,28 @@ interface FriendItem {
   check: boolean
 }
 
+const fetchWithBrowserUA = async (url: string, mySite: string) => {
+  const browserUA =
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +
+    'AppleWebKit/537.36 (KHTML, like Gecko) ' +
+    'Chrome/141.0.0.0 Safari/537.36'
+  const customUA = `${browserUA} FriendLinkChecker/1.0 (+${mySite})`
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'User-Agent': customUA,
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+      'Accept-Encoding': 'gzip, deflate, br'
+    },
+    signal: AbortSignal.timeout(12_000)
+  })
+}
+
 // 检测友链页面中是否包含本站链接
 async function checkFriendPage(friend: FriendItem): Promise<{ success: boolean; message: string }> {
   try {
-    const res = await fetch(friend.friend_link, {
-      timeout: 10000,
-      headers: {
-        'User-Agent': `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36 FriendLinkChecker/1.0 (+${MY_SITE})`,
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Language': 'zh-CN,zh;q=0.9'
-      }
-    })
+    const res = await fetchWithBrowserUA(friend.friend_link, MY_SITE);
     if (!res.ok) {
       return { success: false, message: `网站访问失败: ${res.status} ${res.statusText}` }
     }
