@@ -69,7 +69,6 @@ repos:
 
 ```bash
 #!/usr/bin/env bash
-set -euo pipefail
 echo "---- 开始部署 ----"
 echo "时间: $(date)"
 
