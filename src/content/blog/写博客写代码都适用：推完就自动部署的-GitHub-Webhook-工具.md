@@ -68,11 +68,12 @@ repos:
 我博客的部署脚本大概是这样：
 
 ```bash
-#!/usr/bin/env bash
-set -uo pipefail
-export PATH=/usr/local/bin:$PATH
+#!/bin/bash
 
 PROJECT_DIR="/opt/astro-blog"
+GIT="/usr/bin/git"
+BUN="/usr/bin/bun"
+PM2="/usr/bin/pm2"
 
 log() {
     echo "[shell] 输出: $1"
@@ -81,17 +82,27 @@ log() {
 log "---- 开始部署 ----"
 log "时间: $(date)"
 log "---- 进入项目目录 ----"
+
 cd "$PROJECT_DIR" || { log "无法进入目录 $PROJECT_DIR"; exit 1; }
+
 log "---- 拉取最新代码 ----"
-git fetch origin 2>&1 | while IFS= read -r line; do log "$line"; done
-git reset --hard origin/main 2>&1 | while IFS= read -r line; do log "$line"; done
+$GIT fetch origin 2>&1 | while IFS= read -r line; do log "$line"; done
+$GIT reset --hard origin/main 2>&1 | while IFS= read -r line; do log "$line"; done
+
 log "---- 安装依赖 ----"
-bun install --production 2>&1 | while IFS= read -r line; do log "$line"; done
+$BUN install --production 2>&1 | while IFS= read -r line; do log "$line"; done
+
 log "---- 构建项目 ----"
-bun run build 2>&1 | while IFS= read -r line; do log "$line"; done
+$BUN run build 2>&1 | while IFS= read -r line; do log "$line"; done
+
 log "---- 重启 PM2 进程 ----"
-/usr/local/bin/pm2 restart astro-blog 2>&1 | while IFS= read -r line; do log "$line"; done || log "pm2 重启失败"
+$PM2 restart /opt/astro-blog/ecosystem.config.cjs 2>&1 | while IFS= read -r line; do log "$line"; done
+if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+    log "pm2 重启失败"
+fi
+
 log "---- 部署完成 ----"
+
 ```
 
 有了这个流程，我写博客只管写代码，编辑器里写完 push，一切自动完成。服务器自己去拉取、构建、重启，我几乎不用管。
