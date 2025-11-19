@@ -69,39 +69,36 @@ repos:
 
 ```bash
 #!/bin/bash
-
+set -e
 PROJECT_DIR="/opt/astro-blog"
 GIT="/usr/bin/git"
 BUN="/usr/bin/bun"
 PM2="/usr/bin/pm2"
+export HOME="/root"
+export PM2_HOME="/root/.pm2"
 
 log() {
-    echo "[shell] 输出: $1"
+    echo "[deploy] $1"
 }
-
-log "---- 开始部署 ----"
+log "========================================"
+log "开始部署 Astro Blog"
 log "时间: $(date)"
-log "---- 进入项目目录 ----"
-
-cd "$PROJECT_DIR" || { log "无法进入目录 $PROJECT_DIR"; exit 1; }
-
-log "---- 拉取最新代码 ----"
-$GIT fetch origin 2>&1 | while IFS= read -r line; do log "$line"; done
-$GIT reset --hard origin/main 2>&1 | while IFS= read -r line; do log "$line"; done
-
-log "---- 安装依赖 ----"
-$BUN install --production 2>&1 | while IFS= read -r line; do log "$line"; done
-
-log "---- 构建项目 ----"
-$BUN run build 2>&1 | while IFS= read -r line; do log "$line"; done
-
-log "---- 重启 PM2 进程 ----"
-$PM2 restart /opt/astro-blog/ecosystem.config.cjs 2>&1 | while IFS= read -r line; do log "$line"; done
-if [ "${PIPESTATUS[0]}" -ne 0 ]; then
-    log "pm2 重启失败"
-fi
-
-log "---- 部署完成 ----"
+log "========================================"
+cd "$PROJECT_DIR" || { log "无法进入项目目录"; exit 1; }
+log "拉取最新代码..."
+$GIT fetch origin
+$GIT reset --hard origin/main
+log "安装依赖（Bun）..."
+$BUN install
+log "构建 Astro 项目..."
+$BUN run build
+log "重启 PM2 进程..."
+$PM2 restart "$PROJECT_DIR/ecosystem.config.cjs"
+log "PM2 状态："
+$PM2 list || true
+log "部署完成"
+log "时间: $(date)"
+log "========================================"
 
 ```
 
