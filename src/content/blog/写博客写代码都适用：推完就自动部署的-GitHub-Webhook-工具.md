@@ -69,24 +69,29 @@ repos:
 
 ```bash
 #!/usr/bin/env bash
-echo "---- 开始部署 ----"
-echo "时间: $(date)"
+set -uo pipefail
+export PATH=/usr/local/bin:$PATH
 
 PROJECT_DIR="/opt/astro-blog"
 
-echo "---- 进入项目目录 ----"
-cd "$PROJECT_DIR"
-echo "---- 拉取最新代码 ----"
-git fetch origin
-echo "---- 重置到 origin/main ----"
-git reset --hard origin/main
-echo "---- 安装依赖 ----"
-bun install --production
-echo "---- 构建项目 ----"
-bun run build
-echo "---- 重启 PM2 进程 ----"
-pm2 restart astro-blog
-echo "---- 部署完成 ----"
+log() {
+    echo "[shell] 输出: $1"
+}
+
+log "---- 开始部署 ----"
+log "时间: $(date)"
+log "---- 进入项目目录 ----"
+cd "$PROJECT_DIR" || { log "无法进入目录 $PROJECT_DIR"; exit 1; }
+log "---- 拉取最新代码 ----"
+git fetch origin 2>&1 | while IFS= read -r line; do log "$line"; done
+git reset --hard origin/main 2>&1 | while IFS= read -r line; do log "$line"; done
+log "---- 安装依赖 ----"
+bun install --production 2>&1 | while IFS= read -r line; do log "$line"; done
+log "---- 构建项目 ----"
+bun run build 2>&1 | while IFS= read -r line; do log "$line"; done
+log "---- 重启 PM2 进程 ----"
+/usr/local/bin/pm2 restart astro-blog 2>&1 | while IFS= read -r line; do log "$line"; done || log "pm2 重启失败"
+log "---- 部署完成 ----"
 ```
 
 有了这个流程，我写博客只管写代码，编辑器里写完 push，一切自动完成。服务器自己去拉取、构建、重启，我几乎不用管。
