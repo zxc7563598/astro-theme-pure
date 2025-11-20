@@ -92,15 +92,15 @@ async function main() {
 
   // ---- 这里开始执行 git 提交和 push ----
   try {
-    const { stdout } = await exec('git status --porcelain')
+    const { stdout } = await exec('git status --porcelain', { env: process.env })
     if (stdout.trim().length === 0) {
       console.log('📭 没有文件变动，无需提交')
     } else {
-      await exec('git config --global user.name "zxc7563598"')
-      await exec('git config --global user.email "junjie.he.925@gmail.com"')
-      await exec('git add public/links.json')
-      await exec('git commit -am "chore(links): 自动检测链接活跃情况并进行分类"')
-      await exec('git push')
+      await exec('git config --global user.name "zxc7563598"', { env: process.env })
+      await exec('git config --global user.email "junjie.he.925@gmail.com"', { env: process.env })
+      await exec('git add public/links.json', { env: process.env })
+      await exec('git commit -am "chore(links): 自动检测链接活跃情况并进行分类"', { env: process.env })
+      await exec('git push', { env: process.env })
       console.log('🚀 已成功推送到远程仓库')
     }
   } catch (err) {

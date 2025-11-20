@@ -32,7 +32,7 @@ const fetchWithBrowserUA = async (url: string, mySite: string) => {
     method: 'GET',
     headers: {
       'User-Agent': customUA,
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
       'Accept-Encoding': 'gzip, deflate, br'
     },
@@ -43,7 +43,7 @@ const fetchWithBrowserUA = async (url: string, mySite: string) => {
 // 检测友链页面中是否包含本站链接
 async function checkFriendPage(friend: FriendItem): Promise<{ success: boolean; message: string }> {
   try {
-    const res = await fetchWithBrowserUA(friend.friend_link, MY_SITE);
+    const res = await fetchWithBrowserUA(friend.friend_link, MY_SITE)
     if (!res.ok) {
       return { success: false, message: `网站访问失败: ${res.status} ${res.statusText}` }
     }
@@ -278,11 +278,11 @@ export const POST: APIRoute = async ({ request }) => {
         })
         // 同步到 Git
         try {
-          const { stdout } = await exec('git status --porcelain')
+          const { stdout } = await exec('git status --porcelain', { env: process.env })
           if (stdout.trim().length !== 0) {
-            await exec('git add public/links.json')
-            await exec('git commit -m "chore(links): 自动添加新的友链"')
-            await exec('git push')
+            await exec('git add public/links.json', { env: process.env })
+            await exec('git commit -m "chore(links): 自动添加新的友链"', { env: process.env })
+            await exec('git push', { env: process.env })
           }
         } catch (err) {
           console.error('Git 操作失败:', err)
