@@ -79,7 +79,7 @@ async function main() {
   })
   console.log('\n📋 检测结果:')
   results.forEach((r) => {
-    console.log(`${r.friend.link.padEnd(40)} => ${r.statusCode}${r.status}:${r.statusText}`)
+    console.log(`${r.friend.link.padEnd(40)} => ${r.statusCode} : ${r.status} : ${r.statusText}`)
   })
 
   await fs.writeFile('public/links.json', JSON.stringify({ friends }, null, 2), 'utf-8')
