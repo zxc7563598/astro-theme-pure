@@ -1,13 +1,14 @@
 module.exports = {
   apps: [
     {
-      name: "astro-blog",
-      script: "/root/.bun/bin/bun",
-      args: "/opt/astro-blog/dist/server/entry.mjs",
-      cwd: "/opt/astro-blog",
+      user: 'root',
+      name: 'astro-blog',
+      script: '/root/.bun/bin/bun',
+      args: '/opt/astro-blog/dist/server/entry.mjs',
+      cwd: '/opt/astro-blog',
       env: {
-        NODE_ENV: "production",
-      },
-    },
-  ],
-};
+        NODE_ENV: 'production'
+      }
+    }
+  ]
+}
