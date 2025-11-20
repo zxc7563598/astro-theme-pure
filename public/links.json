@@ -84,13 +84,7 @@
           "friend_link": "https://vluv.space/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/GnixAij-1763473807182.webp",
           "check": false
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "Xingluo’s Blog",
           "intro": "何处秋风悲画扇",
@@ -101,6 +95,11 @@
           "check": true
         }
       ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": []
     },
     {
       "id_name": "special-links",
