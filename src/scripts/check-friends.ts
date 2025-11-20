@@ -26,38 +26,34 @@ friends.forEach((group) => {
   group.link_list.forEach((item) => allFriends.push(item))
 })
 
-const fetchWithBrowserUA = async (url: string, mySite: string) => {
-  const browserUA =
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +
-    'AppleWebKit/537.36 (KHTML, like Gecko) ' +
-    'Chrome/141.0.0.0 Safari/537.36'
-  const customUA = `${browserUA} FriendLinkChecker/1.0 (+${mySite})`
-  return fetch(url, {
-    method: 'GET',
-    headers: {
-      'User-Agent': customUA,
-      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-      'Accept-Encoding': 'gzip, deflate, br'
-    },
-    signal: AbortSignal.timeout(12_000)
-  })
-}
-
-async function checkFriendPage(
+async function checkFriendPage(friend: FriendItem): Promise<{
   friend: FriendItem
-): Promise<{ friend: FriendItem; status: 'ok' | 'missing' | 'error' | 'not_check' }> {
+  status: 'ok' | 'missing' | 'error' | 'not_check'
+  statusCode: number
+  statusText: string
+}> {
   try {
-    const res = await fetchWithBrowserUA(friend.friend_link, MY_SITE)
-    if (!res.ok) return { friend, status: 'error' }
+    const res = await fetch(friend.friend_link, {
+      timeout: 10000,
+      headers: { 'User-Agent': 'FriendLinkChecker/1.0 (+https://hejunjie.life)' }
+    })
+    if (!res.ok)
+      return { friend, status: 'error', statusCode: res.status, statusText: res.statusText }
     const html = await res.text()
     if (friend.check) {
-      return html.includes(MY_SITE) ? { friend, status: 'ok' } : { friend, status: 'missing' }
+      return html.includes(MY_SITE)
+        ? { friend, status: 'ok', statusCode: res.status, statusText: res.statusText }
+        : { friend, status: 'missing', statusCode: res.status, statusText: res.statusText }
     } else {
-      return { friend, status: 'not_check' }
+      return { friend, status: 'not_check', statusCode: res.status, statusText: res.statusText }
     }
-  } catch {
-    return { friend, status: 'error' }
+  } catch (err) {
+    return {
+      friend,
+      status: 'error',
+      statusCode: 500,
+      statusText: err instanceof Error ? err.message : String(err)
+    }
   }
 }
 
@@ -83,7 +79,7 @@ async function main() {
   })
   console.log('\n📋 检测结果:')
   results.forEach((r) => {
-    console.log(`${r.friend.link.padEnd(40)} => ${r.status}`)
+    console.log(`${r.friend.link.padEnd(40)} => ${r.statusCode}${r.status}:${r.statusText}`)
   })
 
   await fs.writeFile('public/links.json', JSON.stringify({ friends }, null, 2), 'utf-8')
