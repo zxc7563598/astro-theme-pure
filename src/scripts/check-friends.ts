@@ -96,10 +96,13 @@ async function main() {
     if (stdout.trim().length === 0) {
       console.log('📭 没有文件变动，无需提交')
     } else {
-      await exec('git config --global user.name "zxc7563598"', { env: process.env })
-      await exec('git config --global user.email "junjie.he.925@gmail.com"', { env: process.env })
+      // 使用本地配置而不是全局配置
+      await exec('git config user.name "zxc7563598"', { env: process.env })
+      await exec('git config user.email "junjie.he.925@gmail.com"', { env: process.env })
       await exec('git add public/links.json', { env: process.env })
-      await exec('git commit -am "chore(links): 自动检测链接活跃情况并进行分类"', { env: process.env })
+      await exec('git commit -am "chore(links): 自动检测链接活跃情况并进行分类"', {
+        env: process.env
+      })
       await exec('git push', { env: process.env })
       console.log('🚀 已成功推送到远程仓库')
     }

@@ -280,6 +280,8 @@ export const POST: APIRoute = async ({ request }) => {
         try {
           const { stdout } = await exec('git status --porcelain', { env: process.env })
           if (stdout.trim().length !== 0) {
+            await exec('git config user.name "zxc7563598"', { env: process.env })
+            await exec('git config user.email "junjie.he.925@gmail.com"', { env: process.env })
             await exec('git add public/links.json', { env: process.env })
             await exec('git commit -m "chore(links): 自动添加新的友链"', { env: process.env })
             await exec('git push', { env: process.env })
