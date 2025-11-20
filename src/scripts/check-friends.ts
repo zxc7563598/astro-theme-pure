@@ -36,7 +36,7 @@ const fetchWithBrowserUA = async (url: string, mySite: string) => {
     method: 'GET',
     headers: {
       'User-Agent': customUA,
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
       'Accept-Encoding': 'gzip, deflate, br'
     },
@@ -48,7 +48,7 @@ async function checkFriendPage(
   friend: FriendItem
 ): Promise<{ friend: FriendItem; status: 'ok' | 'missing' | 'error' | 'not_check' }> {
   try {
-    const res = await fetchWithBrowserUA(friend.friend_link, MY_SITE);
+    const res = await fetchWithBrowserUA(friend.friend_link, MY_SITE)
     if (!res.ok) return { friend, status: 'error' }
     const html = await res.text()
     if (friend.check) {
@@ -96,6 +96,8 @@ async function main() {
     if (stdout.trim().length === 0) {
       console.log('📭 没有文件变动，无需提交')
     } else {
+      await exec('git config --global user.name "zxc7563598"')
+      await exec('git config --global user.email "junjie.he.925@gmail.com"')
       await exec('git add public/links.json')
       await exec('git commit -am "chore(links): 自动检测链接活跃情况并进行分类"')
       await exec('git push')
