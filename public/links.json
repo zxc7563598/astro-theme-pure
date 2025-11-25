@@ -86,15 +86,6 @@
           "check": false
         },
         {
-          "name": "Xingluo’s Blog",
-          "intro": "何处秋风悲画扇",
-          "link": "https://blog.en.icu",
-          "avatar": "https://pic.en.icu/Xingluo.webp",
-          "friend_link": "https://blog.en.icu/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
-          "check": true
-        },
-        {
           "name": "Under the Sun with Paddy",
           "intro": "分享实践思考、算法编程以及快乐。",
           "link": "https://www.paddysun.top",
@@ -108,7 +99,17 @@
     {
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
-      "link_list": []
+      "link_list": [
+        {
+          "name": "Xingluo’s Blog",
+          "intro": "何处秋风悲画扇",
+          "link": "https://blog.en.icu",
+          "avatar": "https://pic.en.icu/Xingluo.webp",
+          "friend_link": "https://blog.en.icu/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
+          "check": true
+        }
+      ]
     },
     {
       "id_name": "special-links",
