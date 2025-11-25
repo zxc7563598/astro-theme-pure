@@ -1,0 +1,204 @@
+---
+title: '自动部署'
+description: 'Docker 一键部署，开箱即用，几步就能启动机器人和积分系统，适合想快速上手的用户'
+order: 3
+---
+
+import { Aside, Steps } from 'astro-pure/user'
+import { LinkPreview } from 'astro-pure/advanced'
+
+<Aside title='请注意' type='note'>
+  <div>适合对项目不打算做任何调整，也不想折腾环境的朋友。</div>
+  <div>几条命令就能通过 Docker 自动完成部署，系统会自动更新，保持最新版本。</div>
+  <div>如果你想自己控制更新或做定制化修改，建议选择 [手动部署](/danmusuite/start/manual-deploy)。</div>
+  <div>也许比起看文档，你会更喜欢 [看视频教程](https://bilibili.com/video/BV1xhKczkEg9)</div>
+</Aside>
+
+## 一键部署
+
+登陆你的服务器，在上面执行
+
+```bash
+curl -fsSL https://bilibili-danmu-scripts.oss-cn-hongkong.aliyuncs.com/install-docker.sh | bash
+```
+
+之后等几分钟后你就能拿到机器人控制台的访问地址了，通常是 `http://服务器IP:7777`
+
+打开后会先弹出一个账号密码的设置框。这里你填的账号密码会作为今后访问机器人控制台的第一道防线，所以随便填可以，但最好自己记得住。
+
+## 他做了什么？
+
+一键部署会在服务器上自动完成下面这些操作
+
+一般你不用关心细节，但如果你想知道它到底做了什么，或者想自己手动执行，不通过一键脚本，也可以参考下面的内容
+
+### 更新软件源
+
+```bash
+sudo apt update
+```
+
+```bash
+sudo apt upgrade -y
+```
+
+```bash
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+```
+
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+```bash
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+```bash
+sudo apt update
+```
+
+### 安装 Docker
+
+```bash
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose
+```
+
+```bash
+sudo systemctl start docker
+```
+
+```bash
+sudo systemctl enable docker
+```
+
+```bash
+sudo docker --version
+```
+
+### 构建 Docker
+
+```bash
+git clone https://github.com/zxc7563598/php-bilibili-danmu-docker.git /opt/bilibili-robots
+```
+
+```bash
+cd /opt/bilibili-robots
+```
+
+```bash
+sh ./setup.sh
+```
+
+```bash
+docker-compose build
+```
+
+```bash
+docker-compose up -d
+```
+
+## 要如何绑定域名
+
+<Aside title='请注意' type='caution'>
+  <div>此部分仅描述域名解析到服务器后如何配置</div>
+  <div>域名解析的问题不再赘述，机器人需要 2 个解析，一个用于访问控制台，一个用于访问商城</div>
+  <div>请再确定 2 个解析均已解析到服务器再进行后续操作</div>
+  <div>详见：[关于域名](/danmusuite/start/domain)</div>
+</Aside>
+
+```bash
+curl -fsSL https://bilibili-danmu-scripts.oss-cn-hongkong.aliyuncs.com/setup-nginx-ssl.sh | bash -s 后台地址 积分商城地址 你的邮箱
+```
+
+完成后前往机器人控制台，修改**项目地址**为后台域名，修改**商城地址**为商城后保存。
+
+![添加域名](https://cdn.hejunjie.life/bilibilidanmu/域名设置04.png)
+
+后续即可通过域名访问项目。
+
+### 他做了什么？
+
+#### 安装 Nginx
+
+```bash
+sudo apt update
+```
+
+```bash
+sudo apt install nginx
+```
+
+<Aside title='请注意' type='tip'>
+  可能会出现类似： ```bash Reading package lists... Done Building dependency tree... Done Reading
+  state information... Done The following additional packages will be installed: nginx-common
+  Suggested packages: fcgiwrap nginx-doc ssl-cert The following NEW packages will be installed:
+  nginx nginx-common 0 upgraded, 2 newly installed, 0 to remove and 4 not upgraded. Need to get 564
+  kB of archives. After this operation, 1,596 kB of additional disk space will be used. Do you want
+  to continue? [Y/n] ``` 按 Y 然后回车即可
+</Aside>
+
+#### 配置 Nginx
+
+在 `/etc/nginx/conf.d` 目录中创建 `.conf` 配置文件并填入以下内容
+
+```conf
+server {
+    listen 80;
+    server_name 机器人控制台域名;
+
+    location / {
+        proxy_pass http://localhost:7777;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+server {
+    listen 80;
+    server_name 积分商城域名;
+
+    location / {
+        proxy_pass http://localhost:5177;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+#### 重启 Nginx
+
+```bash
+sudo nginx -t
+```
+
+```bash
+sudo systemctl reload nginx
+```
+
+#### 申请证书
+
+```bash
+sudo apt install certbot python3-certbot-nginx
+```
+
+```bash
+sudo certbot --nginx -d 域名1 -d 域名2
+```
+
+之后根据提示，输入你的邮箱，然后一路Y下去就好了
+
+## 后续：重启项目
+
+连接服务器，前往 `/opt/bilibili-robots` 目录执行
+
+```bash
+cd /opt/bilibili-robots
+```
+
+```bash
+docker-compose restart
+```
