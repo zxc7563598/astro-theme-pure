@@ -2,6 +2,7 @@
 import { Button } from 'astro-pure/user'
 import { cn } from 'astro-pure/utils'
 import PageLayout from '@/layouts/BaseLayout.astro'
+import { Comment } from '@/components/waline'
 import { integ } from '@/site-config'
 
 import DanmuSuiteContents from './DanmuSuiteContents.astro'
@@ -31,4 +32,5 @@ const meta = {
       <p>这样不管是自己部署，还是想二开扩展，都能更清晰地查到需要的信息。</p>
     </div>
   </main>
+  <Comment class='mt-6 sm:mt-6' />
 </PageLayout>
