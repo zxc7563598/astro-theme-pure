@@ -32,15 +32,6 @@
           "check": false
         },
         {
-          "name": "唐志远",
-          "intro": "立志成为一名架构师",
-          "link": "https://fe32.top",
-          "avatar": "https://bu.dusays.com/2022/05/02/626f92e193879.jpg",
-          "friend_link": "https://fe32.top/link",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
-          "check": false
-        },
-        {
           "name": "手里有只毛毛虫",
           "intro": "号角声起 - 等你启航",
           "link": "https://www.krjojo.com",
@@ -86,12 +77,12 @@
           "check": false
         },
         {
-          "name": "Xingluo’s Blog",
-          "intro": "何处秋风悲画扇",
-          "link": "https://blog.en.icu",
-          "avatar": "https://pic.en.icu/Xingluo.webp",
-          "friend_link": "https://blog.en.icu/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
+          "name": "Under the Sun with Paddy",
+          "intro": "分享实践思考、算法编程以及快乐。",
+          "link": "https://www.paddysun.top",
+          "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
+          "friend_link": "https://www.paddysun.top/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
           "check": true
         }
       ]
@@ -101,12 +92,21 @@
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
         {
-          "name": "Under the Sun with Paddy",
-          "intro": "分享实践思考、算法编程以及快乐。",
-          "link": "https://www.paddysun.top",
-          "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
-          "friend_link": "https://www.paddysun.top/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
+          "name": "唐志远",
+          "intro": "立志成为一名架构师",
+          "link": "https://fe32.top",
+          "avatar": "https://bu.dusays.com/2022/05/02/626f92e193879.jpg",
+          "friend_link": "https://fe32.top/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
+          "check": false
+        },
+        {
+          "name": "Xingluo’s Blog",
+          "intro": "何处秋风悲画扇",
+          "link": "https://blog.en.icu",
+          "avatar": "https://pic.en.icu/Xingluo.webp",
+          "friend_link": "https://blog.en.icu/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
           "check": true
         }
       ]
