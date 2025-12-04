@@ -1,0 +1,72 @@
+---
+title: '关于服务器'
+description: '教你如何购买并配置阿里云服务器，为后续手动或 Docker 部署项目做准备，适合零基础用户'
+order: 1
+---
+
+import { Aside, Steps } from 'astro-pure/user'
+
+
+## 去哪里购买服务器
+
+前往 [阿里云云服务器 ECS 控制台](https://ecs.console.aliyun.com/home) → 点击「创建实例」 → 选择合适的配置进行购买。
+
+## 服务器配置选择
+
+配置方面 2 vCPU + 2 GiB 内存 足够运行本项目，购买时关注以下几个重点即可：
+
+- **地域**：请选择 **中国香港**（具体原因详见下方章节 [关于为什么要选择香港服务器](#关于为什么要选择香港服务器)）
+- **配置**：最低建议选择 `2 vCPU + 2 GiB 内存`​。计算型、共享型等都可，**不推荐“突发性能实例”** ，这类机型在大多数时间会限制 CPU 性能，影响使用体验。
+- **系统镜像**：请选择 `Ubuntu 20.04 64位`​，我所有的测试与部署都基于此版本，兼容性和稳定性最好。
+
+其他配置可根据个人需求自行选择，不过如果你是第一次使用，建议直接参考下图进行配置，省事也稳妥。
+
+![配置图，可按此图配置购买](https://cdn.hejunjie.life/bilibilidanmu/configuration-diagram.png)
+
+## 跟截图不一致
+
+新注册的阿里云账号进入后台后，可能默认看到的是“简洁版”界面。点一下左上角，把它切换到“标准版”就能看到完整功能了。
+
+![切换到标准版](https://cdn.hejunjie.life/bilibilidanmu/switch_to_standard_version.png)
+
+## 开放端口
+
+云服务器默认是不开放外部访问的，你需要在安全组里手动加规则，才允许用户从外网访问。
+
+建议你一次性把这几个端口都开好: `80` `443` `7777` `5177`，后续用起来就不会再被端口卡住了。
+
+![前往服务器详情](https://cdn.hejunjie.life/bilibilidanmu/security_group_01.png)
+
+---
+
+![管理安全组规则](https://cdn.hejunjie.life/bilibilidanmu/security_group_02.png)
+
+---
+
+![添加规则](https://cdn.hejunjie.life/bilibilidanmu/security_group_03.png)
+
+---
+
+![设置端口](https://cdn.hejunjie.life/bilibilidanmu/security_group_04.png)
+
+
+## 如何连接服务器 
+
+可以通过 FinalShell 远程连接服务器：[点击下载](https://www.hostbuf.com/t/988.html)
+
+![如何连接服务器](https://cdn.hejunjie.life/bilibilidanmu/connect.png)
+
+## 关于为什么要选择香港服务器
+
+1. **备案麻烦 &amp; 使用限制：**  
+   大陆地区的服务器对外提供互联网服务时，必须完成备案和一系列合规流程，流程繁琐，还会受到一定的监管。相比之下，香港属于中国，却**不需要备案**，开箱即用、稳定省事。  
+   至于日本、韩国等境外服务器，由于**科学上网问题**，连接经常不稳定，不推荐新手使用。
+2. **代码托管在 GitHub:**  
+   如果你选择一键部署，服务器需要从 GitHub 拉取代码，而 GitHub 并不在国内。  
+   **大陆服务器与个人一样也会受到网络限制**，可能导致部署失败。
+   <Aside title='小提示' type='tip'>
+     如果你打算在自家的服务器、NAS 或虚拟机中部署，请务必先解决访问 GitHub 的问题。
+   </Aside>
+3. **实用角度考虑：**  
+   其实用国内服务器也不是不能用，就是容易自找麻烦。  
+   阿里云香港的稳定性不错，部署项目之外还能顺便搭个梯子。虽然 ChatGPT 屏蔽了香港 IP，但**看点其他内容、搭建加速服务还是很香的**，明码标价、速度稳定，视频都能流畅播放。

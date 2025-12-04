@@ -1,0 +1,344 @@
+---
+title: '手动部署'
+description: '手动部署指南，教你一步步配置环境并启动机器人，适合想了解内部细节或定制化需求的用户'
+order: 4
+---
+
+import { Aside, Steps } from 'astro-pure/user'
+
+<Aside title='请注意' type='note'>
+  <div>适合想自己动手调整项目、或者对部署细节感兴趣的朋友。</div>
+  <div>得益于现代运维工具，手动部署并不复杂，你可以自由修改项目内容，并选择性更新。</div>
+  <div>如果你只想快速使用，不想折腾环境，可以选择 [Docker 一键部署](/danmusuite/start/auto-deploy)。</div>
+  <div>也许比起看文档，你会更喜欢 [看视频教程](https://bilibili.com/video/BV1jkYazSEFk)</div>
+</Aside>
+
+## 安装宝塔
+
+首先，前往宝塔面板官方 [宝塔面板](https://www.bt.cn/new/download.html)获取安装命令
+
+大概如下：
+
+```bash
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ssl251104
+```
+
+登陆服务器执行命令进行安装，安装完成后，宝塔会显示登录地址、用户名和密码。
+
+最后会得到类似这样的信息：
+
+![宝塔安装完成](https://cdn.hejunjie.life/bilibilidanmu/002-20250817170113-9gp7ez5.png)
+
+用这些信息登录，就能进入服务器的管理面板。
+
+> 如果无法访问需要在云服务器中开放指定的端口，开放方式详见：[开放端口](/danmusuite/start/server#开放端口)
+
+## 安装Redis
+
+![安装 Redis](https://cdn.hejunjie.life/bilibilidanmu/006-20250817170626-m9766wd.png)
+
+## 安装Mysql
+
+Mysql8.0 左右的版本即可，安装时注意更换默认版本
+
+![安装 MySQL](https://cdn.hejunjie.life/bilibilidanmu/005-20250817170527-jllysmh.png)
+
+- 安装完成后，进入数据库页面，修改 root 密码为一个你自己能记住的值。
+
+  ![修改数据库密码](https://cdn.hejunjie.life/bilibilidanmu/009-20250817175121-hh4m48b.png)
+
+- 进入终端，输入：
+
+  ```bash
+  mysql -u root -p
+  ```
+
+  ![登录 MySQL](https://cdn.hejunjie.life/bilibilidanmu/010-20250817175252-sntstjp.png)
+
+  输入刚刚设置的密码后，执行以下命令创建数据库：
+
+  ```sql
+  CREATE DATABASE bilibili_danmu CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+  ```
+
+  ![创建数据库](https://cdn.hejunjie.life/bilibilidanmu/011-20250817175347-zsgq8ev.png)
+
+## 安装Nginx
+
+![安装 Nginx](https://cdn.hejunjie.life/bilibilidanmu/003-20250817170329-jyiqs6n.png)
+
+## 安装PHP
+
+![安装 PHP](https://cdn.hejunjie.life/bilibilidanmu/004-20250817170427-5w1oqix.png)
+
+## 安装NodeJS
+
+前往 `网站` - `Node项目` 系统会推荐安装版本管理器，安装即可
+
+![安装 PHP](https://cdn.hejunjie.life/bilibilidanmu/node安装001.png)
+
+进入 `版本管理器` 按图中选择，只显示LTS版本，官方源，然后点击更新列表
+
+更新完成后安装最新版本即可
+
+![安装 PHP](https://cdn.hejunjie.life/bilibilidanmu/node安装002.png)
+
+完成安装后，命令行版本就会出现刚刚安装好的版本，选择到刚刚安装好的版本即可
+
+![安装 PHP](https://cdn.hejunjie.life/bilibilidanmu/node安装003.png)
+
+## 安装PHP扩展
+
+PHP需要安装 redis、event 以及 brotli 扩展。
+
+方式如下：
+
+- 在 PHP 设置中安装扩展：`redis`、`event`；
+
+  ![安装扩展，event在下面](https://cdn.hejunjie.life/bilibilidanmu/008-20250817172341-i06415z.png)
+
+- 在配置文件中搜索：`disable_functions` ，内容替换为：
+
+  ```bash
+  disable_functions = passthru,system,chroot,chgrp,chown,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru
+  ```
+
+  ![记得保存配置](https://cdn.hejunjie.life/bilibilidanmu/017-20250817180614-ofulqpw.png)
+
+- 在 `pecl扩展安装` 处安装 `brotli`
+
+  ![安装 brotli](https://cdn.hejunjie.life/bilibilidanmu/019-20250817184319-iopbz2k.png)
+
+  > 如果没有 pecl 扩展安装说明宝塔面板版本过低，尝试去面板首页更新面板即可
+
+  > 如果安装失败，首先确定前面一步的 disable_functions 有没有调整，确定调整过的情况下，在终端执行 `pecl channel-update pecl.php.net` 后重新安装尝试，可以解决99%的问题
+
+## 部署项目
+
+### 初始化配置文件
+
+在宝塔后台打开 **文件 → 终端**，输入：
+
+```bash
+git clone https://github.com/zxc7563598/php-bilibili-danmu
+```
+
+![下载项目](https://cdn.hejunjie.life/bilibilidanmu/012-20250817175517-2utwkhu.png)
+
+刷新页面后，可以看到多了一个 `php-bilibili-danmu` 文件夹。
+
+![文件列表](https://cdn.hejunjie.life/bilibilidanmu/013-20250817175554-5b2h9re.png)
+
+进入该文件夹，新建 `.env` 文件（前面有点）。
+
+![新建.env文件](https://cdn.hejunjie.life/bilibilidanmu/014-20250817175732-hhirzk1.png)  
+然后打开 `.env.example`，复制内容到 `.env` 并修改：
+
+- 系统服务地址：**服务器IP:7777**
+- 商城前台访问地址：**服务器IP:5177**
+- 项目监听的端口号：**7776**
+- API 密钥：**随意输入 32 位字母或数字**
+- 数据库配置：**DB_NAME**数据库名（bilibili_danmu）、**DB_USER**用户名（root）、**DB_PASSWORD**密码（你修改的 root 密码）
+
+保存即可。
+
+<Aside title='请注意' type='caution'>
+  <div>如果你拥有域名，并且希望通过域名访问机器人，此处的地址填写域名即可</div>
+  <div>机器人需要 2 个解析，一个用于访问控制台，一个用于访问商城</div>
+  <div>你也可以忽略此项，在配置域名时统一调整：[要如何绑定域名](#要如何绑定域名)</div>
+</Aside>
+
+### 安装依赖并启动项目
+
+在终端执行：
+
+```bash
+composer install
+```
+
+```bash
+php vendor/bin/phinx migrate -e development
+```
+
+```bash
+php start.php start -d
+```
+
+这样依赖安装、数据库构建、项目启动就完成了。
+
+![一行一行执行命令](https://cdn.hejunjie.life/bilibilidanmu/016-20250817180307-4crrtlx.png)
+
+![项目启动后的样子](https://cdn.hejunjie.life/bilibilidanmu/020-20250817184458-sdw09ft.png)
+
+### 设置机器人站点
+
+进入宝塔后台 → 网站 → 添加站点：
+
+<Aside title='请注意' type='caution'>
+  <div>如果你拥有域名，并且希望通过域名访问机器人，此处的地址填写域名即可</div>
+  <div>机器人需要 2 个解析，一个用于访问控制台，一个用于访问商城</div>
+  <div>你也可以忽略此项，在配置域名时统一调整：[要如何绑定域名](#要如何绑定域名)</div>
+</Aside>
+
+- 域名：**服务器IP:7777**
+- 根目录：**php-bilibili-danmu**
+
+  ![配置站点](https://cdn.hejunjie.life/bilibilidanmu/021-20250817184631-unra297.png)
+
+创建后，进入站点设置 → 配置文件，在顶部添加：
+
+```nginx
+upstream bilibilidanmuji {
+    server 127.0.0.1:7776;
+    keepalive 10240;
+}
+```
+
+![配置 Nginx](https://cdn.hejunjie.life/bilibilidanmu/022-20250817184800-dmoaf58.png)
+
+保存后，再进入伪静态，添加：
+
+```nginx
+location ^~ / {
+  proxy_set_header Host $http_host;
+  proxy_set_header X-Forwarded-For $remote_addr;
+  proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_http_version 1.1;
+  proxy_set_header Connection "";
+  if (!-f $request_filename){
+    proxy_pass http://bilibilidanmuji;
+  }
+}
+```
+
+![配置伪静态](https://cdn.hejunjie.life/bilibilidanmu/023-20250817184850-ga6abqd.png)
+
+最后在网站目录设置中：
+
+- 关闭防跨站攻击；
+- 将运行目录改为 `public`；  
+  保存即可。
+
+  ![配置访问目录](https://cdn.hejunjie.life/bilibilidanmu/024-20250817184940-suuuu2w.png)
+
+这时，访问 `服务器IP:7777` 就能进入机器人控制台。
+
+### 设置积分商城站点
+
+进入机器人控制台，点击 **构建商城**
+
+![服务器IP:7777即可访问](https://cdn.hejunjie.life/bilibilidanmu/025-20250817191243-dcew9c9.png)
+
+看到这样的内容说明成功：
+
+![完成积分商城构建](https://cdn.hejunjie.life/bilibilidanmu/029-20250817191346-234i81y.png)
+
+然后在宝塔后台 → 网站 → 新建站点：
+
+<Aside title='请注意' type='caution'>
+  <div>如果你拥有域名，并且希望通过域名访问机器人，此处的地址填写域名即可</div>
+  <div>机器人需要 2 个解析，一个用于访问控制台，一个用于访问商城</div>
+  <div>你也可以忽略此项，在配置域名时统一调整：[要如何绑定域名](#要如何绑定域名)</div>
+</Aside>
+
+- 域名：**服务器IP:5177**
+- 根目录：**php-bilibili-danmu/public/shop/dist**
+- PHP 版本：**纯静态**
+
+  ![创建积分商城站点](https://cdn.hejunjie.life/bilibilidanmu/030-20250817193327-k8e9sip.png)
+
+创建后，进入伪静态，填入：
+
+```nginx
+location / {
+  try_files $uri $uri/ /index.html;
+}
+```
+
+保存后，访问 `服务器IP:5177` 即可进入积分商城。
+
+![保存积分商城站点伪静态](https://cdn.hejunjie.life/bilibilidanmu/031-20250817193424-yz1f9o3.png)
+
+## 要如何绑定域名
+
+<Aside title='请注意' type='caution'>
+  <div>此部分仅描述域名解析到服务器后如何配置</div>
+  <div>域名解析的问题不再赘述，机器人需要 2 个解析，一个用于访问控制台，一个用于访问商城</div>
+  <div>请再确定 2 个解析均已解析到服务器再进行后续操作</div>
+  <div>详见：[关于域名](/danmusuite/start/domain)</div>
+</Aside>
+
+两个站点操作完全一致，因此仅展示一次示例
+
+- 前往宝塔面板，设置站点
+
+  ![设置站点](https://cdn.hejunjie.life/bilibilidanmu/域名设置01.png)
+
+- 添加域名
+
+  ![添加域名](https://cdn.hejunjie.life/bilibilidanmu/域名设置02.png)
+
+- 申请证书
+
+  Let's Encrypt 提供免费的 https 证书，选择你添加进去的域名，申请即可（不要去申请IP站点，就申请你域名的站点就好）
+
+  ![申请证书](https://cdn.hejunjie.life/bilibilidanmu/域名设置03.png)
+
+- 修改系统配置
+
+  前往机器人控制台，修改**项目地址**为后台域名，修改**商城地址**为商城后保存。
+
+  ![添加域名](https://cdn.hejunjie.life/bilibilidanmu/域名设置04.png)
+
+  后续即可通过域名访问项目，确认无误后返回宝塔面板，设置中删除掉IP域名，仅保留您自己的域名即可。
+
+## 后续：更新项目
+
+- 前往项目目录:
+
+  ```bash
+  cd /www/wwwroot/php-bilibili-danmu
+  ```
+
+- 获取最新代码（若你进行了二次开发，需要自行解决冲突）:
+
+  ```bash
+  git pull
+  ```
+
+- 安装依赖:
+
+  ```bash
+  composer install
+  ```
+
+- 确保数据库正确:
+
+  ```bash
+  vendor/bin/phinx migrate
+  ```
+
+- 停止项目:
+
+  ```bash
+  php start.php stop
+  ```
+
+- 启动项目:
+  ```bash
+  php start.php start -d
+  ```
+
+## 后续：重启项目
+
+- 停止项目:
+
+  ```bash
+  php start.php stop
+  ```
+
+- 启动项目:
+  ```bash
+  php start.php start -d
+  ```

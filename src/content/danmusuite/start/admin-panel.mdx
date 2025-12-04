@@ -1,0 +1,171 @@
+---
+title: '独立后台'
+description: '介绍如何搭建独立后台，提供更完整的功能和更好的体验。包括安装 Node.js、手动打包后台并上传到服务器的操作步骤。'
+order: 5
+---
+
+import { LinkPreview } from 'astro-pure/advanced'
+import { Aside, Steps, TabItem, Tabs } from 'astro-pure/user'
+
+<Aside title='请注意' type='note'>
+    原项目实际上已经内置了一个原生后台，已可直接使用，此项目非刚需。本项目的目标是为追求更强大后台功能的用户提供一个更完善的替代方案。
+
+    更好的UI，更丰富的功能，更好的体验...
+
+    由于在推荐服务器配置时出于成本考虑，建议使用较低配置的服务器（如 2核2G）。这种配置在实际运行项目时并不会有明显问题，但如果尝试在服务器上直接构建本项目，性能压力会非常大，构建过程可能会失败甚至卡死。
+
+    因此，我们将前端后台代码单独抽离到此仓库，建议用户在本地完成构建后再上传到服务器。这并不是一项复杂的操作，欢迎动手尝试，如有困难也可以联系作者获取帮助
+
+</Aside>
+
+## 安装 Node.js
+
+<Tabs>
+  <TabItem label="Windows">
+    1. **下载 Node.js**
+        - 访问官网：[https://nodejs.org/](https://nodejs.org/)
+        - 推荐选择 **LTS 版本**​（稳定版），下载 `.msi` 安装包。
+
+    2. **安装 Node.js**
+        - 双击下载的 `.msi` 文件。
+        - 一路 **Next**​，勾选 **Add to PATH**
+        - 安装完成后可以点击 **Finish**。
+
+    3. **验证安装**
+        打开 **命令提示符(CMD)或 PowerShell**，输入：
+
+        ```bash
+        node -v
+        npm -v
+        ```
+
+    如果能显示版本号，说明安装成功。
+
+  </TabItem>
+  <TabItem label="Mac">
+
+    **方法一：通过官方安装包**
+
+    1. **下载 Node.js**
+        - 官网：[https://nodejs.org/](https://nodejs.org/)
+        - 下载 **LTS 版本** **`.pkg`** **文件**。
+
+    2. **安装**
+        - 双击 `.pkg` 文件，按照提示安装。
+        - 默认安装路径即可。
+
+    3. **验证安装**
+        打开 **终端(Terminal)** ，输入：
+
+        ```bash
+        node -v
+        npm -v
+        ```
+
+    ---
+
+    **方法二：通过 Homebrew**
+
+    1. **安装 Homebrew（如果已经有可跳过）**
+
+        ```bash
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        ```
+
+    2. **安装 Node.js**
+
+        ```bash
+        brew install node
+        ```
+
+    3. **验证安装**
+
+        ```bash
+        node -v
+        npm -v
+
+        ```
+
+  </TabItem>
+</Tabs>
+
+## 克隆项目
+
+通过Git命令
+
+```bash
+git clone https://github.com/zxc7563598/vue-bilibili-danmu-admin.git
+```
+
+或直接前往仓库下载的方式获取到完整代码：[前往仓库](https://github.com/zxc7563598/vue-bilibili-danmu-admin)
+
+![下载代码](https://cdn.hejunjie.life/bilibilidanmu/admin-download.png)
+
+## 基础配置
+
+复制项目中的 `.env.example` 文件为 `.env`
+
+将 **VITE_AXIOS_BASE_URL** 与 **VITE_PROXY_TARGET** 替换为实际项目地址
+
+```bash title=".env"
+# ⚠️ 本文件为环境变量示例，请复制为 `.env` 并根据实际部署情况进行修改
+# 项目标题，用于页面显示标题等
+VITE_TITLE=哔哩哔哩机器人
+
+# 是否启用 Hash 路由（true 使用 # 路由，适用于部署在非根路径时）
+VITE_USE_HASH=true
+
+# 静态资源的公共路径，必须以 / 开头和结尾
+VITE_PUBLIC_PATH=/dist/
+
+# Axios 请求的基础路径（建议填写系统配置中的「项目地址」）
+VITE_AXIOS_BASE_URL=请替换为系统配置中的项目地址
+
+# 本地开发环境的代理目标地址（同样填写系统配置中的「项目地址」）
+VITE_PROXY_TARGET=请替换为系统配置中的项目地址
+```
+
+## 打包上传
+
+1.  安装pnpm
+
+    ```bash
+    npm install -g pnpm
+    ```
+
+    <Aside title='请注意' type='tip'>
+
+        如果下载缓慢，可以考虑通过以下命令走阿里云的 npm 镜像来加速
+
+        ```bash
+        npm install -g pnpm --registry=https://registry.npmmirror.com
+        ```
+
+    </Aside>
+
+2.  安装依赖
+
+    ```bash
+    pnpm install
+    ```
+
+3.  构建项目
+
+    ```bash
+    pnpm build
+    ```
+
+    > 完成后，目录内会出现一个名为 `dist` 的文件夹
+
+4.  上传项目
+
+    <Tabs>
+      <TabItem label='手动部署'>
+        连接服务器，上传 `dist` 目录到 `/www/wwwroot/php-bilibili-danmu/public` 路径中
+      </TabItem>
+      <TabItem label='自动部署'>
+        连接服务器，上传 `dist` 目录到 `/opt/bilibili-robots/php/public` 路径中
+      </TabItem>
+    </Tabs>
+
+    > 忘记如何连接服务器了？[看这里](/danmusuite/start/server#如何连接服务器)
