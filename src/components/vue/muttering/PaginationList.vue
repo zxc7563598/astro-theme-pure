@@ -99,8 +99,8 @@
 
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref, nextTick } from 'vue'
-import { request } from '@/plugins/api'
-import { showToast } from '@/plugins/toast'
+import { request } from '@/components/custom/plugins/api'
+import { showToast } from '@/components/custom/utils'
 
 const loading = ref(false)
 const answer = ref(['', '', ''])

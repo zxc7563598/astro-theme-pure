@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { showToast } from '@/plugins/toast'
+import { showToast } from '@/components/custom/utils'
 
 const loading = ref(false);
 

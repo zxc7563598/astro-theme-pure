@@ -22,7 +22,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { showToast } from '@/plugins/toast'
+import { showToast } from '@/components/custom/utils'
 
 const seed = ref('')
 const avatarUrl = ref('')

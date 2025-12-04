@@ -38,8 +38,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { uploadFile } from '@/plugins/api'
-import { showToast } from '@/plugins/toast'
+import { uploadFile } from '@/components/custom/plugins/api'
+import { showToast } from '@/components/custom/utils'
 
 const fileInput = ref<HTMLInputElement | null>(null)
 const fileName = ref('')

@@ -37,8 +37,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { request } from '@/plugins/api'
-import { showToast } from '@/plugins/toast'
+import { request } from '@/components/custom/plugins/api'
+import { showToast } from '@/components/custom/utils'
 
 interface ApiResponse {
     code: number
