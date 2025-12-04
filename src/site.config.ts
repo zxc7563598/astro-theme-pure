@@ -3,25 +3,25 @@ import type { CardListData, Config, IntegrationUserConfig, ThemeUserConfig } fro
 export const theme: ThemeUserConfig = {
   // [Basic]
   /** Title for your website. Will be used in metadata and as browser tab title. */
-  title: 'Astro Theme Pure',
+  title: '星河避难所',
   /** Will be used in index page & copyright declaration */
-  author: 'Pure Lab',
+  author: '何俊杰',
   /** Description metadata for your website. Can be used in page metadata. */
-  description: 'Stay hungry, stay foolish',
+  description: '写代码，也写自己',
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
-  favicon: '/favicon/favicon.ico',
+  favicon: '/favicon/favicon-32x32.png',
   /** The default social card image for your site which should be a path to an image in the `public/` directory. */
   socialCard: '/images/social-card.png',
   /** Specify the default language for this site. */
   locale: {
-    lang: 'en-US',
-    attrs: 'en_US',
+    lang: 'zh-CN',
+    attrs: 'zh_CN',
     // Date locale
-    dateLocale: 'en-US',
+    dateLocale: 'zh-CN',
     dateOptions: {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
     }
   },
   /** Set a logo image to show in the homepage. */
@@ -48,11 +48,11 @@ export const theme: ThemeUserConfig = {
   /** Configure the header of your site. */
   header: {
     menu: [
-      { title: 'Blog', link: '/blog' },
-      { title: 'Docs', link: '/docs' },
-      { title: 'Projects', link: '/projects' },
-      { title: 'Links', link: '/links' },
-      { title: 'About', link: '/about' }
+      { title: '文章', link: '/blog' },
+      { title: '项目', link: '/projects' },
+      { title: '碎碎念', link: '/muttering' },
+      { title: '友情链接', link: '/links' },
+      { title: '关于我', link: '/about' }
     ]
   },
 
@@ -64,8 +64,8 @@ export const theme: ThemeUserConfig = {
     links: [
       // Registration link
       {
-        title: 'Moe ICP 114514',
-        link: 'https://icp.gov.moe/?keyword=114514',
+        title: '鲁ICP备2025143078号-1',
+        link: 'https://beian.mps.gov.cn/#/query/webSearch',
         style: 'text-sm' // Uno/TW CSS class
       },
       {
@@ -75,15 +75,15 @@ export const theme: ThemeUserConfig = {
       },
       // Privacy Policy link
       {
-        title: 'Site Policy',
-        link: '/terms/list',
+        title: '更多便捷工具',
+        link: '/projects/list',
         pos: 2 // position set to 2 will be appended to copyright line
       }
     ],
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */
     credits: true,
     /** Optional details about the social media accounts for this site. */
-    social: { github: 'https://github.com/cworld1/astro-theme-pure' }
+    social: { github: 'https://github.com/zxc7563598' }
   },
 
   // [Content]
@@ -109,18 +109,24 @@ export const integ: IntegrationUserConfig = {
   links: {
     // Friend logbook
     logbook: [
-      { date: '2025-03-16', content: 'Is there a leakage?' },
-      { date: '2025-03-16', content: 'A leakage of what?' },
-      { date: '2025-03-16', content: 'I have a full seat of water, like, full of water!' },
-      { date: '2025-03-16', content: 'Must be the water.' },
-      { date: '2025-03-16', content: "Let's add that to the words of wisdom." }
+      { date: '2023-10-15', content: '首篇文章书写完成' },
+      { date: '2024-10-04', content: '首次建立博客，基于 Hexo 使用了 everfu 老师的 hexo-theme-solitude 主题' },
+      { date: '2025-01-27', content: '管局审核通过，网站正式稳定' },
+      { date: '2025-10-17', content: '由 Hexo 更换到 Astro 使用了 cworld1 老师的 astro-theme-pure 主题' },
+      { date: '2025-10-24', content: "完善主题流量统计模块" },
+      { date: '2025-11-04', content: "新增碎碎念模块" },
+      { date: '2025-11-09', content: "新增文章加密模块，由静态部署变更为 SSR 部署" },
+      { date: '2025-11-10', content: "开放友情链接页面，开始交换友链" },
+      { date: '2025-11-13', content: "增加友链自动申请功能，实现自动添加/检测" },
+      { date: '...', content: "持续进步中..." },
     ],
     // Yourself link info
     applyTip: [
-      { name: 'Name', val: theme.title },
-      { name: 'Desc', val: theme.description || 'Null' },
-      { name: 'Link', val: 'https://astro-pure.js.org/' },
-      { name: 'Avatar', val: 'https://astro-pure.js.org/favicon/favicon.ico' }
+      { name: '名称', val: theme.title },
+      { name: '描述', val: theme.description || 'Null' },
+      { name: '地址', val: 'https://hejunjie.life' },
+      { name: '头像', val: 'https://cdn.hejunjie.life/avatar.jpg' },
+      { name: '友链页面', val: 'https://hejunjie.life/links' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
     cacheAvatar: false
@@ -166,7 +172,7 @@ export const integ: IntegrationUserConfig = {
   waline: {
     enable: true,
     // Server service link
-    server: 'https://astro-theme-pure-waline.arthals.ink/',
+    server: 'https://waline.hejunjie.life/',
     // Refer https://waline.js.org/en/guide/features/emoji.html
     emoji: ['bmoji', 'weibo'],
     // Refer https://waline.js.org/en/reference/client/props.html
@@ -175,32 +181,50 @@ export const integ: IntegrationUserConfig = {
       pageview: true,
       comment: true,
       locale: {
-        reaction0: 'Like',
-        placeholder: 'Welcome to comment. (Email to receive replies. Login is unnecessary)'
+        reaction0: '喜欢',
+        placeholder: '欢迎发表评论。（通过电子邮件接收回复。无需登录，但起码你要写上邮箱地址才会收到邮件）'
       },
       imageUploader: false
     }
   }
 }
 
+export const metrics: { enable: boolean; sdk: string; id: string; ck: string; widget: string } = {
+  // 51.la 统计
+  enable: true,
+  // 统计网站的配置信息
+  // 在统计网站的后台获取
+  // See: https://v6.51.la/report/setup/params/statistics
+  sdk: '/scripts/js-sdk-pro.min.js',
+  id: '3K0Dk6gsiH5Cx3N3',
+  ck: '3K0Dk6gsiH5Cx3N3',
+  // 数据挂件 javascript 地址，类似：https://v6-widget.51.la/v6/3K0Dk6gsiH5Cx3N3/quote.js
+  // See: https://v6.51.la/report/setup/params/widget
+  widget: 'https://v6-widget.51.la/v6/3K0Dk6gsiH5Cx3N3/quote.js'
+}
+
 export const terms: CardListData = {
-  title: 'Terms content',
+  title: '更多便捷工具',
   list: [
     {
-      title: 'Privacy Policy',
-      link: '/terms/privacy-policy'
+      title: '身份证信息查询',
+      link: '/composer/china-division'
     },
     {
-      title: 'Terms and Conditions',
-      link: '/terms/terms-and-conditions'
+      title: '手机号信息查询',
+      link: '/composer/mobile-locator'
     },
     {
-      title: 'Copyright',
-      link: '/terms/copyright'
+      title: '地址解析工具',
+      link: '/composer/address-parser'
     },
     {
-      title: 'Disclaimer',
-      link: '/terms/disclaimer'
+      title: '八字排盘',
+      link: '/composer/fortune-analyzer'
+    },
+    {
+      title: '随机头像生成',
+      link: '/projects/item/avatar-service'
     }
   ]
 }
