@@ -2,36 +2,153 @@
   "friends": [
     {
       "id_name": "cf-links",
-      "desc": "Common links included in circle friends",
+      "desc": "散落在各地的灯火",
       "link_list": [
         {
-          "name": "Arthals' ink",
-          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
-          "link": "https://arthals.ink/",
-          "avatar": "https://cdn.arthals.ink/Arthals.png"
+          "name": "唯知笔记",
+          "intro": "探索知识的无限可能",
+          "link": "https://note.weizwz.com",
+          "avatar": "https://p.weizwz.com/logo_a4353391cbf0889b.webp",
+          "friend_link": "https://note.weizwz.com/pages/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/weizwz-1763123387382.webp",
+          "check": true
         },
         {
           "name": "CWorld Site",
           "intro": "求知若愚，虚怀若谷",
           "link": "https://cworld0.com/",
-          "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200"
+          "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200",
+          "friend_link": "https://cworld0.com/links",
+          "avatar_cache": "/avatars/CWorld.webp",
+          "check": false
+        },
+        {
+          "name": "安知鱼",
+          "intro": "生活明朗，万物可爱",
+          "link": "https://blog.anheyu.com",
+          "avatar": "https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg",
+          "friend_link": "https://blog.anheyu.com/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/安知鱼-1763194109160.jpg",
+          "check": false
+        },
+        {
+          "name": "手里有只毛毛虫",
+          "intro": "号角声起 - 等你启航",
+          "link": "https://www.krjojo.com",
+          "avatar": "https://www.krjojo.com/wp-content/uploads/2024/05/avatar.avif",
+          "friend_link": "https://www.krjojo.com/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/手里有只毛毛虫-1763124584183.avif",
+          "check": true
+        },
+        {
+          "name": "Arthals' ink",
+          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
+          "link": "https://arthals.ink/",
+          "avatar": "https://cdn.arthals.ink/Arthals.png",
+          "friend_link": "https://arthals.ink/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763021912342.png",
+          "check": true
+        },
+        {
+          "name": "张洪Heo",
+          "intro": "分享设计与科技生活",
+          "link": "https://blog.zhheo.com",
+          "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp",
+          "friend_link": "https://blog.zhheo.com/link/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/张洪Heo-1763023417884.webp",
+          "check": true
+        },
+        {
+          "name": "猫普的精神世界",
+          "intro": "一个独立开发者的精神自留地",
+          "link": "https://maplezz.com",
+          "avatar": "https://maplezz.com/favicon/avatar.webp",
+          "friend_link": "https://maplezz.com/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/猫普的精神世界-1763192767763.webp",
+          "check": false
+        },
+        {
+          "name": "GnixAij",
+          "intro": "Life tracking & Tech Sharing",
+          "link": "https://vluv.space",
+          "avatar": "https://assets.vluv.space/avatar.webp",
+          "friend_link": "https://vluv.space/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/GnixAij-1763473807182.webp",
+          "check": false
+        },
+        {
+          "name": "Under the Sun with Paddy",
+          "intro": "分享实践思考、算法编程以及快乐。",
+          "link": "https://www.paddysun.top",
+          "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
+          "friend_link": "https://www.paddysun.top/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
+          "check": true
+        },
+        {
+          "name": "唐志远",
+          "intro": "立志成为一名架构师",
+          "link": "https://fe32.top",
+          "avatar": "https://bu.dusays.com/2022/05/02/626f92e193879.jpg",
+          "friend_link": "https://fe32.top/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
+          "check": false
+        },
+        {
+          "name": "Xingluo’s Blog",
+          "intro": "何处秋风悲画扇",
+          "link": "https://blog.en.icu",
+          "avatar": "https://pic.en.icu/Xingluo.webp",
+          "friend_link": "https://blog.en.icu/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
+          "check": true
+        },
+        {
+          "name": "小杨",
+          "intro": "分享随笔以及技术的总舵，站长是动漫迷(天杨星)，诸君，缘聚于此，请访。",
+          "link": "https://xiaoyangboke.xyz",
+          "avatar": "https://xiaoyangboke.xyz/svg/blogAvatar1-4f998420.svg",
+          "friend_link": "https://xiaoyangboke.xyz/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/小杨-1764769528928.png",
+          "check": true
         }
       ]
     },
     {
       "id_name": "inactive-links",
-      "desc": "Inactive or rule-breaking friends",
+      "desc": "偶尔需要一点时间的朋友们",
       "link_list": []
     },
     {
       "id_name": "special-links",
-      "desc": "Other special links",
+      "desc": "旅途的意外转弯",
       "link_list": [
         {
-          "name": "Astro",
-          "intro": "The web framework for content-driven websites",
-          "link": "https://astro.build/",
-          "avatar": "https://avatars.githubusercontent.com/u/44914786?s=200&v=4"
+          "name": "虫洞",
+          "intro": "随机前往十年之约的成员博客",
+          "link": "https://www.foreverblog.cn/go.html",
+          "avatar": "/images/wormhole.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false
+        },
+        {
+          "name": "开往",
+          "intro": "随机前往开往的成员博客",
+          "link": "https://www.travellings.cn/go.html",
+          "avatar": "https://www.travellings.cn/assets/travelling.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false
+        },
+        {
+          "name": "BlogFinder",
+          "intro": "聚合优秀的个人博客，发掘优质的个人博客文章和内容",
+          "link": "https://bf.zzxworld.com/s",
+          "avatar": "https://bf.zzxworld.com/images/favicon.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false
         }
       ]
     }
