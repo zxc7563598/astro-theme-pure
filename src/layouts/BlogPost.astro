@@ -8,8 +8,12 @@ import 'katex/dist/katex.min.css'
 import config from 'virtual:config'
 
 import { MediumZoom } from 'astro-pure/advanced'
-import { ArticleBottom, Copyright, Hero, TOC } from 'astro-pure/components/pages'
+import { ArticleBottom, Hero } from 'astro-pure/components/pages'
 import PageLayout from '@/layouts/ContentLayout.astro'
+import { verifySignedCookieValue } from '@/pages/api/verify'
+import Copyright from '@/components/custom/Copyright.astro'
+import TOC from '@/components/custom/TOC.astro'
+import PasswordForm from '@/components/vue/PasswordForm.vue'
 import { Comment, PageInfo } from '@/components/waline'
 
 interface Props {
@@ -43,6 +47,26 @@ const socialImage = heroImage
   : config.socialCard
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString()
 const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-text-opacity))'
+
+// 读取 cookie 并验证
+const cookieHeader = Astro.request.headers.get('cookie')
+let verified = false
+if (cookieHeader) {
+  const cookies = Object.fromEntries(
+    cookieHeader.split(';').map((s) => {
+      const [k, v] = s.trim().split('=')
+      return [k, v]
+    })
+  )
+  const result = verifySignedCookieValue(cookies[`verified-${id}`])
+  if (result && result === id) verified = true
+}
+
+const password = data.password || []
+const questions = password.map((p) => p.question)
+if (questions.length == 0) {
+  verified = true
+}
 ---
 
 <PageLayout
@@ -50,7 +74,7 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
   highlightColor={primaryColor}
   back='/blog'
 >
-  {!!headings.length && <TOC {headings} slot='sidebar' />}
+  {verified && !!headings.length && <TOC {headings} slot='sidebar' />}
 
   <Hero {data} {remarkPluginFrontmatter} slot='header'>
     <Fragment slot='description'>
@@ -58,7 +82,7 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
     </Fragment>
   </Hero>
 
-  <slot />
+  {verified ? <slot /> : <PasswordForm slug={id} questions={questions} client:load />}
 
   <Fragment slot='bottom'>
     {/* Copyright */}

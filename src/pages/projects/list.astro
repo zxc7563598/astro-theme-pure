@@ -1,0 +1,17 @@
+---
+import { Button, CardList } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { terms } from '@/site-config'
+
+const meta = {
+  title: '小工具',
+  description: '这是我一些小 demo 的集合，涵盖不同语言和项目类型；主要用于展示功能、验证想法或记录技术实现过程，仅供查看效果参考'
+}
+---
+
+<PageLayout {meta}>
+  <Button title='返回' href='/' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <CardList {...terms} />
+  </main>
+</PageLayout>

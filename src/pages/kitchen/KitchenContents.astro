@@ -7,19 +7,17 @@ import { cn } from 'astro-pure/utils'
 export const prerender = true
 export const partial = true
 
-const docsCollection = (await getBlogCollection('docs')) as CollectionEntry<'docs'>[]
+const kitchenCollection = (await getBlogCollection('kitchen')) as CollectionEntry<'kitchen'>[]
 // Group docs by id first part (setup, integrations, advanced, etc.)
-const docsByCate = docsCollection.reduce((acc: { [key: string]: typeof docsCollection }, doc) => {
+const kitchenByCate = kitchenCollection.reduce((acc: { [key: string]: typeof kitchenCollection }, doc) => {
   const id = doc.id.split('/')[0]
-  if (!acc[id]) acc[id] = [] as typeof docsCollection
+  if (!acc[id]) acc[id] = [] as typeof kitchenCollection
   acc[id].push(doc)
   return acc
 }, {})
 
 const docCategories = {
-  setup: 'Setup',
-  integrations: 'Integrations',
-  advanced: 'Advanced'
+  common: '经常做',
 }
 
 type Props = {
@@ -31,18 +29,18 @@ const { title = true, class: className, ...props } = Astro.props
 ---
 
 <docs-toc class={cn('not-prose', className)} {...props}>
-  {title && <h2 class='text-foreground font-medium'>DOCS</h2>}
+  {title && <h2 class='text-foreground font-semibold'>下厨房</h2>}
   <ul class='mt-4 flex flex-col gap-y-5'>
     {
       Object.entries(docCategories).map(([id, title]: [string, string]) => (
         <li>
           <h3 class='text-muted-foreground text-xs tracking-widest uppercase'>{title}</h3>
           <ul class='mt-2 flex flex-col'>
-            {docsByCate[id]
+            {kitchenByCate[id]
               .sort((a, b) => a.data.order - b.data.order)
               .map((doc) => (
                 <li class='docs-item flex relative ms-2 px-3 py-1 text-foreground/75 transition-all rounded-2xl'>
-                  <a class='flex-1 hover:text-foreground' href={`/docs/${doc.id}`}>
+                  <a class='flex-1 hover:text-foreground' href={`/kitchen/${doc.id}`}>
                     {doc.data.title}
                   </a>
                 </li>
@@ -85,6 +83,7 @@ const { title = true, class: className, ...props } = Astro.props
 
     constructor() {
       super()
+
       this.link = window.location.pathname
     }
 

@@ -1,250 +1,203 @@
 ---
-import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
+import { Button, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
-import Substats from '@/components/about/Substats.astro'
+import Metrics from '@/components/about/Metrics.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
 
 const headings = [
-  { depth: 2, slug: 'hobbies', text: 'Hobbies' },
-  { depth: 2, slug: 'tools', text: 'Tools' },
-  { depth: 2, slug: 'social-networks', text: 'Social Networks' },
-  { depth: 2, slug: 'gossips', text: 'Gossips' },
-  { depth: 2, slug: 'about-blog', text: 'About Blog' }
+  { depth: 2, slug: 'hobbies', text: '我的兴趣' },
+  { depth: 2, slug: 'my-job', text: '我的工作' },
+  { depth: 2, slug: 'my-skills', text: '我的技能' },
+  { depth: 2, slug: 'access-statistics', text: '访问统计' }
 ]
 ---
 
-<PageLayout title='About' {headings} comment>
-  <p>Developer / Designer</p>
+<PageLayout title='关于我' {headings} comment>
+  <p>PHP 工程师 / 全栈开发</p>
   <p>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
-    possit voluptatum.
+    一名独立开发者，主要使用 Go 与 PHP 构建后端服务，也会用 Vue 写一写前端。<br />
+    我喜欢把想法变成可以跑起来的代码，也喜欢研究系统背后的逻辑与工程细节。<br />
+    这个博客记录的是我在开发过程中的经验、坑点和一些思考。 希望这些内容能帮到你，也欢迎交流。<br
+    /><br />
+    如果你正在寻找一位技术合作者、远程开发者，或者只是想做一些技术咨询，都可以随时联系我，交流总比独自摸索要有趣得多。
   </p>
-  <p>
-    Motto: Stay hungry, Stay foolish. <Spoiler>这里可以夹私货，比如为什么要演奏春日影！</Spoiler>
-  </p>
-  <Button title='Sponsor Me' class='w-fit' href='/projects#sponsorship' variant='ahead' />
+  <Button title='赞助我' class='w-fit' href='/projects#sponsorship' variant='ahead' />
+  <Button title='联系我' class='w-fit' href='/projects#direct-contact' variant='ahead' />
 
   {/* general-talk */}
-  <h2 id='hobbies'>Hobbies</h2>
+  <h2 id='hobbies'>我的兴趣</h2>
   <ul>
-    <li>Lorem ipsum dolor sit amet, vidit suscipit at mei.</li>
-    <li>
-      Quem denique mea id. Usu ei regione indoctum dissentiunt, cu meliore fuisset mei, vel quod
-      voluptua ne.
-    </li>
-    <li>Ex dicat impedit mel, at eum oratio possit voluptatum.</li>
-    <li>Impetus fuisset ullamcorper pri cu, his posse iisque ad, aliquam honestatis usu id.</li>
+    <li>玩游戏( PS5 / Switch, 偏爱单机多一些 )</li>
+    <li>写代码( Go / PHP / 前端折腾 )</li>
+    <li>偶尔研究技术设计，记录点想法</li>
+    <li>享受安静的时间，也喜欢认识新朋友</li>
   </ul>
 
-  {/* tools */}
-  <h2 id='tools'>Tools</h2>
-  <p>Current support tools as follow:</p>
-  <ToolSection
-    class='mb-5'
-    title='Design'
-    tools={[
-      {
-        name: 'Photoshop',
-        description: 'Picture Editing',
-        href: 'https://www.adobe.com/products/photoshop',
-        icon: import('@/assets/tools/photoshop.svg?raw')
-      },
-      {
-        name: 'Illustrator',
-        description: 'Vector Drawing',
-        href: 'https://www.adobe.com/products/illustrator',
-        icon: import('@/assets/tools/illustrator.svg?raw')
-      },
-      {
-        name: 'After Effects',
-        description: 'Motion Graphics',
-        href: 'https://www.adobe.com/products/aftereffects',
-        icon: import('@/assets/tools/aftereffects.svg?raw')
-      },
-      {
-        name: 'Premiere Pro',
-        description: 'Video Editing',
-        href: 'https://www.adobe.com/products/premiere',
-        icon: import('@/assets/tools/premiere.svg?raw')
-      }
-    ]}
-  />
-  <ToolSection
-    class='mb-5'
-    title='Productivity'
-    tools={[
-      {
-        name: 'Chrome',
-        description: 'Browser',
-        href: 'https://www.google.com/chrome/',
-        icon: import('@/assets/tools/chrome.svg?raw')
-      },
-      {
-        name: 'Firefox',
-        description: 'Browser',
-        href: 'https://www.mozilla.org/en-US/firefox',
-        icon: import('@/assets/tools/firefox.svg?raw')
-      },
-      {
-        name: 'Notion',
-        description: 'Note Taking',
-        href: 'https://www.notion.so/',
-        icon: import('@/assets/tools/notion.svg?raw')
-      },
-      {
-        name: 'Typora',
-        description: 'Markdown Editor',
-        href: 'https://typora.io/',
-        icon: import('@/assets/tools/typora.svg?raw')
-      }
-    ]}
-  />
-  <ToolSection
-    class='mb-5'
-    title='Development'
-    tools={[
-      {
-        name: 'VS Code',
-        description: 'IDE',
-        href: 'https://code.visualstudio.com/',
-        icon: import('@/assets/tools/vscode.svg?raw')
-      },
-      {
-        name: 'Neovim',
-        description: 'IDE',
-        href: 'https://neovim.io/',
-        icon: import('@/assets/tools/neovim.svg?raw')
-      },
-      {
-        name: 'Sublime Text',
-        description: 'IDE',
-        href: 'https://www.sublimetext.com/',
-        icon: import('@/assets/tools/sublime.svg?raw')
-      }
-    ]}
-  />
-  <ToolSection
-    class='mb-5'
-    title='Environment'
-    tools={[
-      {
-        name: 'Arch Linux',
-        description: 'Linux Distribution',
-        href: 'https://archlinux.org/',
-        icon: import('@/assets/tools/archlinux.svg?raw')
-      },
-      {
-        name: 'Ubuntu 24.04 LTS',
-        description: 'Linux Distribution',
-        href: 'https://ubuntu.com/',
-        icon: import('@/assets/tools/ubuntu.svg?raw')
-      },
-      {
-        name: 'MacOS Tahoe',
-        description: 'MacBook Air',
-        href: 'https://www.apple.com/macos/',
-        icon: import('@/assets/tools/apple.svg?raw')
-      },
-      {
-        name: 'Windows 11',
-        description: 'Framework Laptop 16',
-        href: 'https://news.microsoft.com/windows11-general-availability/',
-        icon: import('@/assets/tools/windows11.svg?raw')
-      }
-    ]}
-  />
-
-  {/* social-networks */}
-  <h2 id='social-networks'>Social Networks</h2>
+  {/* my-job */}
+  <h2 id='my-job'>我的工作</h2>
   <p>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne.
+    这些年我做过一些不同方向的工作，从传统行业到互联网，再到自由职业。<br />
+    它们负责的内容各不相同，但都让我更清楚自己想成为什么样的开发者。
   </p>
-  <Substats
-    stats={[
-      {
-        platform: 'GitHub',
-        icon: 'github',
-        link: 'https://github.com/cworld1',
-        text: 'followers',
-        api: 'github/cworld1'
-      },
-      {
-        platform: 'Telegram',
-        icon: 'telegram',
-        color: '#2ca5e0',
-        link: 'https://t.me/cworld0_cn',
-        text: 'subscribers',
-        api: 'telegram/cworld0_cn'
-      },
-      {
-        platform: 'Steam',
-        icon: 'steam',
-        color: '#50769d',
-        link: 'https://steamcommunity.com/id/cworld',
-        text: 'games',
-        api: 'steamgames/76561199021278120'
-      }
-    ]}
-  />
-
-  {/* gossips */}
-  <h2 id='gossips'>Gossips</h2>
-  <Collapse title='Lorem ipsum'>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
-    possit voluptatum.
-  </Collapse>
-
-  {/* about-blog */}
-  <h2 id='about-blog'>About Blog</h2>
-  <p>Website history:</p>
   <Timeline
     events={[
       {
-        date: '2024-04-29',
-        content:
-          'Website refactored using <a href="https://astro.build/" target="_blank">Astro</a> and <a href="https://github.com/srleom/astro-theme-resume" target="_blank">Astro Theme Resume</a>'
+        date: '2018-2019',
+        content: '山东麦琪 · 在传统行业做电商相关工作'
       },
       {
-        date: '2024-07-26',
-        content:
-          'Website abstracted as a theme and published on <a href="https://github.com/cworld1/astro-theme-pure"target="_blank">Github</a>'
+        date: '2019-2020',
+        content: '上海豪达 · 从事金融相关产品的开发与维护'
       },
       {
-        date: '2024-07-27',
-        content: 'Began writing website docs'
+        date: '2020+',
+        content: '自由职业 · 与熟悉的团队伙伴合作，从事金融相关系统开发项目'
       }
     ]}
   />
   <p>
-    The smooth operation and personalized customization of website also rely on the resources and
-    technical support provided by the following excellent projects/service providers:
+    这些经历让我逐渐从「做事」走向「做系统」<br />
+    也让我意识到，写代码不是目的，而是理解世界的一种方式。
   </p>
-  <ul>
-    <li>Domain: <a href='#' target='_blank'>Vercel</a></li>
-    <li>
-      Framework & Theme: <a href='https://astro.build/' target='_blank'>Astro</a> + <a
-        href='https://github.com/cworld1/astro-theme-pure'
-        target='_blank'>Astro Theme Pure</a
-      >
-    </li>
-    <li>
-      Site hosting: <a href='https://vercel.com/' target='_blank'>Vercel</a>
-    </li>
-    <li>
-      CI/CD: <a href='https://vercel.com/workflow' target='_blank'>Vercel Workflow</a>
-    </li>
-    <li>Comment system: <a href='https://waline.js.org' target='_blank'>Waline</a></li>
-    <li>
-      Visits: <a href='https://supabase.com/' target='_blank'>Supabase</a> +
-      <a href='https://waline.js.org/' target='_blank'>Waline</a>
-    </li>
-    <li>
-      Other statistics: <a href='https://github.com/spencerwooo/substats' target='_blank'
-        >Substats</a
-      >
-    </li>
-  </ul>
+
+  {/* my-skills */}
+  <h2 id='my-skills'>我的技能</h2>
+  <p>能写前端、精通后端、搞得定运维，也会用 Go/Python 写点自动化脚本 —— 全栈打工侠认证 ✔️</p>
+  <ToolSection
+    class='mb-5'
+    title='语言'
+    tools={[
+      {
+        name: 'Html',
+        description: '网页结构标记语言',
+        href: 'https://developer.mozilla.org/zh-CN/docs/Web/HTML',
+        icon: import('@/assets/language/html.svg?raw')
+      },
+      {
+        name: 'CSS',
+        description: '网页样式与布局设计',
+        href: 'https://developer.mozilla.org/zh-CN/docs/Web/CSS',
+        icon: import('@/assets/language/css.svg?raw')
+      },
+      {
+        name: 'JavaScript',
+        description: '网页交互与逻辑脚本',
+        href: 'https://developer.mozilla.org/zh-CN/docs/Web/JavaScript',
+        icon: import('@/assets/language/js.svg?raw')
+      },
+      {
+        name: 'Vue',
+        description: '渐进式前端框架',
+        href: 'https://cn.vuejs.org/',
+        icon: import('@/assets/language/vue.svg?raw')
+      },
+      {
+        name: 'Shell',
+        description: '命令行脚本工具',
+        href: 'https://www.runoob.com/linux/linux-shell.html',
+        icon: import('@/assets/language/shell.svg?raw')
+      },
+      {
+        name: 'PHP',
+        description: '服务器端网页脚本',
+        href: 'https://www.php.net',
+        icon: import('@/assets/language/php.svg?raw')
+      },
+      {
+        name: 'Go',
+        description: '高效并发编程语言',
+        href: 'https://go.dev',
+        icon: import('@/assets/language/go.svg?raw')
+      },
+      {
+        name: 'Python',
+        description: '简洁易用通用语言',
+        href: 'https://www.python.org',
+        icon: import('@/assets/language/python.svg?raw')
+      },
+      {
+        name: 'SQL',
+        description: '数据库查询语言',
+        href: 'https://www.mysql.com',
+        icon: import('@/assets/language/sql.svg?raw')
+      },
+      {
+        name: 'Git',
+        description: '版本控制工具',
+        href: 'https://git-scm.com',
+        icon: import('@/assets/language/git.svg?raw')
+      }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='前端'
+    tools={[
+      {
+        name: 'TypeScript',
+        description: 'JavaScript的超集',
+        href: 'https://www.typescriptlang.org',
+        icon: import('@/assets/language/ts.svg?raw')
+      },
+      {
+        name: 'Vite',
+        description: '快速前端构建工具',
+        href: 'https://vitejs.dev',
+        icon: import('@/assets/language/vite.svg?raw')
+      },
+      {
+        name: 'Naive UI',
+        description: 'Vue3轻量化组件库',
+        href: 'https://www.naiveui.com/zh-CN',
+        icon: import('@/assets/language/naive.svg?raw')
+      },
+      {
+        name: 'Vant',
+        description: '移动端 Vue 组件库',
+        href: 'https://vant-ui.github.io/vant/#/zh-CN',
+        icon: import('@/assets/language/vant.svg?raw')
+      },
+      {
+        name: 'Element',
+        description: 'PC端 Vue 组件库',
+        href: 'https://element-plus.org/zh-CN',
+        icon: import('@/assets/language/element.svg?raw')
+      }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='后端'
+    tools={[
+      {
+        name: 'Gin',
+        description: 'Go 高性能 Web 框架',
+        href: 'https://gin-gonic.com',
+        icon: import('@/assets/language/gin.svg?raw')
+      },
+      {
+        name: 'ThinkPHP',
+        description: '国产 PHP 快速开发框架',
+        href: 'https://www.thinkphp.cn',
+        icon: import('@/assets/language/thinkphp.svg?raw')
+      },
+      {
+        name: 'Laravel',
+        description: 'PHP 优雅 Web 框架',
+        href: 'https://laravel.com',
+        icon: import('@/assets/language/laravel.svg?raw')
+      },
+      {
+        name: 'Webman',
+        description: '高性能 PHP Web 框架',
+        href: 'https://www.workerman.net/webman',
+        icon: import('@/assets/language/webman.svg?raw')
+      }
+    ]}
+  />
+
+  {/* access-statistics */}
+  <h2 id='access-statistics'>访问统计</h2>
+  <p>数据不重要，但我还是想看看</p>
+  <Metrics />
 </PageLayout>

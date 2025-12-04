@@ -1,44 +1,61 @@
 ---
-import links from 'public/links.json'
+import fs from 'fs/promises'
+import path from 'path'
 import config from 'virtual:config'
 
 import { Collapse, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import FriendList from '@/components/links/FriendList.astro'
+import ApplyLinks from '@/components/vue/ApplyLinks.vue'
 
 const headings = [
-  { depth: 2, slug: 'common-links', text: 'Common Links' },
-  { depth: 2, slug: 'special-links', text: 'Special Links' },
-  { depth: 2, slug: 'apply-links', text: 'Apply Links' }
+  { depth: 2, slug: 'common-links', text: '散落在各地的灯火' },
+  { depth: 2, slug: 'special-links', text: '旅途的意外转弯' },
+  { depth: 2, slug: 'im-here', text: '我在这里' },
+  { depth: 2, slug: 'site-info', text: '本站信息' },
+  { depth: 2, slug: 'friendlink-info', text: '友链申请说明' },
+  { depth: 2, slug: 'friendlink-requirements', text: '友链申请条件' },
+  { depth: 2, slug: 'apply-method', text: '申请友链' },
+  { depth: 2, slug: 'note', text: '最后的话' }
 ]
 
-const { friends } = links
+const linksPath = path.resolve('public/links.json')
+const content = await fs.readFile(linksPath, 'utf-8')
+const linksData = JSON.parse(content)
+const { friends } = linksData
 const linksConf = config.integ.links
-const linkEditPage = 'https://github.com/cworld1/astro-theme-pure/blob/main/public/links.json'
 ---
 
-<PageLayout title='Links' {headings} comment>
-  <p>They're sorted randomly.</p>
-  <h2 id='common-links'>Common Links</h2>
+<PageLayout title='友情链接' {headings} comment>
+  <p>网络的世界很大，但能遇见志同道合的角落不多。</p>
+  <p>这些链接通向一些温柔、聪明、或有趣的灵魂。</p>
+  <p>也许你会喜欢他们，就像我一样 :)</p>
+  <h2 id='common-links'>散落在各地的灯火</h2>
   <FriendList list={friends[0]} />
-  <Collapse title='Links with Bad Status'>
+  <Collapse title='偶尔需要一点时间的朋友们'>
     <FriendList list={friends[1]} />
   </Collapse>
-  <Collapse title='Link History Book'>
+  <Collapse title='回头看看'>
     <Timeline events={linksConf.logbook} />
   </Collapse>
-  <h2 id='special-links'>Special Links</h2>
+  <h2 id='special-links'>旅途的意外转弯</h2>
   <FriendList list={friends[2]} />
 
-  <h2 id='apply-links'>Apply Links</h2>
-  <p>本站信息（点击复制）The site information (click to copy)：</p>
+  <h2 id='im-here'>我在这里</h2>
+  <p>这是我的个人博客，用来记录我感兴趣的事情与一些随想。</p>
+  <p>如果你也有在认真更新自己的博客，欢迎交换友链，让彼此的页面多一点连结。</p>
+  <p>在申请前，请先简单看一下以下说明～</p>
+
+  <h2 id='site-info'>本站信息</h2>
   <blockquote class='not-prose grid grid-cols-[auto_1fr] gap-x-2 break-words border-s-4 ps-4'>
     {
       linksConf.applyTip.map(({ name, val }) => {
-        const script = `navigator.clipboard.writeText('${val}');document.dispatchEvent(new CustomEvent('toast',{detail:{message:'Copied "${val}" to clipboard!'}}))`
+        const script = `navigator.clipboard.writeText('${val}');document.dispatchEvent(new CustomEvent('toast',{detail:{message:'已将 "${val}" 复制到剪切板!'}}))`
         return (
           <>
-            <span class='text-end'>{name}:</span>
+            <span class='text-end'>
+              <b>{name}</b>:
+            </span>
             <samp class='cursor-pointer' onclick={script}>
               {val}
             </samp>
@@ -48,18 +65,33 @@ const linkEditPage = 'https://github.com/cworld1/astro-theme-pure/blob/main/publ
     }
   </blockquote>
 
-  <p>
-    可通过下方留言或 <a href={linkEditPage} target='_blank'>提交 PR</a> 申请友链。申请说明：<br />
-    Apply your link by leaving comment or <a href={linkEditPage} target='_blank'>Submitting a PR</a
-    >. Additional info:
-  </p>
+  <h2 id='friendlink-info'>友链申请说明</h2>
+  <p>为了让整个友链页面在展示上更整齐，也方便后续维护，这里有一些小约定：</p>
   <ul>
-    <li>推荐了本站 You've recommended our link on your website</li>
-    <li>站点活着且有正式域名 Make sure your site is alive with a formal domain</li>
     <li>
-      至少五篇原创文章且最近一年更新过 At least 5 original articles and exists articles released in
-      recent year
+      <b>关于昵称</b>:
+      为了页面统一，昵称中若包含「博客」「XX的XX」等形式，可能会被简化，如果希望保持原样展示，请在评论中备注说明。
     </li>
-    <li>内容不违反国家法律 Content does not violate laws</li>
+    <li>
+      <b>关于头像</b>:
+      所有头像图片都会托管在本站图床，以确保加载速度和安全性，因此无法自动同步贵站头像的更新，如需修改，可在评论中留言。
+    </li>
   </ul>
+
+  <h2 id='friendlink-requirements'>友链申请条件</h2>
+  <p>友链申请没有太多限制，只希望彼此的页面都能健康、可访问：</p>
+  <ol>
+    <li>站点内容需合法、积极，不得含有违反中国大陆法律法规的内容。</li>
+    <li>网站可在中国大陆正常访问。</li>
+    <li>请先在贵站添加本站链接，再由本页提交申请。</li>
+  </ol>
+
+  <h2 id='apply-method'>申请友链</h2>
+  <p>请确定您的友链中已经加入了本站，系统会自动检测，并将你的站点加入到友链页中。</p>
+  <p>如信息有误或头像需更新，也可直接在评论区留言说明。</p>
+  <ApplyLinks client:load />
+
+  <h2 id='note'>最后的话</h2>
+  <p>每一座认真写字的博客，都是互联网里闪烁的灯火。</p>
+  <p>欢迎你来这里驻足，也希望我们可以互相照亮。</p>
 </PageLayout>

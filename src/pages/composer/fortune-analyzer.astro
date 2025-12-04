@@ -1,0 +1,49 @@
+---
+import { Button } from 'astro-pure/user'
+import PageLayout from '@/layouts/ProjectsPage.astro'
+import CalendarConversion from '@/components/vue/fortune-analyzer/CalendarConversion.vue'
+import SolarTerms from '@/components/vue/fortune-analyzer/SolarTerms.vue'
+import FortuneAnalyzers from '@/components/vue/fortune-analyzer/FortuneAnalyzer.vue'
+
+const headings = [
+  { depth: 2, slug: 'calendar-conversion-demo', text: '阳历/农历转换' },
+  { depth: 2, slug: 'solar-terms-demo', text: '节气查询' },
+  { depth: 2, slug: 'fortune-analyzer-demo', text: '八字排盘' },
+  { depth: 2, slug: 'motivation', text: '制作初衷' }
+]
+---
+
+<PageLayout title='八字排盘' {headings} comment>
+  <p>八字排盘工具库，支持 1900-2100 年间阳历与农历的相互转换，内置秒级精度的 24 节气时间计算</p>
+  <p>提供四柱（年、月、日、时）排盘、五行推演等核心命理功能</p>
+  <Button
+    title='通过 Zread 了解本项目'
+    class='w-fit'
+    href='https://zread.ai/zxc7563598/php-fortune-analyzer'
+    variant='ahead'
+  />
+  <Button
+    title='前往 GitHub 查看文档'
+    class='w-fit'
+    href='https://github.com/zxc7563598/php-fortune-analyzer'
+    variant='ahead'
+  />
+
+  {/* calendar-conversion-demo */}
+  <h2 id='calendar-conversion-demo'>阳历/农历转换</h2>
+  <CalendarConversion client:load />
+
+  {/* solar-terms-demo */}
+  <h2 id='solar-terms-demo'>节气查询</h2>
+  <SolarTerms client:load />
+
+  {/* fortune-analyzer-demo */}
+  <h2 id='fortune-analyzer-demo'>八字排盘</h2>
+  <FortuneAnalyzers client:load />
+
+  {/* motivation */}
+  <h2 id='motivation'>制作初衷</h2>
+  <p>在开发这款八字排盘工具时，我意识到市面上已经有许多相关的 PHP 库，但大部分的实现都存在一个共同问题：代码结构复杂且注释不足，导致理解和维护起来非常困难。对于需要用到命理分析的开发者来说，工具的正确性固然重要，但易用性和可读性同样是不可忽视的。</p>
+  <p>因此，我决定开发一个简洁、清晰、易于理解的八字排盘工具。每个方法的实现都在代码中进行了详细的注释，清楚地标明了每个步骤的计算逻辑和思路，确保使用者不仅能使用这个工具，还能理解它的内部机制。这不仅有助于开发者在使用过程中避免误解和错误，也让他们能够更好地定制或扩展功能。</p>
+  <p>在我看来，代码的清晰度远比复杂的结构更加重要。简单明了的接口和注释清晰的实现，可以让每一个开发者都能轻松上手并快速理解命理学的核心计算方法。希望这款工具不仅能帮助大家在实践中高效完成需求，也能作为学习和理解八字命理计算的一份良好资料。</p>
+</PageLayout>

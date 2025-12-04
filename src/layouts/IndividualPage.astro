@@ -2,10 +2,11 @@
 import type { MarkdownHeading, MarkdownLayoutProps } from 'astro'
 import config from 'virtual:config'
 
-import { BackToTop, TOC } from 'astro-pure/components/pages'
+import { BackToTop } from 'astro-pure/components/pages'
 import { Button, Icon } from 'astro-pure/user'
 import { cn } from 'astro-pure/utils'
 import PageLayout from '@/layouts/BaseLayout.astro'
+import TOC from '@/components/custom/TOC.astro'
 
 type Props = MarkdownLayoutProps<{
   title: string

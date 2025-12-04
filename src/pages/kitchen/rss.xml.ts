@@ -17,7 +17,7 @@ const imagesGlob = import.meta.glob<{ default: ImageMetadata }>(
   '/src/content/docs/**/*.{jpeg,jpg,png,gif,avif,webp}' // add more image formats if needed
 )
 
-const renderContent = async (post: CollectionEntry<'docs'>, site: URL) => {
+const renderContent = async (post: CollectionEntry<'kitchen'>, site: URL) => {
   // Replace image links with the correct path
   function remarkReplaceImageLink() {
     /**
@@ -54,7 +54,7 @@ const renderContent = async (post: CollectionEntry<'docs'>, site: URL) => {
 }
 
 const GET = async (context: AstroGlobal) => {
-  const allPostsByDate = sortMDByDate(await getBlogCollection('docs')) as CollectionEntry<'docs'>[]
+  const allPostsByDate = sortMDByDate(await getBlogCollection('kitchen')) as CollectionEntry<'kitchen'>[]
   const siteUrl = context.site ?? new URL(import.meta.env.SITE)
 
   return rss({
@@ -69,7 +69,7 @@ const GET = async (context: AstroGlobal) => {
     site: import.meta.env.SITE,
     items: await Promise.all(
       allPostsByDate.map(async (post) => ({
-        link: `/docs/${post.id}`,
+        link: `/kitchen/${post.id}`,
         content: await renderContent(post, siteUrl),
         ...post.data
       }))

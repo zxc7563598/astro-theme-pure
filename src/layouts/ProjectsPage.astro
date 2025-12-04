@@ -15,7 +15,7 @@ interface Props {
 const { title, headings, view, comment: enableComment, ...props } = Astro.props
 ---
 
-<PageLayout meta={{ title }} {...props}>
+<PageLayout meta={{ title }} back="/projects" {...props}>
   {headings?.length && <TOC headings={headings} slot='sidebar' />}
 
   <Fragment slot='header'>

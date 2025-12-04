@@ -1,0 +1,55 @@
+---
+import { Button } from 'astro-pure/user'
+import PageLayout from '@/layouts/ProjectsPage.astro'
+import BatchPhoneChecker from '@/components/vue/mobile-locator/BatchPhoneChecker.vue'
+import PhoneChecker from '@/components/vue/mobile-locator/PhoneChecker.vue'
+
+const headings = [
+  { depth: 2, slug: 'singular-demo', text: '单条数据查询' },
+  { depth: 2, slug: 'plurality-demo', text: '批量数据查询' },
+  { depth: 2, slug: 'motivation', text: '制作初衷' }
+]
+---
+
+<PageLayout title='手机号信息查询' {headings} comment>
+  <p>一个轻量级库，提供快速、可靠的中国手机号码信息查询，包括运营商数据和地理位置信息。</p>
+  <p>
+    其数据库包含超过 <b>481,615</b> 个电话号码段，允许开发者快速识别电话号码所属的电信运营商和地区，而无需依赖外部API或服务。
+  </p>
+
+  <Button
+    title='通过 Zread 了解本项目'
+    class='w-fit'
+    href='https://zread.ai/zxc7563598/php-mobile-locator'
+    variant='ahead'
+  />
+  <Button
+    title='前往 GitHub 查看文档'
+    class='w-fit'
+    href='https://github.com/zxc7563598/php-mobile-locator'
+    variant='ahead'
+  />
+
+  {/* singular-demo */}
+  <h2 id='singular-demo'>单条数据查询</h2>
+  <PhoneChecker client:load />
+
+  {/* plurality-demo */}
+  <h2 id='plurality-demo'>批量数据查询</h2>
+  <BatchPhoneChecker client:load />
+
+  {/* motivation */}
+  <h2 id='motivation'>制作初衷</h2>
+  <p>
+    最开始只是想在项目里简单查一下手机号归属地，网上的开源库很多年不更新，要么依赖第三方
+    API，要么接口限速，要么就得用老旧的 .dat 文件
+  </p>
+  <p>
+    我就干脆自己搞了一个： 直接整理
+    最新号段数据，按省、市和运营商分类，支持通过手机号快速获取归属地信息
+  </p>
+  <p>
+    数据是定期更新的，库也尽量保持简单实用，如果你发现有遗漏或者数据不准确，欢迎提 Issue 或
+    PR，一起完善
+  </p>
+</PageLayout>

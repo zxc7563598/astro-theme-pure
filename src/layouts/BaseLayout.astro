@@ -2,7 +2,7 @@
 import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic'
 import type { SiteMeta } from 'astro-pure/types'
 import BaseHead from '@/components/BaseHead.astro'
-import config from '@/site-config'
+import config, { metrics } from '@/site-config'
 
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseLayout /> component.
@@ -25,6 +25,12 @@ const {
   <head>
     <BaseHead {articleDate} {description} {ogImage} {title} />
     <ThemeProvider />
+    {metrics.enable && <script is:inline src={metrics.sdk} />}
+    <script is:inline type='module' data-astro-rerun define:vars={{ metrics: metrics }}>
+      if (metrics.enable) {
+        LA.init({ id: metrics.id, ck: metrics.ck })
+      }
+    </script>
   </head>
 
   <body class='flex justify-center bg-background text-foreground' {...props}>
