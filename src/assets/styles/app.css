@@ -1,36 +1,40 @@
 /* Theme */
 :root {
   /* Primary */
-  --primary: 200 29% 45%;
+  --primary: 150 33% 52%;
+
   /* Foreground */
-  --foreground: 240 10% 3.9%;
-  --muted-foreground: 240 3.8% 28.1%;
+  --foreground: 150 10% 15%;
+  --muted-foreground: 150 8% 35%;
+
   /* Background */
-  --background: 210 33% 99%;
-  --muted: 240 4.8% 96%;
-  --card: 0 0% 90%;
+  --background: 150 25% 98%;
+  --muted: 150 10% 94%;
+  --card: 150 8% 92%;
 
   /* Basic */
-  --border: 240 5.9% 88%;
-  --input: 240 5.9% 90%;
-  --ring: 240 5.9% 10%;
+  --border: 150 10% 86%;
+  --input: 150 10% 90%;
+  --ring: 150 20% 45%;
   --radius: 0.5rem;
 }
 .dark {
   /* Primary */
-  --primary: 195 95% 85%;
+  --primary: 150 40% 70%;
+
   /* Foreground */
-  --foreground: 0 0% 98%;
-  --muted-foreground: 240 5% 74.9%;
+  --foreground: 0 0% 96%;
+  --muted-foreground: 150 5% 70%;
+
   /* Background */
-  --background: 240 20.54% 5.2%;
-  --muted: 240 5.9% 13%;
-  --card: 240 3.7% 24.9%;
+  --background: 150 12% 7%;
+  --muted: 150 10% 18%;
+  --card: 150 8% 22%;
 
   /* Basic */
-  --border: 240 3.7% 22.9%;
-  --input: 240 3.7% 17.9%;
-  --ring: 240 4.9% 83.9%;
+  --border: 150 8% 25%;
+  --input: 150 8% 18%;
+  --ring: 150 25% 70%;
 }
 :root {
   --un-default-border-color: hsl(var(--border) / 1);
