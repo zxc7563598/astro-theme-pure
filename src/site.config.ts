@@ -129,7 +129,7 @@ export const integ: IntegrationUserConfig = {
       { name: '友链页面', val: 'https://hejunjie.life/links' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
-    cacheAvatar: false
+    cacheAvatar: true
   },
   // [Search]
   pagefind: true,
