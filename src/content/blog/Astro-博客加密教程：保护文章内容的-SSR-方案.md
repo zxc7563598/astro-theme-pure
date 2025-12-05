@@ -498,4 +498,4 @@ if (questions.length == 0) {
 对于需要文章加密的博客来说，这种方式在安全性和实现复杂度之间，算是一个比较理想的平衡点。  
 如果你也想在自己的博客里尝试类似的加密机制，可以参考本文的思路进行改造。
 
-如果对于文章中提到的改动仍有疑问，可以前往 GitHub 查看本次改造的提交：[点我查看](https://github.com/zxc7563598/astro-theme-pure/pull/1)
+如果对于文章中提到的改动仍有疑问，可以前往 GitHub 查看本次改造的提交：[点我查看](https://github.com/zxc7563598/astro-theme-pures/pull/1)
