@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:check": "astro check --watch & astro dev",
-    "build": "astro-pure check && astro check && astro build",
+    "build": "VITE_BUILD_WORKER_THREADS=1 NODE_OPTIONS=--max-old-space-size=512 astro build",
     "preview": "astro preview",
     "sync": "astro sync",
     "check": "astro check",
