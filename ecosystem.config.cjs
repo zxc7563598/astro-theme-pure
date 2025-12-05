@@ -2,16 +2,16 @@ module.exports = {
   apps: [
     {
       uid: 0,
-      name: 'astro-blog',
+      name: 'astro-theme-pure',
       script: 'node',
-      args: '/opt/astro-blog/dist/server/entry.mjs',
-      cwd: '/opt/astro-blog',
+      args: '/opt/astro-theme-pure/dist/server/entry.mjs',
+      cwd: '/opt/astro-theme-pure',
       env: {
         NODE_ENV: 'production',
         HOME: '/root',
         USER: 'root',
         LOGNAME: 'root',
-        PWD: '/opt/astro-blog',
+        PWD: '/opt/astro-theme-pure',
         SHELL: '/bin/bash',
         LANG: 'C.UTF-8',
         LC_ALL: 'C.UTF-8',
