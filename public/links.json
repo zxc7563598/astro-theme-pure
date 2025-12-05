@@ -20,7 +20,7 @@
           "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200",
           "friend_link": "https://cworld0.com/links",
           "avatar_cache": "/avatars/CWorld.webp",
-          "check": false
+          "check": true
         },
         {
           "name": "安知鱼",
@@ -29,7 +29,7 @@
           "avatar": "https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg",
           "friend_link": "https://blog.anheyu.com/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/安知鱼-1763194109160.jpg",
-          "check": false
+          "check": true
         },
         {
           "name": "手里有只毛毛虫",
