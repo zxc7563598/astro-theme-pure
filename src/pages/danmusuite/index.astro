@@ -1,0 +1,36 @@
+---
+import { Button } from 'astro-pure/user'
+import { cn } from 'astro-pure/utils'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { Comment } from '@/components/waline'
+import { integ } from '@/site-config'
+
+import DanmuSuiteContents from './DanmuSuiteContents.astro'
+
+const meta = {
+  title: '哔哩哔哩弹幕机器人',
+  description: '哔哩哔哩弹幕机器人完全食用指南'
+}
+---
+
+<PageLayout {meta}>
+  <Button title='返回' href='/' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 text-3xl font-medium'>哔哩哔哩弹幕机器人</h1>
+    </div>
+    <div id='content' class={cn('animate mt-8 max-w-none md:min-w-[45ch]', integ.typography.class)}>
+      <h2 class='text-xl font-medium'>
+        一份完整的弹幕机器人食用指南，涵盖使用、配置与二次开发的全部内容
+      </h2>
+      <DanmuSuiteContents title={false} />
+      <h2 class='text-xl font-medium'>关于此页面</h2>
+      <p>之前零零散散写过几篇文章，想教大家怎么使用这个弹幕机器人。</p>
+      <p>但效果其实一般，看的人容易迷糊，我自己回头看也觉得有点乱。</p>
+      <p>写到后面越来越杂，很多关键点还是会让人困惑。</p>
+      <p>所以干脆把所有相关内容整理在这里，做成一份更完整的文档。</p>
+      <p>这样不管是自己部署，还是想二开扩展，都能更清晰地查到需要的信息。</p>
+    </div>
+  </main>
+  <Comment class='mt-6 sm:mt-6' />
+</PageLayout>
