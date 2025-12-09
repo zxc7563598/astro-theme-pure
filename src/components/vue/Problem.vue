@@ -2,15 +2,15 @@
     <section class="w-full mt-10 px-4">
         <form class="space-y-4">
             <input name="name" type="text" placeholder="如何称呼（可选）" v-model="name"
-                class="w-full p-3 rounded-xl border border-border focus:outline-none text-sm" />
+                class="w-full p-3 rounded-xl border border-border focus:outline-none text-sm bg-transparent" />
             <textarea name="question" placeholder="你的问题..." v-model="question"
-                class="w-full h-32 p-3 rounded-xl border border-border focus:outline-none text-sm mt-4"></textarea>
+                class="w-full h-32 p-3 rounded-xl border border-border focus:outline-none text-sm mt-4 bg-transparent"></textarea>
             <input name="email" type="email" placeholder="邮箱（建议填写，以便接收邮件通知）" v-model="email"
-                class="w-full p-3 rounded-xl border border-border focus:outline-none text-sm mt-4" />
+                class="w-full p-3 rounded-xl border border-border focus:outline-none text-sm mt-4 bg-transparent" />
             <Collapse title='锁定问题' v-model="lockEnabled">
                 <div class="mt-1 space-y-4">
                     <input v-model="password" type="password" placeholder="设置锁定密码，提交后通过锁定密码才能查看问题"
-                        class="w-full p-3 rounded-xl border border-border focus:outline-none text-sm" />
+                        class="w-full p-3 rounded-xl border border-border focus:outline-none text-sm bg-transparent" />
                 </div>
             </Collapse>
             <button type="button" @click="handleAddProblems"
