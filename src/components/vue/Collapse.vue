@@ -1,0 +1,60 @@
+<template>
+    <div class="group/expand rounded-xl border px-3 my-4 sm:px-4" :class="{ expanded: isExpanded }">
+        <slot name="before" />
+        <div class="group/highlight expand-title sticky top-0 z-20 flex cursor-pointer
+             items-center justify-between py-1.5 sm:py-2
+            transition-colors" @click="toggle">
+            <p class="m-0 transition-colors group-hover/highlight:text-primary">
+                {{ title }}
+            </p>
+            <div class="expand-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="my-1 stroke-muted-foreground transition-all duration-300
+                 group-hover/highlight:stroke-primary
+                 group-[.expanded]/expand:-rotate-90">
+                    <line x1="5" y1="12" x2="19" y2="12" class="translate-x-1 scale-x-100 duration-300 ease-in-out
+                   group-[.expanded]/expand:translate-x-4
+                   group-[.expanded]/expand:scale-x-0"></line>
+                    <polyline points="12 5 19 12 12 19" class="translate-x-1 duration-300 ease-in-out
+                   group-[.expanded]/expand:translate-x-0"></polyline>
+                </svg>
+            </div>
+        </div>
+        <div class="expand-content grid opacity-0 transition-all duration-300 ease-in-out
+             group-[.expanded]/expand:mb-3 sm:group-[.expanded]/expand:mb-4
+             group-[.expanded]/expand:opacity-100">
+            <div class="overflow-hidden">
+                <slot />
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const props = defineProps({
+    title: String,
+    modelValue: { type: Boolean, default: false }
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const isExpanded = ref(props.modelValue)
+
+function toggle() {
+    console.log(isExpanded.value)
+    isExpanded.value = !isExpanded.value
+    emit('update:modelValue', isExpanded.value)
+}
+</script>
+
+<style scoped>
+.expand-content {
+    grid-template-rows: 0fr;
+}
+
+.expanded .expand-content {
+    grid-template-rows: 1fr;
+}
+</style>

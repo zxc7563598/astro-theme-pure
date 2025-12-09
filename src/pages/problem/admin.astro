@@ -1,0 +1,32 @@
+---
+import PageLayout from '@/layouts/BaseLayout.astro'
+import ProblemAdmin from '@/components/vue/ProblemAdmin.vue'
+
+const meta = {
+  description: '记录生活日常琐碎，这里保留灵感碎片、即时想法，是博客长文以外的流速频道。',
+  title: '提问箱'
+}
+const { view } = Astro.props
+---
+
+<PageLayout {meta}>
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate mb-2'>
+      <h1 class='mb-6 text-3xl font-medium'>提问箱回答</h1>
+      <p>我一直相信，真正的成长来自于解决真实的问题。</p>
+      <p>我们常说“闭门造车没有意义”，原因就在这里：经验不是凭空变强，而是在一次次被问题推动、被需求拉扯、被现实敲打后，慢慢累积起来的。</p>
+      <br/>
+      <p>产品也一样：只有当它被人使用、被真实需求触发，才会产生价值。</p>
+      <p>因此我做了这个页面。</p>
+      <br/>
+      <p>无论你想问什么、想讨论什么、想让我帮你实现什么点子，都可以在这里告诉我。</p>
+      <p>我会在空闲的时候回复你；如果你有想做的东西，我们也可以一起聊一聊方向、方案和可能性。</p>
+      <p>即使我最后没有真的去做，我也会尽力给你一个可行的建议。</p>
+      <br/>
+      <p>如果你不希望你的提问被其他人看到，可以选择锁定问题：那只有你和我能查看。</p>
+      <br/>
+      <p>欢迎来这提出你的问题或想法，让我知道你在想什么，也让我有机会通过解决问题继续成长。</p>
+    </div>
+    <ProblemAdmin client:load />
+  </main>
+</PageLayout>

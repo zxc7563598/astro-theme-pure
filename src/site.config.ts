@@ -50,6 +50,7 @@ export const theme: ThemeUserConfig = {
     menu: [
       { title: '文章', link: '/blog' },
       { title: '项目', link: '/projects' },
+      { title: '提问箱', link: '/problem' },
       { title: '友情链接', link: '/links' },
       { title: '关于我', link: '/about' }
     ]
