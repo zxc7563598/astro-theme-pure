@@ -5,6 +5,15 @@
       "desc": "散落在各地的灯火",
       "link_list": [
         {
+          "name": "清羽飞扬",
+          "intro": "柳影曳曳，清酒孤灯，扬笔撒墨，心境如霜",
+          "link": "https://blog.liushen.fun",
+          "avatar": "https://blog.liushen.fun/info/avatar.ico",
+          "friend_link": "https://blog.liushen.fun/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/清羽飞扬-1765359051.ico",
+          "check": false
+        },
+        {
           "name": "安知鱼",
           "intro": "生活明朗，万物可爱",
           "link": "https://blog.anheyu.com",
