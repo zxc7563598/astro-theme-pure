@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets'
 
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
-import { Button, FormattedDate, Icon, Label } from 'astro-pure/user'
+import { Button, FormattedDate, Icon, Label, Svg } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
@@ -10,9 +10,126 @@ import ProductDelivery from '@/components/projects/ProductDelivery.astro'
 import ProblemSimplify from '@/components/vue/ProblemSimplify.vue'
 import config from '@/site-config'
 
-const languages = ['Html', 'JavaScript', 'CSS', 'Vue', 'Shell', 'PHP', 'Go', 'Python', 'SQL', 'Git']
-const frontend = ['TypeScript', 'Vite', 'Naive UI', 'Vant', 'Element']
-const backend = ['Gin', 'ThinkPHP', 'Laravel', 'Webman']
+const languages = [
+  {
+    name: 'Html',
+    description: '网页结构标记语言',
+    href: 'https://developer.mozilla.org/zh-CN/docs/Web/HTML',
+    icon: import('@/assets/language/html.svg?raw')
+  },
+  {
+    name: 'CSS',
+    description: '网页样式与布局设计',
+    href: 'https://developer.mozilla.org/zh-CN/docs/Web/CSS',
+    icon: import('@/assets/language/css.svg?raw')
+  },
+  {
+    name: 'JavaScript',
+    description: '网页交互与逻辑脚本',
+    href: 'https://developer.mozilla.org/zh-CN/docs/Web/JavaScript',
+    icon: import('@/assets/language/js.svg?raw')
+  },
+  {
+    name: 'Vue',
+    description: '渐进式前端框架',
+    href: 'https://cn.vuejs.org/',
+    icon: import('@/assets/language/vue.svg?raw')
+  },
+  {
+    name: 'Shell',
+    description: '命令行脚本工具',
+    href: 'https://www.runoob.com/linux/linux-shell.html',
+    icon: import('@/assets/language/shell.svg?raw')
+  },
+  {
+    name: 'PHP',
+    description: '服务器端网页脚本',
+    href: 'https://www.php.net',
+    icon: import('@/assets/language/php.svg?raw')
+  },
+  {
+    name: 'Go',
+    description: '高效并发编程语言',
+    href: 'https://go.dev',
+    icon: import('@/assets/language/go.svg?raw')
+  },
+  {
+    name: 'Python',
+    description: '简洁易用通用语言',
+    href: 'https://www.python.org',
+    icon: import('@/assets/language/python.svg?raw')
+  },
+  {
+    name: 'SQL',
+    description: '数据库查询语言',
+    href: 'https://www.mysql.com',
+    icon: import('@/assets/language/sql.svg?raw')
+  },
+  {
+    name: 'Git',
+    description: '版本控制工具',
+    href: 'https://git-scm.com',
+    icon: import('@/assets/language/git.svg?raw')
+  }
+]
+const frontend = [
+  {
+    name: 'TypeScript',
+    description: 'JavaScript的超集',
+    href: 'https://www.typescriptlang.org',
+    icon: import('@/assets/language/ts.svg?raw')
+  },
+  {
+    name: 'Vite',
+    description: '快速前端构建工具',
+    href: 'https://vitejs.dev',
+    icon: import('@/assets/language/vite.svg?raw')
+  },
+  {
+    name: 'Naive UI',
+    description: 'Vue3轻量化组件库',
+    href: 'https://www.naiveui.com/zh-CN',
+    icon: import('@/assets/language/naive.svg?raw')
+  },
+  {
+    name: 'Vant',
+    description: '移动端 Vue 组件库',
+    href: 'https://vant-ui.github.io/vant/#/zh-CN',
+    icon: import('@/assets/language/vant.svg?raw')
+  },
+  {
+    name: 'Element',
+    description: 'PC端 Vue 组件库',
+    href: 'https://element-plus.org/zh-CN',
+    icon: import('@/assets/language/element.svg?raw')
+  }
+]
+const backend = [
+  {
+    name: 'Gin',
+    description: 'Go 高性能 Web 框架',
+    href: 'https://gin-gonic.com',
+    icon: import('@/assets/language/gin.svg?raw')
+  },
+  {
+    name: 'ThinkPHP',
+    description: '国产 PHP 快速开发框架',
+    href: 'https://www.thinkphp.cn',
+    icon: import('@/assets/language/thinkphp.svg?raw')
+  },
+  {
+    name: 'Laravel',
+    description: 'PHP 优雅 Web 框架',
+    href: 'https://laravel.com',
+    icon: import('@/assets/language/laravel.svg?raw')
+  },
+  {
+    name: 'Webman',
+    description: '高性能 PHP Web 框架',
+    href: 'https://www.workerman.net/webman',
+    icon: import('@/assets/language/webman.svg?raw')
+  }
+]
 
 const MAX_POSTS = 6
 const allPosts = await getBlogCollection()
@@ -26,6 +143,10 @@ if (!images[imagePath])
   throw new Error(
     `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif,avif,webp}"`
   )
+
+function isImageMetadata(obj: unknown): obj is ImageMetadata {
+  return typeof obj === 'object' && obj !== null && 'src' in obj
+}
 ---
 
 <PageLayout meta={{ title: '首页' }} highlightColor='#5EA88A'>
@@ -123,7 +244,7 @@ if (!images[imagePath])
               </div>
               <ProblemSimplify client:load />
             </div>
-            <div class="mt-4">
+            <div class='mt-4'>
               <div class='border-b-primary pb-2 mb-2 flex'>
                 <span class='text-xl font-semibold'>小工具</span>
               </div>
@@ -169,12 +290,111 @@ if (!images[imagePath])
           </div>
         </div>
       </section>
+      <section class='w-full'>
+        <h2 class='text-xl font-semibold'>我的技术栈</h2>
+        <div class='mt-4'>
+          <h3 class='text-sm font-medium text-muted-foreground mb-2'>语言 · Languages</h3>
+          <div class='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4'>
+            {
+              languages.map((item) => (
+                <a
+                  class='group relative text-sm leading-normal no-underline'
+                  href={item.href}
+                  id={item.name}
+                  target='_blank'
+                >
+                  <div class='flex items-center gap-x-3 rounded-lg border border-transparent px-1.5 py-1 transition-colors hover:border-border hover:bg-muted'>
+                    {isImageMetadata(item.icon) ? (
+                      <div class='size-10 rounded-lg bg-card p-2'>
+                        <Image
+                          src={item.icon}
+                          alt={item.name}
+                          class='h-full w-full object-contain'
+                        />
+                      </div>
+                    ) : (
+                      <Svg src={item.icon} class='size-10 rounded-lg bg-card fill-foreground p-2' />
+                    )}
 
-      <Section title='技能'>
-        <SkillLayout title='语言' skills={languages} />
-        <SkillLayout title='前端' skills={frontend} />
-        <SkillLayout title='后端' skills={backend} />
-      </Section>
+                    <div class='z-20 flex flex-col'>
+                      <div class='font-medium text-foreground'>{item.name}</div>
+                      <div class='font-normal'>{item.description}</div>
+                    </div>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+        <div class='mt-4'>
+          <h3 class='text-sm font-medium text-muted-foreground mb-2'>前端 · Frontend</h3>
+          <div class='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4'>
+            {
+              frontend.map((item) => (
+                <a
+                  class='group relative text-sm leading-normal no-underline'
+                  href={item.href}
+                  id={item.name}
+                  target='_blank'
+                >
+                  <div class='flex items-center gap-x-3 rounded-lg border border-transparent px-1.5 py-1 transition-colors hover:border-border hover:bg-muted'>
+                    {isImageMetadata(item.icon) ? (
+                      <div class='size-10 rounded-lg bg-card p-2'>
+                        <Image
+                          src={item.icon}
+                          alt={item.name}
+                          class='h-full w-full object-contain'
+                        />
+                      </div>
+                    ) : (
+                      <Svg src={item.icon} class='size-10 rounded-lg bg-card fill-foreground p-2' />
+                    )}
+
+                    <div class='z-20 flex flex-col'>
+                      <div class='font-medium text-foreground'>{item.name}</div>
+                      <div class='font-normal'>{item.description}</div>
+                    </div>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+        <div class='mt-4'>
+          <h3 class='text-sm font-medium text-muted-foreground mb-2'>后端 · Backend</h3>
+          <div class='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4'>
+            {
+              backend.map((item) => (
+                <a
+                  class='group relative text-sm leading-normal no-underline'
+                  href={item.href}
+                  id={item.name}
+                  target='_blank'
+                >
+                  <div class='flex items-center gap-x-3 rounded-lg border border-transparent px-1.5 py-1 transition-colors hover:border-border hover:bg-muted'>
+                    {isImageMetadata(item.icon) ? (
+                      <div class='size-10 rounded-lg bg-card p-2'>
+                        <Image
+                          src={item.icon}
+                          alt={item.name}
+                          class='h-full w-full object-contain'
+                        />
+                      </div>
+                    ) : (
+                      <Svg src={item.icon} class='size-10 rounded-lg bg-card fill-foreground p-2' />
+                    )}
+
+                    <div class='z-20 flex flex-col'>
+                      <div class='font-medium text-foreground'>{item.name}</div>
+                      <div class='font-normal'>{item.description}</div>
+                    </div>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 </PageLayout>
