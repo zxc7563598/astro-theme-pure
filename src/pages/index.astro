@@ -4,8 +4,6 @@ import { Image } from 'astro:assets'
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
 import { Button, FormattedDate, Icon, Label, Svg } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
-import Section from '@/components/home/Section.astro'
-import SkillLayout from '@/components/home/SkillLayout.astro'
 import ProductDelivery from '@/components/projects/ProductDelivery.astro'
 import ProblemSimplify from '@/components/vue/ProblemSimplify.vue'
 import config from '@/site-config'
@@ -210,7 +208,7 @@ function isImageMetadata(obj: unknown): obj is ImageMetadata {
                 href='/blog'
                 title='更多文章'
                 variant='ahead'
-                class='ml-a text-sm not-prose'
+                class='ml-a text-sm not-prose bg-transparent'
               />
             </div>
             <ul class='flex flex-col gap-y-3 sm:gap-y-4'>
@@ -241,12 +239,26 @@ function isImageMetadata(obj: unknown): obj is ImageMetadata {
             <div>
               <div class='border-b-primary pb-2 mb-2 flex'>
                 <span class='text-xl font-semibold'>提问箱</span>
+                <Button
+                  as='a'
+                  href='/problem'
+                  title='查看提问箱'
+                  variant='ahead'
+                  class='ml-a text-sm not-prose bg-transparent'
+                />
               </div>
               <ProblemSimplify client:load />
             </div>
             <div class='mt-4'>
               <div class='border-b-primary pb-2 mb-2 flex'>
                 <span class='text-xl font-semibold'>小工具</span>
+                <Button
+                  as='a'
+                  href='/projects'
+                  title='更多项目'
+                  variant='ahead'
+                  class='ml-a text-sm not-prose bg-transparent'
+                />
               </div>
               <ProductDelivery
                 list={{
@@ -291,7 +303,16 @@ function isImageMetadata(obj: unknown): obj is ImageMetadata {
         </div>
       </section>
       <section class='w-full'>
-        <h2 class='text-xl font-semibold'>我的技术栈</h2>
+        <div class='border-b-primary pb-2 mb-2 flex'>
+          <span class='text-xl font-semibold'>我的技术栈</span>
+          <Button
+            as='a'
+            href='/projects#direct-contact'
+            title='商务合作 · 外包开发 · 技术咨询'
+            variant='ahead'
+            class='ml-a text-sm not-prose bg-transparent'
+          />
+        </div>
         <div class='mt-4'>
           <h3 class='text-sm font-medium text-muted-foreground mb-2'>语言 · Languages</h3>
           <div class='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4'>
