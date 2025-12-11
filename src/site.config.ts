@@ -78,6 +78,11 @@ export const theme: ThemeUserConfig = {
         title: '我的碎碎念',
         link: '/muttering',
         pos: 2 // position set to 2 will be appended to copyright line
+      },
+      {
+        title: '我的菜谱备忘录',
+        link: '/kitchen',
+        pos: 2 // position set to 2 will be appended to copyright line
       }
     ],
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */
