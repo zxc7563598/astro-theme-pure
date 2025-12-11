@@ -1,0 +1,100 @@
+---
+title: '周黑鸭味鸡翅尖'
+description: '鸡翅尖以周黑鸭风味卤汁慢煮入味，口感酥嫩弹牙，带着微甜与辛香的独特香气，一口上头'
+order: 1
+---
+
+import { Aside, CardList, Collapse, Label, Steps } from 'astro-pure/user'
+import CardCheckList from '@/components/custom/CardCheckList.astro'
+
+## 准备材料
+
+<CardList
+  title='单位说明'
+  list={[
+    { title: '勺 : 装水的情况下 ≈ 10g', link: 'javascript:;' },
+    { title: '匙 : 装盐的情况下 ≈ 5g', link: 'javascript:;' }
+  ]}
+/>
+
+<CardCheckList
+  title='材料清单'
+  list={[
+    {
+      title: '原材料',
+      children: [{ title: '鸡翅尖', unit: '1斤', clickable: true }]
+    },
+    {
+      title: '干料',
+      children: [
+        { title: '干花椒', unit: '15g', clickable: true },
+        { title: '干麻椒', unit: '15g', clickable: true },
+        { title: '干辣椒', unit: '30g', clickable: true },
+        { title: '姜', unit: '2片', clickable: true },
+        { title: '桂皮', unit: '1g', clickable: true },
+        { title: '香叶', unit: '1片', clickable: true }
+      ]
+    },
+    {
+      title: '湿料',
+      children: [
+        { title: '料酒', unit: '250克', clickable: true },
+        { title: '生抽', unit: '25克', clickable: true },
+        { title: '老抽', unit: '25克', clickable: true },
+        { title: '冰糖', unit: '25克', clickable: true },
+        { title: '蜂蜜', unit: '5克', clickable: true }
+      ]
+    },
+    {
+      title: '焯水去腥',
+      children: [
+        { title: '料酒', unit: '3勺', clickable: true },
+        { title: '姜片', unit: '3片', clickable: true }
+      ]
+    }
+  ]}
+/>
+
+<Aside type='tip'>料酒这么多的原因在于在煮翅尖的时候是完全不放水的，就用调出的料来煮</Aside>
+
+<Aside type='tip'>
+  除了鸡翅尖，其他鸭脖一类的也可以考虑，本教程对标的是1斤的鸡翅尖，如果需要煮更多，干/湿料需要按照同等比例增加（比如煮1斤翅尖+1斤鸭脖总共2斤肉需要所有调料\*2）
+</Aside>
+
+## 操作步骤
+
+<Steps>
+
+1.  **焯水**​
+
+    锅中加水，鸡翅尖冷水下锅。
+
+    加入 `3勺料酒`、`3片生姜` 去腥。
+
+    水开后会出现大量浮沫，先把浮沫撇干净；等浮沫不再大量产生后捞出鸡翅尖，用凉水反复冲洗，再浸入冷水中冷却，以便快速降温、保持口感。
+
+2.  **配料**​
+
+    准备两个碗：一个装干料，一个装湿料。
+
+    干料：加入 `15克干花椒`、`15克干麻椒`、`30克干辣椒`、`2片生姜`、`1克肉桂`、`1片香叶`
+
+    湿料：加入 `250克料酒`、`25克生抽`、`25克老抽`、`25克冰糖`、`5克蜂蜜`
+
+    > 若没有麻椒可用花椒替代，但麻味会弱一些，不太建议完全省略。
+
+    > 蜂蜜主要用于中和花椒的微苦，没有也可以不加，影响不大。
+
+3.  **煮翅尖**​
+
+    锅洗净后，将 `干料` 和 `湿料` 全部倒入锅中，开火加热。
+
+    加入 `鸡翅尖`，大火煮开后转小火，盖上锅盖慢慢焖煮。过程中每隔几十秒到一分钟翻动一下，保证翅尖均匀上色入味。
+
+    当翅尖颜色变深、料酒逐渐减少时，可以夹一只尝尝味道；差不多之后开大火快速收汁，**记得不停翻拌避免糊底**。
+
+    收至几乎没有料汁即可关火出锅。
+
+    > 因为调料没有办法完全浸泡翅尖，所以每隔几十秒到一分钟就开盖翻拌一下翅尖，保证味道均匀，这一步很重要，不要忽略
+
+</Steps>

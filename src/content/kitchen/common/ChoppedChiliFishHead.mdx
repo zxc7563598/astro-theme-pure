@@ -1,0 +1,122 @@
+---
+title: '剁椒鱼头'
+description: '鲜活鱼头清蒸至嫩，铺上剁椒和蒜蓉，出锅淋热油，香辣鲜美，鱼肉鲜嫩入味'
+order: 1
+---
+
+import { Aside, CardList, Collapse, Label, Steps } from 'astro-pure/user'
+import CardCheckList from '@/components/custom/CardCheckList.astro'
+
+## 准备材料
+
+<CardList
+  title='单位说明'
+  list={[
+    { title: '勺 : 装水的情况下 ≈ 10g', link: 'javascript:;' },
+    { title: '匙 : 装盐的情况下 ≈ 5g', link: 'javascript:;' }
+  ]}
+/>
+
+<CardCheckList
+  title='材料清单'
+  list={[
+    {
+      title: '原材料',
+      children: [
+        { title: '鱼头', unit: '1个', clickable: true },
+        { title: '生姜', unit: '适量', clickable: true }
+      ]
+    },
+    {
+      title: '用于腌鱼',
+      children: [
+        { title: '料酒', unit: '1勺', clickable: true },
+        { title: '盐', unit: '1匙', clickable: true },
+        { title: '生抽', unit: '1勺', clickable: true },
+        { title: '蚝油', unit: '1勺', clickable: true }
+      ]
+    },
+    {
+      title: '用于蒸鱼',
+      children: [
+        { title: '小香葱', unit: '4根', clickable: true },
+        { title: '蒜', unit: '8瓣', clickable: true },
+        { title: '生姜', unit: '2片', clickable: true },
+        { title: '蒸鱼豆豉', unit: '1勺', clickable: true },
+        { title: '蚝油', unit: '1勺', clickable: true },
+        { title: '生抽', unit: '1勺', clickable: true },
+        { title: '料酒', unit: '1勺', clickable: true },
+        { title: '白醋', unit: '1勺', clickable: true },
+        { title: '白糖', unit: '0.5匙', clickable: true },
+        { title: '胡椒粉', unit: '0.5匙', clickable: true },
+        { title: '盐', unit: '0.5匙', clickable: true },
+        { title: '小米辣', unit: '适量', clickable: true },
+        { title: '剁椒', unit: '适量', clickable: true }
+      ]
+    },
+    {
+      title: '用于最后浇淋',
+      children: [{ title: '油', unit: '1锅勺', clickable: true }]
+    }
+  ]}
+/>
+
+<Aside type='tip'>如果没有蒸鱼豆豉，可以用等量蚝油代替</Aside>
+
+<Aside type='tip'>
+  生姜适量的原因是因为生姜切片铺在盘底，切片铺在盘子下面差不多就行，8-10片一般，取决于盘子跟鱼头大小
+</Aside>
+
+<Aside type='tip'>
+  小米辣适量的原因是因为小米辣用于调整辣度，不能吃辣就少放甚至不放，能吃辣就根据自己喜好添加
+</Aside>
+
+<Aside type='tip'>剁椒适量的原因是因为剁椒的量与葱白/蒜末等调料的比例相同，后续教程中会提及</Aside>
+
+## 操作步骤
+
+<Steps>
+
+1. **腌鱼**​
+
+   将鱼头处理干净，放入盘中。
+
+   加入 `料酒1勺`、`生抽1勺`、`蚝油1勺`，在鱼头正反面撒上 `盐1匙`，涂抹均匀。
+
+   腌制 约 10 分钟 让鱼头入味。
+
+2. **制作剁椒料**​
+
+   `小香葱` 取葱段，`生姜切2片`、`蒜8瓣拍碎`，一起剁成碎沫，放入碗中。
+
+   加入等量 `剁椒`，再加入 `蒸鱼豆豉1勺`、`蚝油1勺`、`生抽1勺`、`料酒1勺`、`白醋1勺`、`白糖0.5匙`、`胡椒粉0.5匙`、`盐0.5匙`，搅拌均匀
+
+   喜欢更辣的可以加入适量 `小米辣`。
+
+   > 剁椒量可根据个人口味适量增加，一般以上比例已足够。
+
+3. **蒸鱼**​
+
+   `鱼头` 腌制好后轻轻洗净，盘底铺上 `姜片`，再放上 `鱼头`。
+
+   将调好的 `剁椒料` 均匀铺在 `鱼头` 上。
+
+   水烧开后放入蒸锅，大火蒸 **10–15 分钟**（根据鱼头大小调整，拿中间值即可，出锅前可尝试确认熟度）。
+
+   蒸好后，将 `小香葱葱叶` 切碎备用。   
+
+   > 取决于鱼头的大小，如果不确定取中间值即可，实在没把握可以出锅前尝一下
+
+4. **出锅**
+
+   `葱花` 撒到 `鱼头` 上
+   
+   起锅烧油，通常建议多烧一些，烧热到油开始冒烟，均匀的浇在鱼头上，完成！
+
+   盘中的汤/油不需要倒，鱼头吃到一半清水煮一些面加在里面也很香
+
+   > 喜欢吃辣一些的，可以把油替换成辣椒油
+
+   > 也可以在热油的时候，加入一点点花椒（几粒）八角（半个）带出香味后捞出，这样油会带一些香气，但需要注意不要炸糊了，差不多点捞出即可
+
+</Steps>

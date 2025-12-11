@@ -4,24 +4,37 @@ description: '川菜经典，用酸菜的酸香衬托鱼片的鲜嫩，汤白味
 order: 1
 ---
 
-import { Aside, Steps } from 'astro-pure/user'
+import { Aside, CardList, Steps } from 'astro-pure/user'
+import CardCheckList from '@/components/custom/CardCheckList.astro'
 
 ## 准备材料
 
-- 海底捞酸菜鱼调味料 \* 1
-- 草鱼 / 黑鱼 / 鲶鱼 \* 1
-- 小香葱 \* 2 根（直接切丁成葱花）
+<CardList
+  title='单位说明'
+  list={[
+    { title: '勺 : 装水的情况下 ≈ 10g', link: 'javascript:;' },
+    { title: '匙 : 装盐的情况下 ≈ 5g', link: 'javascript:;' }
+  ]}
+/>
 
-> 非海底捞酸菜鱼底料也可以，后续步骤为海底捞底料，非海底捞底料尽量选择购买拥有 调料包 + 酸菜包 + 腌鱼包 的版本
-
-> 注意鱼的重量，如果是更大或者更小的鱼，可以考虑根据比例买酸菜鱼底料，总之 3 斤鱼 = 1 包海底捞酸菜鱼底料，实际制作过程中根据比例自行调整
+<CardCheckList
+  title='材料清单'
+  list={[
+    {
+      title: '原材料',
+      children: [
+        { title: '海底捞酸菜鱼调味料', unit: '1包', clickable: true },
+        { title: '草鱼/黑鱼/鲶鱼', unit: '1条', clickable: true },
+        { title: '小香葱', unit: '2根', clickable: true }
+      ]
+    }
+  ]}
+/>
 
 <Aside type='tip'>
-
-后续步骤为黑鱼（ 3 斤）的建议，通常建议买黑鱼，黑鱼的刺比较少，肉质弹嫩，清爽不肥腻
-
+  非海底捞酸菜鱼底料也可以，后续步骤为海底捞底料，非海底捞底料尽量选择购买拥有 调料包 + 酸菜包 + 腌鱼包 的版本
 </Aside>
-
+<Aside type='tip'>通常建议买黑鱼，黑鱼的刺比较少，肉质弹嫩，清爽不肥腻</Aside>
 ## 操作步骤
 
 <Steps>

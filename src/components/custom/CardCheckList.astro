@@ -1,0 +1,29 @@
+---
+import type { CardListData } from 'astro-pure/types'
+
+import CardCheckListChildren from './CardCheckListChildren.astro'
+import { cn } from './utils'
+
+type Props = CardListData & {
+  collapse?: boolean
+  class?: string
+  style?: string | Record<string, string>
+}
+
+const { title, list, class: className, ...props } = Astro.props
+---
+
+{
+  (
+    <div
+      class={cn(
+        'not-prose my-3 flex flex-col gap-y-2 rounded-xl border px-4 py-3 sm:py-4 cursor-pointer',
+        className
+      )}
+      {...props}
+    >
+      <p class='text-lg font-medium text-foreground cursor-pointer'>{title}</p>
+      <CardCheckListChildren children={list} title={title} main />
+    </div>
+  )
+}

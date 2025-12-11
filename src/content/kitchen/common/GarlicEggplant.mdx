@@ -1,0 +1,75 @@
+---
+title: '蒜蓉茄子'
+description: '清香入味的家常菜，茄子软糯香滑，蒜香浓郁、咸鲜开胃，简单蒸一蒸、拌一拌就能轻松上桌'
+order: 1
+---
+
+import { Aside, CardList, Steps } from 'astro-pure/user'
+import CardCheckList from '@/components/custom/CardCheckList.astro'
+
+## 准备材料
+
+<CardList
+  title='单位说明'
+  list={[
+    { title: '勺 : 装水的情况下 ≈ 10g', link: 'javascript:;' },
+    { title: '匙 : 装盐的情况下 ≈ 5g', link: 'javascript:;' }
+  ]}
+/>
+
+<CardCheckList
+  title='材料清单'
+  list={[
+    {
+      title: '原材料',
+      children: [{ title: '茄子', unit: '1个', clickable: true }]
+    },
+    {
+      title: '调料',
+      children: [
+        { title: '蒜', unit: '10瓣', clickable: true },
+        { title: '小米辣', unit: '适量，过程中详细说明', clickable: true },
+        { title: '小香葱', unit: '2根', clickable: true },
+        { title: '蚝油', unit: '1勺', clickable: true },
+        { title: '生抽', unit: '1勺', clickable: true },
+        { title: '鸡精', unit: '0.5匙', clickable: true },
+        { title: '盐', unit: '0.5匙', clickable: true },
+        { title: '白糖', unit: '0.5匙', clickable: true }
+      ]
+    }
+  ]}
+/>
+
+## 操作步骤
+
+<Steps>
+
+1. **蒸茄子**
+
+   `茄子` 横着切掉根部，竖着一分为二，平铺在盘子上，水开上锅扣盖蒸 5 分钟
+
+   > 根部：绿色根茎部分
+
+2. **调制蒜末**
+
+   `蒜` 切末，分成两份，一份放入碗中
+
+   `小米辣` 切碎，为蒜末总量的 1 / 3 ，放入碗中
+
+   起锅烧油，等油温上去之后倒入蒜末碗中，搅拌均匀
+
+   > 要把油浇到蒜末里，只要能跟蒜末拌出粘稠状就可以，不要太多的油
+
+   > 油温上去之后会冒烟的，起锅烧油（锅里不要有水，会崩）烧到油开始有一点点冒烟，或者木筷子插进去会出现一点点细小的气泡就说明油温足够了
+
+   加入 `0.5匙鸡精`、`0.5匙盐`、`0.5匙白糖`、`1勺蚝油`、`1勺生抽`，搅拌均匀，蒜蓉酱就调好了
+
+3. **热油激发香味，开吃！**
+
+   蒸好的茄子用小刀竖着划几刀将调好的蒜蓉酱倒在茄子上，继续蒸 3 分钟
+
+   出锅撒上 `葱花`，泼一勺热油上去，开吃
+
+   > 如果出锅时盘子里油很多，可以偷偷倒掉一点，没什么太大的问题，不影响味道
+
+</Steps>

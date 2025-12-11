@@ -1,0 +1,128 @@
+---
+title: '手撕鸡腿'
+description: '一道清爽开胃的凉拌菜，将熟鸡腿撕成丝后拌入葱姜蒜、小米椒和酱汁，肉质鲜嫩多汁，香辣爽口、越吃越上头'
+order: 1
+---
+
+import { Aside, CardList, Steps } from 'astro-pure/user'
+import CardCheckList from '@/components/custom/CardCheckList.astro'
+
+## 准备材料
+
+<CardList
+  title='单位说明'
+  list={[
+    { title: '勺 : 装水的情况下 ≈ 10g', link: 'javascript:;' },
+    { title: '匙 : 装盐的情况下 ≈ 5g', link: 'javascript:;' }
+  ]}
+/>
+
+<CardCheckList
+  title='材料清单'
+  list={[
+    {
+      title: '原材料',
+      children: [{ title: '鸡腿', unit: '2个', clickable: true }]
+    },
+    {
+      title: '用于煮鸡腿去腥',
+      children: [
+        { title: '葱', unit: '手指长的一段', clickable: true },
+        { title: '姜', unit: '3-4片', clickable: true },
+        { title: '料酒', unit: '3-4勺', clickable: true }
+      ]
+    },
+    {
+      title: '备一份干料',
+      children: [
+        { title: '辣椒面', unit: '适量，过程中详细说明', clickable: true },
+        { title: '胡椒粉', unit: '适量，过程中详细说明', clickable: true },
+        { title: '蒜', unit: '适量，过程中详细说明', clickable: true },
+        { title: '小米椒', unit: '适量，过程中详细说明', clickable: true },
+        { title: '白芝麻', unit: '适量，过程中详细说明', clickable: true }
+      ]
+    },
+    {
+      title: '备一份湿料',
+      children: [
+        { title: '生抽', unit: '3勺', clickable: true },
+        { title: '蚝油', unit: '1勺', clickable: true },
+        { title: '陈醋', unit: '1勺', clickable: true },
+        { title: '盐', unit: '0.5匙', clickable: true },
+        { title: '白糖', unit: '0.5匙', clickable: true }
+      ]
+    },
+    {
+      title: '装点门面',
+      children: [{ title: '葱花香菜', unit: '随意', clickable: true }]
+    }
+  ]}
+/>
+
+<Aside type='tip'>
+  鸡腿就是普通的鸡腿，整个鸡腿， 2 个就接近 500 g左右了，不是琵琶腿，琵琶腿也可以，就是要多买几个
+</Aside>
+
+## 操作步骤
+
+<Steps>
+
+1. **煮鸡腿备用**​
+
+   `2个鸡腿` 下锅，加入冷水，没过整个鸡腿
+
+   加入 `葱`、`3-4片姜`、`3-4勺料酒`
+
+   盖盖开煮，水开后再煮15-20分钟
+
+   > 关于水开后煮的时间，鸡腿大就多煮一会，小就少煮一会
+
+   > 一个简单判断的方法，捞出鸡腿给他一刀，或者筷子扎一下，里面的肉白了就熟了
+
+   > 一点点红没事，鸡腿里面有几根比较粗的血管，血管红不是问题，不用太在意
+
+   捞出浸泡到凉水里，丢到一边让他降降温
+
+2. **调制料汁**
+
+   用 `辣椒面`、`胡椒粉`、`蒜`、`小米椒`、`白芝麻` 做一碗料
+
+   `蒜` 切蒜末，放入碗中
+
+   `辣椒面` 用 `蒜末` 量的 1/3 ，倒入碗中
+
+   `小米椒` 与 `辣椒面` 的用量相同，为 `蒜末` 量的 1/3 ，倒入碗中
+
+   `胡椒粉` 与 `辣椒面` 的用量相同，为 `蒜末` 量的 1/3 ，倒入碗中
+
+   `白芝麻` 与 `辣椒面` 的用量相同，为 `蒜末` 量的 1/3 ，倒入碗中
+
+   > 总结：
+   >
+   > 可以理解成：**蒜末 : 辣椒面 : 胡椒粉 : 小米椒 : 白芝麻**
+   >
+   > 的比例为：**1 : 0.3 : 0.3 : 0.3 : 0.3**
+
+   搅拌均匀，之后起锅烧油，等油温升高后倒入碗中
+
+   > 一定要搅拌好，不然辣椒面会被热油烫糊
+
+   > 油温上去之后会冒烟的，起锅烧油（锅里不要有水，会崩）烧到油开始有一点点冒烟，或者木筷子插进去会出现一点点细小的气泡就说明油温足够了
+
+   搅拌均匀，之后加入 `生抽3勺`、`蚝油1勺`、`陈醋1勺`、`盐0.5匙`、`白糖0.5匙`
+
+   > 注意顺序，油热泼完蒜末那些之后再加入生抽、蚝油、陈醋、盐、白糖
+
+   > 不要在泼油之前就加进去了
+
+   搅拌均匀，料汁就调好了
+
+3. **完成，开吃**
+
+   鸡腿撕碎成小块，骨头丢掉不要
+
+   倒入 `料汁`，用手抓拌均匀
+
+   撒入 `葱花香菜`，开吃
+
+</Steps>

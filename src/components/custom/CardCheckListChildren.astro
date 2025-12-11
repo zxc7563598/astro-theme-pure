@@ -1,0 +1,80 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types'
+
+import { cn } from './utils'
+
+type CardList = {
+  title: string
+  unit?: string
+  clickable?: boolean
+  children?: CardList
+}[]
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+  main?: boolean
+  children: CardList
+  title: string
+}
+const { main = false, children, title } = Astro.props
+---
+
+<ul class={cn('flex flex-col gap-y-1', !main && 'subitem list-disc ms-5')}>
+  {
+    children.map((child: CardList[number]) => {
+      const Tag = child.clickable ? 'div' : 'p'
+      return (
+        <li
+          class={cn(
+            child.clickable && 'markable-item cursor-pointer rounded block w-full px-1 py-0.5'
+          )}
+          data-id={`${title}:${child.title}`}
+        >
+          <Tag
+            class={cn(
+              'markable-text block w-full select-none',
+              main ? 'text-foreground' : 'text-muted-foreground',
+              Tag === 'p' && 'my-1'
+            )}
+          >
+            <div class='flex items-baseline w-full overflow-hidden'>
+              <span class='flex-shrink-0 mr-3'>{child.title}</span>
+              {child.unit && (
+                <span class='flex-1 overflow-hidden whitespace-nowrap opacity-50 text-sm tracking-[0.2em]'>
+                  {'·'.repeat(200)}
+                </span>
+              )}
+              {child.unit && <span class='flex-shrink-0 opacity-90 ml-3'>{child.unit}</span>}
+            </div>
+          </Tag>
+          {child.children && child.children.length > 0 && (
+            <Astro.self children={child.children} title={child.title} />
+          )}
+        </li>
+      )
+    })
+  }
+</ul>
+
+<script is:inline type='module'>
+  if (typeof window !== 'undefined') {
+    const state = {}
+    const items = Array.from(document.querySelectorAll('.markable-item'))
+    function mark(textEl, marked) {
+      textEl.classList.toggle('line-through', marked)
+      textEl.classList.toggle('text-muted-foreground', marked)
+    }
+    items.forEach((li) => {
+      const id = li.getAttribute('data-id')
+      if (!id) return
+      const textEl = li.querySelector('.markable-text')
+      if (!textEl) return
+      state[id] = false
+      mark(textEl, false)
+      li.addEventListener('click', () => {
+        const newValue = !state[id]
+        state[id] = newValue
+        mark(textEl, newValue)
+      })
+    })
+  }
+</script>
