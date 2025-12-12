@@ -253,7 +253,7 @@ composer require google/protobuf
 
 ---
 
-### 编译 `.proto` 文件
+### 编译 .proto 文件
 
 ```bash
 protoc --php_out=./protobuf --proto_path=./protobuf TEST_USER_INFO.proto
