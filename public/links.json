@@ -111,6 +111,15 @@
           "friend_link": "https://www.sejolyn.fyi/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
           "check": true
+        },
+        {
+          "name": "超腾开源",
+          "intro": "全栈开发者博客，愿景是利用AI技术降低软件开发成本，打造软件开发、销售、研究一体化平台",
+          "link": "https://www.hylab.cn/",
+          "avatar": "https://www.hylab.cn/logo.png",
+          "friend_link": "https://www.hylab.cn/contact/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/超腾开源-1766233398510.png",
+          "check": true
         }
       ]
     },
