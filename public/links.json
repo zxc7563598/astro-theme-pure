@@ -86,15 +86,6 @@
           "check": false
         },
         {
-          "name": "Under the Sun with Paddy",
-          "intro": "分享实践思考、算法编程以及快乐。",
-          "link": "https://www.paddysun.top",
-          "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
-          "friend_link": "https://www.paddysun.top/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
-          "check": true
-        },
-        {
           "name": "Yaten-Z's Blog",
           "intro": "世界多变而永恒，文字孤独却自由",
           "link": "https://blog.yaten.xyz",
@@ -127,6 +118,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "Under the Sun with Paddy",
+          "intro": "分享实践思考、算法编程以及快乐。",
+          "link": "https://www.paddysun.top",
+          "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
+          "friend_link": "https://www.paddysun.top/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
+          "check": true
+        },
         {
           "name": "唐志远",
           "intro": "立志成为一名架构师",
