@@ -111,13 +111,7 @@
           "friend_link": "https://www.hylab.cn/contact/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/超腾开源-1766233398510.png",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "Under the Sun with Paddy",
           "intro": "分享实践思考、算法编程以及快乐。",
@@ -126,7 +120,13 @@
           "friend_link": "https://www.paddysun.top/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "唐志远",
           "intro": "立志成为一名架构师",
