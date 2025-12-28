@@ -120,6 +120,15 @@
           "friend_link": "https://www.paddysun.top/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
           "check": true
+        },
+        {
+          "name": "YUNYI BLOG",
+          "intro": "得闲饮茶~~~",
+          "link": "https://www.yunyitang.me",
+          "avatar": "https://www.yunyitang.me/favicon/favicon.ico",
+          "friend_link": "https://www.yunyitang.me/friends/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/YUNYI-BLOG-1766930654687.ico",
+          "check": true
         }
       ]
     },
