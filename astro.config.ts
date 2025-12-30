@@ -1,11 +1,11 @@
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import node from '@astrojs/node'
+import sitemap from '@astrojs/sitemap'
+import vue from '@astrojs/vue'
 import AstroPureIntegration from 'astro-pure'
 import { defineConfig, fontProviders } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
-import vue from '@astrojs/vue'
-import sitemap from '@astrojs/sitemap'
 
 // Local integrations
 import rehypeAutolinkHeadings from './src/plugins/rehype-auto-link-headings.ts'
@@ -76,22 +76,14 @@ export default defineConfig({
         // Two copies of @shikijs/types (one under node_modules
         // and another nested under @astrojs/markdown-remark → shiki).
         // Official transformers
-        // @ts-expect-error
         transformerNotationDiff(),
-        // @ts-expect-error
         transformerNotationHighlight(),
-        // @ts-expect-error
         transformerRemoveNotationEscape(),
         // Custom transformers
-        // @ts-expect-error
         updateStyle(),
-        // @ts-expect-error
         addTitle(),
-        // @ts-expect-error
         addLanguage(),
-        // @ts-expect-error
         addCopyButton(2000), // timeout in ms
-        // @ts-expect-error
         addCollapse(15) // max lines that needs to collapse
       ]
     }
