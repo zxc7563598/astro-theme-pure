@@ -68,11 +68,6 @@ export const theme: ThemeUserConfig = {
         link: 'https://beian.mps.gov.cn/#/query/webSearch',
         style: 'text-sm' // Uno/TW CSS class
       },
-      {
-        title: 'Travelling',
-        link: 'https://www.travellings.cn/go.html',
-        style: 'text-sm'
-      },
       // Privacy Policy link
       {
         title: '我的碎碎念',
@@ -178,6 +173,8 @@ export const integ: IntegrationUserConfig = {
     enable: true,
     // Server service link
     server: 'https://waline.hejunjie.life/',
+    // Show meta info for comments
+    showMeta: false,
     // Refer https://waline.js.org/en/guide/features/emoji.html
     emoji: ['bmoji', 'weibo'],
     // Refer https://waline.js.org/en/reference/client/props.html
