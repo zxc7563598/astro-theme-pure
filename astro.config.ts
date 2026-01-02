@@ -1,10 +1,9 @@
-import { defineConfig, fontProviders } from 'astro/config'
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import vercel from '@astrojs/vercel'
+import AstroPureIntegration from 'astro-pure'
+import { defineConfig, fontProviders } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
-
-import AstroPureIntegration from 'astro-pure'
 
 // Local integrations
 import rehypeAutolinkHeadings from './src/plugins/rehype-auto-link-headings.ts'
@@ -75,22 +74,22 @@ export default defineConfig({
         // Two copies of @shikijs/types (one under node_modules
         // and another nested under @astrojs/markdown-remark → shiki).
         // Official transformers
-        // @ts-expect-error
+        // @ts-ignore this happens due to multiple versions of shiki types
         transformerNotationDiff(),
-        // @ts-expect-error
+        // @ts-ignore this happens due to multiple versions of shiki types
         transformerNotationHighlight(),
-        // @ts-expect-error
+        // @ts-ignore this happens due to multiple versions of shiki types
         transformerRemoveNotationEscape(),
         // Custom transformers
-        // @ts-expect-error
+        // @ts-ignore this happens due to multiple versions of shiki types
         updateStyle(),
-        // @ts-expect-error
+        // @ts-ignore this happens due to multiple versions of shiki types
         addTitle(),
-        // @ts-expect-error
+        // @ts-ignore this happens due to multiple versions of shiki types
         addLanguage(),
-        // @ts-expect-error
+        // @ts-ignore this happens due to multiple versions of shiki types
         addCopyButton(2000), // timeout in ms
-        // @ts-expect-error
+        // @ts-ignore this happens due to multiple versions of shiki types
         addCollapse(15) // max lines that needs to collapse
       ]
     }
