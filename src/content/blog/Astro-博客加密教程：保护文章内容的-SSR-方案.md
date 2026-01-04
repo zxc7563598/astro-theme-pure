@@ -248,7 +248,7 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
     </div>
     <div class="relative w-full text-end mt-3.5">
         <button
-            class="rounded-lg bg-muted px-8 py-2 text-muted-foreground text-sm hover:bg-primary-foreground transition"
+            class="rounded-lg bg-muted px-8 py-2 text-muted-foreground text-sm hover:bg-card transition"
             :disabled="loading" @click="verifyAnswer">
             {{ loading ? '验证中...' : '验证' }}
         </button>

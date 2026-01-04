@@ -32,7 +32,7 @@
 
     <div class="pt-2">
       <button type="submit" :disabled="loading"
-        class="w-full rounded-lg bg-muted px-8 py-2 text-muted-foreground text-sm hover:bg-primary-foreground transition">
+        class="w-full rounded-lg bg-muted px-8 py-2 text-muted-foreground text-sm hover:bg-card transition">
         {{ loading ? '提交中...' : '提交申请' }}
       </button>
     </div>

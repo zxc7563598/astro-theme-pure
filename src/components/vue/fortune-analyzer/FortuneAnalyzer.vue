@@ -2,14 +2,13 @@
     <div class="grid grid-cols-1 gap-3 rounded-xl border p-3 sm:grid-cols-2 sm:p-4" id="id-check">
         <div class="col-span-full flex items-center gap-2">
             <select v-model="gender"
-                class="rounded-lg border px-3 py-2 text-sm text-gray-700 outline-none focus:ring-1 flex-shrink-0">
+                class="rounded-lg border px-3 py-2 text-sm text-gray-700 dark:text-gray-300 outline-none focus:ring-1 flex-shrink-0">
                 <option value=0>女</option>
                 <option value=1>男</option>
             </select>
             <input v-model="birthday_time" type="datetime-local" step="1"
                 class="flex-1 rounded-lg border px-3 py-2 text-sm outline-none focus:ring-1" placeholder="出生时间，精确到分钟" />
-            <button
-                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-primary-foreground transition"
+            <button class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
                 :disabled="loading" @click="handleQuery">
                 {{ loading ? '查询中...' : '查询' }}
             </button>
@@ -417,7 +416,6 @@ async function handleQuery() {
     }).then((data) => {
         if (data.code == 0) {
             show.value = true
-            console.log(data.data)
             Object.assign(wu_xing_breakdown, data.data.wu_xing_breakdown)
             Object.assign(wu_xing_simple, data.data.wu_xing_simple)
             Object.assign(wu_xing_full, data.data.wu_xing_full)

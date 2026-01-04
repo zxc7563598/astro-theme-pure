@@ -5,7 +5,7 @@
                 class="flex-1 rounded-lg border px-3 py-2 text-sm outline-none focus:ring-1"
                 placeholder="输入1900-2100之间的年份" />
             <button
-                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-primary-foreground transition"
+                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
                 :disabled="loading" @click="handleQuery">
                 {{ loading ? '查询中...' : '查询' }}
             </button>

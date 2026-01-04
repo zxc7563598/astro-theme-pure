@@ -4,7 +4,7 @@
             <input v-model="address" class="flex-1 rounded-lg border px-3 py-2 text-sm outline-none focus:ring-1"
                 placeholder="请输入地址信息" />
             <button
-                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-primary-foreground transition"
+                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
                 :disabled="loading" @click="handleQuery">
                 {{ loading ? '解析中...' : '解析' }}
             </button>

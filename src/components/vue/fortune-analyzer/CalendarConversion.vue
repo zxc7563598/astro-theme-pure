@@ -2,14 +2,14 @@
     <div class="grid grid-cols-1 gap-3 rounded-xl border p-3 sm:grid-cols-2 sm:p-4" id="id-check">
         <div class="col-span-full flex items-center gap-2">
             <select v-model="type"
-                class="rounded-lg border px-3 py-2 text-sm text-gray-700 outline-none focus:ring-1 flex-shrink-0">
+                class="rounded-lg border px-3 py-2 text-sm text-gray-700 dark:text-gray-300 outline-none focus:ring-1 flex-shrink-0">
                 <option value="solar-to-lunar">阳历转农历</option>
                 <option value="lunar-to-solar">农历转阳历</option>
             </select>
             <input v-model="date" type="date"
-                class="flex-1 rounded-lg border px-3 py-2 text-sm outline-none focus:ring-1" placeholder="请输入身份证号码" />
+                class="flex-1 rounded-lg border px-3 py-2 text-sm outline-none focus:ring-1" placeholder="请输入日期" />
             <button
-                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-primary-foreground transition"
+                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
                 :disabled="loading" @click="handleQuery">
                 {{ loading ? '查询中...' : '查询' }}
             </button>
@@ -19,7 +19,7 @@
             <input v-model="convert_date" type="date"
                 class="flex-1 rounded-lg border px-3 py-2 text-sm outline-none focus:ring-1 cursor-pointer" disabled />
             <button
-                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-primary-foreground transition"
+                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
                 @click="copyItem">
                 复制
             </button>

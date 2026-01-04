@@ -4,7 +4,7 @@
             <input v-model="seed" type="text" placeholder="输入任意字符串生成头像"
                 class="flex-1 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary w-full sm:w-auto" />
             <button
-                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-primary-foreground transition w-full sm:w-auto"
+                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition w-full sm:w-auto"
                 @click="generateAvatar">
                 生成头像
             </button>

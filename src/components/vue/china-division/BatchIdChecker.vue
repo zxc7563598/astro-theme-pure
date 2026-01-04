@@ -3,7 +3,7 @@
         <!-- 顶部按钮：下载示例 -->
         <div class="col-span-full flex justify-between items-center">
             <button
-                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-primary-foreground transition w-full"
+                class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition w-full"
                 @click="downloadTemplate">
                 下载 CSV 示例
             </button>
@@ -28,7 +28,7 @@
 
         <div v-if="processed" class="col-span-full text-center">
             <button
-                class="rounded-lg bg-muted px-4 py-2 text-muted-foregroun text-sm hover:bg-primary-foreground transition w-full"
+                class="rounded-lg bg-muted px-4 py-2 text-muted-foregroun text-sm hover:bg-card transition w-full"
                 @click="downloadResult">
                 下载处理结果
             </button>
