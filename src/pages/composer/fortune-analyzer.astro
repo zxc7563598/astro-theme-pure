@@ -4,11 +4,13 @@ import PageLayout from '@/layouts/ProjectsPage.astro'
 import CalendarConversion from '@/components/vue/fortune-analyzer/CalendarConversion.vue'
 import SolarTerms from '@/components/vue/fortune-analyzer/SolarTerms.vue'
 import FortuneAnalyzers from '@/components/vue/fortune-analyzer/FortuneAnalyzer.vue'
+import LifeAnalysis from '@/components/vue/fortune-analyzer/LifeAnalysis.vue'
 
 const headings = [
   { depth: 2, slug: 'calendar-conversion-demo', text: '阳历/农历转换' },
   { depth: 2, slug: 'solar-terms-demo', text: '节气查询' },
   { depth: 2, slug: 'fortune-analyzer-demo', text: '八字排盘' },
+  { depth: 2, slug: 'life-nalysis-demo', text: '人生K线分析' },
   { depth: 2, slug: 'motivation', text: '制作初衷' }
 ]
 ---
@@ -40,6 +42,10 @@ const headings = [
   {/* fortune-analyzer-demo */}
   <h2 id='fortune-analyzer-demo'>八字排盘</h2>
   <FortuneAnalyzers client:load />
+
+  {/* lifr-analysis-demo */}
+  <h2 id='life-nalysis-demo'>人生K线分析</h2>
+  <LifeAnalysis client:only="vue" />
 
   {/* motivation */}
   <h2 id='motivation'>制作初衷</h2>
