@@ -31,6 +31,7 @@
     "astro": "^5.16.6",
     "astro-pure": "1.4.0",
     "axios": "^1.13.2",
+    "echarts": "^6.0.0",
     "hejunjie-encrypted-request": "^2.0.0",
     "katex": "^0.16.27",
     "rehype-katex": "^7.0.1",
