@@ -16,7 +16,7 @@
         <div v-if="show" class="col-span-full">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <div v-for="(label, index) in pillars" :key="index"
-                    class="rounded-xl border p-4 flex flex-col gap-3 transition duration-150 hover:shadow-sm bg-card">
+                    class="rounded-xl border p-4 flex flex-col gap-3 transition duration-150 hover:shadow-sm">
                     <div class="text-sm font-medium opacity-90">{{ label }}</div>
                     <div>
                         <div class="text-xs text-muted-foreground mb-1">天干</div>
@@ -66,7 +66,7 @@
             </div>
             <div class="border-t opacity-10 mt-2 mb-2"></div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3">
-                <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm bg-card">
+                <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm">
                     <div class="text-sm font-medium opacity-90">五行统计（不含藏干）</div>
                     <div class="flex flex-wrap gap-3">
                         <div v-for="(count, xing) in wu_xing_simple" :key="xing" class="flex items-center gap-2">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm bg-card">
+                <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm">
                     <div class="text-sm font-medium opacity-90">五行统计（包含藏干）</div>
                     <div class="flex flex-wrap gap-3">
                         <div v-for="(count, xing) in wu_xing_full" :key="xing" class="flex items-center gap-2">
@@ -91,7 +91,7 @@
             </div>
             <div class="border-t opacity-10 mt-2 mb-2"></div>
             <div class="grid grid-cols-1 gap-3">
-                <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm bg-card">
+                <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm">
                     <div class="text-sm font-medium opacity-90">十神分析</div>
                     <div>
                         <div class="text-xs text-muted-foreground mb-2">十神频率</div>
@@ -130,7 +130,7 @@
             </div>
             <div class="grid grid-cols-1 gap-3"
                 v-if="(detect_wu_xing_ju.extra.sanhui.length > 0) || (detect_wu_xing_ju.extra.sanhe.length > 0) || (detect_wu_xing_ju.extra.liuhe.length > 0) || (detect_wu_xing_ju.extra.wuju.length > 0)">
-                <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm bg-card">
+                <div class="rounded-xl border p-4 flex flex-col gap-4 transition duration-150 hover:shadow-sm">
                     <div class="text-sm font-medium opacity-90">五行局分析</div>
                     <div>
                         <div class="text-xs text-muted-foreground mb-2">三会局</div>
@@ -210,7 +210,7 @@
             </div>
             <div class="border-t opacity-10 mt-2 mb-2"></div>
             <div class="grid grid-cols-1 gap-3">
-                <div class="rounded-xl border p-4 flex flex-col gap-2 transition duration-150 hover:shadow-sm bg-card">
+                <div class="rounded-xl border p-4 flex flex-col gap-2 transition duration-150 hover:shadow-sm">
                     <div class="text-sm font-medium opacity-90">大运排盘</div>
                     <div>此人会在 <b>{{ calculate_start_age.date }}</b> 迎来第一次大运，此时的年龄为 <b>{{ calculate_start_age.age }}</b>
                     </div>
