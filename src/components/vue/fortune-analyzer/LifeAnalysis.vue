@@ -40,19 +40,19 @@
             <div class="border-t opacity-10 mt-2 mb-2"></div>
         </div>
         <div v-if="resultShow" class="col-span-full">
-            <div class="grid grid-cols-3 gap-3 mb-2">
+            <div class="grid grid-cols-1 gap-3 mb-2">
                 <button class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
                     :disabled="loading" @click="cleanLocalStorage">
                     清空数据
                 </button>
-                <button class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
+                <!-- <button class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
                     :disabled="loading" @click="showToast({ message: '功能暂未实现，因为着急打游戏去了，这两天就好了' })">
                     导出数据
                 </button>
                 <button class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
                     :disabled="loading" @click="showToast({ message: '功能暂未实现，因为着急打游戏去了，这两天就好了' })">
                     分享截图
-                </button>
+                </button> -->
             </div>
 
             <div class="w-full">
