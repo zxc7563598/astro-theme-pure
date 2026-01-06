@@ -443,7 +443,7 @@ const getPrompt = (wu_xing_breakdown: WuXingBreakdown, birthday_time: string, ge
   "cryptoStyle": "链上Alpha/高倍合约/现货定投",
   "chartPoints": [
     {"age":1,"year":1990,"daYun":"童限","ganZhi":"庚午","open":50,"close":55,"high":60,"low":45,"score":55,"reason":"开局平稳，家庭呵护"},
-    ... (共100条，reason控制在20-30字)
+    ... (共100条，reason控制在20-30字，数据在0-100)
   ]
 }
 
