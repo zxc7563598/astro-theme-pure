@@ -10,6 +10,7 @@ import Sponsors from '@/components/projects/Sponsors.astro'
 import Sponsorship from '@/components/projects/Sponsorship.astro'
 import alipay from '@/assets/alipay-qrcode.png'
 import WechatIcon from '@/assets/icons/wechat.svg'
+import WorkIcon from '@/assets/icons/work.svg'
 import wechat from '@/assets/wechat-qrcode.png'
 
 const headings = [
@@ -305,6 +306,9 @@ const { sponsorship } = sponsorshipData
   <p>邮箱地址：<Spoiler>junjie.he.925@gmail.com</Spoiler></p>
   <Button href='/images/wechat.jpg' title='添加微信' target='_blank'>
     <WechatIcon class='size-5' slot='before' />
+  </Button>
+  <Button href='/resume' title='工作沟通 & 简历查看' target='_blank'>
+    <WorkIcon class='size-5' slot='before' />
   </Button>
 
   <!-- sponsorship -->
