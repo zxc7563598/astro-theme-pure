@@ -31,6 +31,7 @@
     "astro": "^5.16.6",
     "astro-pure": "1.4.0",
     "axios": "^1.13.2",
+    "bowser": "^2.13.1",
     "echarts": "^6.0.0",
     "hejunjie-encrypted-request": "^2.0.0",
     "katex": "^0.16.27",
@@ -48,5 +49,6 @@
     "eslint-plugin-astro": "^1.5.0",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1"
-  }
+  },
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
 }
