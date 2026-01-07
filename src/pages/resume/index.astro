@@ -1,0 +1,85 @@
+---
+import { Button, Spoiler } from 'astro-pure/user'
+import PageLayout from '@/layouts/CommonPage.astro'
+import KeyVisit from '@/components/vue/KeyVisit.vue'
+import WechatIcon from '@/assets/icons/wechat.svg'
+import WorkIcon from '@/assets/icons/work.svg'
+
+const headings = [
+  { depth: 2, slug: 'about', text: '简单介绍' },
+  { depth: 2, slug: 'experience', text: '工作经历' },
+  { depth: 2, slug: 'work', text: '合作方式' },
+  { depth: 2, slug: 'resume', text: '简历' }
+]
+---
+
+<PageLayout title='我的简历' {headings} comment>
+  <h2 id='about'>简单介绍</h2>
+  <p>很高兴你点进了这个页面</p>
+  <p>我叫何俊杰，从 2017 年开始从事 PHP 开发工作。</p>
+  <p>如果你是因为技术、项目，或者合作的原因来到这里，那这页内容大概能帮你快速了解我。</p>
+  <p>如果你只是需要我的文件简历，那可以直接前往<a href='#resume'>页面最下方</a></p>
+
+  <h2 id='experience'>工作经历</h2>
+  <p>我的第一份正式工作是在 <b>山东麦琪食品公司</b>，主要负责电商系统的开发和维护工作。</p>
+  <p>
+    当时前后端都会参与，涵盖了商品、订单、支付、后台管理等核心模块，也是在这个阶段，对电商业务的整体流程和系统结构有了比较完整的认识。
+  </p>
+  <p>
+    2019 年，因为公司经营上的原因，我离职后加入了一家金融贷款公司，并在后续担任技术负责人，负责从 0
+    到 1 搭建一个跨境业务平台。
+  </p>
+  <p>
+    项目中主要围绕用户借贷业务展开，我负责系统整体架构设计以及核心模块的开发，包括用户体系、订单管理、资料采集、审核流程、风控、资金流转、后台运营与数据统计等。
+  </p>
+  <p>到 2022 年左右，业务逐步转向国内市场。</p>
+  <p>
+    这套系统除了公司内部使用，也对外提供过，大概有三十多家公司在使用。
+    系统长期稳定运行，整体累计产生的用户交易流水 过亿。
+  </p>
+  <p>框架基本都有接触，真正长期用于线上实战的主要是：</p>
+  <ul>
+    <li>ThinkPHP（早期）</li>
+    <li>Laravel（中期）</li>
+    <li>Webman（后期）</li>
+  </ul>
+  <p>
+    前端以 Vue 为主，移动端主要使用 Vant。
+    也接触过uni-app，只是之前的项目中有更合适的方案，因此没有实际投入线上。
+  </p>
+  <p>此外，我也做过一些 微信小程序 项目，复杂度不算高，但常见功能和业务逻辑都可以独立完成。</p>
+  <p>
+    Python 和 Go
+    也都有所涉猎，作为主力开发语言可能不算擅长，但用于编写运维脚本、辅助工具或者解决特定问题都没有太大压力。
+  </p>
+
+  <h2 id='work'>合作方式</h2>
+  <p>目前我对合作形式并不设限：</p>
+  <ul>
+    <li>全职、兼职都可以</li>
+    <li>长期合作或阶段性项目也都可以</li>
+    <li>新项目从 0 到 1，或者已有系统的维护、重构、优化，都可以聊</li>
+  </ul>
+  <p>需求上我也不太挑，只要事情本身是合理的、目标是明确的，我一般都愿意参与。</p>
+  <p>相比固定的职位描述，我更看重事情本身，以及合作是否顺畅。</p>
+  <p>如果是以兼职或外包形式合作，全天投入的价格大概在 600 / 天左右</p>
+  <p>非全天投入、或者长期合作的情况，具体都可以再商量，我并不执着于一个固定数字。</p>
+
+  <h2 id='resume'>简历</h2>
+  <p>如果你更习惯从简历了解一个人，可以直接查看。</p>
+  <Button href='/docx/简历20250406.pdf' title='简历下载' target='_blank'>
+    <WorkIcon class='size-5' slot='before' />
+  </Button>
+
+  <p>
+    也可以通过微信或邮箱直接联系我，聊项目、聊技术，或者确认是否合适都行，我的邮箱是：<Spoiler
+      >junjie.he.925@gmail.com</Spoiler
+    >
+  </p>
+  <Button href='/images/wechat.jpg' title='添加微信' target='_blank'>
+    <WechatIcon class='size-5' slot='before' />
+  </Button>
+
+  <p>感谢你愿意花时间看到这里。</p>
+  <KeyVisit client:only='vue' path='resume' />
+</PageLayout>
