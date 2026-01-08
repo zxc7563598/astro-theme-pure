@@ -219,7 +219,10 @@ function isImageMetadata(obj: unknown): obj is ImageMetadata {
                       href={`/blog/${p.id}`}
                       class='block rounded-xl border px-4 py-3 sm:px-5 sm:py-4 transition-colors hover:bg-muted dark:hover:bg-muted'
                     >
-                      <h2 class='text-lg font-medium m-0'>{p.data.title}</h2>
+                      <h2 class='text-lg font-medium m-0'>
+                        {p.data.draft && <span class='text-red-500'>(Draft) </span>}
+                        {p.data.title}
+                      </h2>
 
                       <p class='mt-1 text-sm text-muted-foreground'>{p.data.description}</p>
 
