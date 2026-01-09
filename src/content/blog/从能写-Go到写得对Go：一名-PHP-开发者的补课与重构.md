@@ -218,6 +218,10 @@ Go 对 package 之间的依赖边界非常敏感，
 **赋值会复制，参数传递会复制，方法调用在很多情况下也会复制。**
 
 ```go
+type Counter struct {
+	n int
+}
+
 a := Counter{n: 10}
 b := a
 ```
