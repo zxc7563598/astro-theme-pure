@@ -1,12 +1,12 @@
 ---
-title: '从“能写 Go”到“写得对 Go”：一名 PHP 开发者的补课与重构'
+title: '[更新中] 从“能写 Go”到“写得对 Go”：一名 PHP 开发者的补课与重构'
 publishDate: '2026-01-08 19:09:37'
 description: '站在已经能用 Go 干活的前提下，系统补齐 PHP 开发者在 slice、map、指针、并发等方面最容易“靠感觉”的认知空缺，持续更新的学习与实践记录'
 tags:
   - Go
 language: '中文'
 heroImage: { src: './cover/go.jpg', color: '#06aedc' }
-draft: true
+draft: false
 slug: 'aodj2421'
 ---
 
