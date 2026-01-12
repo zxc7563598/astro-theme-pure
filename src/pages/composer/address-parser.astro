@@ -1,17 +1,20 @@
 ---
 import { Button } from 'astro-pure/user'
 import PageLayout from '@/layouts/ProjectsPage.astro'
-import BatchAddressChecker from '@/components/vue/address-parser/BatchAddressChecker.vue'
 import AddressChecker from '@/components/vue/address-parser/AddressChecker.vue'
+import BatchAddressChecker from '@/components/vue/address-parser/BatchAddressChecker.vue'
 
 const headings = [
   { depth: 2, slug: 'singular-demo', text: '单条数据查询' },
   { depth: 2, slug: 'plurality-demo', text: '批量数据查询' },
   { depth: 2, slug: 'motivation', text: '制作初衷' }
 ]
+
+const description =
+  '收货地址智能解析工具，支持从非结构化文本中提取姓名、手机号、身份证号、省市区、详细地址等字段，适用于电商、物流、CRM 等系统'
 ---
 
-<PageLayout title='地址解析工具' {headings} comment>
+<PageLayout title='地址解析工具' {description} {headings} comment>
   <p>一个轻量级的PHP库，能够智能地从非结构化的地址文本中提取结构化信息</p>
   <p>
     解决了电子商务、物流和CRM系统中常见的一个问题：处理以非标准化格式提交的地址，当用户提交携带手机号、姓名、地址等信息的文字时，该库会自动提取并整理成结构化数据
@@ -43,7 +46,10 @@ const headings = [
 
   <p>在实际业务中，用户填写的地址往往是非结构化的，例如：</p>
   <p><b>张三 13512345678 北京市朝阳区建国路88号 邮编 100000</b></p>
-  <p>将这些信息手动拆分不仅低效，而且容易出错。hejunjie/address-parser 就是为了解决这种 非结构化地址的自动解析 而设计的，广泛适用于：</p>
+  <p>
+    将这些信息手动拆分不仅低效，而且容易出错。hejunjie/address-parser 就是为了解决这种
+    非结构化地址的自动解析 而设计的，广泛适用于：
+  </p>
   <ul>
     <li>电商系统中的订单地址处理</li>
     <li>快递物流系统地址识别</li>

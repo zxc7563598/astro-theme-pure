@@ -9,9 +9,12 @@ const headings = [
   { depth: 2, slug: 'plurality-demo', text: '批量数据查询' },
   { depth: 2, slug: 'motivation', text: '制作初衷' }
 ]
+
+const description =
+  '基于国内号段规则的手机号码归属地查询库，支持运营商识别与地区定位，适用于注册验证、用户画像、数据归档等场景'
 ---
 
-<PageLayout title='手机号信息查询' {headings} comment>
+<PageLayout title='手机号信息查询' {description} {headings} comment>
   <p>一个轻量级库，提供快速、可靠的中国手机号码信息查询，包括运营商数据和地理位置信息。</p>
   <p>
     其数据库包含超过 <b>481,615</b> 个电话号码段，允许开发者快速识别电话号码所属的电信运营商和地区，而无需依赖外部API或服务。

@@ -9,9 +9,11 @@ const headings = [
   { depth: 2, slug: 'plurality-demo', text: '批量数据查询' },
   { depth: 2, slug: 'motivation', text: '制作初衷' }
 ]
+
+const description = '定期更新，全国最新省市区划分数据，身份证号码解析地址在线查询'
 ---
 
-<PageLayout title='身份证信息查询' {headings} comment>
+<PageLayout title='身份证信息查询' {description} {headings} comment>
   <p>一个轻量级库，定期更新，提供全国最新省市区划分数据</p>
   <p>内置身份证号码解析，可以快速校验身份证号是否合法，并提取身份证中包含的位置、性别等信息</p>
   <Button

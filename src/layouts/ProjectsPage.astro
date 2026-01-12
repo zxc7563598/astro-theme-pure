@@ -1,21 +1,22 @@
 ---
 import type { MarkdownHeading } from 'astro'
 
-import TOC from '@/components/custom/TOC.astro'
 import PageLayout from '@/layouts/ContentLayout.astro'
+import TOC from '@/components/custom/TOC.astro'
 import { Comment, PageInfo } from '@/components/waline'
 
 interface Props {
   title: string
+  description: string
   headings?: MarkdownHeading[]
   view?: boolean
   comment?: boolean
 }
 
-const { title, headings, view, comment: enableComment, ...props } = Astro.props
+const { title, description, headings, view, comment: enableComment, ...props } = Astro.props
 ---
 
-<PageLayout meta={{ title }} back="/projects" {...props}>
+<PageLayout meta={{ title, description }} back='/projects' {...props}>
   {headings?.length && <TOC headings={headings} slot='sidebar' />}
 
   <Fragment slot='header'>
