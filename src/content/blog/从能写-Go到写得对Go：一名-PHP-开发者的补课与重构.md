@@ -1,7 +1,7 @@
 ---
 title: '[更新中] 从“能写 Go”到“写得对 Go”：一名 PHP 开发者的补课与重构'
 publishDate: '2026-01-08 19:09:37'
-updatedDate: '2026-01-17 13:41:41'
+updatedDate: '2026-01-22 15:37:09'
 description: '站在已经能用 Go 干活的前提下，系统补齐 PHP 开发者在 slice、map、指针、并发等方面最容易“靠感觉”的认知空缺，持续更新的学习与实践记录'
 tags:
   - Go
@@ -74,10 +74,10 @@ slug: 'aodj2421'
 | Day 16 | PHP → Go 重构          | 67–70    | 2026-01-27 | 2026-01-19 |
 | Day 17 | 服务启动与关闭         | 71–72    | 2026-01-28 | 2026-01-19 |
 | Day 18 | 部署实践               | 73–74    | 2026-01-29 | 2026-01-19 |
-| Day 19 | 并发型项目设计         | 75–76    | 2026-01-30 | -          |
-| Day 20 | Worker Pool            | 77       | 2026-01-31 | -          |
+| Day 19 | 并发型项目设计         | 75–76    | 2026-01-30 | 2026-01-21 |
+| Day 20 | Worker Pool            | 77       | 2026-01-31 | 2026-01-22 |
 | ——     | **周日休息**           | ——       | 2026-02-01 | -          |
-| Day 21 | 稳定性设计             | 78–79    | 2026-02-02 | -          |
+| Day 21 | 稳定性设计             | 78–79    | 2026-02-02 | 2026-01-22 |
 | Day 22 | 性能意识               | 80–83    | 2026-02-03 | -          |
 
 ## 一、重新认识 Go
@@ -6516,19 +6516,1042 @@ func main() {
 
 ### 76. 并发执行 shell 的任务调度器
 
-> 占位中，等待更新
+> 当前问题存在示例代码，可以前往[GitHub查看](https://github.com/zxc7563598/go-lab/commit/8a8176c540a7927cf16e78f1b00b31839590fb4f)
+
+```go
+package main
+
+import (
+	"bufio"
+	"bytes"
+	"context"
+	"fmt"
+	"io"
+	"log"
+	"os"
+	"os/exec"
+	"os/signal"
+	"strings"
+	"sync"
+	"syscall"
+	"time"
+
+	"github.com/fatih/color"
+)
+
+// TaskStatus 任务状态
+type TaskStatus int
+
+const (
+	StatusPending   TaskStatus = iota // 0
+	StatusRunning                     // 1
+	StatusSuccess                     // 2
+	StatusFailed                      // 3
+	StatusTimeout                     // 4
+	StatusCancelled                   // 5
+)
+
+func (s TaskStatus) String() string {
+	switch s {
+	case StatusPending:
+		return "⏳ 待处理"
+	case StatusRunning:
+		return "🚀 运行中"
+	case StatusSuccess:
+		return "✅ 成功"
+	case StatusFailed:
+		return "❌ 失败"
+	case StatusTimeout:
+		return "⏰ 超时"
+	case StatusCancelled:
+		return "🚫 取消"
+	default:
+		return "❓ 未知"
+	}
+}
+
+// Task 任务定义
+type Task struct {
+	ID           string        // 任务ID
+	Name         string        // 任务名称
+	Cmd          string        // 执行命令
+	Args         []string      // 命令参数
+	Timeout      time.Duration // 超时时间
+	RetryCount   int           // 重试次数
+	RetryDelay   time.Duration // 重试延迟
+	MaxOutput    int           // 最大输出行数
+	Env          []string      // 环境变量
+	WorkDir      string        // 工作目录
+	Dependencies []string      // 依赖的任务ID
+}
+
+// TaskResult 任务执行结果
+type TaskResult struct {
+	TaskID     string        // 任务ID
+	TaskName   string        // 任务名称
+	Status     TaskStatus    // 任务状态
+	StartTime  time.Time     // 开始时间
+	EndTime    time.Time     // 结束时间
+	Duration   time.Duration // 持续时间
+	ExitCode   int           // 退出code
+	Output     string        // 输出内容
+	Error      error         // 错误信息
+	RetryCount int           // 重试次数
+}
+
+// Scheduler 调度器
+type Scheduler struct {
+	maxWorkers      int                    // 最大并发数
+	tasks           map[string]*Task       // 所有任务
+	taskResults     map[string]*TaskResult // 所有任务结果
+	taskQueue       chan *Task             // 任务队列
+	taskResultQueue chan *TaskResult       // 结果队列
+	wg              sync.WaitGroup         // 等待组
+	mu              sync.Mutex             // 读写锁
+	ctx             context.Context        // 上下文
+	cancel          context.CancelFunc     // 取消函数
+	isRunning       bool                   // 是否正在运行
+	completedTasks  map[string]bool        // 已完成任务
+}
+
+// NewScheduler 创建调度器
+func NewScheduler(maxWorkers int) *Scheduler {
+	ctx, cancel := context.WithCancel(context.Background())
+	return &Scheduler{
+		maxWorkers:      maxWorkers,
+		tasks:           make(map[string]*Task),
+		taskResults:     make(map[string]*TaskResult),
+		taskQueue:       make(chan *Task, 100),
+		taskResultQueue: make(chan *TaskResult, 100),
+		ctx:             ctx,
+		cancel:          cancel,
+		completedTasks:  make(map[string]bool),
+	}
+}
+
+// AddTask 添加任务
+func (s *Scheduler) AddTask(task *Task) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	if task.ID == "" {
+		task.ID = fmt.Sprintf("task-%d", len(s.tasks)+1)
+	}
+	if task.Name == "" {
+		task.Name = task.ID
+	}
+	if task.Timeout == 0 {
+		task.Timeout = 5 * time.Minute
+	}
+	if task.MaxOutput == 0 {
+		task.MaxOutput = 5000
+	}
+	s.tasks[task.ID] = task
+	return nil
+}
+
+// checkDependencies 检查任务依赖
+func (s *Scheduler) checkDependencies() error {
+	// 根据 Dependencies 去检查需要的任务是否存在在队列中
+	for _, task := range s.tasks {
+		for _, depID := range task.Dependencies {
+			if _, exists := s.tasks[depID]; !exists {
+				return fmt.Errorf("任务 %s 依赖的任务 %s 不存在", task.ID, depID)
+			}
+		}
+	}
+	return nil
+}
+
+// taskDispatcher 任务分发器
+func (s *Scheduler) taskDispatcher() {
+	// 检查依赖
+	if err := s.checkDependencies(); err != nil {
+		log.Printf("检查依赖失败, %v", err)
+		return
+	}
+	// 没有依赖的任务加入队列
+	// 有依赖的任务会在没有依赖的任务完成后执行
+	s.mu.Lock()
+	for _, task := range s.tasks {
+		if len(task.Dependencies) == 0 {
+			s.taskQueue <- task
+		}
+	}
+	s.mu.Unlock()
+}
+
+// copyAndLog 复制并输出记录
+func (s *Scheduler) copyAndLog(dst io.Writer, src io.Reader, prefix, taskName string) {
+	scanner := bufio.NewScanner(src)
+	for scanner.Scan() {
+		line := scanner.Text()
+		io.WriteString(dst, line+"\n")
+		// 实时日志
+		log.Printf("[%s] %s: %s", taskName, prefix, line)
+	}
+}
+
+// runCommand 执行shell命令
+func (s *Scheduler) runCommand(task *Task, output io.Writer) (int, error) {
+	ctx, cancel := context.WithTimeout(s.ctx, task.Timeout)
+	defer cancel()
+
+	// 创建命令
+	var cmd *exec.Cmd
+	if len(task.Args) > 0 {
+		cmd = exec.CommandContext(ctx, task.Cmd, task.Args...)
+	} else {
+		cmd = exec.CommandContext(ctx, "sh", "-c", task.Cmd)
+	}
+
+	// 设置工作目录
+	if task.WorkDir != "" {
+		cmd.Dir = task.WorkDir
+	}
+
+	// 设置环境变量
+	if len(task.Env) > 0 {
+		cmd.Env = append(os.Environ(), cmd.Env...)
+	}
+
+	// 设置输出
+	stdoutPipe, err := cmd.StdoutPipe()
+	if err != nil {
+		return -1, err
+	}
+	stderrPipe, err := cmd.StderrPipe()
+	if err != nil {
+		return -1, err
+	}
+
+	// 启动命令
+	if err := cmd.Start(); err != nil {
+		return -1, err
+	}
+
+	// 并发读取 stdout 和 stderr
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go func() {
+		defer wg.Done()
+		s.copyAndLog(output, stdoutPipe, "STDOUT", task.Name)
+	}()
+	go func() {
+		defer wg.Done()
+		s.copyAndLog(output, stderrPipe, "STDERR", task.Name)
+	}()
+	wg.Wait()
+
+	// 等待命令完成
+	err = cmd.Wait()
+	exitCode := cmd.ProcessState.ExitCode()
+	if ctx.Err() == context.DeadlineExceeded {
+		return exitCode, fmt.Errorf("任务执行超时(限时: %v)", task.Timeout)
+	}
+	return exitCode, err
+}
+
+// trimOutput 限制输出大小
+func (s *Scheduler) trimOutput(output string, maxLines int) string {
+	lines := bytes.Split([]byte(output), []byte("\n"))
+	if len(lines) <= maxLines {
+		return output
+	}
+
+	// 保留开头和结尾
+	keep := maxLines / 2
+	firstPart := lines[:keep]
+	lastPart := lines[len(lines)-keep:]
+
+	var result []byte
+	result = append(result, bytes.Join(firstPart, []byte("\n"))...)
+	result = append(result, []byte("\n... (忽略中间内容) ...\n")...)
+	result = append(result, bytes.Join(lastPart, []byte("\n"))...)
+
+	return string(result)
+}
+
+// executeTask 执行单个任务
+func (s *Scheduler) executeTask(workerID int, task *Task) *TaskResult {
+	result := &TaskResult{
+		TaskID:     task.ID,
+		TaskName:   task.Name,
+		Status:     StatusRunning,
+		StartTime:  time.Now(),
+		RetryCount: 0,
+	}
+
+	log.Printf("Worker-%d 开始执行%s: %s", workerID, task.Name, task.Cmd)
+
+	// 执行命令
+	var output bytes.Buffer
+	var err error
+	var exitCode int
+
+	for attempt := 0; attempt <= task.RetryCount; attempt++ {
+		if attempt > 0 {
+			log.Printf("任务 %s 第 %d 次重试...", task.Name, attempt)
+			time.Sleep(task.RetryDelay)
+		}
+
+		result.RetryCount = attempt
+		output.Reset()
+		exitCode, err = s.runCommand(task, &output)
+
+		if err == nil {
+			result.Status = StatusSuccess
+			break
+		}
+
+		if attempt == task.RetryCount {
+			result.Status = StatusFailed
+		}
+	}
+
+	result.EndTime = time.Now()
+	result.Duration = result.EndTime.Sub(result.StartTime)
+	result.ExitCode = exitCode
+	result.Output = s.trimOutput(output.String(), task.MaxOutput)
+	result.Error = err
+
+	return result
+}
+
+// worker 工作协程
+func (s *Scheduler) worker(id int) {
+	defer s.wg.Done()
+	for {
+		select {
+		case <-s.ctx.Done():
+			return
+		case task := <-s.taskQueue:
+			result := s.executeTask(id, task)
+			s.taskResultQueue <- result
+		}
+	}
+}
+
+// printResult 打印任务结果
+func (s *Scheduler) printResult(result *TaskResult) {
+	var statusColor *color.Color
+
+	switch result.Status {
+	case StatusSuccess:
+		statusColor = color.New(color.FgGreen, color.Bold)
+	case StatusFailed:
+		statusColor = color.New(color.FgRed, color.Bold)
+	case StatusCancelled:
+		statusColor = color.New(color.FgYellow, color.Bold)
+	default:
+		statusColor = color.New(color.FgWhite)
+	}
+
+	statusColor.Printf("\n任务完成: %s (%s)\n", result.TaskName, result.TaskID)
+	fmt.Printf("  状态: %s", result.Status)
+	fmt.Printf("  耗时: %v", result.Duration)
+	fmt.Printf("  开始: %s", result.StartTime.Format(time.DateTime))
+	fmt.Printf("  结束: %s", result.EndTime.Format(time.DateTime))
+	fmt.Printf("  退出码: %d", result.ExitCode)
+	fmt.Printf("  重试次数: %d", result.RetryCount)
+
+	if result.Error != nil {
+		fmt.Printf("  错误: %v\n", result.Error)
+	}
+
+	if result.Output != "" {
+		fmt.Println("  输出预览:")
+		lines := bytes.SplitN([]byte(result.Output), []byte("\n"), 6)
+		for i, line := range lines {
+			if i >= 5 {
+				fmt.Println("    ...(更多输出请查看完整日志)...")
+			}
+			if len(line) > 0 {
+				fmt.Printf("    %s\n", line)
+			}
+		}
+	}
+	fmt.Println()
+}
+
+// checkDependentTasks 检查依赖任务
+func (s *Scheduler) checkDependentTasks() {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	for _, task := range s.tasks {
+		// 如果任务已经在队列或已完成则跳过
+		if s.completedTasks[task.ID] {
+			continue
+		}
+		// 未进行任务依赖项是否全部满足
+		allDepsCompleted := true
+		for _, depID := range task.Dependencies {
+			if !s.completedTasks[depID] {
+				allDepsCompleted = false
+				break
+			}
+		}
+		// 如果依赖项项目全部满足，加入队列
+		if allDepsCompleted && len(task.Dependencies) > 0 {
+			// 标记已调度
+			if !s.completedTasks[task.ID] {
+				select {
+				case s.taskQueue <- task:
+					s.completedTasks[task.ID] = true
+				default:
+					log.Printf("队列任务已满, 任务 %s 等待调度", task.Name)
+				}
+			}
+		}
+	}
+}
+
+// resultProcessor 处理任务结果
+func (s *Scheduler) resultProcessor() {
+	for result := range s.taskResultQueue {
+		s.mu.Lock()
+		s.taskResults[result.TaskID] = result
+		s.completedTasks[result.TaskID] = true
+		s.mu.Unlock()
+		// 打印结果
+		s.printResult(result)
+		// 检查是否有依赖此任务的任务可以执行
+		s.checkDependentTasks()
+	}
+}
+
+// AddTasks 批量添加任务
+func (s *Scheduler) AddTasks(tasks ...*Task) {
+	for _, task := range tasks {
+		s.AddTask(task)
+	}
+}
+
+// Start 启动调度器
+func (s *Scheduler) Start() error {
+	s.mu.Lock()
+	if s.isRunning {
+		s.mu.Unlock()
+		return fmt.Errorf("程序已经在运行")
+	}
+	s.isRunning = true
+	s.mu.Unlock()
+
+	// 启动work
+	for i := 0; i < s.maxWorkers; i++ {
+		s.wg.Add(1)
+		go s.worker(i)
+	}
+
+	// 启动结果处理器
+	go s.resultProcessor()
+
+	// 启动任务调器
+	go s.taskDispatcher()
+
+	log.Printf("调度器启动，最大并发数: %d", s.maxWorkers)
+	return nil
+}
+
+// Stop 停止调度器
+func (s *Scheduler) Stop() {
+	log.Println("停止调度器...")
+	s.cancel()
+	s.wg.Wait()
+	close(s.taskQueue)
+	close(s.taskResultQueue)
+	s.isRunning = false
+	log.Println("调度器已停止")
+}
+
+// GetResults 获取所有任务结果
+func (s *Scheduler) GetResults() map[string]*TaskResult {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	results := make(map[string]*TaskResult)
+	for k, v := range s.taskResults {
+		results[k] = v
+	}
+	return results
+}
+
+// PrintSummary 打印汇总报告
+func (s *Scheduler) PrintSummary() {
+	results := s.GetResults()
+
+	fmt.Println("\n" + strings.Repeat("-", 60))
+	fmt.Println("任务执行汇总报告")
+	fmt.Println(strings.Repeat("-", 60))
+
+	var totalTime time.Duration
+	successCount := 0
+	failedCount := 0
+
+	for _, result := range results {
+		totalTime += result.Duration
+		if result.Status == StatusSuccess {
+			successCount++
+		} else {
+			failedCount++
+		}
+	}
+
+	fmt.Printf("任务总数: %d\n", len(results))
+	fmt.Printf("成功: %d\n", successCount)
+	fmt.Printf("失败: %d\n", failedCount)
+	fmt.Printf("总耗时: %v\n", totalTime)
+	fmt.Printf("平均耗时: %v\n", totalTime/time.Duration(len(results)))
+
+	// 打印详细结果表格
+	fmt.Println("\n详细结果:")
+	fmt.Println(strings.Repeat("-", 100))
+	fmt.Printf("%-20s %-15s %-12s %-10s %-30s\n", "任务名称", "状态", "耗时", "退出码", "开始时间")
+	fmt.Println(strings.Repeat("-", 100))
+	for _, result := range results {
+		statusStr := result.Status.String()
+		if result.Status == StatusSuccess {
+			statusStr = color.GreenString(statusStr)
+		} else {
+			statusStr = color.RedString(statusStr)
+		}
+
+		fmt.Printf("%-20s %-15s %-12v %-10d %-30s\n", result.TaskName, statusStr, result.Duration.Round(time.Millisecond), result.ExitCode, result.StartTime.Format(time.DateTime))
+		fmt.Println(strings.Repeat("-", 100))
+	}
+}
+
+func main() {
+	// 创建调度器
+	scheduler := NewScheduler(3)
+
+	// 定义任务
+	tasks := []*Task{
+		{
+			ID:         "Test A",
+			Name:       "测试脚本A",
+			Cmd:        "sh ./shell/test.sh 5 测试脚本A",
+			Timeout:    10 * time.Minute,
+			RetryDelay: 3 * time.Second,
+			RetryCount: 2,
+		},
+		{
+			ID:         "Test B",
+			Name:       "测试脚本B",
+			Cmd:        "sh ./shell/test.sh 3 测试脚本B",
+			Timeout:    10 * time.Minute,
+			RetryDelay: 3 * time.Second,
+			RetryCount: 2,
+		},
+		{
+			ID:         "Test C",
+			Name:       "测试脚本C",
+			Cmd:        "sh ./shell/test.sh 2",
+			Timeout:    10 * time.Minute,
+			RetryDelay: 3 * time.Second,
+			RetryCount: 2,
+		},
+		{
+			ID:           "Test D",
+			Name:         "测试脚本D",
+			Cmd:          "sh ./shell/test.sh 1 测试脚本D",
+			Timeout:      10 * time.Minute,
+			Dependencies: []string{"Test A", "Test B"},
+			RetryDelay:   3 * time.Second,
+			RetryCount:   2,
+		},
+	}
+
+	// 添加任务
+	scheduler.AddTasks(tasks...)
+
+	// 启动调度
+	if err := scheduler.Start(); err != nil {
+		log.Fatal("启动失败:", err)
+	}
+
+	// 等待所有任务完成
+	fmt.Println("调度器运行中, Ctrl+C 停止")
+
+	// 监听中断信号
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
+
+	// 等待完成或者收到中断信号
+	ticker := time.NewTicker(time.Second)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-sigChan:
+			fmt.Println("\n接收到中断信号，正在停止...")
+			scheduler.Stop()
+			scheduler.PrintSummary()
+			return
+		case <-ticker.C:
+			// 检查是否所有任务都已完成
+			results := scheduler.GetResults()
+			if len(results) == len(tasks) {
+				scheduler.Stop()
+				scheduler.PrintSummary()
+				return
+			}
+		}
+	}
+}
+
+```
 
 ### 77. Worker Pool 的设计与实现
 
-> 占位中，等待更新
+> 当前问题存在示例代码，可以前往[GitHub查看](https://github.com/zxc7563598/go-lab/commit/32525dde65e1b2e684ab75e0c5fe25df1c48aa57)
+
+一开始接触 Go 并发的时候，很容易写出这样的代码：来一个任务，就起一个 goroutine。
+
+```go
+go doWork(job)
+```
+
+这种写法在“任务不多、生命周期很短”的时候非常顺滑，也很符合直觉。
+
+但当我把这个模式往真实场景里套时，很快就会意识到一个问题：**goroutine 虽然便宜，但不是无限的**。
+
+当任务数量不受控、或者外部输入突增时，“来一个起一个”本质上是在把并发压力直接暴露给运行时。
+
+这时候我才意识到，worker pool 并不是为了“提高并发”，而是为了​**限制并发**。
+
+---
+
+从设计意图上看，worker pool 做的事情其实很简单：把「任务的产生」和「任务的执行」拆开。
+
+任务可以源源不断地产生，但真正执行任务的 goroutine 数量是固定的。
+
+在 Go 里，这个拆分几乎天然就会落到 channel 上。
+
+```go
+type Job struct {
+	ID int
+}
+
+func worker(id int, jobs <-chan Job) {
+	for job := range jobs {
+		fmt.Printf("[worker %d] 开始处理任务 %d\n", id, job.ID)
+	}
+}
+```
+
+这里的 worker 非常“老实”：
+
+- 不创建 goroutine
+- 不关心任务从哪里来
+- 只做一件事：从 channel 里拿任务，处理，然后继续等下一个
+
+这和 PHP 世界里常见的“一个请求进来 → 一条执行路径跑到底”是完全不同的感觉。
+
+这里更像是：**程序结构先被稳定下来，数据在结构里流动**。
+
+---
+
+接下来是 pool 本身，也就是“开多少个 worker”。
+
+```go
+func startWorkerPool(workerNum int, jobs <-chan Job) {
+	for i := 0; i < workerNum; i++ {
+		go worker(i, jobs)
+	}
+}
+```
+
+这个地方让我第一次意识到 Go 并发的一个特点：**goroutine 的创建是集中发生的，而不是分散在业务逻辑里**。
+
+worker 的数量在这里就已经定死了，后面的代码即使疯狂往 jobs 里塞任务，也只会有这几个 goroutine 在干活。
+
+---
+
+任务的产生端反而变得非常“普通”。
+
+```go
+func main() {
+	jobs := make(chan Job)
+
+	startWorkerPool(3, jobs)
+
+	for i := 0; i < 10; i++ {
+		jobs <- Job{ID: i}
+	}
+
+	close(jobs)
+}
+```
+
+如果你站在 PHP 的视角看这段代码，会发现一个很有意思的变化：**主 goroutine 不负责干活，它只是把任务“投递”出去**。
+
+这里没有锁，没有共享状态，甚至没有显式的并发控制语句。
+
+并发被“压缩”进了 channel 的语义里。
+
+---
+
+在我理解 worker pool 的过程中，一个比较重要的转折点是：我开始把它当成一种**结构设计**，而不是并发技巧。
+
+worker pool 本身并不聪明：
+
+- 不保证任务顺序
+- 不保证任务成功
+- 不关心任务失败如何处理
+
+它唯一保证的是：同一时间，最多只有 N 个任务在被执行。
+
+这让我意识到一个事实：**worker pool 管的是“并发度”，不是“业务逻辑”** 。
+
+---
+
+当你开始往真实系统靠的时候，worker pool 往往会自然地多长出一些东西。
+
+比如，增加退出控制：
+
+```go
+func worker(ctx context.Context, id int, jobs <-chan Job) {
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case job, ok := <-jobs:
+			if !ok {
+				return
+			}
+			fmt.Printf("worker %d handling job %d\n", id, job.ID)
+		}
+	}
+}
+```
+
+这时候你会发现，worker pool 和「优雅关闭」「服务生命周期」已经开始产生联系了。
+
+它不再只是一个并发工具，而是服务结构的一部分。
+
+---
+
+回头看，worker pool 对我来说最大的价值，不是“学会了一种并发模式”，而是让我开始接受这样一种思路：不要让并发随意生长，先设计结构，再让任务流经结构
+
+这可能也是 Go 和 PHP 在并发模型上给我最大的心理差异。
+
+PHP 更像是“请求驱动代码执行”，而 Go 更像是“结构驱动任务流动”。
+
+worker pool，只是这个思路里一个非常早、也非常典型的例子。
 
 ### 78. 限流、超时与失败控制
 
-> 占位中，等待更新
+刚开始从 PHP 转到 Go，看「限流、超时、失败控制」这些词，会下意识把它们当成“框架能力”或者“中间件功能”。
+
+在 PHP 世界里，很多时候确实是这样：Nginx、FPM、框架、网关已经帮你做掉了，你只是在配置层面“启用”。
+
+但在 Go 里，我慢慢意识到，这三件事更像是​**代码层面的时间与容量意识**，而不是某个现成的功能开关。
+
+限流，本质上是在承认一件事：**系统不是无限的**。
+
+不是“防止被打爆”，而是你需要明确告诉自己：我现在愿意同时处理多少件事。
+
+在 Go 里，这种意识很自然地会落到 channel 上。
+
+```go
+var limiter = make(chan struct{}, 10) // 同时最多处理 10 个请求
+
+func handle(req int) {
+    limiter <- struct{}{}        // 进入限流区
+    defer func() { <-limiter }() // 处理完成后释放
+
+    // 模拟业务处理
+    time.Sleep(200 * time.Millisecond)
+    fmt.Println("handled", req)
+}
+```
+
+这个写法一开始看着有点“原始”，但用久了会发现它非常直观：channel 的容量就是你对系统承载能力的一个**明确表态**。
+
+和 PHP 不同的是，这里不是等队列无限堆积，而是你在代码里清楚地画了一条线：“超过这个数量，我宁可等，也不继续往里塞”。
+
+接着是超时。
+
+超时在 Go 里不是一个“异常情况”，而是一种**默认应该存在的边界**。
+
+这点和 PHP 的感受差异很大。PHP 更多是：“这个请求慢了，那就慢了，反正进程也快结束了。”
+
+而 Go 常驻进程的视角是：“如果我不主动设定时间，慢就会变成常态。”
+
+```go
+ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
+defer cancel()
+
+err := doSomething(ctx)
+if err != nil {
+    fmt.Println("failed:", err)
+}
+```
+
+一开始我会纠结：“这个 300ms 是不是太武断了？”
+
+后来想通了，它并不是一个精确的承诺，而是一个**态度**：超过这个时间，我不再认为这件事值得继续消耗资源。
+
+而 context 的设计让这件事不是“强行中断”，而是**层层传递的放弃信号**。
+
+谁最先意识到“不值得继续”，谁就停下来。
+
+失败控制是这三者里最容易被误解的。
+
+很多时候我们会把失败当成“异常路径”，但在 Go 的世界里，失败反而更像是一种**常规结果**。
+
+```go
+if err != nil {
+    return err
+}
+```
+
+写多了会发现，这不是消极，而是非常诚实。
+
+Go 不鼓励你“兜底一切”，而是逼你在每一层都想清楚：
+
+- 这一步失败了，还要不要继续？
+- 是立即返回，还是重试？
+- 重试几次算合理？
+
+```go
+for i := 0; i < 3; i++ {
+    err := doSomething()
+    if err == nil {
+        return nil
+    }
+    time.Sleep(100 * time.Millisecond)
+}
+return errors.New("retry failed")
+```
+
+这里没有什么“高级策略”，但它让失败变成了​**一个被认真对待的路径**，而不是日志里的一行抱怨。
+
+把这三件事放在一起看，我慢慢发现它们其实在解决同一件事：**如何在不确定的世界里，给系统设定清晰的边界**。
+
+- 限流：我一次只接这么多
+- 超时：我只等这么久
+- 失败控制：我只尝试到这个程度
+
+它们并不会让系统“更强”，但会让系统**更可控**。
+
+而这恰恰是从 PHP 过来后，我对 Go 最明显的一次理解变化：不是“能不能跑”，而是“什么时候该停”。
 
 ### 79. 从“能跑”到“稳定”的改造过程
 
-> 占位中，等待更新
+一开始的“能跑”，通常就是一个最朴素的 HTTP 服务。
+
+它没有任何边界意识，但逻辑是完整闭合的。
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"time"
+)
+
+func main() {
+	http.HandleFunc("/work", func(w http.ResponseWriter, r *http.Request) {
+		// 模拟一个耗时操作
+		time.Sleep(800 * time.Millisecond)
+		fmt.Fprintln(w, "ok")
+	})
+
+	fmt.Println("server start at :8080")
+	http.ListenAndServe(":8080", nil)
+}
+```
+
+这个程序非常“干净”：请求来了就做事，做完就返回。
+
+慢，也只是慢而已。
+
+问题在于：**你不知道慢到什么时候算不合理**。
+
+于是第一次改造，往往是给请求加上时间边界。
+
+这一步并不是为了优化性能，而是为了让“放弃”变得可描述。
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"net/http"
+	"time"
+)
+
+func main() {
+	http.HandleFunc("/work", func(w http.ResponseWriter, r *http.Request) {
+		ctx, cancel := context.WithTimeout(r.Context(), 500*time.Millisecond)
+		defer cancel()
+
+		err := doWork(ctx)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusGatewayTimeout)
+			return
+		}
+
+		fmt.Fprintln(w, "ok")
+	})
+
+	fmt.Println("server start at :8080")
+	http.ListenAndServe(":8080", nil)
+}
+
+func doWork(ctx context.Context) error {
+	select {
+	case <-time.After(800 * time.Millisecond):
+		return nil
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+```
+
+现在这个服务仍然“能跑”，但已经多了一层态度：**超过 500ms，这件事就不再值得继续**。
+
+接下来，当并发请求上来时，你会发现另一个问题：就算每个请求都有超时，**同时跑太多也会把自己拖死**。
+
+这时候改造点通常落在并发数量上。
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"net/http"
+	"time"
+)
+
+var limiter = make(chan struct{}, 5) // 同时最多 5 个请求在处理
+
+func main() {
+	http.HandleFunc("/work", func(w http.ResponseWriter, r *http.Request) {
+		select {
+		case limiter <- struct{}{}:
+			defer func() { <-limiter }()
+		default:
+			http.Error(w, "too many requests", http.StatusTooManyRequests)
+			return
+		}
+
+		ctx, cancel := context.WithTimeout(r.Context(), 500*time.Millisecond)
+		defer cancel()
+
+		err := doWork(ctx)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusGatewayTimeout)
+			return
+		}
+
+		fmt.Fprintln(w, "ok")
+	})
+
+	fmt.Println("server start at :8080")
+	http.ListenAndServe(":8080", nil)
+}
+
+func doWork(ctx context.Context) error {
+	select {
+	case <-time.After(800 * time.Millisecond):
+		return nil
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+```
+
+这里有一个非常典型的“稳定性取舍”：当系统已经忙不过来了，**直接拒绝新请求**，而不是让所有请求一起慢。
+
+这在“能跑”的阶段通常很难下这个决定，但在“稳定”的视角里，这是在保护已经进来的请求。
+
+最后一个常见变化，是你不再指望“一次就成功”。
+
+失败不再只是返回错误，而是变成一个可控的过程。
+
+```go
+package main
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"net/http"
+	"time"
+)
+
+var limiter = make(chan struct{}, 5)
+
+func main() {
+	http.HandleFunc("/work", func(w http.ResponseWriter, r *http.Request) {
+		select {
+		case limiter <- struct{}{}:
+			defer func() { <-limiter }()
+		default:
+			http.Error(w, "too many requests", http.StatusTooManyRequests)
+			return
+		}
+
+		ctx, cancel := context.WithTimeout(r.Context(), 1*time.Second)
+		defer cancel()
+
+		err := retry(ctx, 3, func() error {
+			return doWork(ctx)
+		})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadGateway)
+			return
+		}
+
+		fmt.Fprintln(w, "ok")
+	})
+
+	fmt.Println("server start at :8080")
+	http.ListenAndServe(":8080", nil)
+}
+
+func doWork(ctx context.Context) error {
+	select {
+	case <-time.After(400 * time.Millisecond):
+		// 模拟偶发失败
+		return errors.New("random failure")
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+func retry(ctx context.Context, times int, fn func() error) error {
+	var err error
+	for i := 0; i < times; i++ {
+		if err = fn(); err == nil {
+			return nil
+		}
+		select {
+		case <-time.After(100 * time.Millisecond):
+		case <-ctx.Done():
+			return ctx.Err()
+		}
+	}
+	return err
+}
+```
+
+到这里，这个服务并没有“更聪明”，
+
+但它已经具备了一种**稳定时的自我克制**：
+
+- 不无限接请求
+- 不无限等待
+- 不无限重试
+
+回头看，“能跑”到“稳定”的改造过程，并不是一步到位的架构升级，而是一点点把**隐含假设变成显式边界**的过程。
 
 ---
 
@@ -6536,7 +7559,137 @@ func main() {
 
 ### 80. Go GC 的基本行为
 
-> 占位中，等待更新
+刚接触 Go 的时候，我对 GC 的感知几乎是“它存在，但我不用管”。
+
+这种感觉和写 PHP 时其实很像：脚本结束，内存自然就回收了，至于中间发生了什么，并不会成为心智负担。
+
+直到我开始写​**常驻进程**，这种“无感”才第一次被打破。
+
+```go
+package main
+
+func main() {
+	for {
+		data := make([]byte, 1024*1024)
+		_ = data
+	}
+}
+```
+
+这段代码什么都不做，只是不断分配 1MB 的内存。
+
+它能跑，而且跑得“看起来没问题”，CPU 不高，程序也没崩。
+
+但这里其实已经触发了 Go GC 的一个最基本行为：**GC 并不是在内存“用完”时才发生，而是在分配过程中被持续触发的。**
+
+在 Go 里，内存分配本身就是 GC 的信号源之一。
+
+---
+
+进一步观察时，我开始意识到一个和直觉不太一样的点：**GC 并不是“停下来一次性清干净”。**
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	go func() {
+		for {
+			_ = make([]byte, 1024*1024)
+			time.Sleep(10 * time.Millisecond)
+		}
+	}()
+
+	for {
+		fmt.Println("running")
+		time.Sleep(100 * time.Millisecond)
+	}
+}
+```
+
+程序一边分配内存，一边持续输出日志。
+
+如果 GC 是那种“全停”的行为，那么理论上我应该能看到明显的卡顿。
+
+但实际感受是：**输出节奏基本稳定，没有那种“突然停一下”的感觉。**
+
+这是我第一次真正意识到：Go 的 GC 设计目标，从一开始就不是“回收得最快”，而是“别太打扰程序运行”。
+
+它是​**并发的、增量的**，而不是一个集中爆发的清扫动作。
+
+---
+
+不过，“不太打扰”并不等于“完全没有代价”。
+
+```go
+package main
+
+func alloc() []byte {
+	return make([]byte, 1024)
+}
+
+func main() {
+	for i := 0; i < 1_000_000; i++ {
+		_ = alloc()
+	}
+}
+```
+
+这类代码在功能上毫无问题，但它揭示了 GC 的另一个基本事实：**GC 的成本，和“活跃对象的数量”强相关。**
+
+不是分配得多就一定慢，而是**分配之后还活着的对象越多，GC 越辛苦。**
+
+这也解释了一个常见但容易被误解的现象：
+
+- 有些程序分配频繁，但 GC 压力不大
+- 有些程序分配并不多，但一到 GC 就抖一下
+
+问题往往不在“分配了多少”，而在“留住了多少”。
+
+---
+
+从 PHP 的视角来看，这一点非常不直观。
+
+在 PHP 里，请求结束就是天然的“内存清零点”；
+
+而在 Go 里，**程序没有“请求结束”这个时间点，只有对象是否仍然可达**。
+
+```go
+type Cache struct {
+	data []byte
+}
+
+func main() {
+	c := &Cache{
+		data: make([]byte, 1024*1024*100),
+	}
+	_ = c
+	select {}
+}
+```
+
+这里没有循环，也没有持续分配。
+
+但这 100MB 内存会一直被认为是“活的”。
+
+GC 并不会因为“它好久没被用过”而回收它，
+
+只要引用关系还在，它就仍然属于运行时的一部分。
+
+---
+
+所以在我理解里，Go GC 的“基本行为”其实可以浓缩成几句话：
+
+- GC 是​**持续发生的背景活动**，不是阶段性的大扫除
+- 它更在意​**程序的平稳运行**，而不是极限吞吐
+- 回收压力的核心，不是分配频率，而是**存活对象规模**
+- 在常驻服务中，**对象的生命周期设计本身，就是性能设计的一部分**
+
+也正是从这里开始，我才意识到：性能问题并不是“写慢代码”，而是**在不知不觉中，和运行时站到了对立面**。
 
 ### 81. 什么时候需要关注内存分配
 
