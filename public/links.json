@@ -131,15 +131,6 @@
           "check": true
         },
         {
-          "name": "唐志远",
-          "intro": "立志成为一名架构师",
-          "link": "https://fe32.top",
-          "avatar": "https://bu.dusays.com/2022/05/02/626f92e193879.jpg",
-          "friend_link": "https://fe32.top/link",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
-          "check": false
-        },
-        {
           "name": "求知学习社",
           "intro": "持续分享时间精力管理、能力提升、学习成长、生活实用等知识技巧。",
           "link": "https://blog.zhipro.com",
@@ -154,6 +145,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "唐志远",
+          "intro": "立志成为一名架构师",
+          "link": "https://fe32.top",
+          "avatar": "https://bu.dusays.com/2022/05/02/626f92e193879.jpg",
+          "friend_link": "https://fe32.top/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
+          "check": false
+        },
         {
           "name": "Xingluo’s Blog",
           "intro": "何处秋风悲画扇",
