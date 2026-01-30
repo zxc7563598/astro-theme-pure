@@ -131,15 +131,6 @@
           "check": true
         },
         {
-          "name": "超腾开源",
-          "intro": "全栈开发者博客，愿景是利用AI技术降低软件开发成本，打造软件开发、销售、研究一体化平台",
-          "link": "https://www.hylab.cn/",
-          "avatar": "https://www.hylab.cn/logo.png",
-          "friend_link": "https://www.hylab.cn/contact/link",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/超腾开源-1766233398510.png",
-          "check": true
-        },
-        {
           "name": "唐志远",
           "intro": "立志成为一名架构师",
           "link": "https://fe32.top",
@@ -154,6 +145,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "超腾开源",
+          "intro": "全栈开发者博客，愿景是利用AI技术降低软件开发成本，打造软件开发、销售、研究一体化平台",
+          "link": "https://www.hylab.cn/",
+          "avatar": "https://www.hylab.cn/logo.png",
+          "friend_link": "https://www.hylab.cn/contact/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/超腾开源-1766233398510.png",
+          "check": true
+        },
         {
           "name": "Xingluo’s Blog",
           "intro": "何处秋风悲画扇",
