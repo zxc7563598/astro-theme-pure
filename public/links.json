@@ -138,13 +138,7 @@
           "friend_link": "https://fe32.top/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
           "check": false
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "超腾开源",
           "intro": "全栈开发者博客，愿景是利用AI技术降低软件开发成本，打造软件开发、销售、研究一体化平台",
@@ -153,7 +147,13 @@
           "friend_link": "https://www.hylab.cn/contact/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/超腾开源-1766233398510.png",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "Xingluo’s Blog",
           "intro": "何处秋风悲画扇",
