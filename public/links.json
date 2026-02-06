@@ -5,6 +5,15 @@
       "desc": "散落在各地的灯火",
       "link_list": [
         {
+          "name": "旧识桥",
+          "intro": "什么都略懂一点，生活更多彩一些",
+          "link": "https://ailmel.top/",
+          "avatar": "https://img.167891.xyz/v2/3VHU8UR.png",
+          "friend_link": "https://ailmel.top/links/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/旧识桥-1770377184928.webp",
+          "check": false
+        },
+        {
           "name": "清羽飞扬",
           "intro": "柳影曳曳，清酒孤灯，扬笔撒墨，心境如霜",
           "link": "https://blog.liushen.fun",
