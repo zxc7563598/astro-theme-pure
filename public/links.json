@@ -156,6 +156,15 @@
           "friend_link": "https://www.paddysun.top/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
           "check": true
+        },
+        {
+          "name": "Nalanyinyun's Library",
+          "intro": "太阳伞下天然文静素材",
+          "link": "https://nalanyinyun.work/",
+          "avatar": "https://youke.xn--y7xa690gmna.cn/s1/2026/02/10/698b475a8010f.webp",
+          "friend_link": "https://nalanyinyun.work/linkexchange/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Nalanyinyun-s-Library-1770735556742.webp",
+          "check": true
         }
       ]
     },
