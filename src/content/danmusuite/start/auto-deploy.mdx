@@ -4,13 +4,15 @@ description: 'Docker 一键部署，开箱即用，几步就能启动机器人�
 order: 3
 ---
 
-import { Aside, Steps } from 'astro-pure/user'
 import { LinkPreview } from 'astro-pure/advanced'
+import { Aside, Steps } from 'astro-pure/user'
 
 <Aside title='请注意' type='note'>
   <div>适合对项目不打算做任何调整，也不想折腾环境的朋友。</div>
   <div>几条命令就能通过 Docker 自动完成部署，系统会自动更新，保持最新版本。</div>
-  <div>如果你想自己控制更新或做定制化修改，建议选择 [手动部署](/danmusuite/start/manual-deploy)。</div>
+  <div>
+    如果你想自己控制更新或做定制化修改，建议选择 [手动部署](/danmusuite/start/manual-deploy)。
+  </div>
   <div>也许比起看文档，你会更喜欢 [看视频教程](https://bilibili.com/video/BV1xhKczkEg9)</div>
 </Aside>
 
@@ -25,6 +27,20 @@ curl -fsSL https://bilibili-danmu-scripts.oss-cn-hongkong.aliyuncs.com/install-d
 之后等几分钟后你就能拿到机器人控制台的访问地址了，通常是 `http://服务器IP:7777`
 
 打开后会先弹出一个账号密码的设置框。这里你填的账号密码会作为今后访问机器人控制台的第一道防线，所以随便填可以，但最好自己记得住。
+
+<Aside title='特别声明' type='caution'>
+  <div>此命令仅适用于全新服务器（未安装任何运行环境）的情况</div>
+  <div>脚本会自动安装 Docker，并通过 Docker 将本项目部署到 /opt/bilibili-robots 目录</div>
+  <div>脚本的具体执行内容可参考文章下半部分 <a href='#他做了什么'>他做了什么？</a></div>
+  <div>如果你已有服务器环境或已安装相关服务，也可以直接阅读下半部分内容，跳过 Docker 安装步骤，手动进行项目构建</div>
+</Aside>
+
+<Aside title='关于已有 Docker 环境但只想使用 docker-compose 的说明' type='caution'>
+  <div>默认的 docker-compose 会启动 nginx、php、mysql、redis 四个容器</div>
+  <div>如果你希望使用已有的 nginx、mysql 或 redis，请自行调整 docker-compose 配置</div>
+  <div>若使用自有 nginx 容器，需要自行完成相关配置，配置示例可在 nginx 目录中查看</div>
+  <div>若使用自有 mysql、redis 容器，请在执行 sh ./setup.sh 后，手动调整 ./php/scripts/init_project.sh 脚本，将其中的 danmu-mysql、danmu-redis 替换为你自己的容器名，并确保它们处于同一 Docker 网络中</div>
+</Aside>
 
 ## 他做了什么？
 
