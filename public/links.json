@@ -95,15 +95,6 @@
           "check": false
         },
         {
-          "name": "Yaten-Z's Blog",
-          "intro": "世界多变而永恒，文字孤独却自由",
-          "link": "https://blog.yaten.xyz",
-          "avatar": "https://s1.imagehub.cc/images/2025/05/30/55439681d8b3c2d988638c133e160a56.jpg",
-          "friend_link": "https://blog.yaten.xyz/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Yaten-Z-s-Blog-1765322446989.jpg",
-          "check": true
-        },
-        {
           "name": "The Sejolyn Memo",
           "intro": "So fucking close.",
           "link": "https://www.sejolyn.fyi/",
@@ -172,6 +163,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "Yaten-Z's Blog",
+          "intro": "世界多变而永恒，文字孤独却自由",
+          "link": "https://blog.yaten.xyz",
+          "avatar": "https://s1.imagehub.cc/images/2025/05/30/55439681d8b3c2d988638c133e160a56.jpg",
+          "friend_link": "https://blog.yaten.xyz/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Yaten-Z-s-Blog-1765322446989.jpg",
+          "check": true
+        },
         {
           "name": "Xingluo’s Blog",
           "intro": "何处秋风悲画扇",
