@@ -156,13 +156,7 @@
           "friend_link": "https://nalanyinyun.work/linkexchange/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Nalanyinyun-s-Library-1770735556742.webp",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "Yaten-Z's Blog",
           "intro": "世界多变而永恒，文字孤独却自由",
@@ -171,7 +165,13 @@
           "friend_link": "https://blog.yaten.xyz/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Yaten-Z-s-Blog-1765322446989.jpg",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "Xingluo’s Blog",
           "intro": "何处秋风悲画扇",
