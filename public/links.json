@@ -59,15 +59,6 @@
           "check": true
         },
         {
-          "name": "Arthals' ink",
-          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
-          "link": "https://arthals.ink/",
-          "avatar": "https://cdn.arthals.ink/Arthals.png",
-          "friend_link": "https://arthals.ink/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763021912342.png",
-          "check": true
-        },
-        {
           "name": "张洪Heo",
           "intro": "分享设计与科技生活",
           "link": "https://blog.zhheo.com",
@@ -172,6 +163,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "Arthals' ink",
+          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
+          "link": "https://arthals.ink/",
+          "avatar": "https://cdn.arthals.ink/Arthals.png",
+          "friend_link": "https://arthals.ink/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763021912342.png",
+          "check": true
+        },
         {
           "name": "Xingluo’s Blog",
           "intro": "何处秋风悲画扇",
