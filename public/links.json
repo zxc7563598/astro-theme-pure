@@ -156,13 +156,7 @@
           "friend_link": "https://blog.yaten.xyz/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Yaten-Z-s-Blog-1765322446989.jpg",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "Arthals' ink",
           "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
@@ -171,7 +165,13 @@
           "friend_link": "https://arthals.ink/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763021912342.png",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "Xingluo’s Blog",
           "intro": "何处秋风悲画扇",
