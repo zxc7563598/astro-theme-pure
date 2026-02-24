@@ -1,0 +1,74 @@
+---
+import fs from 'fs/promises'
+import path from 'path'
+
+const entertainmentPath = path.resolve('public/entertainment.json')
+const content = await fs.readFile(entertainmentPath, 'utf-8')
+const entertainmentData = JSON.parse(content)
+
+entertainmentData.sort((a: any, b: any) => b.release_date.localeCompare(a.release_date))
+
+interface Item {
+  id: number
+  title: string
+  original_title: string
+  poster_path: string
+  release_date: string
+  vote_average: number
+}
+
+const { class: className, limit, grid, baseurl, ...props } = Astro.props
+
+var listData = []
+if (limit && limit > 0) {
+  listData = entertainmentData.slice(0, limit)
+} else {
+  listData = entertainmentData
+}
+---
+
+<div class={className} {...props}>
+  <section class={grid}>
+    {
+      listData.map((item: Item) => {
+        return (
+          <article
+            class='group rounded-xl
+                 border border-neutral-200/70
+                 dark:border-neutral-700
+                 bg-white/60 dark:bg-neutral-900/60
+                 backdrop-blur-sm
+                 transition-all duration-300
+                 hover:shadow-md
+                 hover:-translate-y-1'
+          >
+            {/* 海报 */}
+            <div
+              class='relative aspect-[2/3]
+                   rounded-t-xl overflow-hidden
+                   bg-neutral-100 dark:bg-neutral-800'
+            >
+              <img
+                src={baseurl + item.poster_path + '?x-oss-process=image/resize,w_400'}
+                alt={item.title}
+                loading='lazy'
+                decoding='async'
+                class='w-full h-full object-cover
+                     transition-transform duration-500
+                     group-hover:scale-105'
+              />
+            </div>
+
+            {/* 内容区 */}
+            <div class='px-3 pt-2 pb-3 space-y-2'>
+              {/* 年份 */}
+              <div class='text-xs text-neutral-500 dark:text-neutral-400'>{item.release_date}</div>
+              {/* 标题 */}
+              <h3 class='text-sm font-medium leading-snug mt-1 mb-0'>{item.title}</h3>
+            </div>
+          </article>
+        )
+      })
+    }
+  </section>
+</div>
