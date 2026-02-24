@@ -8,7 +8,7 @@ const headings = [
   { depth: 2, slug: 'hobbies', text: '我的兴趣' },
   { depth: 2, slug: 'my-job', text: '我的工作' },
   { depth: 2, slug: 'my-skills', text: '我的技能' },
-  { depth: 2, slug: 'access-statistics', text: '访问统计' }
+  { depth: 2, slug: 'access-statistics', text: '访问统计' },
 ]
 ---
 
@@ -27,10 +27,39 @@ const headings = [
   {/* general-talk */}
   <h2 id='hobbies'>我的兴趣</h2>
   <ul>
-    <li>玩游戏( PS5 / Switch, 偏爱单机多一些 )</li>
-    <li>写代码( Go / PHP / 前端折腾 )</li>
-    <li>偶尔研究技术设计，记录点想法</li>
-    <li>享受安静的时间，也喜欢认识新朋友</li>
+    <li>
+      玩游戏( PS5 / Switch, 偏爱单机多一些 )
+    </li>
+    <li>
+      写代码( Go / PHP / 前端折腾 )
+      <a
+        href='/projects'
+        class='ml-2 text-xs text-neutral-400 hover:text-neutral-700
+            dark:hover:text-neutral-200 transition-colors no-underline'
+      >
+        👀 去瞅瞅 →
+      </a>
+    </li>
+    <li>
+      偶尔研究技术设计，记录点想法
+      <a
+        href='/blog'
+        class='ml-2 text-xs text-neutral-400 hover:text-neutral-700
+            dark:hover:text-neutral-200 transition-colors no-underline'
+      >
+        👀 去瞅瞅 →
+      </a>
+    </li>
+    <li>
+      享受安静的时间，也喜欢认识新朋友
+      <a
+        href='/links'
+        class='ml-2 text-xs text-neutral-400 hover:text-neutral-700
+            dark:hover:text-neutral-200 transition-colors no-underline'
+      >
+        👀 去瞅瞅 →
+      </a>
+    </li>
   </ul>
 
   {/* my-job */}
