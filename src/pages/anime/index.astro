@@ -1,5 +1,5 @@
 ---
-import PageLayout from '@/layouts/BaseLayout.astro'
+import PageLayout from '@/layouts/CommonPage.astro'
 import TVwall from '@/components/entertainment/TVwall.astro'
 
 const meta = {
@@ -8,17 +8,12 @@ const meta = {
 }
 ---
 
-<PageLayout {meta}>
-  <main class='mt-6 lg:mt-10'>
-    <div id='content-header' class='animate mb-4'>
-      <h1 class='mb-6 text-3xl font-medium'>我的追番</h1>
-      <p>这里整理的是我已经追完的动漫作品。</p>
-      <p>这个页面更像是一份长期更新的个人记录。</p>
-      <p>排序方式并非按照我的观看时间，而是按照作品的发布时间排列，方便按时代脉络查看。</p>
-    </div>
-    <TVwall
-      baseurl='https://cdn.hejunjie.life/tmdb/'
-      grid='grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5'
-    />
-  </main>
+<PageLayout title='我的追番' comment>
+  <p>这里整理的是我已经追完的动漫作品。</p>
+  <p>这个页面更像是一份长期更新的个人记录。</p>
+  <p>排序方式并非按照我的观看时间，而是按照作品的发布时间排列，方便按时代脉络查看。</p>
+  <TVwall
+    baseurl='https://cdn.hejunjie.life/tmdb/'
+    grid='grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4'
+  />
 </PageLayout>

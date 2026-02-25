@@ -1,5 +1,5 @@
 ---
-import PageLayout from '@/layouts/BaseLayout.astro'
+import PageLayout from '@/layouts/CommonPage.astro'
 import GameWall from '@/components/entertainment/GameWall.astro'
 
 const meta = {
@@ -8,18 +8,13 @@ const meta = {
 }
 ---
 
-<PageLayout {meta}>
-  <main class='mt-6 lg:mt-10'>
-    <div id='content-header' class='animate mb-4'>
-      <h1 class='mb-6 text-3xl font-medium'>最近在玩</h1>
-      <p>这里整理的是我在 PS5 上通关或认真体验过的游戏。</p>
-      <p>它更像是一份持续更新的个人游玩记录。</p>
-      <p>排序方式并非按照我的游玩时间，而是按照作品的发售时间排列，方便按时代脉络回看这些作品。</p>
-      <p>部分完成白金奖杯的游戏会做特别标记，那些算是投入时间与精力较多的阶段性纪念。</p>
-    </div>
-    <GameWall
-      baseurl='https://cdn.hejunjie.life/game/'
-      grid='grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5'
-    />
-  </main>
+<PageLayout title='最近在玩' comment>
+  <p>这里整理的是我在 PS5 上通关或认真体验过的游戏。</p>
+  <p>它更像是一份持续更新的个人游玩记录。</p>
+  <p>排序方式并非按照我的游玩时间，而是按照作品的发售时间排列，方便按时代脉络回看这些作品。</p>
+  <p>部分完成白金奖杯的游戏会做特别标记，那些算是投入时间与精力较多的阶段性纪念。</p>
+  <GameWall
+    baseurl='https://cdn.hejunjie.life/game/'
+    grid='grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4'
+  />
 </PageLayout>
