@@ -27,7 +27,7 @@ const listData = gameData.slice(0, limit > 0 ? limit : gameData.length)
     {
       listData.map((item: Item) => {
         return (
-          <a href={item.link} target='_blank' class='group rounded-xl border border-neutral-200/70 dark:border-neutral-700 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col'>
+          <a href={item.link} target='_blank' class='no-underline group rounded-xl border border-neutral-200/70 dark:border-neutral-700 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col'>
             <div class='relative aspect-1 rounded-t-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800'>
               <img src={baseurl + item.poster_path + '?x-oss-process=image/resize,w_400'} alt={item.name} loading='lazy' decoding='async' class='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'/>
             </div>
