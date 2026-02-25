@@ -11,11 +11,7 @@ const { class: className, title, baseurl, limit, ...props } = Astro.props
 >
   <div class='m-0 px-2 text-lg font-medium'>{title}</div>
   <div>
-    <GameWall
-      baseurl={baseurl}
-      limit={limit}
-      grid='grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4'
-    />
+    <GameWall baseurl={baseurl} limit={limit} grid='grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4'/>
   </div>
 </div>
 <div class='mt-2 text-right text-sm'>

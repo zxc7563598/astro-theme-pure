@@ -2,6 +2,8 @@
 import fs from 'fs/promises'
 import path from 'path'
 
+import GameGallery from '@/components/vue/game/GameGallery.vue'
+
 const { class: className, limit, grid, baseurl, ...props } = Astro.props
 
 interface Item {
@@ -23,32 +25,5 @@ const listData = gameData.slice(0, limit > 0 ? limit : gameData.length)
 ---
 
 <div class={className} {...props}>
-  <section class={grid}>
-    {
-      listData.map((item: Item) => {
-        return (
-          <a href={item.link} target='_blank' class='no-underline group rounded-xl border border-neutral-200/70 dark:border-neutral-700 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col'>
-            <div class='relative aspect-1 rounded-t-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800'>
-              <img src={baseurl + item.poster_path + '?x-oss-process=image/resize,w_400'} alt={item.name} loading='lazy' decoding='async' class='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'/>
-            </div>
-            <div class={`relative px-3 pt-2 pb-3 space-y-1.5 rounded-b-xl overflow-hidden flex-1 ${item.platinum ? `bg-white/70 dark:bg-neutral-900/70` : `bg-white/60 dark:bg-neutral-900/60`}`}>
-              {item.platinum && (
-                <div class='absolute inset-0 pointer-events-none'>
-                  <div class='absolute inset-0 bg-[linear-gradient(135deg,rgba(255,215,0,0.08)_0%,rgba(255,200,0,0.04)_40%,transparent_70%)]'></div>
-                  <div class='absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,215,0,0.15),transparent_60%)]'></div>
-                </div>
-              )}
-              <div class='relative text-xs text-neutral-500 dark:text-neutral-400'>{item.date}</div>
-              <h3 class='relative text-sm font-medium leading-snug mt-1 mb-0'>{item.name}</h3>
-              {item.platinum && item.platinum_date && (
-                <div class='relative text-[11px] text-amber-500 dark:text-amber-400 tracking-wide'>
-                  🏆 {item.platinum_date}
-                </div>
-              )}
-            </div>
-          </a>
-        )
-      })
-    }
-  </section>
+  <GameGallery client:only='vue' list={listData} baseurl={baseurl} grid={grid} />
 </div>
