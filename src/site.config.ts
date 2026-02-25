@@ -118,6 +118,7 @@ export const integ: IntegrationUserConfig = {
       { date: '2025-11-09', content: "新增文章加密模块，由静态部署变更为 SSR 部署" },
       { date: '2025-11-10', content: "开放友情链接页面，开始交换友链" },
       { date: '2025-11-13', content: "增加友链自动申请功能，实现自动添加/检测" },
+      { date: '2026-02-25', content: "增加游戏墙/番剧墙" },
       { date: '...', content: "持续进步中..." },
     ],
     // Yourself link info
