@@ -18,7 +18,7 @@
                     <div class="text-xs text-neutral-500 dark:text-neutral-400">
                         {{ item.release_date }}
                     </div>
-                    <h3 class="text-sm font-medium leading-snug">
+                    <h3 class="text-sm font-medium leading-snug mt-1 mb-0">
                         {{ item.title }}
                     </h3>
                 </div>
