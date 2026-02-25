@@ -4,13 +4,15 @@ import PageLayout from '@/layouts/CommonPage.astro'
 import Metrics from '@/components/about/Metrics.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
 import TVwallCard from '@/components/entertainment/TVwallCard.astro'
+import GameWallCard from '@/components/entertainment/GameWallCard.astro'
 
 const headings = [
   { depth: 2, slug: 'hobbies', text: '我的兴趣' },
   { depth: 2, slug: 'my-job', text: '我的工作' },
   { depth: 2, slug: 'my-skills', text: '我的技能' },
   { depth: 2, slug: 'access-statistics', text: '访问统计' },
-  { depth: 2, slug: 'my-anime', text: '我的追番' }
+  { depth: 2, slug: 'my-anime', text: '我的追番' },
+  { depth: 2, slug: 'my-game', text: '最近在玩' }
 ]
 ---
 
@@ -31,6 +33,13 @@ const headings = [
   <ul>
     <li>
       玩游戏( PS5 / Switch, 偏爱单机多一些 )
+      <a
+        href='#my-game'
+        class='ml-2 text-xs text-neutral-400 hover:text-neutral-700
+            dark:hover:text-neutral-200 transition-colors no-underline'
+      >
+        👀 去瞅瞅 →
+      </a>
     </li>
     <li>
       看动漫（老二次元了，啥都看看）
@@ -246,4 +255,9 @@ const headings = [
   <h2 id='my-anime'>我的追番</h2>
   <p>更新就追，完结就补。<br>不算高强度，有时间就会去找点看。</p>
   <TVwallCard title='追番列表' baseurl='https://cdn.hejunjie.life/tmdb/' limit={8} />
+
+  {/* my-game */}
+  <h2 id='my-game'>最近在玩</h2>
+  <p>大多是单机作品，慢慢打，不追进度。<br>更在意体验，而不是通关速度。</p>
+  <GameWallCard title='PS5游戏列表' baseurl='https://cdn.hejunjie.life/game/' limit={8} />
 </PageLayout>
