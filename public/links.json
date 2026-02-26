@@ -147,6 +147,15 @@
           "friend_link": "https://arthals.ink/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763021912342.png",
           "check": true
+        },
+        {
+          "name": "Under the Sun with Paddy",
+          "intro": "分享实践思考、算法编程以及快乐。",
+          "link": "https://www.paddysun.top",
+          "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
+          "friend_link": "https://www.paddysun.top/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
+          "check": true
         }
       ]
     },
@@ -162,15 +171,6 @@
           "friend_link": "https://fe32.top/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
           "check": false
-        },
-        {
-          "name": "Under the Sun with Paddy",
-          "intro": "分享实践思考、算法编程以及快乐。",
-          "link": "https://www.paddysun.top",
-          "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
-          "friend_link": "https://www.paddysun.top/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
-          "check": true
         },
         {
           "name": "Xingluo’s Blog",
