@@ -14,6 +14,7 @@ interface Project {
   links: {
     type: string
     href: string
+    title: string
   }[]
 }
 
@@ -86,7 +87,8 @@ const projectIconSet: Record<string, iconsType> = {
                   return (
                     <a
                       href={link.href}
-                      class='rounded-full bg-muted p-1 text-muted-foreground transition-colors sm:p-1.5'
+                      data-tooltip={link.title}
+                      class='rounded-full bg-muted p-1 text-muted-foreground transition-colors sm:p-1.5 tooltip'
                       aria-label={link.type}
                       target='_blank'
                     >
@@ -105,3 +107,47 @@ const projectIconSet: Record<string, iconsType> = {
     }
   </div>
 </div>
+<style>
+  .tooltip {
+    position: relative;
+    text-decoration: none;
+    color: #007bff;
+  }
+
+  .tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .tooltip:hover::after,
+  .tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>
