@@ -219,8 +219,8 @@
     "name": "刺客教條：暗影者",
     "poster_path": "e8f210151e19c5cbd4ff8278a9eeb4756011e94f0cfeea02.avif",
     "date": "2025-12-28",
-    "platinum": false,
-    "platinum_date": "",
+    "platinum": true,
+    "platinum_date": "2026-03-05",
     "link": "https://store.playstation.com/zh-hant-hk/product/JP0001-PPSA20398_00-GAME000000000000"
   },
   {
@@ -235,8 +235,16 @@
     "name": "原神·空月之歌",
     "poster_path": "9efe96ddb3ffacf01f255c80bb2a4f466c25dbb5d44eb16d.avif",
     "date": "2025-08-23",
+    "platinum": true,
+    "platinum_date": "2025-08-23",
+    "link": "https://store.playstation.com/zh-hant-hk/product/EP6261-PPSA02584_00-OSRELSIEEGENSHIN"
+  },
+  {
+    "name": "仁王３",
+    "poster_path": "835b207c01d1b02c29229e73fba0da13b914148c8b8bd4ed.avif",
+    "date": "2026-03-06",
     "platinum": false,
     "platinum_date": "",
-    "link": "https://store.playstation.com/zh-hant-hk/product/EP6261-PPSA02584_00-OSRELSIEEGENSHIN"
+    "link": "https://store.playstation.com/zh-hant-hk/product/HP0106-PPSA32786_00-NIOH300000000000"
   }
 ]
