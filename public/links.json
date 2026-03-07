@@ -147,6 +147,15 @@
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": true
+        },
+        {
+          "name": "navms's blog",
+          "intro": "互联网、编程、科技的个人记录",
+          "link": "https://navms.github.io/",
+          "avatar": "https://navms.github.io/images/favicon.png",
+          "friend_link": "https://navms.github.io/links/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/navms-s-blog-1772856485817.png",
+          "check": true
         }
       ]
     },
