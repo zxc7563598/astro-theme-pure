@@ -95,15 +95,6 @@
           "check": true
         },
         {
-          "name": "超腾开源",
-          "intro": "全栈开发者博客，愿景是利用AI技术降低软件开发成本，打造软件开发、销售、研究一体化平台",
-          "link": "https://www.hylab.cn/",
-          "avatar": "https://www.hylab.cn/logo.png",
-          "friend_link": "https://www.hylab.cn/link",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/超腾开源-1766233398510.png",
-          "check": true
-        },
-        {
           "name": "Nalanyinyun's Library",
           "intro": "太阳伞下天然文静素材",
           "link": "https://nalanyinyun.work/",
@@ -122,21 +113,54 @@
           "check": true
         },
         {
-          "name": "Arthals' ink",
-          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
-          "link": "https://arthals.ink/",
-          "avatar": "https://cdn.arthals.ink/Arthals.png",
-          "friend_link": "https://arthals.ink/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763021912342.png",
-          "check": true
-        },
-        {
           "name": "Under the Sun with Paddy",
           "intro": "分享实践思考、算法编程以及快乐。",
           "link": "https://www.paddysun.top",
           "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
           "friend_link": "https://www.paddysun.top/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
+          "check": true
+        },
+        {
+          "name": "navms's blog",
+          "intro": "互联网、编程、科技的个人记录",
+          "link": "https://navms.github.io/",
+          "avatar": "https://navms.github.io/images/favicon.png",
+          "friend_link": "https://navms.github.io/links/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/navms-s-blog-1772856485817.png",
+          "check": true
+        },
+        {
+          "name": "The Sejolyn Memo",
+          "intro": "So fucking close.",
+          "link": "https://www.sejolyn.fyi/",
+          "avatar": "https://sejolyn.fyi/avatar.jpg",
+          "friend_link": "https://www.sejolyn.fyi/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
+          "check": true
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
+        {
+          "name": "超腾开源",
+          "intro": "全栈开发者博客，愿景是利用AI技术降低软件开发成本，打造软件开发、销售、研究一体化平台",
+          "link": "https://www.hylab.cn/",
+          "avatar": "https://www.hylab.cn/logo.png",
+          "friend_link": "https://www.hylab.cn/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/超腾开源-1766233398510.png",
+          "check": true
+        },
+        {
+          "name": "Arthals' ink",
+          "intro": "所见高山远木，阔云流风；所幸岁月盈余，了无拘束",
+          "link": "https://arthals.ink/",
+          "avatar": "https://cdn.arthals.ink/Arthals.png",
+          "friend_link": "https://arthals.ink/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763021912342.png",
           "check": true
         },
         {
@@ -149,36 +173,12 @@
           "check": true
         },
         {
-          "name": "navms's blog",
-          "intro": "互联网、编程、科技的个人记录",
-          "link": "https://navms.github.io/",
-          "avatar": "https://navms.github.io/images/favicon.png",
-          "friend_link": "https://navms.github.io/links/",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/navms-s-blog-1772856485817.png",
-          "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
-        {
           "name": "张洪Heo",
           "intro": "分享设计与科技生活",
           "link": "https://blog.zhheo.com",
           "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp",
           "friend_link": "https://blog.zhheo.com/link/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/张洪Heo-1763023417884.webp",
-          "check": true
-        },
-        {
-          "name": "The Sejolyn Memo",
-          "intro": "So fucking close.",
-          "link": "https://www.sejolyn.fyi/",
-          "avatar": "https://sejolyn.fyi/avatar.jpg",
-          "friend_link": "https://www.sejolyn.fyi/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
           "check": true
         },
         {
