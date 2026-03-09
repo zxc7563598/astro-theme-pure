@@ -131,21 +131,6 @@
           "check": true
         },
         {
-          "name": "The Sejolyn Memo",
-          "intro": "So fucking close.",
-          "link": "https://www.sejolyn.fyi/",
-          "avatar": "https://sejolyn.fyi/avatar.jpg",
-          "friend_link": "https://www.sejolyn.fyi/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
-          "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
-        {
           "name": "超腾开源",
           "intro": "全栈开发者博客，愿景是利用AI技术降低软件开发成本，打造软件开发、销售、研究一体化平台",
           "link": "https://www.hylab.cn/",
@@ -170,6 +155,21 @@
           "avatar": "https://www.jerrygao.cn/icons/icon-512.png",
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
+          "check": true
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
+        {
+          "name": "The Sejolyn Memo",
+          "intro": "So fucking close.",
+          "link": "https://www.sejolyn.fyi/",
+          "avatar": "https://sejolyn.fyi/avatar.jpg",
+          "friend_link": "https://www.sejolyn.fyi/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
           "check": true
         },
         {
