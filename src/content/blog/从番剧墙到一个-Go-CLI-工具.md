@@ -1,7 +1,7 @@
 ---
 title: '从番剧墙到一个 Go CLI 工具'
 publishDate: '2026-02-26 12:58:27'
-description: '基于个人番剧墙的需求，我写了一个 Go 命令行工具，用于将 TMDB 片单数据导出为本地 JSON 文件。本文记录了这个小工具的动机、实现思路，以及它如何帮助我把影视数据从动态 API 转为静态资产'
+description: '本文记录了基于个人番剧墙的需求，用 Go 制作的命令行工具，用于将 TMDB 片单数据导出为本地 JSON 文件'
 tags:
   - Go
 language: '中文'
