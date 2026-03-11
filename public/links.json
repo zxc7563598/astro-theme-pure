@@ -156,13 +156,7 @@
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "The Sejolyn Memo",
           "intro": "So fucking close.",
@@ -171,7 +165,13 @@
           "friend_link": "https://www.sejolyn.fyi/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "张洪Heo",
           "intro": "分享设计与科技生活",
