@@ -1,0 +1,83 @@
+---
+import { Button } from 'astro-pure/user'
+import { cn } from 'astro-pure/utils'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { integ } from '@/site-config'
+
+import OneadminContents from './OneadminContents.astro'
+
+const meta = {
+  title: 'OneAdmin',
+  description:
+    'OneAdmin 是一个开箱即用的全栈后台管理系统，基于 Go 与 Vue 3 构建，将 API 服务与前端界面整合为单一二进制部署。内置 RBAC 权限控制与完整后台基础能力，具备清晰的分层架构与良好的扩展性，适用于快速搭建各类管理系统与控制面板。'
+}
+---
+
+<PageLayout {meta}>
+  <Button title='返回' href='/' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 text-3xl font-medium'>OneAdmin</h1>
+    </div>
+    <div id='content' class={cn('animate mt-8 max-w-none md:min-w-[45ch]', integ.typography.class)}>
+      <p>一个开箱即用的全栈后台管理系统，基于 Go 与 Vue 3 构建，将 API 服务与前端界面整合为单一二进制部署。</p>
+      <p>内置 RBAC 权限控制与完整后台基础能力，具备清晰的分层架构与良好的扩展性，适用于快速搭建各类管理系统与控制面板。</p>
+      <OneadminContents title={false} />
+      <h2 class='text-xl font-medium'>项目介绍</h2>
+      <p><b>OneAdmin 是一个为“快速落地后台系统”而设计的全栈解决方案。</b></p>
+      <p>它将 Go 后端与 Vue 3 前端整合在同一个仓库中，并通过构建阶段将前端资源嵌入到后端二进制中，最终只需交付一个可执行文件，即可同时提供 API 服务与完整的后台管理界面。</p>
+      <p>相比传统前后端分离部署方案，OneAdmin 在部署复杂度、环境依赖和运维成本上都做了大幅简化，更适合中小型项目、内部系统以及需要快速上线的业务场景。</p>
+      <p>在能力上，OneAdmin 并不是一个“演示项目”，而是一个可以直接用于生产的基础框架，内置了后台系统最常见的一整套功能：</p>
+      <ul>
+        <li>基于 RBAC 的权限控制（管理员 / 角色 / 菜单 / 权限）</li>
+        <li>清晰的分层架构（handler / service / repository）</li>
+        <li>统一响应结构与错误码设计</li>
+        <li>JWT 鉴权与登录态管理</li>
+        <li>前后端完整打通的管理后台界面</li>
+      </ul>
+      <p>
+        你可以把它当作一个“已经帮你搭好 70%
+        的后台项目骨架”，在此基础上专注业务本身，而不是重复造轮子。
+      </p>
+      <h2 class='text-xl font-medium'>技术支持 / 定制开发</h2>
+      <p>如果你正好有项目需求，这里不只是一个开源项目，也可以是你落地项目的合作入口。</p>
+      <p>我提供 <b>Web 全栈技术支持与定制开发服务</b>，从前端到后端、从开发到部署，可以一站式完成，而不是只做某一部分。</p>
+      <h3>能力范围</h3>
+      <h4>前端开发</h4>
+      <ul>
+        <li>HTML / CSS / JavaScript</li>
+        <li>Vue 3 生态（Naive UI / Element Plus / Vant 4）</li>
+        <li>后台系统、H5 页面、小程序界面开发</li>
+      </ul>
+      <h4>后端开发</h4>
+      <ul>
+        <li>Go（Gin）构建高性能 API 服务</li>
+        <li>PHP（ThinkPHP / Laravel / Webman）项目开发与维护</li>
+        <li>MySQL 性能优化 / Redis 缓存设计</li>
+        <li>接口安全（鉴权、签名、限流等）</li>
+      </ul>
+      <h4>运维与部署</h4>
+      <ul>
+        <li>LNMP 环境搭建与优化</li>
+        <li>Docker 容器化部署</li>
+        <li>GitHub / CI 基础流程</li>
+      </ul>
+      <h4>其他能力</h4>
+      <ul>
+        <li>微信公众号 / 小程序开发与对接</li>
+        <li>Python 脚本与工具开发</li>
+        <li>Composer 生态与第三方包整合（能少造轮子就少造）</li>
+      </ul>
+      <h3>可以帮你做什么？</h3>
+      <p>不只是“写代码”，更偏向把事情完整做成：</p>
+      <ol>
+        <li>从 0 到 1 搭建后台系统或 SaaS 控制台</li>
+        <li>基于 OneAdmin 做二次开发或定制功能</li>
+        <li>重构已有项目（性能、结构、安全）</li>
+        <li>快速交付一个能上线的完整系统（前后端 + 部署）</li>
+      </ol>
+      <p>如果你希望找一个 <b>能独立推进项目、沟通成本低、同时覆盖前后端的开发者</b>，那这部分刚好是为你准备的。</p>
+      <p>有需求可以直接联系，我这边一般会先帮你把方案梳理清楚，再决定怎么一起做。</p>
+    </div>
+  </main>
+</PageLayout>

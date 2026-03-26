@@ -1,0 +1,162 @@
+---
+title: '快速开始'
+description: '本节将帮助你快速完成 OneAdmin 的环境准备、项目启动与基本访问配置。通过简单几步，你可以在本地运行完整的开发环境（前后端一体），并了解各服务入口与基础使用方式。'
+order: 1
+---
+
+import { Aside, CardList, Steps } from 'astro-pure/user'
+
+## 环境要求
+
+| 依赖                | 版本     | 是否必需          | 用途                        |
+| ------------------- | -------- | ----------------- | --------------------------- |
+| Go                  | ≥ 1.25   | ✅ 后端编译与运行 |
+| Node.js             | ≥ 18     | ✅ 仅开发环境     | 前端构建工具链 (Vite)       |
+| Mysql 或 PostgreSQL | 主流版本 | ✅ 任选其一       | 数据库                      |
+| Redis               | ≥ 6.0    | ⚠️ 可选           | 用于 JWT 认证令牌的会话缓存 |
+
+<Aside title='请注意' type='note'>
+  <div>Mysql 或 PostgreSQL 可本地安装，也可以直接使用云服务器安装好的服务，自行选择</div>
+</Aside>
+
+<Aside title='请注意' type='note'>
+  <div>Redis 并非必需组件。如需实现更严格的会话控制（例如限制管理员单设备登录、权限变更后强制下线等），建议启用 Redis </div>
+</Aside>
+
+---
+
+## 获取项目并初始化配置
+
+```bash
+git clone https://github.com/zxc7563598/oneadmin.git
+cd oneadmin
+cp config.example.yaml config.yaml
+```
+
+根据实际情况修改 `config.yaml`（如数据库连接等配置）。
+
+---
+
+## 启动开发环境
+
+推荐使用 Makefile 一键启动：
+
+```bash
+make dev
+```
+
+该命令会同时启动：
+
+- Go 后端服务
+- 前端开发服务器（Vite）
+
+---
+
+## 可访问服务
+
+项目启动后，可访问以下服务：
+
+| 服务名称   | 地址                                                                                 | 说明                                                  |
+| ---------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------- |
+| Go API     | [http://localhost:9000](http://localhost:9000)                                       | 后端 REST API 服务                                    |
+| Vite Dev   | [http://localhost:5173](http://localhost:5173)                                       | 前端开发服务器（支持热重载，并代理 API 请求到 :9000） |
+| Swagger UI | [http://localhost:9000/swagger/index.html](http://localhost:9000/swagger/index.html) | 交互式 API 文档（仅开发环境）                         |
+| ReDoc      | [http://localhost:9000/redoc](http://localhost:9000/redoc)                           | 备用 API 文档查看器（仅开发环境）                     |
+| 管理后台   | [http://localhost:9000/admin/](http://localhost:9000/admin/)                         | 构建后的前端页面（嵌入在后端服务中）                  |
+
+## 构建项目
+
+### 构建当前平台
+
+```bash
+make build
+```
+
+构建完成后，生成的可执行文件位于：
+
+```bash
+./bin/oneadmin
+```
+
+---
+
+### 构建前端资源
+
+```bash
+make build-web
+```
+
+构建后的前端资源会自动同步至：
+
+```text
+internal/webui/dist
+```
+
+---
+
+### 构建多平台版本
+
+```bash
+make release
+```
+
+支持以下平台：
+
+- Linux (amd64)
+- macOS (amd64 / arm64)
+- Windows (amd64)
+
+---
+
+## 运行服务
+
+```bash
+./bin/oneadmin
+```
+
+---
+
+### 启动参数
+
+程序支持以下参数：
+
+```text
+-port    服务端口（默认：9000）
+-config  配置文件路径（默认：config.yaml）
+```
+
+---
+
+### 示例
+
+```bash
+# 使用默认配置
+./bin/oneadmin
+
+# 指定端口
+./bin/oneadmin -port 8080
+
+# 指定配置文件
+./bin/oneadmin -config ./configs/dev.yaml
+
+# 同时指定
+./bin/oneadmin -port 8080 -config ./configs/dev.yaml
+```
+
+
+## 其他常用命令
+
+```bash
+# 生成 Swagger 文档
+make swagger
+
+# 清理构建产物
+make clean
+```
+
+
+## 说明
+
+- 开发环境建议使用 `make dev`，可同时启动前后端并支持前端热更新
+- 生产环境建议使用 `make build` 构建后，通过二进制文件运行
+- Swagger UI 与 ReDoc 默认仅在非生产模式下启用

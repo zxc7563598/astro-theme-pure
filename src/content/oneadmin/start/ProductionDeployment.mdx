@@ -1,0 +1,246 @@
+---
+title: '生产部署'
+description: '本文介绍如何将 OneAdmin 部署到生产环境，包含构建策略、运行方式、反向代理及 Docker 部署方案。'
+order: 2
+---
+
+## 构建生产版本
+
+> 建议在本地完成构建后再上传到服务器，而不是在服务器上直接构建。
+
+原因：
+
+- 构建过程依赖 Node.js（前端编译）
+- 服务器通常不具备完整前端构建环境
+- 可避免生产环境依赖污染与构建不一致问题
+
+---
+
+### 本地构建
+
+```bash
+make build
+```
+
+构建完成后生成：
+
+```bash
+./bin/oneadmin
+```
+
+该二进制文件已包含：
+
+- 后端 API 服务
+- 前端构建资源（已嵌入，无需额外部署）
+
+---
+
+### 上传到服务器
+
+建议目录结构：
+
+```text
+/opt/oneadmin/
+├── oneadmin        # 可执行文件
+├── config.yaml     # 配置文件
+└── logs/           # 日志目录（运行时生成）
+```
+
+上传示例：
+
+```bash
+scp ./bin/oneadmin user@server:/opt/oneadmin/
+scp ./config.yaml user@server:/opt/oneadmin/
+```
+
+---
+
+## 运行服务
+
+```bash
+GIN_MODE=release ./oneadmin -config ./config.yaml -port 9000
+```
+
+> 生产环境必须设置 `GIN_MODE=release`，否则将运行在 debug 模式。
+
+---
+
+## 文件权限说明（重要）
+
+运行过程中会写入日志目录，例如：
+
+```text
+logs/
+```
+
+请确保运行用户具备写权限：
+
+```bash
+mkdir -p /opt/oneadmin/logs
+chown -R www-data:www-data /opt/oneadmin
+chmod -R 755 /opt/oneadmin
+```
+
+否则可能导致：
+
+- 日志写入失败
+- 服务异常退出
+
+---
+
+## 使用 systemd 管理服务（推荐）
+
+### 创建服务文件
+
+```bash
+sudo vim /etc/systemd/system/oneadmin.service
+```
+
+```text
+[Unit]
+Description=OneAdmin Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/oneadmin
+Environment="GIN_MODE=release"
+ExecStart=/opt/oneadmin/oneadmin -config /opt/oneadmin/config.yaml -port 9000
+Restart=always
+RestartSec=5
+User=www-data
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+
+### 启动服务
+
+```bash
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable oneadmin
+sudo systemctl start oneadmin
+```
+
+---
+
+### 查看状态与日志
+
+```bash
+sudo systemctl status oneadmin
+journalctl -u oneadmin -f
+```
+
+---
+
+## 配置 Nginx 反向代理（推荐）
+
+```text
+server {
+    listen 80;
+    server_name your-domain.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:9000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
+
+启用配置：
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+---
+
+## 访问服务
+
+部署完成后：
+
+- 管理后台：[http://your-domain.com/admin/](http://your-domain.com/admin/)
+- API：[http://your-domain.com](http://your-domain.com)
+
+---
+
+## Docker 部署（可选）
+
+### 思路说明
+
+推荐方式：
+
+> **本地构建二进制 → 上传到服务器 → 挂载目录运行**
+
+该方式无需构建镜像，部署简单，更新高效。
+
+---
+
+### 目录结构
+
+```text
+/opt/oneadmin/
+├── oneadmin
+├── config.yaml
+└── logs/
+```
+
+---
+
+### 权限设置
+
+```bash
+# 添加执行权限
+chmod +x /opt/oneadmin/oneadmin
+
+# 创建日志目录
+mkdir -p /opt/oneadmin/logs
+
+# 设置目录权限
+chmod -R 755 /opt/oneadmin
+```
+
+---
+
+### 启动容器
+
+```bash
+docker run -d \
+    -p 9000:9000 \
+    -e GIN_MODE=release \
+    -v /opt/oneadmin:/app \
+    --name oneadmin \
+    alpine:latest \
+    /app/oneadmin -config /app/config.yaml -port 9000
+```
+
+参数说明：
+
+- `-p 9000:9000`：端口映射
+- `-e GIN_MODE=release`：启用 Gin 生产模式
+- `-v /opt/oneadmin:/app`：挂载宿主机目录
+- `/app/oneadmin`：容器内执行程序
+
+---
+
+## 更新部署
+
+```bash
+# 本地构建
+make build
+
+# 上传新版本
+scp ./bin/oneadmin user@server:/opt/oneadmin/
+
+# 重启服务（systemd）
+sudo systemctl restart oneadmin
+
+# 重启服务（Docker）
+docker restart oneadmin
+```
