@@ -9,15 +9,20 @@ export const partial = true
 
 const oneadminCollection = (await getBlogCollection('oneadmin')) as CollectionEntry<'oneadmin'>[]
 // Group docs by id first part (setup, integrations, advanced, etc.)
-const oneadminByCate = oneadminCollection.reduce((acc: { [key: string]: typeof oneadminCollection }, doc) => {
-  const id = doc.id.split('/')[0]
-  if (!acc[id]) acc[id] = [] as typeof oneadminCollection
-  acc[id].push(doc)
-  return acc
-}, {})
+const oneadminByCate = oneadminCollection.reduce(
+  (acc: { [key: string]: typeof oneadminCollection }, doc) => {
+    const id = doc.id.split('/')[0]
+    if (!acc[id]) acc[id] = [] as typeof oneadminCollection
+    acc[id].push(doc)
+    return acc
+  },
+  {}
+)
 
 const docCategories = {
   start: '快速上手',
+  backend: '后端开发',
+  frontend: '前端开发'
 }
 
 type Props = {

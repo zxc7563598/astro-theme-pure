@@ -1,0 +1,364 @@
+---
+title: '常用组合式函数'
+description: '本文介绍 OneAdmin 前端项目中常用的四个组合式函数：useAliveData、useCrud、useForm 与 useModal，重点说明各自的参数、返回值及使用方式。这些函数围绕页面缓存、表单处理与弹窗交互进行封装，可配合 MeCrud 与 MeModal 快速完成后台页面开发。'
+order: 4
+---
+
+项目在：
+
+```text
+/src/composables
+```
+
+中封装了一些常用组合式函数：
+
+```javascript
+export * from './useAliveData'
+export * from './useCrud'
+export * from './useForm'
+export * from './useModal'
+```
+
+这几个函数并不是独立存在的，而是围绕后台开发的几个核心场景分别解决不同问题：
+
+- 页面缓存（useAliveData）
+- 表单处理（useForm）
+- 弹窗控制（useModal）
+- CRUD 编排（useCrud）
+
+它们组合使用后，可以显著减少：
+
+- 状态管理代码
+- 表单处理代码
+- 弹窗控制代码
+
+从而让页面开发更加统一和高效。
+
+## useAliveData（页面缓存）
+
+用于​**缓存页面数据**（通常是查询条件），在页面切换后返回时可以恢复状态。
+
+### 入参
+
+```javascript
+useAliveData(initData = {}, key?)
+```
+
+| 参数     | 说明                              |
+| -------- | --------------------------------- |
+| initData | 初始数据                          |
+| key      | 缓存 key（默认使用当前路由 name） |
+
+### 返回值
+
+```javascript
+const { aliveData, reset } = useAliveData(...)
+```
+
+| 字段      | 说明                     |
+| --------- | ------------------------ |
+| aliveData | 响应式数据（会自动缓存） |
+| reset     | 重置缓存                 |
+
+### 使用示例
+
+```javascript
+const { aliveData: query, reset } = useAliveData({
+  username: null,
+  status: null
+})
+```
+
+```html
+<MeCrud v-model:queryItems="query" />
+```
+
+### 行为说明
+
+- 数据变化时自动缓存（Map 存储）
+- 页面返回时自动恢复
+- 调用 `reset()` 会清空缓存
+
+### 适用场景
+
+- 列表查询条件缓存（最常见）
+- 表单草稿缓存（可选）
+
+## useForm（表单处理）
+
+用于统一管理：
+
+- 表单数据（model）
+- 表单引用（ref）
+- 表单校验
+
+### 入参
+
+```javascript
+useForm((initFormData = {}))
+```
+
+### 返回值
+
+```javascript
+const [formRef, formModel, validation, rules] = useForm(initForm)
+```
+
+| 字段       | 说明                    |
+| ---------- | ----------------------- |
+| formRef    | 表单 ref（绑定 n-form） |
+| formModel  | 表单数据                |
+| validation | 表单校验方法            |
+| rules      | 默认规则（required）    |
+
+### 使用示例
+
+```html
+<n-form ref="formRef" :model="formModel">
+  <n-form-item label="用户名" path="username" :rule="rules.required">
+    <n-input v-model:value="formModel.username" />
+  </n-form-item>
+</n-form>
+```
+
+```javascript
+// formRef 需要绑定到 n-form 的 ref 上
+// formModel 需要绑定到 n-form 的 model 上并用于表单字段
+// rules 目前只实现了 required, 其余可以自己实现
+const [formRef, formModel, validation, rules] = useForm()
+
+// 表单提交时调用
+await validation()
+// validation 校验失败后会 throw error
+// 因此若校验失败，后续代码不会被执行
+// 也可以用 try catch 来捕获异常
+```
+
+### 说明
+
+- `formModel` 默认是深拷贝初始值
+- `validation()`​ 会调用 `n-form.validate()`
+
+## useModal（弹窗控制）
+
+用于操作 `MeModal`：
+
+- 获取 modalRef
+- 控制 loading 状态
+
+### 返回值
+
+```javascript
+const [modalRef, okLoading] = useModal()
+```
+
+| 字段      | 说明                 |
+| --------- | -------------------- |
+| modalRef  | 绑定 MeModal         |
+| okLoading | 控制确认按钮 loading |
+
+### 使用示例
+
+```html
+<MeModal ref="modalRef" />
+```
+
+```javascript
+// modalRef 需要绑定到 MeModal 的 ref 上
+const [modalRef, okLoading] = useModal()
+
+// 直接调用 modal 暴露的方法（ open / close ）
+modalRef.value.open({
+  title: '新增'
+})
+
+// loading 控制，等价于 modalRef.value.okLoading = true
+okLoading.value = true
+```
+
+## useCrud（CRUD 封装）
+
+对 CRUD 操作进行统一封装，内部整合：
+
+- useModal
+- useForm
+
+用于快速实现：
+
+- 新增
+- 编辑
+- 查看
+- 删除
+
+### 入参
+
+```javascript
+useCrud({
+  name,
+  initForm,
+  doCreate,
+  doUpdate,
+  doDelete,
+  refresh
+})
+```
+
+| 参数     | 说明                 |
+| -------- | -------------------- |
+| name     | 模块名称（用于标题） |
+| initForm | 表单初始值           |
+| doCreate | 新增接口             |
+| doUpdate | 更新接口             |
+| doDelete | 删除接口             |
+| refresh  | 刷新列表方法         |
+
+### 返回值
+
+```javascript
+const {
+  modalRef,
+  modalFormRef,
+  modalForm,
+  modalAction,
+  okLoading,
+  validation,
+  handleAdd,
+  handleEdit,
+  handleView,
+  handleDelete,
+  handleSave,
+} = useCrud(...)
+```
+
+### 核心方法
+
+- 新增 : handleAdd()
+- 编辑 : handleEdit(row)
+- 查看 : handleView(row)
+- 删除 : handleDelete(id)
+- 保存（内部调用） : handleSave()
+
+### 使用示例
+
+```javascript
+const { modalRef, modalForm, handleAdd, handleEdit, handleDelete } = useCrud({
+  name: '角色',
+  initForm: { name: '', status: 1 },
+  doCreate: api.create,
+  doUpdate: api.update,
+  doDelete: api.delete,
+  refresh: getList
+})
+```
+
+```html
+<MeModal ref="modalRef">
+  <n-form ref="modalFormRef" :model="modalForm">
+    <!-- 表单 -->
+  </n-form>
+</MeModal>
+```
+
+### 行为说明
+
+- 自动区分 add / edit / view
+- 自动处理 loading
+- 自动调用 refresh
+- 自动弹窗标题拼接（新增角色 / 编辑角色）
+
+## 组合关系
+
+这四个 hook 的关系如下：
+
+```text
+useCrud
+ ├── useModal（控制弹窗）
+ └── useForm（管理表单）
+
+useAliveData（独立，用于缓存查询条件）
+```
+
+### 实际开发组合
+
+```html
+<template>
+  <CommonPage>
+    <MeCrud :columns="columns" :getData="api.read" v-model:queryItems="query" ref="crudRef">
+      <MeQueryItem label="用户名">
+        <n-input v-model:value="query.username" />
+      </MeQueryItem>
+    </MeCrud>
+
+    <MeModal ref="modalRef">
+      <n-form ref="modalFormRef">
+        <!-- 表单 -->
+      </n-form>
+    </MeModal>
+  </CommonPage>
+</template>
+```
+
+```javascript
+// 通过 useAliveData 用于缓存查询条件（可选）
+const { aliveData: query } = useAliveData({
+  username: null
+})
+// const query = reactive({
+//   username: null,
+// })
+
+// 列表展示列
+const columns = [
+  { title: '用户名', key: 'username' },
+  { title: '状态', key: 'status' },
+  {
+    title: '操作',
+    key: 'actions',
+    width: 320,
+    align: 'right',
+    fixed: 'right',
+    render(row) {
+      return [
+        h(
+          NButton,
+          {
+            size: 'small',
+            type: 'primary',
+            style: 'margin-left: 12px;',
+            disabled: row.code === 'SUPER_ADMIN',
+            onClick: () => handleEdit(row)
+          },
+          {
+            default: () => '编辑',
+            icon: () => h('i', { class: 'i-material-symbols:edit-outline text-14' })
+          }
+        ),
+        h(
+          NButton,
+          {
+            size: 'small',
+            type: 'error',
+            style: 'margin-left: 12px;',
+            disabled: row.code === 'SUPER_ADMIN',
+            onClick: () => handleDelete(row.id)
+          },
+          {
+            default: () => '删除',
+            icon: () => h('i', { class: 'i-material-symbols:delete-outline text-14' })
+          }
+        )
+      ]
+    }
+  }
+]
+
+const crudRef = ref(null)
+const { modalRef, modalFormRef, modalAction, modalForm, handleAdd, handleDelete, handleEdit } =
+  useCrud({
+    name: '用户',
+    doCreate: api.create,
+    doDelete: api.delete,
+    doUpdate: api.update,
+    refresh: (_, keepCurrentPage) => crudRef.value?.handleSearch(keepCurrentPage)
+  })
+```

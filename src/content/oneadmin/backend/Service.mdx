@@ -1,0 +1,115 @@
+---
+title: '设计说明: Service'
+description: '本文介绍 OneAdmin 项目中 Service 层的设计与使用规范。Service 层负责业务逻辑处理，不直接对应 Model 或 Repository，而是按照业务逻辑划分。通过明确的依赖注入和分层职责，Service 层保证业务逻辑与数据访问的解耦，避免无关数据操作，提高可维护性与可测试性'
+order: 5
+---
+
+在 OneAdmin 的分层架构中，Service 层位于 Repository 之上，负责业务逻辑的编排与处理。它根据具体业务功能组织代码，通过调用 Repository 完成数据操作。
+
+---
+
+## Service 层的职责
+
+Service 层的核心职责包括：
+
+1. **业务逻辑处理**
+   - 组合不同 Repository 提供的数据访问接口
+   - 完成具体业务场景下的数据处理和状态变更
+
+2. **封装操作流程**
+   - 将业务操作封装在方法中
+   - 通过调用 common.go 或 Repository 提供的方法完成数据操作
+
+3. **依赖注入管理**
+   - 每个 Service 在 `internal/bootstrap/service.go` 中注册
+   - 根据实际业务需要注入对应 Repository
+   - 避免注入无关 Repository，防止误操作
+
+---
+
+## 文件组织
+
+每个 Service 模块通常包含三个文件：
+
+1. **dto.go**
+   - 定义 Service 方法的入参与出参
+   - 保持数据结构与接口解耦
+
+2. **common.go**
+   - 封装必要的通用操作或重复逻辑
+   - 供 service.go 调用
+
+3. **service.go**
+   - 核心业务逻辑处理或编排
+   - 调用 common.go 与 Repository 完成业务处理
+
+---
+
+## 依赖注入与模块注册
+
+每当新增一个 Service 模块时，需要在 `internal/bootstrap/service.go` 注册并注入必要 Repository。例如：
+
+```go
+type Services struct {
+	Admin admin.Service
+}
+
+func InitServices(repo *Repositories, db *gorm.DB, rdb *redis.Client) *Services {
+	return &Services{
+		Admin: *admin.New(repo.saveLog),
+	}
+}
+```
+
+在对应的 `service` 中：
+
+```go
+type Service struct {
+	saveLogRepo save_log.Repository
+}
+
+func New(saveLogRepo save_log.Repository) *Service {
+	return &Service{
+		saveLogRepo: saveLogRepo,
+	}
+}
+```
+
+- 保证每个 Service 只获取自身业务需要的依赖
+- 避免无关依赖注入，降低出错风险
+- Service 的职责单一、明确，便于维护和测试
+
+---
+
+## 示例：Save 方法
+
+假设 Service 提供一个 `Save` 方法，用于新增或更新记录：
+
+```go
+// internal/service/admin/service.go
+func (s *Service) Save(ctx context.Context, adminID uint64, form SaveForm) (int, error) {
+	isCreate := form.ID == nil || *form.ID == 0
+	if isCreate {
+		// 调用 common 封装的 insert 方法
+		err := s.insert(form)
+	} else {
+		// 调用 common 封装的 update 方法
+		err := s.update(form)
+	}
+
+	// 记录操作日志
+	errCode, err := s.saveLogRepo.CreateByAdminID(adminID, isCreate)
+	if errCode > 0 {
+		return errCode, err
+	}
+
+	return 0, nil
+}
+```
+
+这个示例说明了几个重要原则：
+
+- Service **不直接操作数据库**，所有数据操作通过 Repository 完成
+- 入参与出参通过 DTO 定义，保持层与层之间解耦，避免 Repository 层返回的 Model 结构体被传递到 Headler
+- 避免 Service 臃肿，复杂操作可以拆解并封装到 common.go，Service 只负责流程编排
+- 对外只暴露业务方法，不泄露数据库字段

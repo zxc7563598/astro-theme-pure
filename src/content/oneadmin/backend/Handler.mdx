@@ -1,0 +1,227 @@
+---
+title: '设计说明: Handler'
+description: '本文介绍 OneAdmin 项目中 Handler 层的设计与实现规范。Handler 层作为 HTTP 请求的入口，负责参数解析、调用 Service 层处理业务逻辑，并统一封装响应结果与错误处理。通过明确职责划分与统一处理流程，保证接口层结构清晰、行为一致，提升整体可维护性。'
+order: 6
+---
+
+在 OneAdmin 的分层架构中，Handler 层位于最外层，作为系统对外提供 HTTP 服务的入口。它负责接收请求、调用 Service 处理业务，并将结果转换为标准响应返回。
+
+---
+
+## Handler 层的职责
+
+Handler 层主要负责以下内容：
+
+1. **处理 HTTP 请求**
+   - 接收客户端请求
+   - 解析参数与上下文信息
+
+2. **调用 Service 层**
+   - 将请求数据传递给 Service
+   - 获取业务处理结果
+
+3. **统一响应封装**
+   - 将返回数据转换为标准响应结构
+   - 通过统一响应格式返回给客户端
+
+4. **统一错误处理**
+   - 捕获 Service / Repository 抛出的错误
+   - 记录日志并返回标准错误响应
+
+---
+
+## 文件组织
+
+每个 Handler 模块通常包含两个文件：
+
+1. **common.go**
+   - 提供通用方法
+   - 常用于将 Service 返回结构转换为 `internal/dto/resp` 定义的响应结构
+
+2. **handler.go**
+   - 编写具体 HTTP 接口处理逻辑
+   - 每个接口对应一个方法
+
+---
+
+## 接口处理流程
+
+在 `handler.go` 中，每个接口的实现基本遵循统一流程：
+
+### 获取上下文信息（可选）
+
+从中间件或上下文中获取必要数据，例如：
+
+- 当前登录用户信息
+- 语言（i18n）
+- 请求上下文（context）
+
+```go
+// 获取上下文/语言配置
+ctx := c.Request.Context()
+lang := i18n.GetLang(ctx)
+// 获取管理员ID
+adminInfo, ok := handler.GetAdminInfo(c)
+if !ok {
+	response.Error(c, lang, 20001)
+	return
+}
+```
+
+---
+
+### 解析请求参数
+
+- 请求结构定义在 `internal/dto/input` 中
+- 通过 `internal/validation` 进行参数校验
+
+示例：
+
+```go
+var req input.AdminListPageReq
+// handler.BindAndValidate 方法：用于验证请求数据是否合法，并绑定数据
+if code, ok, err := handler.BindAndValidate(c, &req); !ok {
+    // handler.ErrorLog 方法：用于记录错误信息，通过自定义 logger 处理类传入
+    // 详情可参考错误处理相关章节
+	handler.ErrorLog(
+		logger.AdminLogger,
+		"ListPage 参数异常",
+		code,
+		err,
+	)
+	response.Error(c, lang, code)
+	return
+}
+
+// dto 中的 input.AdminListPageReq 如下
+// 通过 binding 标签对参数进行验证
+// err 为自定义标签，代表 binding 拦截触发时返回什么错误码，设置了多个 binding 项时可以设置多个 err
+// 建议完善 internal/dto/input 于 internal/dto/resp 的注释 / example / enums 等信息，以便 swagger 生成文档
+type AdminListPageReq struct {
+	PageNo   int     `json:"pageNo" binding:"required" err:"required=10101" example:"1"`    // 页码
+	PageSize int     `json:"pageSize" binding:"required" err:"required=10101" example:"20"` // 每页展示条数
+	Username *string `json:"username" example:"admin"`                                      // 用户名，支持模糊搜索
+	Gender   *int    `json:"gender" example:"1" enums:"0,1,2"`                              // 性别
+	Enable   *int    `json:"enable" example:"1" enums:"0,1"`                                // 是否启用
+}
+
+type AdminChangePasswordReq struct {
+	OldPassword string `json:"oldPassword" binding:"required,min=6,max=32" err:"required=10103,min=10104,max=10105" example:"123456"`
+	NewPassword string `json:"newPassword" binding:"required,min=6,max=32" err:"required=10103,min=10104,max=10105" example:"654321"`
+}
+```
+
+---
+
+### 调用 Service 层
+
+将参数传入 Service，获取业务处理结果：
+
+```go
+svcResp, errCode, err := h.adminSvc.Login(ctx, req.Username, req.Password, req.Captcha)
+if errCode != 0 {
+    // handler.ErrorLog 方法：用于记录错误信息，通过自定义 logger 处理类传入
+    // 详情可参考错误处理相关章节
+	handler.ErrorLog(
+		logger.AdminLogger,
+		"adminSvc.Login 调用失败",
+		errCode,
+		err,
+		zap.String("uname", req.Username),
+	)
+	response.Error(c, lang, errCode)
+	return
+}
+```
+
+---
+
+### 转换并返回响应
+
+- 将 Service 返回数据转换为 `internal/dto/resp` 定义的结构
+- 使用统一响应封装返回结果
+
+```go
+
+response.Success(c, lang, resp.AdminListPageResp{
+	Total:    svcResp.Total,
+	PageData: toAdminListItems(svcResp.PageData),
+})
+```
+
+---
+
+## DTO 结构约定
+
+Handler 层依赖两类 DTO：
+
+- ​`internal/dto/input`：请求参数结构
+- ​`internal/dto/resp`：响应数据结构
+
+每个 Handler 模块应对应一组 DTO 文件，便于快速定位与维护，避免不同模块之间结构混乱。
+
+---
+
+## 依赖注入与模块注册
+
+每个 Handler 在 `internal/bootstrap/handler.go` 中注册，并按需注入对应的 Service，例如：
+
+```go
+type Handlers struct {
+	Admin *admin.Handler
+}
+
+func InitHandlers(svc *Services) *Handlers {
+	return &Handlers{
+		Admin: admin.New(&svc.Admin),
+	}
+}
+```
+
+在对应的 `handler` 中：
+
+```go
+type Handler struct {
+	adminSvc admin.Service
+}
+
+func New(adminSvc *admin.Service) *Handler {
+	return &Handler{
+		adminSvc: *adminSvc,
+	}
+}
+```
+
+约定：
+
+- Handler 只依赖 Service
+- 不直接依赖 Repository 或数据库
+
+---
+
+## Swagger 文档
+
+每个接口方法都应编写标准的 Swagger 注释，用于生成 API 文档：
+
+- 描述接口用途
+- 标注请求参数
+- 标注响应结构
+
+保证接口文档与代码保持一致。
+
+---
+
+## 错误处理规范
+
+错误统一在 Handler 层处理，整体流程如下：
+
+> Repository 抛错 → Service 透传 → Handler 统一处理
+
+Handler 负责：
+
+- 记录日志
+- 根据错误码返回统一格式响应
+
+所有响应均通过 `internal/response` 进行封装，保证接口返回结构一致。
+
+具体错误处理方式，可参考错误处理相关章节。

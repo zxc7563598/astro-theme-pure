@@ -1,0 +1,215 @@
+---
+title: '目录说明'
+description: '本文介绍 OneAdmin 前端项目的整体目录结构及核心模块职责。该前端基于开源项目 vue-naive-admin 改造而来，通过合理的目录划分与组件封装，实现高效的页面开发体验。虽然目录结构较多，但实际开发中只需关注核心模块即可快速上手'
+order: 1
+---
+
+在开始介绍目录结构之前，先简单说明一下项目来源。
+
+当前前端项目基于 GitHub 开源项目  
+**vue-naive-admin** 进行二次开发与改造：
+
+- 项目地址：[https://github.com/zclzone/vue-naive-admin](https://github.com/zclzone/vue-naive-admin)
+- 原作者文档：[https://www.isme.top/](https://www.isme.top/)
+
+这是一套设计优秀、结构清晰的后台管理系统模板，在此基础上进行扩展可以大幅提升开发效率，感谢原作者的开源贡献。
+
+---
+
+在了解项目背景之后，我们先来看一下整个项目的目录结构：
+
+```php
+web
+├── src
+│   ├── App.vue # 应用根组件（页面入口）
+│   ├── api  # 接口请求封装（框架层 API 统一管理）
+│   │   └── index.js # API 统一导出入口
+│   ├── assets # 静态资源目录
+│   │   ├── icons # 图标资源
+│   │   │   ├── dynamic-icons.js # 动态 iconify 图标注册（参考 https://icones.js.org/collection/simple-icons）
+│   │   │   ├── feather # 自定义 SVG 图标（前缀 i-fe，需在 /build/index.js 注册）
+│   │   │   └── isme # 自定义 SVG 图标（前缀 i-me，需在 /build/index.js 注册）
+│   │   └── images # 图片资源
+│   ├── components # 公共组件
+│   │   ├── common
+│   │   │   ├── AppCard.vue # 通用卡片容器组件
+│   │   │   ├── AppPage.vue # 页面主布局容器
+│   │   │   ├── CommonPage.vue # 子页面通用布局容器
+│   │   │   ├── LayoutSetting.vue # 布局设置面板
+│   │   │   ├── TheFooter.vue # 底部信息组件
+│   │   │   ├── TheLogo.vue # 顶部 Logo 组件
+│   │   │   ├── ThemeSetting.vue # 主题色配置组件
+│   │   │   ├── ToggleTheme.vue # 明暗主题切换组件
+│   │   │   └── index.js # common 组件统一导出
+│   │   ├── index.js # 全局组件导出入口
+│   │   └── me
+│   │       ├── crud # CRUD 页面模板组件（列表 + 分页 + 操作）
+│   │       │   ├── QueryItem.vue # 查询条件组件
+│   │       │   └── index.vue # CRUD 页面模板组件
+│   │       ├── index.js # me 组件统一导出
+│   │       └── modal # 弹窗组件模板
+│   │           ├── index.vue # 弹窗组件实现
+│   │           └── utils.js # 弹窗相关辅助方法
+│   ├── composables # 组合式函数（Composition API 封装）
+│   │   ├── index.js # composables 统一导出
+│   │   ├── useAliveData.js # 页面缓存处理
+│   │   ├── useCrud.js # CRUD 逻辑封装
+│   │   ├── useForm.js # 表单逻辑封装
+│   │   └── useModal.js # 弹窗逻辑封装
+│   ├── directives # 自定义指令
+│   │   └── index.js # 指令统一注册入口
+│   ├── layouts # 布局系统
+│   │   ├── components # 布局相关组件
+│   │   │   ├── BreadCrumb.vue # 面包屑导航
+│   │   │   ├── Fullscreen.vue # 全屏切换组件
+│   │   │   ├── MenuCollapse.vue # 侧边栏折叠控制
+│   │   │   ├── RoleSelect.vue # 角色切换组件
+│   │   │   ├── SideLogo.vue # 侧边栏 Logo
+│   │   │   ├── SideMenu.vue # 侧边栏菜单
+│   │   │   ├── UserAvatar.vue # 用户头像组件
+│   │   │   ├── index.js # 布局组件统一导出
+│   │   │   └── tab # 多标签页（Tab）模块
+│   │   │       ├── ContextMenu.vue # Tab 右键菜单
+│   │   │       └── index.vue # Tab 容器组件
+│   │   ├── empty # 空白布局（无导航结构）
+│   │   │   └── index.vue # 空白布局实现
+│   │   ├── full # 完整布局（Header + Sidebar）
+│   │   │   ├── header
+│   │   │   │   └── index.vue # 顶部区域
+│   │   │   ├── index.vue # 完整布局容器
+│   │   │   └── sidebar
+│   │   │       └── index.vue # 侧边栏区域
+│   │   ├── normal # 标准布局（常规后台布局）
+│   │   │   ├── header
+│   │   │   │   └── index.vue # 顶部区域
+│   │   │   ├── index.vue # 标准布局容器
+│   │   │   └── sidebar
+│   │   │       └── index.vue # 侧边栏区域
+│   │   └── simple # 简约布局（精简版）
+│   │       ├── index.vue # 简约布局容器
+│   │       └── sidebar
+│   │           └── index.vue # 侧边栏区域
+│   ├── main.js # 应用入口文件（初始化 Vue 实例）
+│   ├── router # 路由配置
+│   │   ├── basic-routes.js # 基础静态路由
+│   │   ├── guards # 路由守卫
+│   │   │   ├── index.js # 守卫注册入口
+│   │   │   ├── page-loading-guard.js # 页面加载控制
+│   │   │   ├── page-title-guard.js # 页面标题设置
+│   │   │   ├── permission-guard.js # 权限校验
+│   │   │   └── tab-guard.js # Tab 页签控制
+│   │   └── index.js # 路由实例创建与导出
+│   ├── settings.js # 全局配置（主题、布局等）
+│   ├── store # 全局状态管理（Pinia / Vuex）
+│   │   ├── helper.js # 状态辅助方法
+│   │   ├── index.js # 状态管理入口
+│   │   └── modules # 状态模块
+│   │       ├── app.js # 应用状态
+│   │       ├── auth.js # 认证状态
+│   │       ├── index.js # 模块统一导出
+│   │       ├── permission.js # 权限控制
+│   │       ├── router.js # 路由状态
+│   │       ├── tab.js # 多标签页状态
+│   │       └── user.js # 用户信息
+│   ├── styles # 全局样式
+│   │   ├── global.css # 全局样式定义
+│   │   └── reset.css # 样式重置
+│   ├── utils # 工具方法
+│   │   ├── common.js # 通用工具函数
+│   │   ├── http # 请求封装
+│   │   │   ├── helpers.js # 请求辅助方法
+│   │   │   ├── index.js # 请求实例封装
+│   │   │   └── interceptors.js # 请求拦截器
+│   │   ├── index.js # 工具方法统一导出
+│   │   ├── is.js # 类型/校验工具
+│   │   ├── naiveTools.js # Naive UI 相关工具
+│   │   └── storage # 本地存储封装
+│   │       ├── index.js # 存储工具入口
+│   │       └── storage.js # 存储实现
+│   └── views # 页面视图
+│       ├── error-page # 错误页
+│       │   ├── 403.vue # 无权限页面
+│       │   └── 404.vue # 页面不存在
+│       ├── home # 首页
+│       │   └── index.vue # 首页视图
+│       ├── iframe # 内嵌页面
+│       │   └── index.vue # iframe 页面容器
+│       ├── login # 登录模块
+│       │   ├── api.js # 登录相关接口
+│       │   └── index.vue # 登录页面
+│       └── profile # 个人中心
+│           ├── api.js # 个人中心接口
+│           └── index.vue # 个人中心页面
+```
+
+初看这个目录，可能会觉得结构比较复杂，但实际上在日常开发中，你并不需要关注所有内容。
+
+绝大多数情况下，只需要围绕几个核心目录进行开发即可。
+
+## 核心开发目录
+
+### 页面实现 `src/views`
+
+该目录负责所有页面的具体实现，是前端开发的核心区域。
+
+通常建议按模块划分目录，例如：
+
+- 登录页：`views/login`
+- 角色管理：`views/pms/role`
+
+通过目录结构表达业务模块，可以让页面组织更加清晰，也更方便后期维护。
+
+### 通用工具 `src/utils`
+
+该目录封装了项目中的通用工具函数，包括：
+
+- HTTP 请求封装（axios 实例及拦截器）
+- 各类辅助方法
+
+在开发过程中，优先复用已有工具，避免重复实现。
+
+### 组件与模板 `src/components`
+
+该目录用于存放通用组件与页面模板。
+
+在开发中建议尽量复用已有组件，尤其是：
+
+- `src/components/me`
+
+该目录中已经封装了常见的后台页面模式：
+
+- 搜索表单
+- 分页列表
+- 弹窗组件
+
+可以直接复用，大幅减少重复开发工作。
+
+### 组合式函数 `src/composables`
+
+该目录封装了常用的 Composition API 逻辑，例如：
+
+- 表单处理
+- CRUD 逻辑
+- 弹窗控制
+
+建议优先使用已有的组合式函数，而不是在页面中重复编写逻辑。
+
+## 其他目录说明
+
+除上述核心目录外，其余目录大多属于：
+
+- 框架能力（如 router、store）
+- 布局系统（layouts）
+- 全局配置与样式
+
+在日常开发中无需频繁修改，只有在特定需求下才需要关注。
+
+## 路由与菜单说明
+
+项目采用​**动态路由机制**：
+
+- 页面开发完成后，无需手动维护前端路由
+- 只需在后台「菜单管理」中配置对应路径
+- 将菜单与 Vue 页面进行绑定即可
+
+因此在开发过程中，可以专注于页面本身，而不需要过多关注路由配置问题。

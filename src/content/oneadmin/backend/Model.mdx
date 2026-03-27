@@ -1,0 +1,149 @@
+---
+title: '设计说明: Model'
+description: '本文介绍 OneAdmin 项目中 Model 层的设计与使用规范，主要用于定义 GORM 映射结构体以及 repository 查询结构。通过统一的数据模型约束，明确 Model 层职责边界，避免业务逻辑侵入，从而保证数据层的简洁性与可维护性。'
+order: 3
+---
+
+
+在 OneAdmin 的分层架构中，Model 层位于最底层，负责定义数据库表结构在 Go 代码中的映射。它仅用于数据结构表达，不参与任何业务逻辑处理。
+
+---
+
+## Model 层的职责
+
+Model 层主要承担两类职责：
+
+- **定义数据库表结构（GORM 映射）**
+- **定义 repository 查询使用的结构体**
+
+通常情况下：
+
+> **一个 model 文件，对应一张数据库表**
+
+---
+
+## 基础模型（BaseModel）
+
+在项目中，提供了一个通用的基础模型 `BaseModel`，用于统一处理时间字段和软删除：
+
+```go
+type BaseModel struct {
+	CreatedAt int64          `gorm:"not null;comment:创建时间"`
+	UpdatedAt int64          `gorm:"not null;comment:更新时间"`
+	DeletedAt gorm.DeletedAt `gorm:"index;comment:软删除"`
+}
+
+// BeforeCreate 自动写入时间
+func (m *BaseModel) BeforeCreate(tx *gorm.DB) error {
+	now := time.Now().Unix()
+	if m.CreatedAt == 0 {
+		m.CreatedAt = now
+	}
+	if m.UpdatedAt == 0 {
+		m.UpdatedAt = now
+	}
+	return nil
+}
+
+// BeforeUpdate 自动更新更新时间
+func (m *BaseModel) BeforeUpdate(tx *gorm.DB) error {
+	m.UpdatedAt = time.Now().Unix()
+	return nil
+}
+```
+
+通过嵌入这个结构体：
+
+- 自动维护 `CreatedAt` / `UpdatedAt`
+- 支持 GORM 软删除
+- 避免重复代码
+
+---
+
+## 表模型定义方式
+
+一个标准的表模型通常如下：
+
+```go
+type AdminRole struct {
+	ID      uint64 `gorm:"primaryKey"`
+	AdminID uint64 `gorm:"not null;default:0;comment:管理员ID"`
+	RoleID  uint64 `gorm:"not null;default:0;comment:角色ID"`
+	BaseModel
+}
+
+func (AdminRole) TableName() string {
+	return "admin_roles"
+}
+```
+
+建议遵循以下约定：
+
+- 显式声明 `TableName()`，避免默认命名不一致
+- 字段尽量带上 `gorm tag`（约束 + 注释）
+- 所有表统一嵌入 `BaseModel`
+
+---
+
+## 查询结构体（非表结构）
+
+除了表结构外，Model 层还可以定义用于查询的结构体，例如：
+
+```go
+// AdminRoleListItem 用于后台列表展示，不对应数据库表
+type AdminRoleListItem struct {
+	ID      uint64
+	AdminID uint64
+	RoleID  uint64
+}
+```
+
+这种结构体的特点：
+
+- **不对应数据库表**
+- **仅用于 repository 查询结果接收**
+- 通常用于字段裁剪（减少不必要字段）
+
+适用于：
+
+- 表字段很多，但只需要部分字段
+- 提升查询性能与数据传输效率
+
+---
+
+## 多表查询约定
+
+如果涉及多表关联查询：**结构体应定义在“主表”的 model 文件中**
+
+这样可以保证：
+
+- 结构归属清晰
+- 避免跨模块混乱
+- 方便维护
+
+---
+
+## 数据迁移与初始化
+
+Model 层定义的结构，可以选择接入自动迁移与初始化：
+
+- 在 `internal/migrate/migrate.go` 中注册，实现**自动建表**
+- 在 `internal/migrate/seed.go` 中编写，实现**初始数据填充**
+
+根据项目需要选择使用，不做强制要求。
+
+---
+
+## 重要约束（非常关键）
+
+Model 层有明确的边界限制：
+
+- 不定义业务使用的结构（如接口返回结构）
+- 不进行类型转换
+
+- 不编写任何业务逻辑
+
+只做两件事：
+
+- 数据库映射
+- 查询结构定义

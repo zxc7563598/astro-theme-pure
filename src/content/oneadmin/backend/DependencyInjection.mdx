@@ -1,0 +1,125 @@
+---
+title: '设计说明: 依赖注入'
+description: '本文介绍 OneAdmin 项目中的依赖注入设计与实现方式，通过集中式的初始化流程，将 repository、service、handler 等各层依赖进行统一管理与装配。相比零散注入，这种方式能够更清晰地控制模块边界，降低耦合度，同时提升代码的可维护性与可扩展性。'
+order: 2
+---
+
+在一个分层明确的项目中，**依赖注入**  是非常关键的一环。
+
+如果依赖关系在各个模块中随意创建，很容易导致代码耦合混乱，后期维护成本会迅速上升。因此在 OneAdmin 中，我选择将所有依赖注入逻辑​**集中在** **`internal/bootstrap`** **目录中统一管理**。
+
+---
+
+在 `bootstrap` 目录下，主要包含以下几个核心文件：
+
+- `app.go`
+- `repository.go`
+- `service.go`
+- `handler.go`
+- `router.go`
+
+整个应用的启动与依赖装配，都是从 `app.go` 开始的。
+
+---
+
+### 初始化流程
+
+在 `app.go` 中，会完成配置读取、数据库初始化，以及整个依赖注入流程：
+
+```go
+// repository
+repos := InitRepositories(db)
+
+// service
+services := InitServices(repos, db, rdb)
+
+// handler
+handlers := InitHandlers(services)
+
+// 注册路由
+r := gin.New()
+r = RouteRegister(r, rdb, handlers)
+```
+
+可以看到，整个过程是一个非常清晰的“自下而上”构建过程：
+
+> Repository → Service → Handler → Router
+
+每一层只依赖下一层，并通过统一入口完成注入。
+
+---
+
+### 各层职责说明
+
+#### Repository 层
+
+`InitRepositories` 负责初始化所有 repository 实例：
+
+- 将数据库连接注入到各个 repository
+- 按模块创建对应实例
+- 最终返回一个聚合结构体（统一管理所有 repository）
+
+这一层只关注 **数据访问能力**
+
+---
+
+#### Service 层
+
+`InitServices` 负责初始化所有 service 实例：
+
+- 按需注入 repository
+- 按需注入数据库（用于事务控制）
+- 注入 Redis 等外部依赖（如缓存）
+
+需要特别注意的是：
+
+> **并不是所有 service 都需要数据库或 Redis，必须按需注入**
+
+这样可以有效避免不必要的依赖扩散。
+
+这一层是 **业务逻辑核心**
+
+---
+
+#### Handler 层
+
+`InitHandlers` 负责初始化所有 handler 实例：
+
+- 按需注入对应的 service
+- 不直接依赖 repository 或数据库
+
+最终生成的 handlers 会统一交给路由层使用。
+
+这一层只负责 **请求处理与响应返回**
+
+---
+
+#### Router 层
+
+在 `router.go` 中：
+
+- 接收已注入完成的 handlers
+- 完成路由注册
+- 挂载中间件（如认证、日志等）
+
+---
+
+### 模块注册机制
+
+每当你新增一个模块（例如新增一个业务功能），都需要在对应文件中进行注册：
+
+- 在 `repository.go` 中注册 repository
+- 在 `service.go` 中注册 service
+- 在 `handler.go` 中注册 handler
+
+并根据实际需求进行依赖注入。
+
+这里有一个非常重要的原则：
+
+> **只注入当前模块真正需要的依赖，避免“顺手全注入”**
+
+这样做的好处是：
+
+- 保持模块边界清晰
+- 降低耦合
+- 提升可测试性

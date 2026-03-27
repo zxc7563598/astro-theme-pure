@@ -1,0 +1,231 @@
+---
+title: '常用页面组件'
+description: '本文介绍 OneAdmin 前端项目中用于后台页面开发的三个核心组件：MeCrud、MeQueryItem 与 MeModal，重点说明各组件的参数、事件及使用方式。通过这些组件可以快速实现标准的列表查询与弹窗交互页面。'
+order: 3
+---
+
+在后台管理系统中，大多数页面都包含：
+
+- 查询条件
+- 列表数据
+- 弹窗操作
+
+项目在 `/src/components/me` 中提供了一套通用组件用于处理这些场景：
+
+```javascript
+export { default as MeCrud } from './crud/index.vue'
+export { default as MeQueryItem } from './crud/QueryItem.vue'
+export { default as MeModal } from './modal/index.vue'
+```
+
+这三个组件在开发中的职责非常明确：
+
+- MeCrud：列表与数据获取
+- MeQueryItem：查询条件
+- MeModal：弹窗操作
+
+掌握它们的参数和使用方式后，可以快速完成绝大多数后台页面开发。下面分别说明它们的使用方式。
+
+---
+
+## MeCrud（列表组件）
+
+### 基本用法
+
+```html
+<MeCrud ref="crudRef" :columns="columns" :getData="getList" v-model:queryItems="query" />
+```
+
+```javascript
+const columns = [
+  { title: '用户名', key: 'username' },
+  { title: '状态', key: 'status' }
+]
+
+function getList(params) {
+  return request.get('/api/list', { params })
+}
+
+const query = reactive({
+  username: null,
+  status: null
+})
+```
+
+### Props 说明
+
+- columns `必传` : 表格列配置（Naive UI Table Columns）
+- getData `必传` : 数据请求方法
+
+  组件会自动传入：
+
+  ```json
+  {
+    ...queryItems,
+    pageNo,
+    pageSize
+  }
+  ```
+
+  约定返回格式：
+
+  ```json
+  {
+    data: {
+      pageData: [],
+      total: number
+    }
+  }
+  ```
+
+- queryItems : 查询参数（通常用 v-model）
+- remote : 是否后端分页（默认 true）
+- isPagination : 是否启用分页（默认 true）
+- rowKey : 行唯一标识（默认 id）
+- scrollX : 表格横向滚动宽度（默认 1200）
+- expand : 是否启用“展开/收起查询条件”
+
+### 事件（emit）
+
+- onChecked : 多选时触发
+- onDataChange : 数据更新时触发
+
+### 暴露方法
+
+根据 MeCrud 的 ref 调用，例如 `<MeCrud ref="crudRef" />`
+
+- 搜索 : `crudRef.value.handleSearch()`
+- 重置 : `crudRef.value.handleReset()`
+- 导出 : `crudRef.value.handleExport()`
+
+### 查询区域写法
+
+通过插槽实现：
+
+```html
+<MeCrud ...>
+  <MeQueryItem label="用户名">
+    <n-input v-model:value="query.username" />
+  </MeQueryItem>
+</MeCrud>
+```
+
+## MeQueryItem（查询项组件）
+
+### 基本用法
+
+```html
+<MeQueryItem label="用户名">
+  <n-input v-model:value="query.username" />
+</MeQueryItem>
+```
+
+### Props 说明
+
+- label : 标签文本
+- labelWidth : 标签宽度，默认80
+- contentWidth : 输入区域宽度，默认220
+
+### 效果说明
+
+渲染结构为：
+
+```text
+[ label ][ input ]
+```
+
+多个 `MeQueryItem` 会自动横向排列（由 MeCrud 控制）。
+
+### 使用建议
+
+- 每个查询条件使用一个 MeQueryItem
+- 不要自己写布局，统一用这个组件
+
+## MeModal（弹窗组件）
+
+### 基本用法
+
+```html
+<MeModal ref="modalRef">
+  <n-form>
+    <!-- 表单内容 -->
+  </n-form>
+  <template #footer>
+    <!-- 底部内容 -->
+  </template>
+</MeModal>
+```
+
+### 打开弹窗
+
+```javascript
+modalRef.value.open({
+  title: '新增用户',
+  onOk: handleSubmit
+})
+```
+
+### Props / Options
+
+以下参数可以在 `open()` 时传入：
+
+- title - 标题
+- width - 弹窗宽度（默认 800px）
+- closable - 是否可关闭
+- showFooter - 是否显示底部按钮
+- showCancel / showOk - 是否显示取消 / 确认按钮
+- cancelText / okText - 取消 / 确认按钮文本内容
+- modalStyle / contentStyle - 外层 / 内层 css 样式
+- onOk - 点击确认按钮时调用的方法
+
+  ```javascript
+  // 支持 async
+  // 返回 false 可阻止关闭
+  onOk: async () => {
+    await submit()
+  }
+  ```
+
+- onCancel - 点击取消按钮时调用的方法
+
+  ```javascript
+  // 支持 async
+  // 返回 false 可阻止关闭
+  onOk: async () => {
+    await cancel()
+  }
+  ```
+
+### 暴露方法
+
+根据 MeModal 的 ref 调用，例如 `<MeModal ref="modalRef" />`
+
+打开弹窗 : `modalRef.value.open()`
+
+关闭弹窗 : `modalRef.value.close()`
+
+### loading 控制
+
+```javascript
+modalRef.value.okLoading = true
+```
+
+## 组合使用示例
+
+```html
+<template>
+  <CommonPage>
+    <MeCrud :columns="columns" :getData="getList" v-model:queryItems="query">
+      <MeQueryItem label="用户名">
+        <n-input v-model:value="query.username" />
+      </MeQueryItem>
+    </MeCrud>
+
+    <MeModal ref="modalRef">
+      <n-form>
+        <!-- 表单 -->
+      </n-form>
+    </MeModal>
+  </CommonPage>
+</template>
+```

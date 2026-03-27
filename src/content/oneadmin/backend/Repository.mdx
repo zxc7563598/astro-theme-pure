@@ -1,0 +1,153 @@
+---
+title: '设计说明: Repository'
+description: '本文介绍 OneAdmin 项目中 Repository 层的设计与实现方法，作为唯一可操作 Model 的层，它负责数据库增删改查能力的封装。通过严格控制依赖与暴露接口，Repository 层保证了数据访问的统一性和安全性，同时为 Service 层提供清晰的数据操作接口。'
+order: 4
+---
+
+在 OneAdmin 的分层架构中，Repository 层位于 Model 之上，作为项目与数据库之间的桥梁。它负责封装对数据的增删改查操作，并为 Service 层提供统一的数据访问接口。
+
+---
+
+## Repository 层的职责
+
+Repository 层的核心职责如下：
+
+1. **操作对应 Model 的数据**
+   - 每个 Repository 对应一个 Model
+   - 多表联合查询应放在主表对应的 Repository
+
+2. **提供标准的数据访问接口**
+   - 封装 CRUD（增删改查）操作
+   - 提供分页、条件查询、按字段查找等方法
+
+3. **不参与业务逻辑**
+   - 不进行类型转换或数据处理
+   - 不在 Service 层直接暴露数据库字段
+
+> 核心原则：除了 Repository，其他层（Service、Handler 等）不允许直接操作数据库字段或表结构。
+
+---
+
+## 文件组织
+
+每个 Repository 模块下通常包含两个文件：
+
+1. **gorm_repo.go**：Repository 实现与依赖注入
+
+   ```go
+   type gormRepo struct {
+   	db *gorm.DB
+   	base.Repository[model.Role]
+   }
+
+   func New(db *gorm.DB) Repository {
+   	return &gormRepo{
+   		db:         db,
+   		Repository: base.New[model.Role](db),
+   	}
+   }
+
+   // getDB 封装 ctx + tx
+   func (r *gormRepo) getDB(ctx context.Context, tx *gorm.DB) *gorm.DB {
+   	db := r.db
+   	if tx != nil {
+   		db = tx
+   	}
+   	if ctx != nil {
+   		db = db.WithContext(ctx)
+   	}
+   	return db
+   }
+   ```
+
+2. **interface.go**：Repository 接口定义，封装所有数据操作
+
+   ```go
+   type Repository interface {
+   	base.Repository[model.Role]
+   	GetByCode(ctx context.Context, tx *gorm.DB, code string) (*model.Role, error)
+   	ListEnabled(ctx context.Context, tx *gorm.DB) ([]model.Role, error)
+   	ListPage(ctx context.Context, tx *gorm.DB, query model.RoleListPageQuery) ([]model.RoleListItem, int64, error)
+   }
+   ```
+
+   具体方法示例：
+
+   ```go
+   // GetByCode 根据 code 获取单条数据
+   func (r *gormRepo) GetByCode(ctx context.Context, tx *gorm.DB, code string) (*model.Role, error) {
+   	return r.FindOneByField(ctx, tx, "code", code)
+   }
+
+   // ListEnabled 获取全部启用数据
+   func (r *gormRepo) ListEnabled(ctx context.Context, tx *gorm.DB) ([]model.Role, error) {
+   	return r.FindByField(ctx, tx, "enable", enum.EnableEnable)
+   }
+
+   // ListPage 获取分页列表数据
+   func (r *gormRepo) ListPage(ctx context.Context, tx *gorm.DB, query model.RoleListPageQuery) ([]model.RoleListItem, int64, error) {
+   	var list []model.RoleListItem
+   	var total int64
+   	db := r.getDB(ctx, tx)
+   	db = db.Model(&model.Role{})
+   	if v := query.Name; v != nil && *v != "" {
+   		db = db.Where("name LIKE ?", "%"+*v+"%")
+   	}
+   	if v := query.Enable; v != nil {
+   		e := enum.Enable(*v)
+   		if e.IsValid() {
+   			db = db.Where("enable = ?", e)
+   		}
+   	}
+   	if err := db.Count(&total).Error; err != nil {
+   		return nil, 0, err
+   	}
+   	err := db.Order("id asc").Offset(query.Offset).Limit(query.Limit).Find(&list).Error
+   	if err != nil {
+   		return nil, 0, err
+   	}
+   	return list, total, nil
+   }
+   ```
+
+---
+
+## Base Repository
+
+为了减少重复代码，Repository 层提供了一个通用的 `base.Repository`，使用泛型实现标准操作：
+
+```go
+type Repository[T any] interface {
+	GetByID(ctx context.Context, tx *gorm.DB, id uint64) (*T, error)
+	GetByIDs(ctx context.Context, tx *gorm.DB, ids []uint64) ([]T, error)
+	FindAll(ctx context.Context, tx *gorm.DB) ([]T, error)
+	FindByField(ctx context.Context, tx *gorm.DB, field string, value any) ([]T, error)
+	FindOneByField(ctx context.Context, tx *gorm.DB, field string, value any) (*T, error)
+	Create(ctx context.Context, tx *gorm.DB, entity *T) (*T, error)
+	Update(ctx context.Context, tx *gorm.DB, entity *T) error
+	Delete(ctx context.Context, tx *gorm.DB, id uint64) error
+	Count(ctx context.Context, tx *gorm.DB) (int64, error)
+	Exists(ctx context.Context, tx *gorm.DB, field string, value any) (bool, error)
+}
+```
+
+每个 Repository 可以直接通过 `base.Repository[对应 Model]` 引入基础方法，减少重复实现。
+
+---
+
+## 使用规范与约束
+
+1. **封装数据库操作**
+   - Service 层只能调用 Repository 提供的方法
+   - 不允许 Service 或 Handler 层直接操作数据库字段
+
+2. **按需查询**
+   - 可通过自定义结构体返回部分字段
+   - 多表联合查询应在主表 Repository 完成
+
+3. **事务与上下文**
+   - 每个方法支持 `context.Context` 和 `gorm.DB` 事务参数
+   - 保证数据操作可控、安全
+
+4. **模块化注册**
+   - 每个新建 Repository 模块需在 `bootstrap/repository.go` 中注册并注入
