@@ -62,27 +62,54 @@ yes: 是
 
 ## 多语言加载
 
-提供两种加载方式：
+项目内置多语言（i18n）支持，语言文件采用 `YAML` 格式进行管理，默认存放于：
 
-### 加载单个语言文件
-
-```go
-Load(lang string, path string) error
+```text
+internal/i18n/locales/
 ```
 
-- `lang`：语言标识（如 zh、en）
-- `path`：对应 yml 文件路径
+例如：
 
-### 加载目录下全部语言（推荐）
-
-```go
-LoadLocales(dir string) error
+```text
+zh.yaml
+en.yaml
 ```
 
-- 自动扫描目录下所有 `.yml` 文件
-- 以文件名作为语言标识进行加载
+---
 
-当前项目在 `internal/bootstrap/app.go` 中，默认使用该方式加载全部语言文件，可根据需要自行调整。
+### 初始化方式
+
+项目统一通过以下方法完成多语言加载：
+
+```go
+i18n.InitLocales()
+```
+
+当前项目已在 `internal/bootstrap/app.go` 中自动调用该方法，无需额外配置。
+
+---
+
+### 加载策略说明
+
+​`InitLocales` 会根据运行环境自动选择加载方式：
+
+#### 开发环境（debug / test）
+
+从本地文件系统加载
+
+- 扫描 `internal/i18n/locales` 目录
+- 自动加载所有 `.yaml / .yml` 文件
+- **支持热更新（修改文件无需重新编译）**
+
+---
+
+#### 生产环境（release）
+
+从 embed 内嵌文件加载
+
+- 语言文件在编译时已打包进二进制
+- 运行时无需依赖本地文件
+- **部署更简单、安全性更高**
 
 ## 请求中的语言传递
 
