@@ -33,8 +33,6 @@ make build
 - 后端 API 服务
 - 前端构建资源（已嵌入，无需额外部署）
 
----
-
 ### 上传到服务器
 
 建议目录结构：
@@ -52,18 +50,6 @@ make build
 scp ./bin/oneadmin user@server:/opt/oneadmin/
 scp ./config.yaml user@server:/opt/oneadmin/
 ```
-
----
-
-## 运行服务
-
-```bash
-GIN_MODE=release ./oneadmin -config ./config.yaml -port 9000
-```
-
-> 生产环境必须设置 `GIN_MODE=release`，否则将运行在 debug 模式。
-
----
 
 ## 文件权限说明（重要）
 
@@ -86,7 +72,13 @@ chmod -R 755 /opt/oneadmin
 - 日志写入失败
 - 服务异常退出
 
----
+## 运行服务
+
+```bash
+GIN_MODE=release ./oneadmin -config ./config.yaml -port 9000
+```
+
+> 生产环境必须设置 `GIN_MODE=release`，否则将运行在 debug 模式。
 
 ## 使用 systemd 管理服务（推荐）
 
@@ -114,8 +106,6 @@ User=www-data
 WantedBy=multi-user.target
 ```
 
----
-
 ### 启动服务
 
 ```bash
@@ -125,16 +115,12 @@ sudo systemctl enable oneadmin
 sudo systemctl start oneadmin
 ```
 
----
-
 ### 查看状态与日志
 
 ```bash
 sudo systemctl status oneadmin
 journalctl -u oneadmin -f
 ```
-
----
 
 ## 配置 Nginx 反向代理（推荐）
 
@@ -159,16 +145,12 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
----
-
 ## 访问服务
 
 部署完成后：
 
 - 管理后台：[http://your-domain.com/admin/](http://your-domain.com/admin/)
 - API：[http://your-domain.com](http://your-domain.com)
-
----
 
 ## Docker 部署（可选）
 
@@ -180,8 +162,6 @@ sudo systemctl reload nginx
 
 该方式无需构建镜像，部署简单，更新高效。
 
----
-
 ### 目录结构
 
 ```text
@@ -190,8 +170,6 @@ sudo systemctl reload nginx
 ├── config.yaml
 └── logs/
 ```
-
----
 
 ### 权限设置
 
@@ -205,8 +183,6 @@ mkdir -p /opt/oneadmin/logs
 # 设置目录权限
 chmod -R 755 /opt/oneadmin
 ```
-
----
 
 ### 启动容器
 
@@ -222,12 +198,30 @@ docker run -d \
 
 参数说明：
 
-- `-p 9000:9000`：端口映射
-- `-e GIN_MODE=release`：启用 Gin 生产模式
-- `-v /opt/oneadmin:/app`：挂载宿主机目录
-- `/app/oneadmin`：容器内执行程序
-
----
+- `-d`​：以**后台模式**运行容器（detached），不会占用当前终端
+- `-p 9000:9000`​：端口映射  
+  将**宿主机的 9000 端口**映射到**容器内的 9000 端口**
+- `-e GIN_MODE=release`：设置环境变量  
+  启用 Gin 的生产模式，关闭调试日志，提高性能
+- `-v /opt/oneadmin:/app`​：挂载目录（数据卷）  
+  将宿主机 `/opt/oneadmin`​ 目录挂载到容器内 `/app`  
+  用于：
+  - 存放配置文件（`config.yaml`）
+  - 持久化日志（`logs`）
+  - 放置编译后的程序（`oneadmin`）
+- `-w /app`​：设置容器工作目录（**关键参数**）  
+  指定容器启动时的当前工作目录为 `/app`​  
+  这样程序中使用相对路径（如 `config.yaml`）时才会正确解析
+- `--name oneadmin`​：指定容器名称  
+  方便后续使用 `docker stop / start / logs` 等命令管理容器
+- `alpine:latest`：使用的基础镜像  
+  一个轻量级的 Linux 发行版，适合运行 Go 编译后的二进制程序
+- `./oneadmin`：容器启动后执行的程序  
+  即挂载目录中的 Go 编译产物
+- `-config config.yaml`​：指定配置文件路径  
+  使用相对路径，依赖 `-w /app`​，实际路径为 `/app/config.yaml`
+- `-port 9000`：指定服务监听端口  
+  与端口映射保持一致（容器内监听 9000）
 
 ## 更新部署
 

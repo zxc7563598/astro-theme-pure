@@ -20,10 +20,12 @@ import { Aside, CardList, Steps } from 'astro-pure/user'
 </Aside>
 
 <Aside title='请注意' type='note'>
-  <div>Redis 并非必需组件。如需实现更严格的会话控制（例如限制管理员单设备登录、权限变更后强制下线等），建议启用 Redis </div>
+  <div>
+    Redis
+    并非必需组件。如需实现更严格的会话控制（例如限制管理员单设备登录、权限变更后强制下线等），建议启用
+    Redis{' '}
+  </div>
 </Aside>
-
----
 
 ## 获取项目并初始化配置
 
@@ -34,8 +36,6 @@ cp config.example.yaml config.yaml
 ```
 
 根据实际情况修改 `config.yaml`（如数据库连接等配置）。
-
----
 
 ## 启动开发环境
 
@@ -49,8 +49,6 @@ make dev
 
 - Go 后端服务
 - 前端开发服务器（Vite）
-
----
 
 ## 可访问服务
 
@@ -78,8 +76,6 @@ make build
 ./bin/oneadmin
 ```
 
----
-
 ### 构建前端资源
 
 ```bash
@@ -91,8 +87,6 @@ make build-web
 ```text
 internal/webui/dist
 ```
-
----
 
 ### 构建多平台版本
 
@@ -106,15 +100,11 @@ make release
 - macOS (amd64 / arm64)
 - Windows (amd64)
 
----
-
 ## 运行服务
 
 ```bash
 ./bin/oneadmin
 ```
-
----
 
 ### 启动参数
 
@@ -124,8 +114,6 @@ make release
 -port    服务端口（默认：9000）
 -config  配置文件路径（默认：config.yaml）
 ```
-
----
 
 ### 示例
 
@@ -143,7 +131,6 @@ make release
 ./bin/oneadmin -port 8080 -config ./configs/dev.yaml
 ```
 
-
 ## 其他常用命令
 
 ```bash
@@ -153,7 +140,6 @@ make swagger
 # 清理构建产物
 make clean
 ```
-
 
 ## 说明
 
