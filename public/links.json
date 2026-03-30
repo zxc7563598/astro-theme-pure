@@ -165,13 +165,7 @@
           "friend_link": "https://www.sejolyn.fyi/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "工控万金油",
           "intro": "工业自动化砖家",
@@ -180,7 +174,13 @@
           "friend_link": "https://blog.icsteam.cn/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/工控万金油-1773803525959.jpg",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "张洪Heo",
           "intro": "分享设计与科技生活",
