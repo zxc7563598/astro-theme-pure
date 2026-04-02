@@ -158,6 +158,15 @@
           "check": true
         },
         {
+          "name": "张洪Heo",
+          "intro": "分享设计与科技生活",
+          "link": "https://blog.zhheo.com",
+          "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp",
+          "friend_link": "https://blog.zhheo.com/link/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/张洪Heo-1763023417884.webp",
+          "check": false
+        },
+        {
           "name": "The Sejolyn Memo",
           "intro": "So fucking close.",
           "link": "https://www.sejolyn.fyi/",
@@ -179,15 +188,6 @@
           "avatar": "https://blog.icsteam.cn/myimg/avatar.jpg",
           "friend_link": "https://blog.icsteam.cn/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/工控万金油-1773803525959.jpg",
-          "check": true
-        },
-        {
-          "name": "张洪Heo",
-          "intro": "分享设计与科技生活",
-          "link": "https://blog.zhheo.com",
-          "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp",
-          "friend_link": "https://blog.zhheo.com/link/",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/张洪Heo-1763023417884.webp",
           "check": true
         },
         {
