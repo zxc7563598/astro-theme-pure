@@ -167,12 +167,12 @@
           "check": true
         },
         {
-          "name": "工控万金油",
-          "intro": "工业自动化砖家",
-          "link": "https://blog.icsteam.cn",
-          "avatar": "https://blog.icsteam.cn/myimg/avatar.jpg",
-          "friend_link": "https://blog.icsteam.cn/links/",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/工控万金油-1773803525959.jpg",
+          "name": "JerryGao's Blog",
+          "intro": "爱折腾的安全小白",
+          "link": "https://www.jerrygao.cn",
+          "avatar": "https://www.jerrygao.cn/icons/icon-512.png",
+          "friend_link": "https://www.jerrygao.cn/friends",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": true
         }
       ]
@@ -182,12 +182,12 @@
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
         {
-          "name": "JerryGao's Blog",
-          "intro": "爱折腾的安全小白",
-          "link": "https://www.jerrygao.cn",
-          "avatar": "https://www.jerrygao.cn/icons/icon-512.png",
-          "friend_link": "https://www.jerrygao.cn/friends",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
+          "name": "工控万金油",
+          "intro": "工业自动化砖家",
+          "link": "https://blog.icsteam.cn",
+          "avatar": "https://blog.icsteam.cn/myimg/avatar.jpg",
+          "friend_link": "https://blog.icsteam.cn/links/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/工控万金油-1773803525959.jpg",
           "check": true
         },
         {
