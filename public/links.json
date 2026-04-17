@@ -156,6 +156,15 @@
           "friend_link": "https://blog.icsteam.cn/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/工控万金油-1773803525959.jpg",
           "check": true
+        },
+        {
+          "name": "Xingluo’s Blog",
+          "intro": "何处秋风悲画扇",
+          "link": "https://blog.en.icu",
+          "avatar": "https://pic.en.icu/Xingluo.webp",
+          "friend_link": "https://blog.en.icu/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
+          "check": true
         }
       ]
     },
@@ -198,15 +207,6 @@
           "friend_link": "https://fe32.top/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
           "check": false
-        },
-        {
-          "name": "Xingluo’s Blog",
-          "intro": "何处秋风悲画扇",
-          "link": "https://blog.en.icu",
-          "avatar": "https://pic.en.icu/Xingluo.webp",
-          "friend_link": "https://blog.en.icu/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
-          "check": true
         },
         {
           "name": "小杨",
