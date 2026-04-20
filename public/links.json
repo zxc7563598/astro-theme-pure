@@ -156,13 +156,7 @@
           "friend_link": "https://blog.en.icu/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "安知鱼",
           "intro": "生活明朗，万物可爱",
@@ -171,7 +165,13 @@
           "friend_link": "https://blog.anheyu.com/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/安知鱼-1763194109160.jpg",
           "check": false
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "旧识桥",
           "intro": "什么都略懂一点，生活更多彩一些",
