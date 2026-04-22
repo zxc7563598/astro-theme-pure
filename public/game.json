@@ -243,8 +243,16 @@
     "name": "仁王３",
     "poster_path": "835b207c01d1b02c29229e73fba0da13b914148c8b8bd4ed.avif",
     "date": "2026-03-06",
+    "platinum": true,
+    "platinum_date": "2026-04-03",
+    "link": "https://store.playstation.com/zh-hant-hk/product/HP0106-PPSA32786_00-NIOH300000000000"
+  },
+  {
+    "name": "柏德之門3",
+    "poster_path": "ba706e54d68d10a0eb6ab7c36cdad9178c58b7fb7bb03d28.avif",
+    "date": "2026-04-03",
     "platinum": false,
     "platinum_date": "",
-    "link": "https://store.playstation.com/zh-hant-hk/product/HP0106-PPSA32786_00-NIOH300000000000"
+    "link": "https://store.playstation.com/zh-hant-hk/product/HP3470-PPSA14486_00-0137097724824368"
   }
 ]
