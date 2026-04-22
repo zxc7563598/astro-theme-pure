@@ -165,6 +165,15 @@
           "friend_link": "https://blog.anheyu.com/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/安知鱼-1763194109160.jpg",
           "check": false
+        },
+        {
+          "name": "JerryGao's Blog",
+          "intro": "爱折腾的安全小白",
+          "link": "https://www.jerrygao.cn",
+          "avatar": "https://www.jerrygao.cn/icons/icon-512.png",
+          "friend_link": "https://www.jerrygao.cn/friends",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
+          "check": true
         }
       ]
     },
@@ -180,15 +189,6 @@
           "friend_link": "https://ailmel.top/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/旧识桥-1770377184928.webp",
           "check": false
-        },
-        {
-          "name": "JerryGao's Blog",
-          "intro": "爱折腾的安全小白",
-          "link": "https://www.jerrygao.cn",
-          "avatar": "https://www.jerrygao.cn/icons/icon-512.png",
-          "friend_link": "https://www.jerrygao.cn/friends",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
-          "check": true
         },
         {
           "name": "Yaten-Z's Blog",
