@@ -1,6 +1,6 @@
 ---
 title: '生产部署'
-description: '本文介绍如何将 OneAdmin 部署到生产环境，包含构建策略、运行方式、反向代理及 Docker 部署方案。'
+description: '本文介绍如何将 GoAdminKit 部署到生产环境，包含构建策略、运行方式、反向代理及 Docker 部署方案。'
 order: 2
 ---
 
@@ -25,7 +25,7 @@ make build
 构建完成后生成：
 
 ```bash
-./bin/oneadmin
+./bin/gak
 ```
 
 该二进制文件已包含：
@@ -38,8 +38,8 @@ make build
 建议目录结构：
 
 ```text
-/opt/oneadmin/
-├── oneadmin        # 可执行文件
+/opt/gak/
+├── gak        # 可执行文件
 ├── config.yaml     # 配置文件
 └── logs/           # 日志目录（运行时生成）
 ```
@@ -47,8 +47,8 @@ make build
 上传示例：
 
 ```bash
-scp ./bin/oneadmin user@server:/opt/oneadmin/
-scp ./config.yaml user@server:/opt/oneadmin/
+scp ./bin/gak user@server:/opt/gak/
+scp ./config.yaml user@server:/opt/gak/
 ```
 
 ## 文件权限说明（重要）
@@ -62,9 +62,9 @@ logs/
 请确保运行用户具备写权限：
 
 ```bash
-mkdir -p /opt/oneadmin/logs
-chown -R www-data:www-data /opt/oneadmin
-chmod -R 755 /opt/oneadmin
+mkdir -p /opt/gak/logs
+chown -R www-data:www-data /opt/gak
+chmod -R 755 /opt/gak
 ```
 
 否则可能导致：
@@ -75,7 +75,7 @@ chmod -R 755 /opt/oneadmin
 ## 运行服务
 
 ```bash
-GIN_MODE=release ./oneadmin -config ./config.yaml -port 9000
+GIN_MODE=release ./gak -config ./config.yaml -port 9000
 ```
 
 > 生产环境必须设置 `GIN_MODE=release`，否则将运行在 debug 模式。
@@ -85,19 +85,19 @@ GIN_MODE=release ./oneadmin -config ./config.yaml -port 9000
 ### 创建服务文件
 
 ```bash
-sudo vim /etc/systemd/system/oneadmin.service
+sudo vim /etc/systemd/system/gak.service
 ```
 
 ```text
 [Unit]
-Description=OneAdmin Service
+Description=GoAdminKit Service
 After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/opt/oneadmin
+WorkingDirectory=/opt/gak
 Environment="GIN_MODE=release"
-ExecStart=/opt/oneadmin/oneadmin -config /opt/oneadmin/config.yaml -port 9000
+ExecStart=/opt/gak/gak -config /opt/gak/config.yaml -port 9000
 Restart=always
 RestartSec=5
 User=www-data
@@ -111,15 +111,15 @@ WantedBy=multi-user.target
 ```bash
 sudo systemctl daemon-reexec
 sudo systemctl daemon-reload
-sudo systemctl enable oneadmin
-sudo systemctl start oneadmin
+sudo systemctl enable gak
+sudo systemctl start gak
 ```
 
 ### 查看状态与日志
 
 ```bash
-sudo systemctl status oneadmin
-journalctl -u oneadmin -f
+sudo systemctl status gak
+journalctl -u gak -f
 ```
 
 ## 配置 Nginx 反向代理（推荐）
@@ -165,8 +165,8 @@ sudo systemctl reload nginx
 ### 目录结构
 
 ```text
-/opt/oneadmin/
-├── oneadmin
+/opt/gak/
+├── gak
 ├── config.yaml
 └── logs/
 ```
@@ -175,13 +175,13 @@ sudo systemctl reload nginx
 
 ```bash
 # 添加执行权限
-chmod +x /opt/oneadmin/oneadmin
+chmod +x /opt/gak/gak
 
 # 创建日志目录
-mkdir -p /opt/oneadmin/logs
+mkdir -p /opt/gak/logs
 
 # 设置目录权限
-chmod -R 755 /opt/oneadmin
+chmod -R 755 /opt/gak
 ```
 
 ### 启动容器
@@ -190,10 +190,10 @@ chmod -R 755 /opt/oneadmin
 docker run -d \
     -p 9000:9000 \
     -e GIN_MODE=release \
-    -v /opt/oneadmin:/app \
-    --name oneadmin \
+    -v /opt/gak:/app \
+    --name gak \
     alpine:latest \
-    /app/oneadmin -config /app/config.yaml -port 9000
+    /app/gak -config /app/config.yaml -port 9000
 ```
 
 参数说明：
@@ -203,20 +203,20 @@ docker run -d \
   将**宿主机的 9000 端口**映射到**容器内的 9000 端口**
 - `-e GIN_MODE=release`：设置环境变量  
   启用 Gin 的生产模式，关闭调试日志，提高性能
-- `-v /opt/oneadmin:/app`​：挂载目录（数据卷）  
-  将宿主机 `/opt/oneadmin`​ 目录挂载到容器内 `/app`  
+- `-v /opt/gak:/app`​：挂载目录（数据卷）  
+  将宿主机 `/opt/gak`​ 目录挂载到容器内 `/app`  
   用于：
   - 存放配置文件（`config.yaml`）
   - 持久化日志（`logs`）
-  - 放置编译后的程序（`oneadmin`）
+  - 放置编译后的程序（`gak`）
 - `-w /app`​：设置容器工作目录（**关键参数**）  
   指定容器启动时的当前工作目录为 `/app`​  
   这样程序中使用相对路径（如 `config.yaml`）时才会正确解析
-- `--name oneadmin`​：指定容器名称  
+- `--name gak`​：指定容器名称  
   方便后续使用 `docker stop / start / logs` 等命令管理容器
 - `alpine:latest`：使用的基础镜像  
   一个轻量级的 Linux 发行版，适合运行 Go 编译后的二进制程序
-- `./oneadmin`：容器启动后执行的程序  
+- `./gak`：容器启动后执行的程序  
   即挂载目录中的 Go 编译产物
 - `-config config.yaml`​：指定配置文件路径  
   使用相对路径，依赖 `-w /app`​，实际路径为 `/app/config.yaml`
@@ -230,11 +230,11 @@ docker run -d \
 make build
 
 # 上传新版本
-scp ./bin/oneadmin user@server:/opt/oneadmin/
+scp ./bin/gak user@server:/opt/gak/
 
 # 重启服务（systemd）
-sudo systemctl restart oneadmin
+sudo systemctl restart gak
 
 # 重启服务（Docker）
-docker restart oneadmin
+docker restart gak
 ```

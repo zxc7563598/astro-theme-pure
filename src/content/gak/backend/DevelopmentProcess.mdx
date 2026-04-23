@@ -1,6 +1,6 @@
 ---
 title: '开发流程说明'
-description: '本文介绍在 OneAdmin 项目中进行实际开发的推荐流程，从需求分析到接口实现，串联 Model、Repository、Service、Handler 各层职责。通过标准化的开发步骤，帮助开发者快速上手项目，并在保证代码结构清晰的前提下完成业务功能开发。'
+description: '本文介绍在 GoAdminKit 项目中进行实际开发的推荐流程，从需求分析到接口实现，串联 Model、Repository、Service、Handler 各层职责。通过标准化的开发步骤，帮助开发者快速上手项目，并在保证代码结构清晰的前提下完成业务功能开发。'
 order: 10
 ---
 
@@ -50,7 +50,7 @@ order: 10
   - 同步更新数据库结构（migrate）
   - 如有需要，补充初始化数据（seed）
 
-可参考：[Model 设计说明](/oneadmin/backend/model)
+可参考：[Model 设计说明](/gak/backend/model)
 
 ### Repository 是否满足需求？
 
@@ -59,7 +59,7 @@ order: 10
   - 在对应 Repository 中新增方法
   - 封装必要的数据查询或操作逻辑
 
-可参考：[Repository 设计说明](/oneadmin/backend/repository)
+可参考：[Repository 设计说明](/gak/backend/repository)
 
 ## 定义接口（Handler 层）
 
@@ -81,7 +81,7 @@ order: 10
 - 在 `internal/bootstrap/router.go` 中注册路由
 - 编写基础的 Handler 方法结构
 
-可参考：[Handler 设计说明](/oneadmin/backend/handler)
+可参考：[Handler 设计说明](/gak/backend/handler)
 
 ## 实现业务逻辑（Service 层）
 
@@ -102,7 +102,7 @@ order: 10
 - 复杂逻辑拆分为多个方法（common.go）
 - Service 只负责流程编排
 
-可参考：[Service 设计说明](/oneadmin/backend/service)、[依赖注入设计](/oneadmin/backend/dependencyinjection)
+可参考：[Service 设计说明](/gak/backend/service)、[依赖注入设计](/gak/backend/dependencyinjection)
 
 ## 完善 Handler 实现
 

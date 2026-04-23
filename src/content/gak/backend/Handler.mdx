@@ -1,10 +1,10 @@
 ---
 title: '设计说明: Handler'
-description: '本文介绍 OneAdmin 项目中 Handler 层的设计与实现规范。Handler 层作为 HTTP 请求的入口，负责参数解析、调用 Service 层处理业务逻辑，并统一封装响应结果与错误处理。通过明确职责划分与统一处理流程，保证接口层结构清晰、行为一致，提升整体可维护性。'
+description: '本文介绍 GoAdminKit 项目中 Handler 层的设计与实现规范。Handler 层作为 HTTP 请求的入口，负责参数解析、调用 Service 层处理业务逻辑，并统一封装响应结果与错误处理。通过明确职责划分与统一处理流程，保证接口层结构清晰、行为一致，提升整体可维护性。'
 order: 6
 ---
 
-在 OneAdmin 的分层架构中，Handler 层位于最外层，作为系统对外提供 HTTP 服务的入口。它负责接收请求、调用 Service 处理业务，并将结果转换为标准响应返回。
+在 GoAdminKit 的分层架构中，Handler 层位于最外层，作为系统对外提供 HTTP 服务的入口。它负责接收请求、调用 Service 处理业务，并将结果转换为标准响应返回。
 
 ---
 

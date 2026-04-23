@@ -1,10 +1,10 @@
 ---
 title: '设计说明: Service'
-description: '本文介绍 OneAdmin 项目中 Service 层的设计与使用规范。Service 层负责业务逻辑处理，不直接对应 Model 或 Repository，而是按照业务逻辑划分。通过明确的依赖注入和分层职责，Service 层保证业务逻辑与数据访问的解耦，避免无关数据操作，提高可维护性与可测试性'
+description: '本文介绍 GoAdminKit 项目中 Service 层的设计与使用规范。Service 层负责业务逻辑处理，不直接对应 Model 或 Repository，而是按照业务逻辑划分。通过明确的依赖注入和分层职责，Service 层保证业务逻辑与数据访问的解耦，避免无关数据操作，提高可维护性与可测试性'
 order: 5
 ---
 
-在 OneAdmin 的分层架构中，Service 层位于 Repository 之上，负责业务逻辑的编排与处理。它根据具体业务功能组织代码，通过调用 Repository 完成数据操作。
+在 GoAdminKit 的分层架构中，Service 层位于 Repository 之上，负责业务逻辑的编排与处理。它根据具体业务功能组织代码，通过调用 Repository 完成数据操作。
 
 ---
 

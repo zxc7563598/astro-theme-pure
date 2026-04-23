@@ -4,12 +4,12 @@ import { cn } from 'astro-pure/utils'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import { integ } from '@/site-config'
 
-import OneadminContents from './OneadminContents.astro'
+import GoAdminKitContents from './GoAdminKitContents.astro'
 
 const meta = {
-  title: 'OneAdmin',
+  title: 'GoAdminKit',
   description:
-    'OneAdmin 是一个开箱即用的全栈后台管理系统，基于 Go 与 Vue 3 构建，将 API 服务与前端界面整合为单一二进制部署。内置 RBAC 权限控制与完整后台基础能力，具备清晰的分层架构与良好的扩展性，适用于快速搭建各类管理系统与控制面板。'
+    'GoAdminKit 是一个开箱即用的全栈后台管理系统，基于 Go 与 Vue 3 构建，将 API 服务与前端界面整合为单一二进制部署。内置 RBAC 权限控制与完整后台基础能力，具备清晰的分层架构与良好的扩展性，适用于快速搭建各类管理系统与控制面板。'
 }
 ---
 
@@ -17,16 +17,16 @@ const meta = {
   <Button title='返回' href='/' variant='back' />
   <main class='mt-6 lg:mt-10'>
     <div id='content-header' class='animate'>
-      <h1 class='mb-6 text-3xl font-medium'>OneAdmin</h1>
+      <h1 class='mb-6 text-3xl font-medium'>GoAdminKit</h1>
     </div>
     <div id='content' class={cn('animate mt-8 max-w-none md:min-w-[45ch]', integ.typography.class)}>
       <p>一个开箱即用的全栈后台管理系统，基于 Go 与 Vue 3 构建，将 API 服务与前端界面整合为单一二进制部署。</p>
       <p>内置 RBAC 权限控制与完整后台基础能力，具备清晰的分层架构与良好的扩展性，适用于快速搭建各类管理系统与控制面板。</p>
       <h2 class='text-xl font-medium'>项目介绍</h2>
-      <p><b>OneAdmin 是一个为“快速落地后台系统”而设计的全栈解决方案。</b></p>
+      <p><b>GoAdminKit 是一个为“快速落地后台系统”而设计的全栈解决方案。</b></p>
       <p>它将 Go 后端与 Vue 3 前端整合在同一个仓库中，并通过构建阶段将前端资源嵌入到后端二进制中，最终只需交付一个可执行文件，即可同时提供 API 服务与完整的后台管理界面。</p>
-      <p>相比传统前后端分离部署方案，OneAdmin 在部署复杂度、环境依赖和运维成本上都做了大幅简化，更适合中小型项目、内部系统以及需要快速上线的业务场景。</p>
-      <p>在能力上，OneAdmin 并不是一个“演示项目”，而是一个可以直接用于生产的基础框架，内置了后台系统最常见的一整套功能：</p>
+      <p>相比传统前后端分离部署方案，GoAdminKit 在部署复杂度、环境依赖和运维成本上都做了大幅简化，更适合中小型项目、内部系统以及需要快速上线的业务场景。</p>
+      <p>在能力上，GoAdminKit 并不是一个“演示项目”，而是一个可以直接用于生产的基础框架，内置了后台系统最常见的一整套功能：</p>
       <ul>
         <li>基于 RBAC 的权限控制（管理员 / 角色 / 菜单 / 权限）</li>
         <li>清晰的分层架构（handler / service / repository）</li>
@@ -38,7 +38,7 @@ const meta = {
         你可以把它当作一个“已经帮你搭好 70%
         的后台项目骨架”，在此基础上专注业务本身，而不是重复造轮子。
       </p>
-      <OneadminContents title={false} />
+      <GoAdminKitContents title={false} />
       <h2 class='text-xl font-medium'>技术支持 / 定制开发</h2>
       <p>如果你正好有项目需求，这里不只是一个开源项目，也可以是你落地项目的合作入口。</p>
       <p>我提供 <b>Web 全栈技术支持与定制开发服务</b>，从前端到后端、从开发到部署，可以一站式完成，而不是只做某一部分。</p>
@@ -72,7 +72,7 @@ const meta = {
       <p>不只是“写代码”，更偏向把事情完整做成：</p>
       <ol>
         <li>从 0 到 1 搭建后台系统或 SaaS 控制台</li>
-        <li>基于 OneAdmin 做二次开发或定制功能</li>
+        <li>基于 GoAdminKit 做二次开发或定制功能</li>
         <li>重构已有项目（性能、结构、安全）</li>
         <li>快速交付一个能上线的完整系统（前后端 + 部署）</li>
       </ol>

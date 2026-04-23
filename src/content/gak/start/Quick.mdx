@@ -1,6 +1,6 @@
 ---
 title: '快速开始'
-description: '本节将帮助你快速完成 OneAdmin 的环境准备、项目启动与基本访问配置。通过简单几步，你可以在本地运行完整的开发环境（前后端一体），并了解各服务入口与基础使用方式。'
+description: '本节将帮助你快速完成 GoAdminKit 的环境准备、项目启动与基本访问配置。通过简单几步，你可以在本地运行完整的开发环境（前后端一体），并了解各服务入口与基础使用方式。'
 order: 1
 ---
 
@@ -30,8 +30,8 @@ import { Aside, CardList, Steps } from 'astro-pure/user'
 ## 获取项目并初始化配置
 
 ```bash
-git clone https://github.com/zxc7563598/oneadmin.git
-cd oneadmin
+git clone https://github.com/zxc7563598/GoAdminKit
+cd gak
 cp config.example.yaml config.yaml
 ```
 
@@ -73,7 +73,7 @@ make build
 构建完成后，生成的可执行文件位于：
 
 ```bash
-./bin/oneadmin
+./bin/gak
 ```
 
 ### 构建前端资源
@@ -103,7 +103,7 @@ make release
 ## 运行服务
 
 ```bash
-./bin/oneadmin
+./bin/gak
 ```
 
 ### 启动参数
@@ -119,16 +119,16 @@ make release
 
 ```bash
 # 使用默认配置
-./bin/oneadmin
+./bin/gak
 
 # 指定端口
-./bin/oneadmin -port 8080
+./bin/gak -port 8080
 
 # 指定配置文件
-./bin/oneadmin -config ./configs/dev.yaml
+./bin/gak -config ./configs/dev.yaml
 
 # 同时指定
-./bin/oneadmin -port 8080 -config ./configs/dev.yaml
+./bin/gak -port 8080 -config ./configs/dev.yaml
 ```
 
 ## 其他常用命令

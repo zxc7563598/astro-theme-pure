@@ -8,12 +8,12 @@ import { Collapse } from 'astro-pure/user'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import { Comment } from '@/components/waline'
 
-import OneadminContents from './OneadminContents.astro'
+import GoAdminKitContents from './GoAdminKitContents.astro'
 
 export const prerender = true
 
 export async function getStaticPaths() {
-  const posts = sortMDByDate(await getBlogCollection('oneadmin'))
+  const posts = sortMDByDate(await getBlogCollection('gak'))
   return posts.map((post) => ({
     params: { id: post.id },
     props: { post }
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-  post: CollectionEntry<'oneadmin'>
+  post: CollectionEntry<'gak'>
 }
 
 const { post } = Astro.props
@@ -29,10 +29,10 @@ const { Content, headings } = await render(post)
 const { description, title } = post.data
 ---
 
-<PageLayout meta={{ description, title }} back='/oneadmin'>
+<PageLayout meta={{ description, title }} back='/gak'>
   <Fragment slot='sidebar'>
     {!!headings.length && <TOC {headings} />}
-    <OneadminContents class='docs-toc block mt-3' />
+    <GoAdminKitContents class='docs-toc block mt-3' />
   </Fragment>
   <Fragment slot='header'>
     <h1 class='text-2xl font-medium sm:mb-2 sm:text-3xl'>
@@ -51,7 +51,7 @@ const { description, title } = post.data
     {
       (
         <Collapse class='md:hidden' title='查看更多'>
-          <OneadminContents title={false} />
+          <GoAdminKitContents title={false} />
         </Collapse>
       )
     }

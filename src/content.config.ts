@@ -80,8 +80,8 @@ const danmusuite = defineCollection({
 })
 
 // Define docs collection
-const oneadmin = defineCollection({
-  loader: glob({ base: './src/content/oneadmin', pattern: '**/*.{md,mdx}' }),
+const gak = defineCollection({
+  loader: glob({ base: './src/content/gak', pattern: '**/*.{md,mdx}' }),
   schema: () =>
     z.object({
       title: z.string().max(60),
@@ -95,4 +95,4 @@ const oneadmin = defineCollection({
     })
 })
 
-export const collections = { blog, kitchen, danmusuite, oneadmin }
+export const collections = { blog, kitchen, danmusuite, gak }

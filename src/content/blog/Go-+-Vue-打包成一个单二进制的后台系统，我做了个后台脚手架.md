@@ -50,7 +50,7 @@ slug: 'c9fu5hnq'
 
 所以后来我干脆把自己项目里反复出现的那一套东西整理了一下，做成了一个可以复用的脚手架。
 
-现在这个项目就是这么来的，叫 ​**OneAdmin**。
+现在这个项目就是这么来的，叫 ​**GoAdminKit**。
 
 ## 它大概能帮你省点什么
 
@@ -76,7 +76,7 @@ slug: 'c9fu5hnq'
 基本就是：
 
 ```bash
-./oneadmin
+./gak
 ```
 
 就能用了。
@@ -190,9 +190,9 @@ Handler → Service → Repository
 
 如果你最近刚好要做后台，或者已经在做类似的东西了，可以看看这个项目：
 
-- GitHub：[https://github.com/zxc7563598/oneadmin](https://github.com/zxc7563598/oneadmin)
-- 文档：[https://hejunjie.life/oneadmin](https://hejunjie.life/oneadmin)
-- 在线展示：[https://oneadmin.hejunjie.life/admin](https://oneadmin.hejunjie.life/admin)
+- GitHub：[https://github.com/zxc7563598/GoAdminKit](https://github.com/zxc7563598/GoAdminKit)
+- 文档：[https://hejunjie.life/gak](https://hejunjie.life/gak)
+- 在线展示：[https://gak.hejunjie.life/admin](https://gak.hejunjie.life/admin)
 
 基本上拉下来，改个配置就能跑。
 
