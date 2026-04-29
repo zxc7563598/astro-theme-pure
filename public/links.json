@@ -249,6 +249,15 @@
           "avatar_cache": "",
           "friend_link": "",
           "check": false
+        },
+        {
+          "name": "博友圈",
+          "intro": "博客人的朋友圈，将一个个散落在各处的孤岛连接成一片广袤无垠的新大陆！",
+          "link": "https://www.boyouquan.com/planet-shuttle",
+          "avatar": "https://www.boyouquan.com/assets/images/sites/logo/logo-small.svg",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false
         }
       ]
     }
