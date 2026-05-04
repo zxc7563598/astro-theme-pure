@@ -68,30 +68,12 @@
           "check": true
         },
         {
-          "name": "求知学习社",
-          "intro": "持续分享时间精力管理、能力提升、学习成长、生活实用等知识技巧。",
-          "link": "https://blog.zhipro.com",
-          "avatar": "https://blog.zhipro.com/favicon.ico",
-          "friend_link": "https://blog.zhipro.com/links/",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/求知学习社-1768124253348.ico",
-          "check": true
-        },
-        {
           "name": "Nalanyinyun's Library",
           "intro": "太阳伞下天然文静素材",
           "link": "https://nalanyinyun.work/",
           "avatar": "https://youke.xn--y7xa690gmna.cn/s1/2026/02/10/698b475a8010f.webp",
           "friend_link": "https://nalanyinyun.work/linkexchange/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Nalanyinyun-s-Library-1770735556742.webp",
-          "check": true
-        },
-        {
-          "name": "Under the Sun with Paddy",
-          "intro": "分享实践思考、算法编程以及快乐。",
-          "link": "https://www.paddysun.top",
-          "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
-          "friend_link": "https://www.paddysun.top/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
           "check": true
         },
         {
@@ -181,6 +163,24 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "求知学习社",
+          "intro": "持续分享时间精力管理、能力提升、学习成长、生活实用等知识技巧。",
+          "link": "https://blog.zhipro.com",
+          "avatar": "https://blog.zhipro.com/favicon.ico",
+          "friend_link": "https://blog.zhipro.com/links/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/求知学习社-1768124253348.ico",
+          "check": true
+        },
+        {
+          "name": "Under the Sun with Paddy",
+          "intro": "分享实践思考、算法编程以及快乐。",
+          "link": "https://www.paddysun.top",
+          "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
+          "friend_link": "https://www.paddysun.top/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
+          "check": true
+        },
         {
           "name": "旧识桥",
           "intro": "什么都略懂一点，生活更多彩一些",
