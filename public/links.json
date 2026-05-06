@@ -156,13 +156,7 @@
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "求知学习社",
           "intro": "持续分享时间精力管理、能力提升、学习成长、生活实用等知识技巧。",
@@ -171,7 +165,13 @@
           "friend_link": "https://blog.zhipro.com/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/求知学习社-1768124253348.ico",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "Under the Sun with Paddy",
           "intro": "分享实践思考、算法编程以及快乐。",
