@@ -165,13 +165,7 @@
           "friend_link": "https://blog.zhipro.com/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/求知学习社-1768124253348.ico",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "Under the Sun with Paddy",
           "intro": "分享实践思考、算法编程以及快乐。",
@@ -180,7 +174,13 @@
           "friend_link": "https://www.paddysun.top/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "旧识桥",
           "intro": "什么都略懂一点，生活更多彩一些",
