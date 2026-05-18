@@ -258,6 +258,15 @@
           "avatar_cache": "",
           "friend_link": "",
           "check": false
+        },
+        {
+          "name": "博客圈子",
+          "intro": "收录万千博文，索引优质内容。",
+          "link": "https://bkqz.cn/page.php?slug=go",
+          "avatar": "https://cdn.hejunjie.life/avatars/博客圈子-1779077306123.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false
         }
       ]
     }
