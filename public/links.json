@@ -149,15 +149,6 @@
           "check": false
         },
         {
-          "name": "JerryGao's Blog",
-          "intro": "爱折腾的安全小白",
-          "link": "https://www.jerrygao.cn",
-          "avatar": "https://www.jerrygao.cn/icons/icon-512.png",
-          "friend_link": "https://www.jerrygao.cn/friends",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
-          "check": true
-        },
-        {
           "name": "求知学习社",
           "intro": "持续分享时间精力管理、能力提升、学习成长、生活实用等知识技巧。",
           "link": "https://blog.zhipro.com",
@@ -181,6 +172,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "JerryGao's Blog",
+          "intro": "爱折腾的安全小白",
+          "link": "https://www.jerrygao.cn",
+          "avatar": "https://www.jerrygao.cn/icons/icon-512.png",
+          "friend_link": "https://www.jerrygao.cn/friends",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
+          "check": true
+        },
         {
           "name": "旧识桥",
           "intro": "什么都略懂一点，生活更多彩一些",
