@@ -32,15 +32,6 @@
           "check": true
         },
         {
-          "name": "手里有只毛毛虫",
-          "intro": "号角声起 - 等你启航",
-          "link": "https://www.krjojo.com",
-          "avatar": "https://www.krjojo.com/wp-content/uploads/2024/05/avatar.avif",
-          "friend_link": "https://www.krjojo.com/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/手里有只毛毛虫-1763124584183.avif",
-          "check": true
-        },
-        {
           "name": "猫普的精神世界",
           "intro": "一个独立开发者的精神自留地",
           "link": "https://maplezz.com",
@@ -172,6 +163,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "手里有只毛毛虫",
+          "intro": "号角声起 - 等你启航",
+          "link": "https://www.krjojo.com",
+          "avatar": "https://www.krjojo.com/wp-content/uploads/2024/05/avatar.avif",
+          "friend_link": "https://www.krjojo.com/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/手里有只毛毛虫-1763124584183.avif",
+          "check": true
+        },
         {
           "name": "JerryGao's Blog",
           "intro": "爱折腾的安全小白",
