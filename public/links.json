@@ -156,13 +156,7 @@
           "friend_link": "https://www.paddysun.top/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "手里有只毛毛虫",
           "intro": "号角声起 - 等你启航",
@@ -171,7 +165,13 @@
           "friend_link": "https://www.krjojo.com/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/手里有只毛毛虫-1763124584183.avif",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "JerryGao's Blog",
           "intro": "爱折腾的安全小白",
