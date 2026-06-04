@@ -104,15 +104,6 @@
           "check": false
         },
         {
-          "name": "The Sejolyn Memo",
-          "intro": "So fucking close.",
-          "link": "https://www.sejolyn.fyi/",
-          "avatar": "https://sejolyn.fyi/avatar.jpg",
-          "friend_link": "https://www.sejolyn.fyi/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
-          "check": true
-        },
-        {
           "name": "工控万金油",
           "intro": "工业自动化砖家",
           "link": "https://blog.icsteam.cn",
@@ -181,6 +172,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "The Sejolyn Memo",
+          "intro": "So fucking close.",
+          "link": "https://www.sejolyn.fyi/",
+          "avatar": "https://sejolyn.fyi/avatar.jpg",
+          "friend_link": "https://www.sejolyn.fyi/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
+          "check": true
+        },
         {
           "name": "JerryGao's Blog",
           "intro": "爱折腾的安全小白",
