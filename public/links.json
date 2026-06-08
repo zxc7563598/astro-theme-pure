@@ -104,15 +104,6 @@
           "check": false
         },
         {
-          "name": "The Sejolyn Memo",
-          "intro": "So fucking close.",
-          "link": "https://www.sejolyn.fyi/",
-          "avatar": "https://sejolyn.fyi/avatar.jpg",
-          "friend_link": "https://www.sejolyn.fyi/links",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
-          "check": true
-        },
-        {
           "name": "工控万金油",
           "intro": "工业自动化砖家",
           "link": "https://blog.icsteam.cn",
@@ -174,6 +165,15 @@
           "friend_link": "https://anze.love/friendslinks",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/安泽的温馨小窝-1779676439575.jpg",
           "check": true
+        },
+        {
+          "name": "灵的梦境",
+          "intro": "愿美梦成真",
+          "link": "https://lemonadorable.github.io/",
+          "avatar": "https://lemonadorable.github.io/favicon/favicon.gif",
+          "friend_link": "https://lemonadorable.github.io/links/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/灵的梦境-1780740179130.gif",
+          "check": true
         }
       ]
     },
@@ -181,6 +181,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "The Sejolyn Memo",
+          "intro": "So fucking close.",
+          "link": "https://www.sejolyn.fyi/",
+          "avatar": "https://sejolyn.fyi/avatar.jpg",
+          "friend_link": "https://www.sejolyn.fyi/links",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
+          "check": true
+        },
         {
           "name": "JerryGao's Blog",
           "intro": "爱折腾的安全小白",
