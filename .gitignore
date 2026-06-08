@@ -40,3 +40,4 @@ bunfig.toml
 /src/content/blog/test.*
 /test/
 /public/public_key.pem
+.claude
