@@ -165,13 +165,7 @@
           "friend_link": "https://lemonadorable.github.io/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/灵的梦境-1780740179130.gif",
           "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "清羽飞扬",
           "intro": "柳影曳曳，清酒孤灯，扬笔撒墨，心境如霜",
@@ -180,7 +174,13 @@
           "friend_link": "https://blog.liushen.fun/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/清羽飞扬-1765359051.ico",
           "check": true
-        },
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "The Sejolyn Memo",
           "intro": "So fucking close.",
