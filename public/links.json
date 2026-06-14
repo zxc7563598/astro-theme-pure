@@ -149,15 +149,6 @@
           "check": true
         },
         {
-          "name": "安泽的温馨小窝",
-          "intro": "愿得一人心.",
-          "link": "https://anze.love",
-          "avatar": "https://anze.love/wp-content/uploads/2026/03/cropped-anze.jpg",
-          "friend_link": "https://anze.love/friendslinks",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/安泽的温馨小窝-1779676439575.jpg",
-          "check": true
-        },
-        {
           "name": "灵的梦境",
           "intro": "愿美梦成真",
           "link": "https://lemonadorable.github.io/",
@@ -181,6 +172,15 @@
       "id_name": "inactive-links",
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
+        {
+          "name": "安泽的温馨小窝",
+          "intro": "愿得一人心.",
+          "link": "https://anze.love",
+          "avatar": "https://anze.love/wp-content/uploads/2026/03/cropped-anze.jpg",
+          "friend_link": "https://anze.love/friendslinks",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/安泽的温馨小窝-1779676439575.jpg",
+          "check": true
+        },
         {
           "name": "The Sejolyn Memo",
           "intro": "So fucking close.",
