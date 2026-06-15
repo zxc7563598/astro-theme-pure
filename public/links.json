@@ -172,7 +172,7 @@
           "friend_link": "https://anze.love/friendslinks",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/安泽的温馨小窝-1779676439575.jpg",
           "check": true,
-          "fail_count": 0
+          "fail_count": 1
         },
         {
           "name": "灵的梦境",
@@ -202,7 +202,7 @@
           "friend_link": "https://www.sejolyn.fyi/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
           "check": true,
-          "fail_count": 0
+          "fail_count": 1
         },
         {
           "name": "JerryGao's Blog",
@@ -212,7 +212,7 @@
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": true,
-          "fail_count": 0
+          "fail_count": 1
         },
         {
           "name": "旧识桥",
@@ -222,7 +222,7 @@
           "friend_link": "https://ailmel.top/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/旧识桥-1770377184928.webp",
           "check": false,
-          "fail_count": 0
+          "fail_count": 1
         },
         {
           "name": "Yaten-Z's Blog",
@@ -232,7 +232,7 @@
           "friend_link": "https://blog.yaten.xyz/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Yaten-Z-s-Blog-1765322446989.jpg",
           "check": true,
-          "fail_count": 0
+          "fail_count": 1
         },
         {
           "name": "唐志远",
@@ -242,7 +242,7 @@
           "friend_link": "https://fe32.top/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
           "check": false,
-          "fail_count": 0
+          "fail_count": 1
         },
         {
           "name": "小杨",
@@ -252,7 +252,7 @@
           "friend_link": "https://xiaoyangboke.xyz/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/小杨-1764769528928.png",
           "check": true,
-          "fail_count": 0
+          "fail_count": 1
         }
       ]
     },
