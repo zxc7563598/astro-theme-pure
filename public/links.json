@@ -11,7 +11,8 @@
           "avatar": "https://p.weizwz.com/logo_a4353391cbf0889b.webp",
           "friend_link": "https://note.weizwz.com/pages/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/weizwz-1763123387382.webp",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "CWorld Site",
@@ -20,7 +21,8 @@
           "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200",
           "friend_link": "https://cworld0.com/links",
           "avatar_cache": "/avatars/CWorld.webp",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "猫普的精神世界",
@@ -29,7 +31,8 @@
           "avatar": "https://maplezz.com/favicon/avatar.webp",
           "friend_link": "https://maplezz.com/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/猫普的精神世界-1763192767763.webp",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "GnixAij",
@@ -38,7 +41,8 @@
           "avatar": "https://assets.vluv.space/avatar.webp",
           "friend_link": "https://vluv.space/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/GnixAij-1763473807182.webp",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "YUNYI BLOG",
@@ -47,7 +51,8 @@
           "avatar": "https://www.yunyitang.me/favicon/favicon.ico",
           "friend_link": "https://www.yunyitang.me/friends/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/YUNYI-BLOG-1766930654687.jpeg",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "Nalanyinyun's Library",
@@ -56,7 +61,8 @@
           "avatar": "https://youke.xn--y7xa690gmna.cn/s1/2026/02/10/698b475a8010f.webp",
           "friend_link": "https://nalanyinyun.work/linkexchange/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Nalanyinyun-s-Library-1770735556742.webp",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "navms's blog",
@@ -65,7 +71,8 @@
           "avatar": "https://navms.github.io/images/favicon.png",
           "friend_link": "https://navms.github.io/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/navms-s-blog-1772856485817.png",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "超腾开源",
@@ -74,7 +81,8 @@
           "avatar": "https://www.hylab.cn/logo.png",
           "friend_link": "https://www.hylab.cn/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/超腾开源-1766233398510.png",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "Arthals' ink",
@@ -83,7 +91,8 @@
           "avatar": "https://cdn.arthals.ink/Arthals.png",
           "friend_link": "https://arthals.ink/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Arthals-ink-1763021912342.png",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "张洪Heo",
@@ -92,7 +101,8 @@
           "avatar": "https://img.zhheo.com/i/67d8fa75943e4.webp",
           "friend_link": "https://blog.zhheo.com/link/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/张洪Heo-1763023417884.webp",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "工控万金油",
@@ -101,7 +111,8 @@
           "avatar": "https://blog.icsteam.cn/myimg/avatar.jpg",
           "friend_link": "https://blog.icsteam.cn/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/工控万金油-1773803525959.jpg",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "Xingluo’s Blog",
@@ -110,7 +121,8 @@
           "avatar": "https://pic.en.icu/Xingluo.webp",
           "friend_link": "https://blog.en.icu/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Xingluo-s-Blog-1763023453557.webp",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "安知鱼",
@@ -119,7 +131,8 @@
           "avatar": "https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg",
           "friend_link": "https://blog.anheyu.com/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/安知鱼-1763194109160.jpg",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "求知学习社",
@@ -128,7 +141,8 @@
           "avatar": "https://blog.zhipro.com/favicon.ico",
           "friend_link": "https://blog.zhipro.com/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/求知学习社-1768124253348.ico",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "Under the Sun with Paddy",
@@ -137,7 +151,8 @@
           "avatar": "https://www.paddysun.top/wp-content/uploads/2025/11/标志大象头像-1024x1024-1.png",
           "friend_link": "https://www.paddysun.top/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Under-the-Sun-with-Paddy-1764057869946.png",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "手里有只毛毛虫",
@@ -146,7 +161,18 @@
           "avatar": "https://www.krjojo.com/wp-content/uploads/2024/05/avatar.avif",
           "friend_link": "https://www.krjojo.com/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/手里有只毛毛虫-1763124584183.avif",
-          "check": true
+          "check": true,
+          "fail_count": 0
+        },
+        {
+          "name": "安泽的温馨小窝",
+          "intro": "愿得一人心.",
+          "link": "https://anze.love",
+          "avatar": "https://anze.love/wp-content/uploads/2026/03/cropped-anze.jpg",
+          "friend_link": "https://anze.love/friendslinks",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/安泽的温馨小窝-1779676439575.jpg",
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "灵的梦境",
@@ -155,7 +181,8 @@
           "avatar": "https://lemonadorable.github.io/favicon/favicon.gif",
           "friend_link": "https://lemonadorable.github.io/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/灵的梦境-1780740179130.gif",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "清羽飞扬",
@@ -164,22 +191,8 @@
           "avatar": "https://blog.liushen.fun/info/avatar.ico",
           "friend_link": "https://blog.liushen.fun/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/清羽飞扬-1765359051.ico",
-          "check": true
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
-        {
-          "name": "安泽的温馨小窝",
-          "intro": "愿得一人心.",
-          "link": "https://anze.love",
-          "avatar": "https://anze.love/wp-content/uploads/2026/03/cropped-anze.jpg",
-          "friend_link": "https://anze.love/friendslinks",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/安泽的温馨小窝-1779676439575.jpg",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "The Sejolyn Memo",
@@ -188,7 +201,8 @@
           "avatar": "https://sejolyn.fyi/avatar.jpg",
           "friend_link": "https://www.sejolyn.fyi/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "JerryGao's Blog",
@@ -197,7 +211,8 @@
           "avatar": "https://www.jerrygao.cn/icons/icon-512.png",
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "旧识桥",
@@ -206,7 +221,8 @@
           "avatar": "https://img.167891.xyz/v2/3VHU8UR.png",
           "friend_link": "https://ailmel.top/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/旧识桥-1770377184928.webp",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "Yaten-Z's Blog",
@@ -215,7 +231,8 @@
           "avatar": "https://s1.imagehub.cc/images/2025/05/30/55439681d8b3c2d988638c133e160a56.jpg",
           "friend_link": "https://blog.yaten.xyz/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Yaten-Z-s-Blog-1765322446989.jpg",
-          "check": true
+          "check": true,
+          "fail_count": 0
         },
         {
           "name": "唐志远",
@@ -224,7 +241,8 @@
           "avatar": "https://bu.dusays.com/2022/05/02/626f92e193879.jpg",
           "friend_link": "https://fe32.top/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "小杨",
@@ -233,9 +251,15 @@
           "avatar": "https://xiaoyangboke.xyz/svg/blogAvatar1-4f998420.svg",
           "friend_link": "https://xiaoyangboke.xyz/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/小杨-1764769528928.png",
-          "check": true
+          "check": true,
+          "fail_count": 0
         }
       ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": []
     },
     {
       "id_name": "special-links",
@@ -248,7 +272,8 @@
           "avatar": "/images/wormhole.png",
           "avatar_cache": "",
           "friend_link": "",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "开往",
@@ -257,7 +282,8 @@
           "avatar": "https://www.travellings.cn/assets/travelling.png",
           "avatar_cache": "",
           "friend_link": "",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "BlogFinder",
@@ -266,7 +292,8 @@
           "avatar": "https://bf.zzxworld.com/images/favicon.png",
           "avatar_cache": "",
           "friend_link": "",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "博友圈",
@@ -275,7 +302,8 @@
           "avatar": "https://www.boyouquan.com/assets/images/sites/logo/logo-small.svg",
           "avatar_cache": "",
           "friend_link": "",
-          "check": false
+          "check": false,
+          "fail_count": 0
         },
         {
           "name": "博客圈子",
@@ -284,7 +312,8 @@
           "avatar": "https://cdn.hejunjie.life/avatars/博客圈子-1779077306123.png",
           "avatar_cache": "",
           "friend_link": "",
-          "check": false
+          "check": false,
+          "fail_count": 0
         }
       ]
     }

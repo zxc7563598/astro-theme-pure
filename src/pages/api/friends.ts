@@ -20,6 +20,7 @@ interface FriendItem {
   avatar_cache: string
   friend_link: string
   check: boolean
+  fail_count?: number
 }
 
 // 检测友链页面中是否包含本站链接
@@ -188,7 +189,8 @@ export const POST: APIRoute = async ({ request }) => {
       avatar: avatar.toString().trim(),
       friend_link: friend_link.toString().trim(),
       avatar_cache: '',
-      check: true
+      check: true,
+      fail_count: 0
     }
     if (!isSameDomain(friend.link, friend.friend_link)) {
       return new Response(

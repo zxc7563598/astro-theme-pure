@@ -51,6 +51,7 @@ interface FriendForm {
   link: string
   avatar: string
   friend_link: string
+  fail_count: number
 }
 
 const form = ref<FriendForm>({
@@ -58,7 +59,8 @@ const form = ref<FriendForm>({
   intro: '',
   link: '',
   avatar: '',
-  friend_link: ''
+  friend_link: '',
+  fail_count: 0
 })
 
 async function submitForm() {
@@ -78,7 +80,7 @@ async function submitForm() {
     const data = await res.json()
     if (data.success) {
       showToast({ message: '提交成功，站点已加入友链，刷新页面即可查看' })
-      form.value = { name: '', intro: '', link: '', avatar: '', friend_link: '' }
+      form.value = { name: '', intro: '', link: '', avatar: '', friend_link: '', fail_count: 0 }
     } else {
       showToast({ message: `提交失败：${data.message || '未知错误'}` })
     }

@@ -10,6 +10,7 @@ const { friends } = links
 
 const MY_SITE = 'https://hejunjie.life'
 const CONCURRENCY = 50
+const MAX_FAIL_COUNT = 3
 
 interface FriendItem {
   name: string
@@ -19,6 +20,7 @@ interface FriendItem {
   avatar_cache: string
   friend_link: string
   check: boolean
+  fail_count: number
 }
 
 const allFriends: FriendItem[] = []
@@ -72,9 +74,19 @@ async function main() {
   // 根据检测结果重新分配
   results.forEach((r) => {
     if (r.status === 'ok' || r.status === 'not_check') {
+      // 检测成功或跳过检测，移回活跃列表，清除失败次数
+      r.friend.fail_count = 0
       friends[0].link_list.push(r.friend)
     } else {
-      friends[1].link_list.push(r.friend)
+      // 检测失败，增加失败次数
+      r.friend.fail_count = (r.friend.fail_count || 0) + 1
+      if (r.friend.fail_count >= MAX_FAIL_COUNT) {
+        // 达到最大连续失败次数，移动到失败列表
+        friends[1].link_list.push(r.friend)
+      } else {
+        // 未达到阈值，暂时保留在活跃列表
+        friends[0].link_list.push(r.friend)
+      }
     }
   })
   console.log('\n📋 检测结果:')
