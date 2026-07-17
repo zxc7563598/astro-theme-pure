@@ -8,6 +8,7 @@ import { encryptRequest } from 'hejunjie-encrypted-request'
 
 // 接口基础地址
 const BASE_URL = 'https://tools.api.hejunjie.life/blog'
+const SIGN_SECRET = 'sxi92ufhr7wydhrb4n2ifueys71jtgvj'
 
 // '/china-division/send'
 // '/china-division/upload'
@@ -37,9 +38,11 @@ export async function loadPublicKey() {
  */
 export async function request<T>(endpoint: string, data: Record<string, unknown>): Promise<T> {
   try {
-    const encryptedData = encryptRequest(data, {
-      rsaPubKey: await loadPublicKey()
-    })
+    const encryptedData = await encryptRequest({
+        data: data,
+        rsaPublicKey: await loadPublicKey(),
+        signSecret: SIGN_SECRET,
+    },1)
     const response = await axios.post(`${BASE_URL}${endpoint}`, encryptedData, {
       headers: {
         'Content-Type': 'application/json'
