@@ -16,7 +16,7 @@
         </div>
         <div v-if="convert_date" class="col-span-full flex items-center gap-2">
             <span>转换结果：</span>
-            <input v-model="convert_date" type="date"
+            <input v-model="convert_date" type="text"
                 class="flex-1 rounded-lg border px-3 py-2 text-sm outline-none focus:ring-1 cursor-pointer" disabled />
             <button
                 class="rounded-lg bg-muted px-4 py-2 text-muted-foreground text-sm hover:bg-card transition"
