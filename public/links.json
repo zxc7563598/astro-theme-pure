@@ -213,13 +213,7 @@
           "avatar_cache": "https://cdn.hejunjie.life/avatars/AIOVTUE-雪-1782904215522.PNG",
           "check": true,
           "fail_count": 0
-        }
-      ]
-    },
-    {
-      "id_name": "inactive-links",
-      "desc": "偶尔需要一点时间的朋友们",
-      "link_list": [
+        },
         {
           "name": "JerryGao's Blog",
           "intro": "爱折腾的安全小白",
@@ -228,8 +222,14 @@
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": false,
-          "fail_count": 37
-        },
+          "fail_count": 0
+        }
+      ]
+    },
+    {
+      "id_name": "inactive-links",
+      "desc": "偶尔需要一点时间的朋友们",
+      "link_list": [
         {
           "name": "The Sejolyn Memo",
           "intro": "So fucking close.",
