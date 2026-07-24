@@ -21,7 +21,7 @@ import { Aside, Steps } from 'astro-pure/user'
 登陆你的服务器，在上面执行
 
 ```bash
-curl -fsSL https://bilibili-danmu-scripts.oss-cn-hongkong.aliyuncs.com/install-docker.sh | bash
+curl -fsSL https://bilibili-danmu-scripts.oss-cn-hongkong.aliyuncs.com/install-docker-v2.sh | bash
 ```
 
 之后等几分钟后你就能拿到机器人控制台的访问地址了，通常是 `http://服务器IP:7777`
@@ -48,40 +48,83 @@ curl -fsSL https://bilibili-danmu-scripts.oss-cn-hongkong.aliyuncs.com/install-d
 
 一般你不用关心细节，但如果你想知道它到底做了什么，或者想自己手动执行，不通过一键脚本，也可以参考下面的内容
 
-### 更新软件源
+### 配置非交互模式
+
+脚本首先会设置非交互模式，避免安装过程中弹出任何需要手动确认的对话框
 
 ```bash
-sudo apt update
+export DEBIAN_FRONTEND=noninteractive
+export NEEDRESTART_MODE=a
+export APT_LISTCHANGES_FRONTEND=none
+export UCF_FORCE_CONFFOLD=1
+export UCF_FORCE_CONFFMISS=1
 ```
 
 ```bash
-sudo apt upgrade -y
+echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
+sudo dpkg-reconfigure -f noninteractive debconf
+```
+
+同时预设 openssh-server 的配置，防止升级时弹窗询问
+
+```bash
+echo 'openssh-server openssh-server/permit-root-login boolean true' | sudo debconf-set-selections
+```
+
+### 更新系统
+
+```bash
+sudo apt-get update
 ```
 
 ```bash
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
+sudo -E apt-get upgrade -y \
+    -o Dpkg::Options::="--force-confdef" \
+    -o Dpkg::Options::="--force-confold"
 ```
 
 ```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+sudo apt-get install -y ca-certificates curl
+```
+
+### 添加 Docker 软件源
+
+使用 Docker 官方推荐的现代方式添加 APT 仓库
+
+```bash
+sudo install -m 0755 -d /etc/apt/keyrings
 ```
 
 ```bash
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+    -o /etc/apt/keyrings/docker.asc
 ```
 
 ```bash
-sudo apt update
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
+
+```bash
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+```
+
+```bash
+sudo apt-get update
 ```
 
 ### 安装 Docker
 
-```bash
-sudo apt install docker-ce docker-ce-cli containerd.io docker-compose
-```
+新版脚本使用 Docker Compose V2 插件（`docker compose`），替代旧版的独立 `docker-compose` 命令
 
 ```bash
-sudo systemctl start docker
+sudo apt-get install -y \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin
 ```
 
 ```bash
@@ -89,10 +132,17 @@ sudo systemctl enable docker
 ```
 
 ```bash
-sudo docker --version
+sudo systemctl start docker
 ```
 
-### 构建 Docker
+```bash
+docker --version
+docker compose version
+```
+
+### 部署项目
+
+克隆项目并初始化
 
 ```bash
 git clone https://github.com/zxc7563598/php-bilibili-danmu-docker.git /opt/bilibili-robots
@@ -106,12 +156,28 @@ cd /opt/bilibili-robots
 sh ./setup.sh
 ```
 
-```bash
-docker-compose build
-```
+Docker Compose V2 会在首次启动时自动构建镜像，无需手动执行 build
 
 ```bash
-docker-compose up -d
+docker compose up -d
+```
+
+### 获取访问地址
+
+脚本最后会自动获取服务器的公网 IP 并输出访问地址
+
+```bash
+curl -4 -s --max-time 5 https://api.ipify.org
+```
+
+部署成功后你会看到类似这样的输出：
+
+```
+机器人后台：
+http://123.45.67.89:7777
+
+首次访问会要求设置后台账号和密码。
+输入的账号密码将作为后续登录控制台的凭据，请妥善保存。
 ```
 
 ## 要如何绑定域名
@@ -216,5 +282,11 @@ cd /opt/bilibili-robots
 ```
 
 ```bash
-docker-compose restart
+docker compose restart
 ```
+
+<Aside title='docker compose 还是 docker-compose？' type='tip'>
+  <div>新版一键部署脚本安装的是 Docker Compose V2 插件，命令是 <code>docker compose</code>（空格）。</div>
+  <div><code>docker-compose</code>（横杠）是旧版的独立 Python 程序，Docker 官方已停止维护，不建议继续使用。</div>
+  <div>如果你以前装过旧版 <code>docker-compose</code>，两者并不冲突，但建议统一使用新版 <code>docker compose</code> 命令。</div>
+</Aside>
