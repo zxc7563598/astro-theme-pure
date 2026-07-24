@@ -189,11 +189,23 @@ http://123.45.67.89:7777
   <div>详见：[关于域名](/danmusuite/start/domain)</div>
 </Aside>
 
+执行以下命令配置 Nginx 和 SSL 证书：
+
 ```bash
 curl -fsSL https://bilibili-danmu-scripts.oss-cn-hongkong.aliyuncs.com/setup-nginx-ssl.sh | bash -s 后台地址 积分商城地址 你的邮箱
 ```
 
-完成后前往机器人控制台，修改**项目地址**为后台域名，修改**商城地址**为商城后保存。
+命令需要传入 3 个参数，<strong>按顺序</strong>分别为：
+
+1. **后台域名**：用于访问机器人控制台的域名
+2. **商城域名**：用于访问积分商城的域名
+3. **你的邮箱**：用于 Let's Encrypt SSL 证书注册
+
+<Aside title='请注意' type='tip'>
+域名填写时不带 `http://` 或 `https://`，直接写域名本身即可，例如 `admin.example.com`。
+</Aside>
+
+完成后前往机器人控制台，修改**项目地址**为 `https://后台域名`（例如 `https://admin.example.com`），修改**商城地址**为 `https://商城域名` 后保存。注意地址前面要加上 `https://`。
 
 ![添加域名](https://cdn.hejunjie.life/bilibilidanmu/域名设置04.png)
 
