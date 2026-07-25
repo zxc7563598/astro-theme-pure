@@ -215,62 +215,6 @@
           "fail_count": 0
         },
         {
-          "name": "虫洞",
-          "intro": "随机前往十年之约的成员博客",
-          "link": "https://www.foreverblog.cn/go.html",
-          "avatar": "/images/wormhole.png",
-          "avatar_cache": "",
-          "friend_link": "",
-          "check": false,
-          "fail_count": 1
-        },
-        {
-          "name": "开往",
-          "intro": "随机前往开往的成员博客",
-          "link": "https://www.travellings.cn/go.html",
-          "avatar": "https://www.travellings.cn/assets/travelling.png",
-          "avatar_cache": "",
-          "friend_link": "",
-          "check": false,
-          "fail_count": 1
-        },
-        {
-          "name": "BlogFinder",
-          "intro": "聚合优秀的个人博客，发掘优质的个人博客文章和内容",
-          "link": "https://bf.zzxworld.com/s",
-          "avatar": "https://bf.zzxworld.com/images/favicon.png",
-          "avatar_cache": "",
-          "friend_link": "",
-          "check": false,
-          "fail_count": 1
-        },
-        {
-          "name": "博友圈",
-          "intro": "博客人的朋友圈，将一个个散落在各处的孤岛连接成一片广袤无垠的新大陆！",
-          "link": "https://www.boyouquan.com/planet-shuttle",
-          "avatar": "https://www.boyouquan.com/assets/images/sites/logo/logo-small.svg",
-          "avatar_cache": "",
-          "friend_link": "",
-          "check": false,
-          "fail_count": 1
-        },
-        {
-          "name": "博客圈子",
-          "intro": "收录万千博文，索引优质内容。",
-          "link": "https://bkqz.cn/page.php?slug=go",
-          "avatar": "https://cdn.hejunjie.life/avatars/博客圈子-1779077306123.png",
-          "avatar_cache": "",
-          "friend_link": "",
-          "check": false,
-          "fail_count": 1
-        }
-      ]
-    },
-    {
-      "id_name": "special-links",
-      "desc": "旅途的意外转弯",
-      "link_list": [
-        {
           "name": "JerryGao's Blog",
           "intro": "爱折腾的安全小白",
           "link": "https://www.jerrygao.cn",
@@ -278,7 +222,7 @@
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": false,
-          "fail_count": 40
+          "fail_count": 39
         },
         {
           "name": "The Sejolyn Memo",
@@ -288,7 +232,7 @@
           "friend_link": "https://www.sejolyn.fyi/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
           "check": true,
-          "fail_count": 43
+          "fail_count": 42
         },
         {
           "name": "Yaten-Z's Blog",
@@ -298,7 +242,7 @@
           "friend_link": "https://blog.yaten.xyz/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Yaten-Z-s-Blog-1765322446989.jpg",
           "check": true,
-          "fail_count": 43
+          "fail_count": 42
         },
         {
           "name": "唐志远",
@@ -308,7 +252,7 @@
           "friend_link": "https://fe32.top/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
           "check": false,
-          "fail_count": 43
+          "fail_count": 42
         },
         {
           "name": "小杨",
@@ -318,7 +262,63 @@
           "friend_link": "https://xiaoyangboke.xyz/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/小杨-1764769528928.png",
           "check": true,
-          "fail_count": 43
+          "fail_count": 42
+        }
+      ]
+    },
+    {
+      "id_name": "special-links",
+      "desc": "旅途的意外转弯",
+      "link_list": [
+        {
+          "name": "虫洞",
+          "intro": "随机前往十年之约的成员博客",
+          "link": "https://www.foreverblog.cn/go.html",
+          "avatar": "/images/wormhole.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false,
+          "fail_count": 0
+        },
+        {
+          "name": "开往",
+          "intro": "随机前往开往的成员博客",
+          "link": "https://www.travellings.cn/go.html",
+          "avatar": "https://www.travellings.cn/assets/travelling.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false,
+          "fail_count": 0
+        },
+        {
+          "name": "BlogFinder",
+          "intro": "聚合优秀的个人博客，发掘优质的个人博客文章和内容",
+          "link": "https://bf.zzxworld.com/s",
+          "avatar": "https://bf.zzxworld.com/images/favicon.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false,
+          "fail_count": 0
+        },
+        {
+          "name": "博友圈",
+          "intro": "博客人的朋友圈，将一个个散落在各处的孤岛连接成一片广袤无垠的新大陆！",
+          "link": "https://www.boyouquan.com/planet-shuttle",
+          "avatar": "https://www.boyouquan.com/assets/images/sites/logo/logo-small.svg",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false,
+          "fail_count": 0
+        },
+        {
+          "name": "博客圈子",
+          "intro": "收录万千博文，索引优质内容。",
+          "link": "https://bkqz.cn/page.php?slug=go",
+          "avatar": "https://cdn.hejunjie.life/avatars/博客圈子-1779077306123.png",
+          "avatar_cache": "",
+          "friend_link": "",
+          "check": false,
+          "fail_count": 0
         }
       ]
     }
