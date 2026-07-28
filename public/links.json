@@ -223,6 +223,16 @@
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": false,
           "fail_count": 1
+        },
+        {
+          "name": "sssr7844的博客",
+          "intro": "为了未来",
+          "link": "https://sssr7844.cc.cd/",
+          "avatar": "https://sssr7844.cc.cd/wp-content/uploads/2026/07/1785027509-%E9%9C%9E%E5%A1%94_original-scaled-e1785157015117.jpg",
+          "friend_link": "https://sssr7844.cc.cd/%e5%8f%8b%e6%83%85%e9%93%be%e6%8e%a5/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/sssr7844的博客-1785211572249.jpg",
+          "check": true,
+          "fail_count": 0
         }
       ]
     },
