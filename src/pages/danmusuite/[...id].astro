@@ -9,6 +9,7 @@ import PageLayout from '@/layouts/ContentLayout.astro'
 import { Comment } from '@/components/waline'
 
 import DanmuSuiteContents from './DanmuSuiteContents.astro'
+import PopupNotice from '@/components/vue/PopupNotice.vue'
 
 export const prerender = true
 
@@ -58,6 +59,7 @@ const { description, title } = post.data
   </Fragment>
   <Content />
   <Comment class='mt-3 sm:mt-6' />
+  <PopupNotice client:only='vue' />
 </PageLayout>
 <MediumZoom />
 

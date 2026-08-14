@@ -6,6 +6,7 @@ import { Comment } from '@/components/waline'
 import { integ } from '@/site-config'
 
 import DanmuSuiteContents from './DanmuSuiteContents.astro'
+import PopupNotice from '@/components/vue/PopupNotice.vue'
 
 const meta = {
   title: '哔哩哔哩弹幕机器人',
@@ -33,4 +34,5 @@ const meta = {
     </div>
   </main>
   <Comment class='mt-6 sm:mt-6' />
+  <PopupNotice client:only='vue' />
 </PageLayout>
