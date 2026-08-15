@@ -65,16 +65,6 @@
           "fail_count": 0
         },
         {
-          "name": "navms's blog",
-          "intro": "互联网、编程、科技的个人记录",
-          "link": "https://navms.github.io/",
-          "avatar": "https://navms.github.io/images/favicon.png",
-          "friend_link": "https://navms.github.io/links/",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/navms-s-blog-1772856485817.png",
-          "check": true,
-          "fail_count": 2
-        },
-        {
           "name": "超腾开源",
           "intro": "全栈开发者博客，愿景是利用AI技术降低软件开发成本，打造软件开发、销售、研究一体化平台",
           "link": "https://www.hylab.cn/",
@@ -231,6 +221,16 @@
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
         {
+          "name": "navms's blog",
+          "intro": "互联网、编程、科技的个人记录",
+          "link": "https://navms.github.io/",
+          "avatar": "https://navms.github.io/images/favicon.png",
+          "friend_link": "https://navms.github.io/links/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/navms-s-blog-1772856485817.png",
+          "check": true,
+          "fail_count": 3
+        },
+        {
           "name": "JerryGao's Blog",
           "intro": "爱折腾的安全小白",
           "link": "https://www.jerrygao.cn",
@@ -238,7 +238,7 @@
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": false,
-          "fail_count": 19
+          "fail_count": 20
         },
         {
           "name": "The Sejolyn Memo",
@@ -248,7 +248,7 @@
           "friend_link": "https://www.sejolyn.fyi/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
           "check": true,
-          "fail_count": 62
+          "fail_count": 63
         },
         {
           "name": "Yaten-Z's Blog",
@@ -258,7 +258,7 @@
           "friend_link": "https://blog.yaten.xyz/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Yaten-Z-s-Blog-1765322446989.jpg",
           "check": true,
-          "fail_count": 62
+          "fail_count": 63
         },
         {
           "name": "唐志远",
@@ -268,7 +268,7 @@
           "friend_link": "https://fe32.top/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
           "check": false,
-          "fail_count": 62
+          "fail_count": 63
         },
         {
           "name": "小杨",
@@ -278,7 +278,7 @@
           "friend_link": "https://xiaoyangboke.xyz/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/小杨-1764769528928.png",
           "check": true,
-          "fail_count": 62
+          "fail_count": 63
         }
       ]
     },
