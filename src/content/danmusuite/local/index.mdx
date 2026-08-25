@@ -1,0 +1,97 @@
+---
+title: '项目介绍'
+description: '本地重构版本「bilibili-live-assistant」：单文件免安装、双击即用的 B 站直播机器人'
+order: 1
+---
+
+**bilibili-live-assistant** 是一个用 Go 语言编写的 B 站直播辅助机器人，以单二进制文件分发，**无需安装任何环境、下载双击即可运行**
+
+签到、进房欢迎、礼物答谢、PK 播报、弹幕自动回复、定时广告、直播记录……直播间的日常杂活，都可以在它的网页后台里点选配置完成
+
+> **提示：** 本项目仅供学习交流使用，禁止用于商业或非法用途。
+
+## 项目地址
+
+- **GitHub 仓库**：[zxc7563598/bilibili-live-assistant](https://github.com/zxc7563598/bilibili-live-assistant) —— 源码、使用文档与功能规划都在这里
+- **发布页（Releases）**：[github.com/zxc7563598/bilibili-live-assistant/releases](https://github.com/zxc7563598/bilibili-live-assistant/releases) —— 所有历史版本的安装包与更新日志
+
+## 快速开始
+
+### 第 1 步：下载安装包
+
+根据你的系统选择对应的预构建二进制文件：
+
+| 平台 | 架构 | 下载 |
+| ---- | ---- | ---- |
+| Windows | 64 位（amd64） | [下载 `BiliLiveAssistant-windows-amd64.exe`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
+| macOS | Apple Silicon（arm64） | [下载 `BiliLiveAssistant-darwin-arm64`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
+| macOS | Intel（amd64） | [下载 `BiliLiveAssistant-darwin-amd64`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
+| Linux | 64 位（amd64） | [下载 `BiliLiveAssistant-linux-amd64`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
+| Linux | ARM（树莓派等，arm64） | [下载 `BiliLiveAssistant-linux-arm64`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
+
+考虑到网络问题，无法下载的朋友可以 [点击此处使用百度网盘进行下载预构建二进制文件](https://pan.baidu.com/s/5D_5XKcrhCcxew37heroRlQ)
+
+> **提示：** 首次运行会在程序所在目录自动生成 `config.yaml` 与数据文件，因此**建议先新建一个文件夹，把程序放进去再运行**，方便统一管理配置与数据。
+
+### 第 2 步：启动程序
+
+- **Windows**：双击 `BiliLiveAssistant-windows-amd64.exe` 即可
+- **macOS / Linux**：双击或在终端中运行；若提示「无法打开」，见下方「常见问题」第 1 条
+
+### 第 3 步：登录并开启监听
+
+1. 浏览器打开 **http://localhost:25443** 进入后台
+2. 用 B 站账号**扫码登录**
+3. 填入你的**直播间房号**，打开**监听开关**
+
+搞定。之后弹幕、礼物等数据会实时记录并展示在后台，机器人按你的配置自动工作
+
+> **提示：** 机器人运行期间需要保持电脑开机并联网，退出程序即停止工作
+
+## 常见问题
+
+1. **macOS 提示「无法打开，因为无法验证开发者」怎么办？**
+   - 打开「终端」
+   - 将下载的文件拖进终端，即可得到文件路径，例如 `/Users/xxx/bilibili-live-assistant/BiliLiveAssistant`
+   - 依次执行：
+
+     ```bash
+     chmod +x /Users/xxx/bilibili-live-assistant/BiliLiveAssistant
+     sudo xattr -r -d com.apple.quarantine /Users/xxx/bilibili-live-assistant/BiliLiveAssistant
+     ```
+
+   - 之后再双击运行，或在终端直接执行该路径即可。个人更推荐在终端中运行：macOS 下双击运行时，日志会写入用户根目录，用终端运行则日志落在程序目录，更整洁
+
+2. **Windows 弹出 SmartScreen 警告怎么办？**
+   - 点击「更多信息」→「仍要运行」即可；或右键程序 →「属性」→ 勾选「解除锁定」后再打开
+
+3. **数据存在哪里？会不会泄露？**
+   - 所有数据（登录状态、弹幕记录、配置等）都保存在你自己的电脑本地，不会上传到任何第三方服务器
+
+4. **需要提前安装什么环境吗？**
+   - 不需要。预构建版本已内置运行所需的一切，下载解压后直接双击运行
+
+5. **直播间房号在哪里看？**
+   - 打开你的直播间网页（live.bilibili.com），网址末尾的那串数字就是房号
+
+6. **能部署到服务器上、让其他人访问吗？**
+   - 可以，见下文「对外提供服务（可选）」。
+
+## 对外提供服务（可选）
+
+预构建版本默认仅支持本机访问。若想让其他人通过外网访问你的机器人，需要自行构建一个对外版本：
+
+1. 准备一个可通过外网访问的地址：云服务器、内网穿透，或拥有公网 IP 的家庭宽带均可
+2. 安装 [Go 1.25+](https://golang.google.cn/dl/) 与 [Node.js 24+](https://nodejs.org/zh-cn/download)
+3. 获取源代码：
+
+   ```bash
+   git clone https://github.com/zxc7563598/bilibili-live-assistant.git
+   ```
+
+   （也可以直接前往 GitHub 仓库页面下载源代码压缩包）
+
+4. 复制 `web/.env.development` 为 `web/.env`
+5. 将 `.env` 中的 `VITE_AXIOS_BASE_URL` 与 `VITE_PROXY_TARGET` 替换为你的外网访问地址
+6. 在项目根目录执行 `make release`，即可得到与预构建版本相同的各平台二进制文件
+7. 在允许外网访问的设备上运行你构建好的程序，把外网地址提供给他人即可访问
