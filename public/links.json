@@ -213,6 +213,16 @@
           "avatar_cache": "https://cdn.hejunjie.life/avatars/sssr7844的博客-1785211572249.jpg",
           "check": true,
           "fail_count": 0
+        },
+        {
+          "name": "HJZ的博客",
+          "intro": "Never stop discovering!",
+          "link": "https://blog.hjz0713.cn/",
+          "avatar": "https://blog.hjz0713.cn/wp-content/uploads/2026/08/1787393316-87_avatar_middle.jpg",
+          "friend_link": "https://blog.hjz0713.cn/links/",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/HJZ的博客-1787742040657.jpg",
+          "check": true,
+          "fail_count": 0
         }
       ]
     },
