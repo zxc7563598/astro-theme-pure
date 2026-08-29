@@ -223,6 +223,16 @@
           "avatar_cache": "https://cdn.hejunjie.life/avatars/HJZ的博客-1787742040657.jpg",
           "check": true,
           "fail_count": 0
+        },
+        {
+          "name": "桜鵞のすみか",
+          "intro": "你开源的代码写的很不错，现在是我的了~",
+          "link": "https://retmon.cc",
+          "avatar": "https://retmon.cc/pic/head.jpg",
+          "friend_link": "https://retmon.cc",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/桜鵞-1788004603622.jpg",
+          "check": true,
+          "fail_count": 0
         }
       ]
     },
