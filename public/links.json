@@ -115,16 +115,6 @@
           "fail_count": 0
         },
         {
-          "name": "安知鱼",
-          "intro": "生活明朗，万物可爱",
-          "link": "https://blog.anheyu.com",
-          "avatar": "https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg",
-          "friend_link": "https://blog.anheyu.com/link",
-          "avatar_cache": "https://cdn.hejunjie.life/avatars/安知鱼-1763194109160.jpg",
-          "check": false,
-          "fail_count": 2
-        },
-        {
           "name": "求知学习社",
           "intro": "持续分享时间精力管理、能力提升、学习成长、生活实用等知识技巧。",
           "link": "https://blog.zhipro.com",
@@ -241,6 +231,16 @@
       "desc": "偶尔需要一点时间的朋友们",
       "link_list": [
         {
+          "name": "安知鱼",
+          "intro": "生活明朗，万物可爱",
+          "link": "https://blog.anheyu.com",
+          "avatar": "https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg",
+          "friend_link": "https://blog.anheyu.com/link",
+          "avatar_cache": "https://cdn.hejunjie.life/avatars/安知鱼-1763194109160.jpg",
+          "check": false,
+          "fail_count": 3
+        },
+        {
           "name": "navms's blog",
           "intro": "互联网、编程、科技的个人记录",
           "link": "https://navms.github.io/",
@@ -248,7 +248,7 @@
           "friend_link": "https://navms.github.io/links/",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/navms-s-blog-1772856485817.png",
           "check": true,
-          "fail_count": 18
+          "fail_count": 19
         },
         {
           "name": "JerryGao's Blog",
@@ -258,7 +258,7 @@
           "friend_link": "https://www.jerrygao.cn/friends",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/JerryGao-s-Blog-1772682158919.png",
           "check": false,
-          "fail_count": 35
+          "fail_count": 36
         },
         {
           "name": "The Sejolyn Memo",
@@ -268,7 +268,7 @@
           "friend_link": "https://www.sejolyn.fyi/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/The-Sejolyn-Memo-1766209155033.jpg",
           "check": true,
-          "fail_count": 78
+          "fail_count": 79
         },
         {
           "name": "Yaten-Z's Blog",
@@ -278,7 +278,7 @@
           "friend_link": "https://blog.yaten.xyz/links",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/Yaten-Z-s-Blog-1765322446989.jpg",
           "check": true,
-          "fail_count": 78
+          "fail_count": 79
         },
         {
           "name": "唐志远",
@@ -288,7 +288,7 @@
           "friend_link": "https://fe32.top/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/唐志远-1763194537582.jpg",
           "check": false,
-          "fail_count": 78
+          "fail_count": 79
         },
         {
           "name": "小杨",
@@ -298,7 +298,7 @@
           "friend_link": "https://xiaoyangboke.xyz/link",
           "avatar_cache": "https://cdn.hejunjie.life/avatars/小杨-1764769528928.png",
           "check": true,
-          "fail_count": 78
+          "fail_count": 79
         }
       ]
     },
