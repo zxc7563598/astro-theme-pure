@@ -1,0 +1,158 @@
+---
+title: '对外提供服务'
+description: '把 Go 重构版构建成对外版本并部署到服务器：处理三个配置文件、make release 打包、systemd 常驻运行，让观众随时访问'
+order: 2
+---
+
+import { Aside, Button } from 'astro-pure/user'
+
+预构建的二进制默认只监听本机：浏览器打开 `http://localhost:25443` 能进后台，换台电脑就访问不到了。想让观众也能打开积分商城、让机器人 24 小时挂着，就得自己构建一个对外版本，放到服务器上运行。
+
+这一页讲的就是这件事。构建在你自己的电脑上完成，服务器只负责跑最后那个二进制文件。
+
+<Aside title='提示' type='tip'>
+  如果你只是直播时自己用，本机版本已经够了，不需要往下看。
+</Aside>
+
+## 开始之前
+
+需要准备三样东西：
+
+- **一台服务器**：云服务器、内网穿透，或者有公网 IP 的家庭宽带都可以。怎么买见 [关于服务器](/danmusuite/introduction/server)，记得顺便把 `25443` 端口开放好
+- **一个域名**（可选）：没有域名也能用，直接拿服务器 IP 访问，只是链接不好看也不好记。想买见 [关于域名](/danmusuite/introduction/domain)
+- **构建环境**：在你自己的电脑上装好 [Go 1.25+](https://golang.google.cn/dl/) 和 [Node.js 24+](https://nodejs.org/zh-cn/download)。预构建的文件是按「只在本机用」打包的，前端里写死了 `localhost`，改不了，所以想对外提供服务就只能自己构建
+
+## 获取源代码
+
+```bash
+git clone https://github.com/zxc7563598/bilibili-live-assistant.git
+```
+
+也可以前往 GitHub 仓库页面直接下载源代码压缩包。
+
+## 处理三个配置文件
+
+假设你的服务器 IP 是 `38.47.233.76`，下面统一用这个地址举例。有域名的话，把 `http://38.47.233.76:25443` 换成 `https://你的域名` 即可；其中 `25443` 是 `config.yaml` 里 `server.port` 的值，那边改了这个数字也要跟着改。
+
+### 1. `config.yaml`
+
+项目根目录的 `config.example.yaml` 是配置模板，复制一份并改名为 `config.yaml`：
+
+```bash
+cp config.example.yaml config.yaml
+```
+
+每项配置都有注释，按自己的需要改就行，建议至少确认下面这几个：
+
+| 配置项                 | 作用                                                                          |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| `server.port`          | 对外提供服务的端口，默认 `25443`​                                             |
+| `jwt.secret`           | 登录态签名密钥，换成 32 位以上的随机字母数字                                  |
+| `altcha.hmac_key`      | 验证码密钥，同样换掉；留空则表示不启用验证码                                  |
+| `crypto.sign_secret`   | 商城请求的签名密钥，必须与下一步 `shop/.env` 里的 `VITE_SIGN_SECRET` 完全一致 |
+| `cors.allowed_origins` | 允许访问接口的前端来源，留空表示不限制                                        |
+
+<Aside title='注意' type='caution'>
+  `crypto.require_encryption` 只有在整站 HTTPS 的情况下才能设为 `true`，纯 HTTP 部署必须保持
+  `false`。
+</Aside>
+
+改好之后，记得把 `config.yaml` 也传到服务器上，跟二进制文件放在同一个目录。程序读的就是同目录下的这份配置；如果找不到，它会自己生成一份默认配置，里面的密钥是随机的，跟你打包前端时用的 `VITE_SIGN_SECRET` 对不上，商城会因为验签失败而用不了。
+
+### 2. `web/.env`
+
+复制 `web/.env.development` 为 `web/.env`，再把里面两个地址换成你的对外访问地址：
+
+```ini
+VITE_AXIOS_BASE_URL = 'http://38.47.233.76:25443'
+VITE_PROXY_TARGET = 'http://38.47.233.76:25443'
+```
+
+### 3. `shop/.env`
+
+复制 `shop/.env.example` 为 `shop/.env`，同样改两个地方：
+
+```ini
+VITE_API_URL='http://38.47.233.76:25443'
+VITE_SIGN_SECRET='与 config.yaml 的 crypto.sign_secret 完全一致'
+```
+
+`VITE_SIGN_SECRET` 必须和 `config.yaml` 里的 `crypto.sign_secret` 一字不差。这是商城前后端之间的签名密钥，对不上，商城的加密请求会全部失败。
+
+## 构建
+
+回到项目根目录，执行：
+
+```bash
+make release
+```
+
+第一次执行会先安装前端依赖再打包，耗时会长一些。跑完之后 `bin/` 目录里就是各平台的二进制文件，外加一个 `SHA256SUMS` 校验文件，跟 Releases 页面下载到的是同一种东西。
+
+之后运行对应版本对外提供服务即可。
+
+## 部署到 Linux 服务器
+
+下面以把 `BiliLiveAssistant-linux-amd64` 上传到 `/opt/bilibili-live-assistant` 为例。
+
+**1. 上传文件**
+
+把 `BiliLiveAssistant-linux-amd64` 和前面改好的 `config.yaml` 一起上传到服务器的 `/opt/bilibili-live-assistant` 目录。
+
+**2. 给二进制文件加执行权限**
+
+```bash
+sudo chmod +x /opt/bilibili-live-assistant/BiliLiveAssistant-linux-amd64
+```
+
+**3. 创建 systemd 服务**
+
+```bash
+sudo nano /etc/systemd/system/bililive.service
+```
+
+粘贴以下内容：
+
+```ini
+[Unit]
+Description=BiliLiveAssistant Service
+# 确保在网络就绪后再启动
+After=network.target
+
+[Service]
+# 用 root 运行，避免权限问题
+User=root
+Group=root
+
+# 可执行文件的绝对路径（不需要任何参数）
+ExecStart=/opt/bilibili-live-assistant/BiliLiveAssistant-linux-amd64
+
+# 关键配置：无论因为什么原因退出（崩溃、被杀），都自动重启
+Restart=always
+RestartSec=5
+
+# 工作目录设置为二进制文件所在目录
+WorkingDirectory=/opt/bilibili-live-assistant
+
+[Install]
+# 正常开机后启动
+WantedBy=multi-user.target
+```
+
+保存退出后，依次执行：
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now bililive
+```
+
+到这一步项目就已经跑起来了。后续想重启、停止、看状态，直接百度搜「如何使用 systemctl 控制项目」就行，常用命令也就那么几个。
+
+## 访问地址
+
+打开你在 `web/.env` 里填的那个地址，加上对应路径即可：
+
+- 后台管理：`http://38.47.233.76:25443/admin`
+- 积分商城：`http://38.47.233.76:25443/shop`
+
+如果打不开，先确认服务器已经开放了 `25443` 端口，开放方式见 [开放端口](/danmusuite/introduction/server#开放端口)。

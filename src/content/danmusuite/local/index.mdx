@@ -5,14 +5,15 @@ order: 1
 ---
 
 import { GithubCard } from 'astro-pure/advanced'
-import { Aside, Button, Steps } from 'astro-pure/user'
+import { Aside, Button } from 'astro-pure/user'
 
 **bilibili-live-assistant** 是一个用 Go 语言编写的 B 站直播辅助机器人，以单二进制文件分发，**无需安装任何环境、下载双击即可运行**。签到、进房欢迎、礼物答谢、PK 播报、弹幕自动回复、定时广告、直播记录……直播间的日常杂活，都可以在它的网页后台里点选配置完成。
 
 > **提示：** 本项目仅供学习交流使用，禁止用于商业或非法用途。
 
 <Aside title='提示' type='tip'>
-  这是目前的推荐版本。如果你更习惯 PHP 环境，也可以看看 [PHP 服务器版](/danmusuite/start)，它依然保留并继续维护。
+  这是目前的推荐版本。如果你更习惯 PHP 环境，也可以看看 [PHP
+  服务器版](/danmusuite/start)，它依然保留并继续维护。
 </Aside>
 
 ## 项目信息
@@ -25,13 +26,13 @@ import { Aside, Button, Steps } from 'astro-pure/user'
 
 根据你的系统选择对应的预构建二进制文件：
 
-| 平台 | 架构 | 下载 |
-| ---- | ---- | ---- |
-| Windows | 64 位（amd64） | [下载 `BiliLiveAssistant-windows-amd64.exe`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
-| macOS | Apple Silicon（arm64） | [下载 `BiliLiveAssistant-darwin-arm64`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
-| macOS | Intel（amd64） | [下载 `BiliLiveAssistant-darwin-amd64`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
-| Linux | 64 位（amd64） | [下载 `BiliLiveAssistant-linux-amd64`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
-| Linux | ARM（树莓派等，arm64） | [下载 `BiliLiveAssistant-linux-arm64`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
+| 平台    | 架构                   | 下载                                                                                                         |
+| ------- | ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Windows | 64 位（amd64）         | [下载 `BiliLiveAssistant-windows-amd64.exe`](https://github.com/zxc7563598/bilibili-live-assistant/releases) |
+| macOS   | Apple Silicon（arm64） | [下载 `BiliLiveAssistant-darwin-arm64`](https://github.com/zxc7563598/bilibili-live-assistant/releases)      |
+| macOS   | Intel（amd64）         | [下载 `BiliLiveAssistant-darwin-amd64`](https://github.com/zxc7563598/bilibili-live-assistant/releases)      |
+| Linux   | 64 位（amd64）         | [下载 `BiliLiveAssistant-linux-amd64`](https://github.com/zxc7563598/bilibili-live-assistant/releases)       |
+| Linux   | ARM（树莓派等，arm64） | [下载 `BiliLiveAssistant-linux-arm64`](https://github.com/zxc7563598/bilibili-live-assistant/releases)       |
 
 考虑到网络问题，无法下载的朋友可以 [点击此处使用百度网盘进行下载预构建二进制文件](https://pan.baidu.com/s/5D_5XKcrhCcxew37heroRlQ)
 
@@ -79,23 +80,20 @@ import { Aside, Button, Steps } from 'astro-pure/user'
    - 打开你的直播间网页（live.bilibili.com），网址末尾的那串数字就是房号
 
 6. **能部署到服务器上、让其他人访问吗？**
-   - 可以，见下文「对外提供服务（可选）」。
+   - 可以，见 [对外提供服务](/danmusuite/local/provide-service)。
 
 ## 对外提供服务（可选）
 
-预构建版本默认仅支持本机访问。若想让其他人通过外网访问你的机器人，需要自行构建一个对外版本：
+预构建版本默认仅支持本机访问。若想让其他人也能访问你的机器人，需要自己构建一个对外版本，并部署到服务器上常驻运行。
 
-1. 准备一个可通过外网访问的地址：云服务器、内网穿透，或拥有公网 IP 的家庭宽带均可（云服务器怎么买见 [关于服务器](/danmusuite/introduction/server)，想让别人用域名访问见 [关于域名](/danmusuite/introduction/domain)）
-2. 安装 [Go 1.25+](https://golang.google.cn/dl/) 与 [Node.js 24+](https://nodejs.org/zh-cn/download)
-3. 获取源代码：
+从准备服务器、处理配置文件，到打包和部署，完整步骤都写在这一篇里：
 
-   ```bash
-   git clone https://github.com/zxc7563598/bilibili-live-assistant.git
-   ```
-
-   （也可以直接前往 GitHub 仓库页面下载源代码压缩包）
-
-4. 复制 `web/.env.development` 为 `web/.env`
-5. 将 `.env` 中的 `VITE_AXIOS_BASE_URL` 与 `VITE_PROXY_TARGET` 替换为你的外网访问地址
-6. 在项目根目录执行 `make release`，即可得到与预构建版本相同的各平台二进制文件
-7. 在允许外网访问的设备上运行你构建好的程序，把外网地址提供给他人即可访问
+<div class='not-prose flex flex-wrap gap-2'>
+  <Button
+    as='a'
+    href='/danmusuite/local/provide-service'
+    title='前往对外提供服务'
+    variant='ahead'
+    class='not-prose'
+  />
+</div>
