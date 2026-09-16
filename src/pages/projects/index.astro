@@ -48,13 +48,19 @@ const { sponsorship } = sponsorshipData
     projects={[
       {
         name: 'B站弹幕机器人&积分商城',
-        description: '基于 PHP 实现的 B 站弹幕机器人 + 积分商城，支持 Docker 一键部署',
+        description:
+          'B 站弹幕机器人 + 积分商城，支持进房欢迎、礼物答谢、PK 播报、签到与积分兑换等功能。主力版本用 Go 重构，单文件双击即用；另有 PHP 服务器版可选',
         links: [
           { type: 'doc', href: '/danmusuite', title: '查看文章' },
           {
             type: 'github',
+            href: 'https://github.com/zxc7563598/bilibili-live-assistant',
+            title: 'Go 版仓库'
+          },
+          {
+            type: 'github',
             href: 'https://github.com/zxc7563598/php-bilibili-danmu',
-            title: '前往GitHub'
+            title: 'PHP 版仓库'
           }
         ]
       },

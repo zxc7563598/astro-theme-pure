@@ -4,16 +4,20 @@ description: '本地重构版本「bilibili-live-assistant」：单文件免安�
 order: 1
 ---
 
-**bilibili-live-assistant** 是一个用 Go 语言编写的 B 站直播辅助机器人，以单二进制文件分发，**无需安装任何环境、下载双击即可运行**
+import { GithubCard } from 'astro-pure/advanced'
+import { Aside, Button, Steps } from 'astro-pure/user'
 
-签到、进房欢迎、礼物答谢、PK 播报、弹幕自动回复、定时广告、直播记录……直播间的日常杂活，都可以在它的网页后台里点选配置完成
+**bilibili-live-assistant** 是一个用 Go 语言编写的 B 站直播辅助机器人，以单二进制文件分发，**无需安装任何环境、下载双击即可运行**。签到、进房欢迎、礼物答谢、PK 播报、弹幕自动回复、定时广告、直播记录……直播间的日常杂活，都可以在它的网页后台里点选配置完成。
 
 > **提示：** 本项目仅供学习交流使用，禁止用于商业或非法用途。
 
-## 项目地址
+<Aside title='提示' type='tip'>
+  这是目前的推荐版本。如果你更习惯 PHP 环境，也可以看看 [PHP 服务器版](/danmusuite/start)，它依然保留并继续维护。
+</Aside>
 
-- **GitHub 仓库**：[zxc7563598/bilibili-live-assistant](https://github.com/zxc7563598/bilibili-live-assistant) —— 源码、使用文档与功能规划都在这里
-- **发布页（Releases）**：[github.com/zxc7563598/bilibili-live-assistant/releases](https://github.com/zxc7563598/bilibili-live-assistant/releases) —— 所有历史版本的安装包与更新日志
+## 项目信息
+
+<GithubCard repo='zxc7563598/bilibili-live-assistant' />
 
 ## 快速开始
 
@@ -60,7 +64,7 @@ order: 1
      sudo xattr -r -d com.apple.quarantine /Users/xxx/bilibili-live-assistant/BiliLiveAssistant
      ```
 
-   - 之后再双击运行，或在终端直接执行该路径即可。个人更推荐在终端中运行：macOS 下双击运行时，日志会写入用户根目录，用终端运行则日志落在程序目录，更整洁
+   - 之后再双击运行，或在终端直接执行该路径即可。个人更推荐在终端中运行：macOS 下双击运行时，日志会写入用户根目录；用终端运行则日志落在程序目录，更整洁
 
 2. **Windows 弹出 SmartScreen 警告怎么办？**
    - 点击「更多信息」→「仍要运行」即可；或右键程序 →「属性」→ 勾选「解除锁定」后再打开
@@ -81,7 +85,7 @@ order: 1
 
 预构建版本默认仅支持本机访问。若想让其他人通过外网访问你的机器人，需要自行构建一个对外版本：
 
-1. 准备一个可通过外网访问的地址：云服务器、内网穿透，或拥有公网 IP 的家庭宽带均可
+1. 准备一个可通过外网访问的地址：云服务器、内网穿透，或拥有公网 IP 的家庭宽带均可（云服务器怎么买见 [关于服务器](/danmusuite/introduction/server)，想让别人用域名访问见 [关于域名](/danmusuite/introduction/domain)）
 2. 安装 [Go 1.25+](https://golang.google.cn/dl/) 与 [Node.js 24+](https://nodejs.org/zh-cn/download)
 3. 获取源代码：
 

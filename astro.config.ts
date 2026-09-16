@@ -35,6 +35,13 @@ export default defineConfig({
   // root: './my-project-directory',
   server: { host: true },
 
+  // [Redirects]
+  // 文档结构调整：服务器与域名的说明从 start 分类移到 introduction 分类（两个版本共用）
+  redirects: {
+    '/danmusuite/start/server': '/danmusuite/introduction/server',
+    '/danmusuite/start/domain': '/danmusuite/introduction/domain'
+  },
+
   // [Adapter]
   // https://docs.astro.build/en/guides/deploy/
   // adapter: vercel(),

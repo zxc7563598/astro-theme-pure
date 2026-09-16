@@ -1,0 +1,77 @@
+---
+title: '项目介绍'
+description: 'PHP 服务器版：机器人、积分商城与数据库都部署在自己的服务器上，观众随时可访问。本文说明它为什么需要服务器，以及两种部署方式如何选择'
+order: 1
+---
+
+import { GithubCard } from 'astro-pure/advanced'
+import { Aside, Button } from 'astro-pure/user'
+
+PHP 服务器版是项目早期的实现，使用 PHP 编写、部署在服务器上。机器人、积分商城与数据库都跑在你自己的服务器上，观众随时随地都能签到、兑换。
+
+<Aside title='请注意' type='note'>
+  这个版本仍然在维护，但已不是主要推荐。如果你没有特别的理由，建议优先使用 [Go
+  重构版](/danmusuite/local)：性能更好、部署也更省事，同样支持部署到服务器。
+</Aside>
+
+## 项目信息
+
+<GithubCard repo='zxc7563598/php-bilibili-danmu' />
+
+## 为什么需要服务器
+
+这不是一个传统意义上的“机器人”项目。如果你只是需要一个弹幕助手，确实可以直接在自己的电脑上运行，直播时连上直播间，下播后关掉就行。
+
+但这个项目是一个积分商城，实质上就是你自己的一个网站。它需要 24 小时持续运行，并且对外开放，让观众随时都能访问和使用。所以，和普通机器人不同，它需要部署在一台能够长期在线、稳定对外服务的服务器上。
+
+当然，服务器也就是一台电脑而已。有些朋友会用自己家的 UPS 搭配旧电脑，或者改造手机，甚至用 NAS 当服务器。只要你愿意折腾，这些都行。
+
+如果你觉得自己不能像他们一样搞定那些，最简单的方式还是租一台服务器：
+
+<div class='not-prose flex flex-wrap gap-2'>
+  <Button
+    as='a'
+    href='/danmusuite/introduction/server'
+    title='前往关于服务器'
+    variant='ahead'
+    class='not-prose'
+  />
+</div>
+
+## 选择部署方式
+
+服务器准备好之后，就可以正式部署本项目了。项目提供两种部署方式，两种都有视频教学，通常来说不会出现搞不定的情况，按自己的习惯选一种即可：
+
+- **自动部署**：几条命令通过 Docker 自动完成部署，系统会保持最新版本。适合不打算对项目做任何调整、也不想折腾环境的朋友
+- **手动部署**：用宝塔面板一步步搭建环境，可以自由修改项目内容并选择性更新。适合想自己动手调整项目、或者对部署细节感兴趣的朋友
+
+<div class='not-prose flex flex-wrap gap-2'>
+  <Button
+    as='a'
+    href='/danmusuite/start/auto-deploy'
+    title='前往自动部署'
+    variant='ahead'
+    class='not-prose'
+  />
+  <Button
+    as='a'
+    href='/danmusuite/start/manual-deploy'
+    title='前往手动部署'
+    variant='ahead'
+    class='not-prose'
+  />
+</div>
+
+## 需要更强大的后台？
+
+项目本身已经内置了一个可用的原生后台，开箱即可使用，此项目非刚需。如果你想要更好的界面、更丰富的功能，可以再自行部署独立后台：
+
+<div class='not-prose flex flex-wrap gap-2'>
+  <Button
+    as='a'
+    href='/danmusuite/start/admin-panel'
+    title='前往独立后台'
+    variant='ahead'
+    class='not-prose'
+  />
+</div>

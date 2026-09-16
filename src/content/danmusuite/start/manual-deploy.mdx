@@ -1,7 +1,7 @@
 ---
 title: '手动部署'
 description: '手动部署指南，教你一步步配置环境并启动机器人，适合想了解内部细节或定制化需求的用户'
-order: 4
+order: 3
 ---
 
 import { Aside, Steps } from 'astro-pure/user'
@@ -31,7 +31,7 @@ if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_pa
 
 用这些信息登录，就能进入服务器的管理面板。
 
-> 如果无法访问需要在云服务器中开放指定的端口，开放方式详见：[开放端口](/danmusuite/start/server#开放端口)
+> 如果无法访问需要在云服务器中开放指定的端口，开放方式详见：[开放端口](/danmusuite/introduction/server#开放端口)
 
 ## 安装Redis
 
@@ -266,7 +266,7 @@ location / {
   <div>此部分仅描述域名解析到服务器后如何配置</div>
   <div>域名解析的问题不再赘述，机器人需要 2 个解析，一个用于访问控制台，一个用于访问商城</div>
   <div>请再确定 2 个解析均已解析到服务器再进行后续操作</div>
-  <div>详见：[关于域名](/danmusuite/start/domain)</div>
+  <div>详见：[关于域名](/danmusuite/introduction/domain)</div>
 </Aside>
 
 两个站点操作完全一致，因此仅展示一次示例
